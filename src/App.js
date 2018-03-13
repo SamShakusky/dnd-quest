@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import './reset.css';
+import { Text } from './Text';
+import { Quest } from './Quest'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <Text size="lg">Header</Text>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <main>
+          <Quest
+            title="Throador the Keeper"
+            description="The allmighty Throador the keeper of the Sun Temple is threatening your village!"
+            goal="Slain Throador"
+          />
+        </main>
       </div>
     );
   }
