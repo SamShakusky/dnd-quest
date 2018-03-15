@@ -5,13 +5,13 @@ export class Quest extends Component {
 
   static propTypes = {
 		title         : PropTypes.string.isRequired,
-    description   : PropTypes.string.isRequired,
+    description   : PropTypes.string,
     goal          : PropTypes.string.isRequired
   };
 
   static defaultProps = {
     title       : 'title',
-    description : 'description',
+    description : null,
     goal        : 'goal'
 	};
   
@@ -20,6 +20,7 @@ export class Quest extends Component {
 
     return (
       <div className="quest">
+        <button className="quest-edit">edit</button>
         <h3 className="quest-title">{title}</h3>
         <p className="quest-description">{description}</p>
         <p className="quest-goal">{goal}</p>

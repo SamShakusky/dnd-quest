@@ -3,8 +3,31 @@ import './App.css';
 import './reset.css';
 import { Text } from './Text';
 import { Quest } from './Quest'
+import { QuestList } from './QuestList'
 
-class App extends Component {
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      term  : '',
+      items : []
+    };
+  }
+
+  onChange = (event) => {
+    this.setState({term: event.target.value});
+  }
+
+  onSubmit = (event) => {
+    event.preventDefault();
+
+    this.setState({
+      term: '',
+      items: [...this.state.items, this.state.term]
+    });
+  }
+
   render() {
     return (
       <div className="App">
@@ -12,15 +35,13 @@ class App extends Component {
           <Text size="lg">Header</Text>
         </header>
         <main>
-          <Quest
-            title="Throador the Keeper"
-            description="The allmighty Throador the keeper of the Sun Temple is threatening your village!"
-            goal="Slain Throador"
-          />
+          <form className="form" onSubmit={this.onSubmit}>
+            <input placeholder="Title" value={this.state.term} onChange={this.onChange} />
+            <button>Go</button>
+          </form>
+          <QuestList items={this.state.items} />
         </main>
       </div>
     );
   }
 }
-
-export default App;
