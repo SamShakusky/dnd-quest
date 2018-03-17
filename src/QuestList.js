@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+// import PropTypes from 'prop-types';
 import { Quest } from './Quest'
 
 export const QuestList = props => (
-  <div>
+  <div className="quest-list">
     {
       props.items.map((item,index) => (
           <Quest
-            title={item}
-            description="no descr"
-            goal={index}
+            title={item.title}
+            description={item.description}
+            goal={item.goal}
+            key={index}
           />
         )
       )
