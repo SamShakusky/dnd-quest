@@ -5,17 +5,6 @@ import { Text } from './Text';
 import { QuestList } from './QuestList'
 import { QuestForm } from './QuestForm';
 
-const quests = [
-  {
-    title: 'The great Invasion',
-    goal: 'Kill the orcs'
-  },
-  {
-    title: 'Show me',
-    goal: 'Save the princess'
-  }
-]
-
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -24,12 +13,16 @@ export default class App extends Component {
       title  : '',
       description: '',
       goal: '',
-      items : [],
+      items : [{
+        title: 'The title',
+        description: '',
+        goal: 'The goal'
+      }],
       formVisibility : false
     };
   }
 
-  activateForm = () => {
+  toggleForm = () => {
     let visibility = this.state.formVisibility;
 
     if(visibility) { visibility = false; }
@@ -68,6 +61,16 @@ export default class App extends Component {
     }
   }
 
+  onEdit = (id) => {
+    const data = this.state.items[id];
+    this.setState({
+      title: data.title,
+      description: data.description,
+      goal: data.goal
+    });
+    this.toggleForm();
+  }
+
   render() {
     return (
       <div className="App">
@@ -81,11 +84,14 @@ export default class App extends Component {
             goal={this.state.goal}
             onChange={this.onChange}
             onSubmit={this.onSubmit}
-            onFormClose={this.activateForm}
+            onFormToggle={this.toggleForm}
             className={this.state.formVisibility ? 'active' : ''}
           />
-          <QuestList items={this.state.items} />
-          <button className="activate-form" onClick={this.activateForm}>New</button>
+          <QuestList
+            items={this.state.items}
+            onEdit={this.onEdit}
+          />
+          <button className="activate-form" onClick={this.toggleForm}>New</button>
         </main>
       </div>
     );

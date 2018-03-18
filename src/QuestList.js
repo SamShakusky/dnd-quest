@@ -1,5 +1,4 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { Quest } from './Quest'
 
 export const QuestList = props => (
@@ -11,6 +10,8 @@ export const QuestList = props => (
             description={item.description}
             goal={item.goal}
             key={index}
+            id={index}
+            onEdit={props.onEdit}
           />
         )
       )
