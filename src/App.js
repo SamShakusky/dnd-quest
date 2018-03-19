@@ -18,17 +18,54 @@ export default class App extends Component {
         description: '',
         goal: 'The goal'
       }],
-      formVisibility : false
+      formVisibility : false,
+      editing : null
     };
   }
 
+  clearInputs = () => {
+    this.setState({
+      title: '',
+      description: '',
+      goal: '',
+    });
+  }
+
+  openForm = () => {
+    this.setState({
+      formVisibility: true
+    });
+  }
+
+  closeForm = () => {
+    
+    console.log()
+    if(this.state.editing !== null) {
+      this.setState({
+        editing: null,
+        title: '',
+        description: '',
+        goal: ''
+      });
+    }
+    this.setState({
+      formVisibility: false
+    });
+  }
+
   toggleForm = () => {
-    let visibility = this.state.formVisibility;
+    let { formVisibility, editing } = this.state;
+    console.log(editing);
+    if(formVisibility) {
+      formVisibility = false;
+      // editing = null;
+    }
+    else           { formVisibility = true; }
 
-    if(visibility) { visibility = false; }
-    else           { visibility = true; }
-
-    this.setState({ formVisibility: visibility });
+    this.setState({
+      formVisibility: formVisibility,
+      editing: editing
+    });
   }
 
   onChange = (event) => {
@@ -44,9 +81,6 @@ export default class App extends Component {
     event.preventDefault();
     if(this.state.title) {
       this.setState({
-        title: '',
-        description: '',
-        goal: '',
         items: [...this.state.items,
           {
             title: this.state.title,
@@ -54,8 +88,9 @@ export default class App extends Component {
             goal: this.state.goal
           }
         ],
-        formVisibility: false
       });
+      this.clearInputs();
+      this.closeForm();
     } else {
       alert('Введите заголовок!');
     }
@@ -66,9 +101,10 @@ export default class App extends Component {
     this.setState({
       title: data.title,
       description: data.description,
-      goal: data.goal
+      goal: data.goal,
+      editing: id,
     });
-    this.toggleForm();
+    this.openForm();
   }
 
   render() {
@@ -84,14 +120,14 @@ export default class App extends Component {
             goal={this.state.goal}
             onChange={this.onChange}
             onSubmit={this.onSubmit}
-            onFormToggle={this.toggleForm}
+            onFormClose={this.closeForm}
             className={this.state.formVisibility ? 'active' : ''}
           />
           <QuestList
             items={this.state.items}
             onEdit={this.onEdit}
           />
-          <button className="activate-form" onClick={this.toggleForm}>New</button>
+          <button className="activate-form" onClick={this.openForm}>New</button>
         </main>
       </div>
     );

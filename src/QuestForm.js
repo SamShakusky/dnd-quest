@@ -8,6 +8,6 @@ export const QuestForm = props => (
       <input placeholder="Goal" name="goal" value={props.goal} onChange={props.onChange} />
       <button>Go</button>
     </form>
-    <div onClick={props.onFormToggle} className="overlay" />
+    <div onClick={props.onFormClose} className="overlay" />
   </div>
 );
