@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export class Quest extends Component {
-
+  
   static propTypes = {
 		title         : PropTypes.string.isRequired,
     description   : PropTypes.string,

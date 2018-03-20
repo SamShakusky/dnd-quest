@@ -16,7 +16,8 @@ export default class App extends Component {
       items : [{
         title: 'The title',
         description: '',
-        goal: 'The goal'
+        goal: 'The goal',
+        id: '1312'
       }],
       formVisibility : false,
       editing : null
@@ -38,33 +39,11 @@ export default class App extends Component {
   }
 
   closeForm = () => {
-    
-    console.log()
     if(this.state.editing !== null) {
-      this.setState({
-        editing: null,
-        title: '',
-        description: '',
-        goal: ''
-      });
+      this.clearInputs();
     }
     this.setState({
       formVisibility: false
-    });
-  }
-
-  toggleForm = () => {
-    let { formVisibility, editing } = this.state;
-    console.log(editing);
-    if(formVisibility) {
-      formVisibility = false;
-      // editing = null;
-    }
-    else           { formVisibility = true; }
-
-    this.setState({
-      formVisibility: formVisibility,
-      editing: editing
     });
   }
 
@@ -79,25 +58,39 @@ export default class App extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
-    if(this.state.title) {
-      this.setState({
-        items: [...this.state.items,
+    let {title, description, goal, editing, items} = this.state;
+
+    if(title) {
+      if(editing) {
+        const index = items.findIndex(item => item.id === editing);
+        items[index] = {
+          title: title,
+          description: description,
+          goal: goal,
+          id: editing
+        };
+      }
+      else {
+        items = [...items,
           {
-            title: this.state.title,
-            description: this.state.description,
-            goal: this.state.goal
+            title: title,
+            description: description,
+            goal: goal,
+            id: +new Date()
           }
-        ],
-      });
-      this.clearInputs();
+        ];
+      }
+      this.setState({ items: items });
       this.closeForm();
+      this.clearInputs();
     } else {
       alert('Введите заголовок!');
     }
   }
 
   onEdit = (id) => {
-    const data = this.state.items[id];
+    const data = this.state.items.find(x => x.id === id);
+
     this.setState({
       title: data.title,
       description: data.description,
@@ -122,6 +115,7 @@ export default class App extends Component {
             onSubmit={this.onSubmit}
             onFormClose={this.closeForm}
             className={this.state.formVisibility ? 'active' : ''}
+            editing={this.state.editing}
           />
           <QuestList
             items={this.state.items}
