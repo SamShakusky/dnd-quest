@@ -1,4 +1,5 @@
 import React from 'react';
+import './css/QuestForm.css';
 
 export const QuestForm = props => (
   <div className={`quest-form ${props.className}`}>
@@ -7,7 +8,7 @@ export const QuestForm = props => (
       <input placeholder="Description" name="description" value={props.description} onChange={props.onChange} />
       <input placeholder="Goal" name="goal" value={props.goal} onChange={props.onChange} />
       <button type="submit">{props.editing? 'Edit' : 'Create'}</button>
-      {(props.editing && <button onClick={props.onDelete} className="delete-btn">Delete</button>)}
+      {(props.editing && <button onClick={props.onDelete} className="quest-delete">Delete</button>)}
     </form>
     <div onClick={props.onFormClose} className="overlay" />
   </div>

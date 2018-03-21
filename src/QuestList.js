@@ -1,4 +1,5 @@
 import React from 'react';
+import './css/QuestList.css';
 import { Quest } from './Quest'
 
 export const QuestList = props => (
