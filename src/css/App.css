@@ -1,7 +1,12 @@
 .App-header {
   background-color: #222;
-  padding: 18px;
-  color: white; }
+  padding: 12px 18px;
+  color: white;
+  display: flex;
+  align-items: center;
+  font-family: Georgia, 'Times New Roman', Times, serif; }
+  .App-header p {
+    margin-right: 48px; }
 
 .text {
   margin: 0; }
@@ -37,8 +42,9 @@ main {
   background: rgba(0, 0, 0, 0.6); }
 
 .menu {
-  display: flex;
-  margin-top: 6px; }
+  display: flex; }
   .menu a {
     color: grey;
     margin-right: 18px; }
+    .menu a.active {
+      color: white; }

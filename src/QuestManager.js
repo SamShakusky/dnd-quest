@@ -113,7 +113,7 @@ export default class App extends Component {
   
   render() {
     return (
-      <div>
+      <main>
         <QuestForm
           title={this.state.title}
           description={this.state.description}
@@ -130,7 +130,7 @@ export default class App extends Component {
           onEdit={this.onEdit}
         />
         <button className="activate-form" onClick={this.openForm}>New</button>
-      </div>
+      </main>
     );
   }
 }

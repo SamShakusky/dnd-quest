@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Route, NavLink, HashRouter } from 'react-router-dom';
 import QuestManager from "./QuestManager";
+import Spec from "./Spec";
+import Main from "./Main";
 import { Text } from './Text';
 
 import './css/App.css';
@@ -14,14 +16,16 @@ export default class App extends Component {
           <header className="App-header">
             <Text size="lg">Header</Text>
             <ul className="menu">
-              <li><NavLink to="/">Home</NavLink></li>
+              <li><NavLink exact to="/">Home</NavLink></li>
               <li><NavLink to="/quest-manager">Quest Manager</NavLink></li>
               <li><NavLink to="/spec">Spec</NavLink></li>
             </ul>
           </header>
-          <main className="content">
-            <Route path="/" component={QuestManager}/>
-          </main>
+
+          <Route exact path="/" component={Main} />
+          <Route path="/quest-manager" component={QuestManager} />
+          <Route path="/spec" component={Spec} />
+
         </div>
       </HashRouter>
     );
