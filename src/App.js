@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
-import './reset.css';
+import './css/App.css';
+import './css/reset.css';
 import { Text } from './Text';
 import { QuestList } from './QuestList'
 import { QuestForm } from './QuestForm';

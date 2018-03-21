@@ -1,24 +1,19 @@
 .App-header {
   background-color: #222;
   padding: 18px;
-  color: white;
-}
+  color: white; }
 
 .text {
-  margin: 0;
-}
+  margin: 0; }
 
 .text-sm {
-  font-size: 14px;
-}
+  font-size: 14px; }
 
 .text-md {
-  font-size: 18px;
-}
+  font-size: 18px; }
 
 .text-lg {
-  font-size: 24px;
-}
+  font-size: 24px; }
 
 main {
   max-width: 1170px;
@@ -26,15 +21,12 @@ main {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  padding: 64px 24px;
-  
-}
+  padding: 64px 24px; }
 
 .activate-form {
   position: absolute;
   right: 50px;
-  bottom: 50px;
-}
+  bottom: 50px; }
 
 .overlay {
   position: absolute;
@@ -42,8 +34,7 @@ main {
   top: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, .6);
-}
+  background: rgba(0, 0, 0, 0.6); }
 
 .quest-form {
   position: absolute;
@@ -57,13 +48,11 @@ main {
   z-index: 10;
   opacity: 0;
   pointer-events: none;
-  transition: opacity .4s;
-}
+  transition: opacity .4s; }
 
 .quest-form.active {
   opacity: 1;
-  pointer-events: auto;
-}
+  pointer-events: auto; }
 
 .quest-form form {
   display: flex;
@@ -72,50 +61,41 @@ main {
   border: 1px solid #ccc;
   background: #fff;
   position: relative;
-  z-index: 10;
-}
+  z-index: 10; }
 
 .quest-form form input {
-  margin-bottom: 12px;
-}
+  margin-bottom: 12px; }
 
 .quest-list {
   display: flex;
   flex-wrap: wrap;
   flex-basis: 100%;
-  justify-content: space-evenly;
-}
+  justify-content: space-evenly; }
 
 .quest {
   width: 350px;
   padding: 24px;
   margin-bottom: 18px;
   border: 1px solid black;
-  position: relative;
-}
+  position: relative; }
 
 .quest-title {
   font-size: 24px;
   margin-bottom: 24px;
-  padding-right: 38px;
-}
+  padding-right: 38px; }
 
 .quest-description {
   font-size: 18px;
-  margin-bottom: 18px;
-}
+  margin-bottom: 18px; }
 
 .quest-goal {
   text-align: right;
-  font-weight: 700;
-}
+  font-weight: 700; }
 
 .quest-edit {
   position: absolute;
   top: 12px;
-  right: 12px;
-}
+  right: 12px; }
 
 .delete-btn {
-  margin-top: 6px;
-}
+  margin-top: 6px; }
