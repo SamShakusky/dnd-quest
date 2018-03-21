@@ -43,3 +43,12 @@ main {
   width: 100%;
   background: rgba(0, 0, 0, .6);
 }
+
+.menu {
+  display: flex;
+  margin-top: 6px;
+  a {
+    color: grey;
+    margin-right: 18px;
+  }
+}
