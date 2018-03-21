@@ -25,12 +25,14 @@ export default class App extends Component {
   }
 
   clearInputs = () => {
-    this.setState({
-      title: '',
-      description: '',
-      goal: '',
-      editing: ''
-    });
+    setTimeout(() => {
+      this.setState({
+        title: '',
+        description: '',
+        goal: '',
+        editing: ''
+      });
+    }, 400);
   }
 
   openForm = () => {
