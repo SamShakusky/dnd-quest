@@ -1,0 +1,12 @@
+@import './import/colors';
+
+.page-spec {
+  h1 {
+    background: $blue-light;
+    color: #fff;
+    padding: 24px;
+    font-size: 32px;
+    font-family: sans-serif;
+    text-transform: uppercase;
+  }
+}

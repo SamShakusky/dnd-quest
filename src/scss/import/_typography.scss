@@ -1,0 +1,6 @@
+a {
+    text-decoration: none;
+    color: $blue;
+    transition: color .2s;
+    &:hover { color: $blue-light; }
+}

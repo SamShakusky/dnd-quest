@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import { Route, NavLink, HashRouter } from 'react-router-dom';
-import QuestManager from "./QuestManager";
-import Spec from "./Spec";
-import Main from "./Main";
+import QuestManager from './QuestManager';
+import Spec from './Spec';
+import Main from './Main';
 import { Text } from './Text';
 
 import './css/App.css';
-import './css/reset.css';
+import './css/Spec.css';
 
 export default class App extends Component {
   render() {
     return (
       <HashRouter>
         <div className="App">
-          <header className="App-header">
+          <header className="header">
             <Text size="lg">Header</Text>
             <ul className="menu">
               <li><NavLink exact to="/">Home</NavLink></li>
