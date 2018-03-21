@@ -6,7 +6,8 @@ export const QuestForm = props => (
       <input placeholder="Title" name="title" value={props.title} onChange={props.onChange} />
       <input placeholder="Description" name="description" value={props.description} onChange={props.onChange} />
       <input placeholder="Goal" name="goal" value={props.goal} onChange={props.onChange} />
-      <button>Go</button>
+      <button type="submit">{props.editing? 'Edit' : 'Create'}</button>
+      {(props.editing && <button onClick={props.onDelete} className="delete-btn">Delete</button>)}
     </form>
     <div onClick={props.onFormClose} className="overlay" />
   </div>

@@ -115,3 +115,7 @@ main {
   top: 12px;
   right: 12px;
 }
+
+.delete-btn {
+  margin-top: 6px;
+}

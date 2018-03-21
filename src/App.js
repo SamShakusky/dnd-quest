@@ -29,6 +29,7 @@ export default class App extends Component {
       title: '',
       description: '',
       goal: '',
+      editing: ''
     });
   }
 
@@ -87,7 +88,17 @@ export default class App extends Component {
       alert('Введите заголовок!');
     }
   }
-
+  
+  onDelete = (event) => {
+    event.preventDefault();
+    let {items, editing} = this.state;
+    
+    items = items.filter(item => item.id !== editing);
+    
+    this.setState({ items: items });
+    this.closeForm();
+    this.clearInputs();
+  }
   onEdit = (id) => {
     const data = this.state.items.find(x => x.id === id);
 
@@ -99,7 +110,7 @@ export default class App extends Component {
     });
     this.openForm();
   }
-
+  
   render() {
     return (
       <div className="App">
@@ -113,6 +124,7 @@ export default class App extends Component {
             goal={this.state.goal}
             onChange={this.onChange}
             onSubmit={this.onSubmit}
+            onDelete={this.onDelete}
             onFormClose={this.closeForm}
             className={this.state.formVisibility ? 'active' : ''}
             editing={this.state.editing}
