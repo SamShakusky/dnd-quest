@@ -1,6 +1,14 @@
 a {
     text-decoration: none;
-    color: $blue;
     transition: color .2s;
-    &:hover { color: $blue-light; }
+    &.link-dark {
+        color: $blue;
+        &:hover { color: $blue-light; }
+        &.active { color: $blue-light; }
+    }
+    &.link-light {
+        color: $grey-light;
+        &:hover { color: #fff; }
+        &.active { color: #fff; }
+    }
 }

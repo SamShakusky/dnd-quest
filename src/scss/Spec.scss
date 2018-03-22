@@ -1,4 +1,4 @@
-@import './import/colors';
+@import './import/importFile';
 
 .page-spec {
   h1 {
@@ -8,5 +8,22 @@
     font-size: 32px;
     font-family: sans-serif;
     text-transform: uppercase;
+  }
+  
+  nav {
+    display: flex;
+    flex-direction: column;
+    width: 120px;
+    background: $blue-light;
+    height: calc(100vh - 128px);
+    padding: 18px;
+    position: fixed;
+    right: 0;
+    top: 128px;
+    text-align: right;
+    // transform: translateX(95%);
+    a {
+      margin-bottom: 12px;
+    }
   }
 }

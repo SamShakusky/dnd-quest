@@ -49,10 +49,19 @@ html {
 
 a {
   text-decoration: none;
-  color: #3949ab;
   transition: color .2s; }
-  a:hover {
-    color: #6f74dd; }
+  a.link-dark {
+    color: #3949ab; }
+    a.link-dark:hover {
+      color: #6f74dd; }
+    a.link-dark.active {
+      color: #6f74dd; }
+  a.link-light {
+    color: #ccc; }
+    a.link-light:hover {
+      color: #fff; }
+    a.link-light.active {
+      color: #fff; }
 
 .header {
   background-color: #3949ab;
@@ -67,12 +76,7 @@ a {
 .menu {
   display: flex; }
   .menu a {
-    color: #ccc;
     margin-right: 18px; }
-    .menu a.active {
-      color: #fff; }
-    .menu a:hover {
-      color: #fff; }
 
 .text {
   margin: 0; }
@@ -85,5 +89,3 @@ a {
 
 .text-lg {
   font-size: 24px; }
-
-/*# sourceMappingURL=App.css.map */
