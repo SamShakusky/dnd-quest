@@ -3,12 +3,13 @@
 .page-spec {
   margin-top: 48px;
   h1 {
-    background: $blue-light;
-    color: #fff;
+    // background: $blue-light;
+    color: $blue-light;
     padding: 24px;
     font-size: 32px;
     font-family: sans-serif;
     text-transform: uppercase;
+    margin-bottom: -40px;
   }
   
   nav {
@@ -22,17 +23,44 @@
     right: 0;
     top: 0;
     text-align: right;
+    z-index: 9;
     // transform: translateX(95%);
     a {
       margin-bottom: 12px;
     }
   }
   
-  #ass,#ass2 {
+  .section {
     height: 100vh;
-    background: #ccc;
+    padding: 48px 64px 0;
+    position: relative;
   }
-  #ass2 {
-    background: #c6c6c6;
+  
+  .section-header {
+    background: $blue-light;
+    color: #fff;
+    padding: 18px 24px;
+    font-size: 28px;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    width: 100vw;
+    margin-left: -64px;
+  }
+  
+  #colors {
+    
+    &:before {
+      // content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 48px;
+      background: $blue-light;
+    }
+  }
+  
+  #buttons {
+
   }
 }
