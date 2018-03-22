@@ -63,24 +63,30 @@ a {
     a.link-light.active {
       color: #fff; }
 
-.page-spec h1 {
-  background: #6f74dd;
-  color: #fff;
-  padding: 24px;
-  font-size: 32px;
-  font-family: sans-serif;
-  text-transform: uppercase; }
-
-.page-spec nav {
-  display: flex;
-  flex-direction: column;
-  width: 120px;
-  background: #6f74dd;
-  height: calc(100vh - 128px);
-  padding: 18px;
-  position: fixed;
-  right: 0;
-  top: 128px;
-  text-align: right; }
-  .page-spec nav a {
-    margin-bottom: 12px; }
+.page-spec {
+  margin-top: 48px; }
+  .page-spec h1 {
+    background: #6f74dd;
+    color: #fff;
+    padding: 24px;
+    font-size: 32px;
+    font-family: sans-serif;
+    text-transform: uppercase; }
+  .page-spec nav {
+    display: flex;
+    flex-direction: column;
+    width: 120px;
+    background: #6f74dd;
+    height: 100vh;
+    padding: 64px 18px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    text-align: right; }
+    .page-spec nav a {
+      margin-bottom: 12px; }
+  .page-spec #ass, .page-spec #ass2 {
+    height: 100vh;
+    background: #ccc; }
+  .page-spec #ass2 {
+    background: #c6c6c6; }

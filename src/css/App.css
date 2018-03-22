@@ -69,7 +69,12 @@ a {
   color: #fff;
   display: flex;
   align-items: center;
-  font-family: Georgia, 'Times New Roman', Times, serif; }
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 10; }
   .header p {
     margin-right: 48px; }
 

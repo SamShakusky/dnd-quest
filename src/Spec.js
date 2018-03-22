@@ -6,9 +6,13 @@ export default class Spec extends Component {
       <main className="page-spec">
         <h1>-</h1>
         <nav>
-          <a className="link-light" href="#colors">Colors</a>
-          <a className="link-light" href="#buttons">Buttons</a>
+          <a className="link-light" href="#ass">Colors</a>
+          <a className="link-light" href="#ass2">Buttons</a>
         </nav>
+        <div className="container">
+          <div id="ass"></div>
+          <div id="ass2"></div>
+        </div>
       </main>
     );
   }

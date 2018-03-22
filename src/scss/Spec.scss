@@ -1,6 +1,7 @@
 @import './import/importFile';
 
 .page-spec {
+  margin-top: 48px;
   h1 {
     background: $blue-light;
     color: #fff;
@@ -15,15 +16,23 @@
     flex-direction: column;
     width: 120px;
     background: $blue-light;
-    height: calc(100vh - 128px);
-    padding: 18px;
+    height: 100vh;
+    padding: 64px 18px;
     position: fixed;
     right: 0;
-    top: 128px;
+    top: 0;
     text-align: right;
     // transform: translateX(95%);
     a {
       margin-bottom: 12px;
     }
+  }
+  
+  #ass,#ass2 {
+    height: 100vh;
+    background: #ccc;
+  }
+  #ass2 {
+    background: #c6c6c6;
   }
 }
