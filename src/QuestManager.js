@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { QuestList } from './QuestList'
 import { QuestForm } from './QuestForm';
 
+import './css/QuestManager.css';
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -113,7 +115,7 @@ export default class App extends Component {
   
   render() {
     return (
-      <main>
+      <main className="page-manager">
         <QuestForm
           title={this.state.title}
           description={this.state.description}

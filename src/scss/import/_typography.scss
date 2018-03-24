@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Serif|Source+Sans+Pro:400,700&subset=cyrillic');
+
+$font_head: 'Source Sans Pro', sans-serif;
+$font_body: 'PT Serif', serif;
+
+$font_body_xs : .8rem;
+$font_body_s  : .9rem;
+$font_body_m  : 1rem;
+$font_body_l  : 1.1rem;
+$font_body_xl : 1.2rem;
+
+%tp-h1 {
+  font-family: $font_head;
+  font-size: 4rem;
+}
+%tp-h2 {
+  font-family: $font_head;
+  font-size: 3rem;
+}
+%tp-h3 {
+  font-family: $font_head;
+  font-size: 2rem;
+}
+%tp-h4 {
+  font-family: $font_head;
+  font-size: 1.5rem;
+}
+
+%tp-p-xl {
+  font-family: $font_body;
+  font-size: 1.3rem;
+}
+%tp-p-l {
+  font-family: $font_body;
+  font-size: 1.2rem;
+}
+%tp-p-m {
+  font-family: $font_body;
+  font-size: 1.1rem;
+}
+%tp-p-s {
+  font-family: $font_body;
+  font-size: 1rem;
+}
+%tp-p-xs {
+  font-family: $font_body;
+  font-size: .9rem;
+}
+
+%link {
+  text-decoration: none;
+  transition: color .2s;
+  color: $color-main;
+  &:hover { text-decoration: underline; }
+  &-light { color: $color_secondary_light; }
+}
+a {
+    text-decoration: none;
+    transition: color .2s;
+    &.link-dark {
+        color: $color_main;
+        &:hover { color: $color_main_light; }
+        &.active { color: $color_main_light; }
+    }
+    &.link-light {
+        color: $grey_light;
+        &:hover { color: #fff; }
+        &.active { color: #fff; }
+    }
+}

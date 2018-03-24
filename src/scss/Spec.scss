@@ -1,0 +1,159 @@
+@import './import/importFile';
+
+.page-spec {
+  margin-top: 41px;
+  h1 {
+    @extend %tp-h2;
+    color: $white;
+    background: $color_main;
+    padding: 12px 24px 24px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: -40px;
+    position: relative;
+    z-index: 9;
+  }
+  
+  nav {
+    display: flex;
+    padding: 12px 24px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 10;
+    a {
+      @extend %tp-p-s;
+      @extend %link, %link-light;
+      margin-left: 12px;
+    }
+  }
+  
+  .section {
+    padding: 40px 0 0;
+    position: relative;
+    text-align: right;
+    &--header {
+      @extend %tp-h3;
+      width: calc(100vw - 17px);
+      background: $color_main_light;
+      color: $white;
+      padding: 18px 24px;
+      text-align: left;
+    }
+    &--content {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 46px 54px;
+    }
+  }
+  
+  #colors {
+    .section--content {
+      max-width: 565px;
+    }
+
+    .color {
+      @extend %tp-p-s;
+      width: 152px;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 18px;
+      &:before {
+        content: '';
+        display: block;
+        height: 64px;
+        width: 64px;
+        margin-bottom: 12px;
+        border-radius: 100%;
+        @include shadow(1);
+      }
+    }
+    .white {
+      flex-basis: 100%;
+      &:before { background-color: $white }
+    }
+    .grey_light:before { background-color: $grey_light }
+    .grey:before { background-color: $grey }
+    .grey_dark:before { background-color: $grey_dark }
+    .color_main_light:before { background-color: $color_main_light }
+    .color_main:before { background-color: $color_main }
+    .color_main_dark:before { background-color: $color_main_dark }
+    .color_secondary_light:before { background-color: $color_secondary_light }
+    .color_secondary:before { background-color: $color_secondary }
+    .color_secondary_dark:before { background-color: $color_secondary_dark }
+    .color_success:before { background-color: $color_success }
+    .color_danger:before { background-color: $color_danger }
+    .color_warning:before { background-color: $color_warning }
+  }
+  
+  #typography {
+    .section--content {
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+
+      .head {
+        margin-bottom: 12px;
+        > * {
+          margin-bottom: 12px;
+          color: $grey-dark;
+        }
+      }
+
+      .body {
+        > * {
+          margin-bottom: 12px;
+          color: $grey-dark;
+        }
+      }
+
+      .link {
+        p {
+          @extend %tp-p-s;
+          padding: 12px;
+          display: block;
+          margin-left: -12px;
+          color: $grey-dark;
+        }
+        a {
+          @extend %link;
+        }
+        .dark {
+          background: $color-main;
+          color: $white;
+          a {
+            @extend %link-light;
+          }
+        }
+      }
+
+      .h1 { @extend %tp-h1 }
+      .h2 { @extend %tp-h2 }
+      .h3 { @extend %tp-h3 }
+      .h4 { @extend %tp-h4 }
+
+      .xl { @extend %tp-p-xl }
+      .l  { @extend %tp-p-l }
+      .m  { @extend %tp-p-m }
+      .s  { @extend %tp-p-s }
+      .xs { @extend %tp-p-xs }
+    }
+  }
+
+  #shadows {
+    .section--content {
+      > div {
+        height: 150px;
+        width: 150px;
+        margin-right: 52px;
+        &:nth-child(1) { @include shadow(1); }
+        &:nth-child(2) { @include shadow(2); }
+        &:nth-child(3) { @include shadow(3); }
+        &:nth-child(4) { @include shadow(4); }
+        &:nth-child(5) { @include shadow(5); }
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+.page-manager {
+    max-width: 1170px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 64px 24px;
+
+  .activate-form {
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+  }
+
+  .overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, .6);
+  }
+}

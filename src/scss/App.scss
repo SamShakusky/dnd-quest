@@ -1,11 +1,25 @@
-.App-header {
-  background-color: #222;
-  padding: 12px 18px;
-  color: white;
+@import './import/importFile';
+
+.header {
+  background-color: $color_main;
+  padding: 12px 24px;
+  color: #fff;
   display: flex;
   align-items: center;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  p { margin-right: 48px; }
+  font-family: $font-head;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.menu {
+  display: flex;
+  a {
+    @extend %tp-p-m;
+    margin-right: 18px;
+  }
 }
 
 .text {
@@ -22,37 +36,4 @@
 
 .text-lg {
   font-size: 24px;
-}
-
-main {
-  max-width: 1170px;
-  margin: auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  padding: 64px 24px;
-}
-
-.activate-form {
-  position: absolute;
-  right: 50px;
-  bottom: 50px;
-}
-
-.overlay {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  background: rgba(0, 0, 0, .6);
-}
-
-.menu {
-  display: flex;
-  a {
-    color: grey;
-    margin-right: 18px;
-    &.active { color: white; }
-  }
 }
