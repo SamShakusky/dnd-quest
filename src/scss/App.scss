@@ -1,23 +1,23 @@
 @import './import/importFile';
 
 .header {
-  background-color: $blue;
-  padding: 12px 18px;
+  background-color: $color_main;
+  padding: 12px 24px;
   color: #fff;
   display: flex;
   align-items: center;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: $font-head;
   position: fixed;
   left: 0;
   top: 0;
   width: 100%;
   z-index: 10;
-  p { margin-right: 48px; }
 }
 
 .menu {
   display: flex;
   a {
+    @extend %tp-p-m;
     margin-right: 18px;
   }
 }

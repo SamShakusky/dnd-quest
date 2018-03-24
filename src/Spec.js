@@ -6,16 +6,62 @@ export default class Spec extends Component {
       <main className="page-spec">
         <h1>Spec</h1>
         <nav>
-          <a className="link-light" href="#colors">Colors</a>
-          <a className="link-light" href="#buttons">Buttons</a>
+          <a href="#colors">Colors</a>
+          <a href="#typography">Typography</a>
+          <a href="#shadows">Shadows</a>
         </nav>
         <div className="container">
           <section id="colors" className="section">
-            <h2 className="section-header">Colors</h2>
-            <div className="section-content"></div>
+            <h2 className="section--header">Colors</h2>
+            <div className="section--content">
+              <span className=" color white">$white</span>
+              <span className=" color grey_light">$grey_light</span>
+              <span className=" color grey">$grey</span>
+              <span className=" color grey_dark">$grey_dark</span>
+              <span className=" color color_main_light">$color_main_light</span>
+              <span className=" color color_main">$color_main</span>
+              <span className=" color color_main_dark">$color_main_dark</span>
+              <span className=" color color_secondary_light">$color_secondary_light</span>
+              <span className=" color color_secondary">$color_secondary</span>
+              <span className=" color color_secondary_dark">$color_secondary_dark</span>
+              <span className=" color color_success">$color_success</span>
+              <span className=" color color_danger">$color_danger</span>
+              <span className=" color color_warning">$color_warning</span>
+            </div>
           </section>
-          <section id="buttons" className="section">
-            <h2 className="section-header">Buttons</h2>
+
+          <section id="typography" className="section">
+            <h2 className="section--header">Typography</h2>
+            <div className="section--content">
+              <div className="head">
+                <h2 className="h1">Heading 1</h2>
+                <h2 className="h2">Heading 2</h2>
+                <h3 className="h3">Heading 3</h3>
+                <h3 className="h4">Heading 4</h3>
+              </div>
+              <div className="body">
+                <p className="xl">Paragraph xl</p>
+                <p className="l">Paragraph l</p>
+                <p className="m">Paragraph m</p>
+                <p className="s">Paragraph s</p>
+                <p className="xs">Paragraph xs</p>
+              </div>
+              <div className="link">
+                <p className="light">Here is some text with a <a href="google.com" >link</a> for you.</p>
+                <p className="dark">Here is some text with a <a href="google.com" >link</a> for you.</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="shadows" className="section">
+            <h2 className="section--header">Shadows</h2>
+            <div className="section--content">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
           </section>
         </div>
       </main>
