@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Button from './Button';
+import FloatingButton from './FloatingButton';
 
 export default class Spec extends Component {
   render() {
@@ -191,6 +192,13 @@ export default class Spec extends Component {
                     size="sm"
                     shape="flat"
                     duty="success"
+                  />
+                </div>
+              </div>
+              <div>
+                <p>Floating Action</p>
+                <div>
+                  <FloatingButton
                   />
                 </div>
               </div>
