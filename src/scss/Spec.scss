@@ -156,4 +156,18 @@
       }
     }
   }
+
+  #buttons {
+    .section--content {
+      flex-direction: column;
+      > div {
+        display: flex;
+        align-items: center;
+        margin-bottom: 32px;
+      }
+    }
+    .button {
+      margin-right: 18px;
+    }
+  }
 }

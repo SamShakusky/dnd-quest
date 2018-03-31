@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from './Button';
 
 export default class Spec extends Component {
   render() {
@@ -61,6 +62,46 @@ export default class Spec extends Component {
               <div></div>
               <div></div>
               <div></div>
+            </div>
+          </section>
+
+          <section id="buttons" className="section">
+            <h2 className="section--header">Buttons</h2>
+            <div className="section--content">
+              <div>
+                <Button
+                  label="button"
+                  size="md"
+                />
+                <Button
+                  label="button"
+                  size="sm"
+                />
+              </div>
+              <div>
+                <Button
+                  label="button"
+                  size="md"
+                  shape="ghost"
+                />
+                <Button
+                  label="button"
+                  size="sm"
+                  shape="ghost"
+                />
+              </div>
+              <div>
+                <Button
+                  label="button"
+                  size="md"
+                  shape="flat"
+                />
+                <Button
+                  label="button"
+                  size="sm"
+                  shape="flat"
+                />
+              </div>
             </div>
           </section>
         </div>
