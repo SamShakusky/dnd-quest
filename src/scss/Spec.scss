@@ -5,7 +5,7 @@
   h1 {
     @extend %tp-h2;
     color: $white;
-    background: $color_main;
+    background: $color_main_dark;
     padding: 12px 24px 24px;
     text-transform: uppercase;
     font-weight: 700;
@@ -35,7 +35,7 @@
     &--header {
       @extend %tp-h3;
       width: calc(100vw - 17px);
-      background: $color_main_light;
+      background: $color_main;
       color: $white;
       padding: 18px 24px;
       text-align: left;
@@ -159,11 +159,18 @@
 
   #buttons {
     .section--content {
-      flex-direction: column;
       > div {
-        display: flex;
-        align-items: center;
-        margin-bottom: 32px;
+        margin-right: 36px;
+        > div {
+          display: flex;
+          align-items: center;
+          margin-bottom: 32px;
+        }
+      }
+      p {
+        @extend %tp-p-m;
+        text-align: left;
+        margin-bottom: 24px;
       }
     }
     .button {

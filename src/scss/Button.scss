@@ -1,5 +1,36 @@
 @import './import/importFile';
 
+@mixin buttonColor($color: $color_main) {
+  &.button_shape {
+    &_solid {
+      @include shadow(1);
+      background: $color;
+      border-color: $color;
+      color: $white;
+      &:active {
+        background: darken($color, 10%);
+        border-color: darken($color, 10%);
+        @include shadow(3);
+      }
+    }
+    &_ghost {
+      border-color: $color;
+      color: $color;
+      &:active {
+        color: darken($color, 10%);
+        border-color: darken($color, 10%);
+      }
+    }
+    &_flat {
+      color: $color;
+      &:active {
+        color: darken($color, 10%);
+        background: $grey_light;
+      }
+    }
+  }
+}
+
 .button {
   @extend %button;
   border-radius: 2px;
@@ -10,8 +41,12 @@
   font-weight: 500;
   background: none;
   border-color: transparent;
-  transition: background .2s, border .2s, color .2s;
+  transition: background .2s, border .2s, color .2s, box-shadow .2s;
   cursor: pointer;
+  &:disabled {
+    opacity: .4;
+    pointer-events: none;
+  }
   &_size {
     &_sm {
       font-size: .8rem;
@@ -26,30 +61,9 @@
       line-height: 32px;
     }
   }
-  &_shape {
-    &_solid {
-      background: $color_main;
-      border-color: $color_main;
-      color: $white;
-      &:active {
-        background: darken($color_main, 10%);
-        border-color: darken($color_main, 10%);
-      }
-    }
-    &_ghost {
-      border-color: $color_main;
-      color: $color_main;
-      &:active {
-        color: darken($color_main, 10%);
-        border-color: darken($color_main, 10%);
-      }
-    }
-    &_flat {
-      color: $color_main;
-      &:active {
-        color: darken($color_main, 10%);
-        background: $grey_light;
-      }
-    }
+  &_duty {
+    &_simple { @include buttonColor($color_main); }
+    &_danger { @include buttonColor($color_danger); }
+    &_success { @include buttonColor($color_success); }
   }
 }

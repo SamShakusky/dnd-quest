@@ -6,15 +6,19 @@ import './css/Button.css';
 export default class Button extends Component {
   
   static propTypes = {
-		label   : PropTypes.string.isRequired,
-    size    : PropTypes.oneOf(['sm', 'md', 'lg']),
+		label    : PropTypes.string.isRequired,
+    size     : PropTypes.oneOf(['sm', 'md', 'lg']),
     shape    : PropTypes.oneOf(['solid','ghost','flat']),
-    onClick : PropTypes.func.isRequired
+    duty     : PropTypes.oneOf(['simple','danger','success']),
+    onClick  : PropTypes.func.isRequired,
+    disabled : PropTypes.bool
   };
 
   static defaultProps = {
-    size : 'md',
-    shape : 'solid'
+    size     : 'md',
+    shape    : 'solid',
+    duty     : 'simple',
+    disabled : false
 	};
   
   // onEdit = id => {
@@ -22,17 +26,19 @@ export default class Button extends Component {
   // }
 
   render() {
-    const { label, size, shape, onClick } = this.props;
+    const { label, size, shape, duty, onClick, disabled } = this.props;
 
     return (
       <button
         className={`button button_size_${
-            size
-          } button_shape_${
-            shape
-          }`
-        }
+          size
+        } button_shape_${
+          shape
+        } button_duty_${
+          duty
+        }`}
         onClick={onClick}
+        disabled={disabled}
       >
       {label}
       </button>
