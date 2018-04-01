@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=PT+Serif|Source+Sans+Pro:400,700&subset=cyrillic');
+@import url('https://fonts.googleapis.com/css?family=PT+Serif|Roboto:400,500&subset=cyrillic');
 
-$font_head: 'Source Sans Pro', sans-serif;
-$font_body: 'PT Serif', serif;
+$font_head: 'Roboto', sans-serif;
+$font_body: 'Roboto', serif;
 
 $font_body_xs : .8rem;
 $font_body_s  : .9rem;
@@ -54,6 +54,12 @@ $font_body_xl : 1.2rem;
   &:hover { text-decoration: underline; }
   &-light { color: $color_secondary_light; }
 }
+
+%button {
+  font-family: $font_body;
+  font-weight: 500;
+}
+
 a {
     text-decoration: none;
     transition: color .2s;

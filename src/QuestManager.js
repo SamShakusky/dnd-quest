@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { QuestList } from './QuestList'
 import { QuestForm } from './QuestForm';
+import FloatingButton from './FloatingButton';
 
 import './css/QuestManager.css';
 
@@ -60,7 +61,6 @@ export default class App extends Component {
   }
 
   onSubmit = (event) => {
-    event.preventDefault();
     let {title, description, goal, editing, items} = this.state;
 
     if(title) {
@@ -131,7 +131,7 @@ export default class App extends Component {
           items={this.state.items}
           onEdit={this.onEdit}
         />
-        <button className="activate-form" onClick={this.openForm}>New</button>
+        <FloatingButton onClick={this.openForm}/>
       </main>
     );
   }

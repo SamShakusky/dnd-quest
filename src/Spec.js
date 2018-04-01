@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import Formsy from 'formsy-react';
+import Button from './Button';
+import FloatingButton from './FloatingButton';
+import Input from './Input';
 
 export default class Spec extends Component {
   render() {
@@ -9,6 +13,7 @@ export default class Spec extends Component {
           <a href="#colors">Colors</a>
           <a href="#typography">Typography</a>
           <a href="#shadows">Shadows</a>
+          <a href="#buttons">Buttons</a>
         </nav>
         <div className="container">
           <section id="colors" className="section">
@@ -61,6 +66,154 @@ export default class Spec extends Component {
               <div></div>
               <div></div>
               <div></div>
+            </div>
+          </section>
+
+          <section id="buttons" className="section">
+            <h2 className="section--header">Buttons</h2>
+            <div className="section--content">
+              <div>
+                <p>Simple</p>
+                <div>
+                  <Button
+                    label="button"
+                    size="md"
+                  />
+                  <Button
+                    label="button"
+                    size="sm"
+                  />
+                </div>
+                <div>
+                  <Button
+                    label="button"
+                    size="md"
+                    shape="ghost"
+                  />
+                  <Button
+                    label="button"
+                    size="sm"
+                    shape="ghost"
+                  />
+                </div>
+                <div>
+                  <Button
+                    label="button"
+                    size="md"
+                    shape="flat"
+                  />
+                  <Button
+                    label="button"
+                    size="sm"
+                    shape="flat"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <p>Danger</p>
+                <div>
+                  <Button
+                    label="button"
+                    size="md"
+                    duty="danger"
+                  />
+                  <Button
+                    label="button"
+                    size="sm"
+                    duty="danger"
+                  />
+                </div>
+                <div>
+                  <Button
+                    label="button"
+                    size="md"
+                    shape="ghost"
+                    duty="danger"
+                  />
+                  <Button
+                    label="button"
+                    size="sm"
+                    shape="ghost"
+                    duty="danger"
+                  />
+                </div>
+                <div>
+                  <Button
+                    label="button"
+                    size="md"
+                    shape="flat"
+                    duty="danger"
+                  />
+                  <Button
+                    label="button"
+                    size="sm"
+                    shape="flat"
+                    duty="danger"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <p>Success</p>
+                <div>
+                  <Button
+                    label="button"
+                    size="md"
+                    duty="success"
+                  />
+                  <Button
+                    label="button"
+                    size="sm"
+                    duty="success"
+                  />
+                </div>
+                <div>
+                  <Button
+                    label="button"
+                    size="md"
+                    shape="ghost"
+                    duty="success"
+                  />
+                  <Button
+                    label="button"
+                    size="sm"
+                    shape="ghost"
+                    duty="success"
+                  />
+                </div>
+                <div>
+                  <Button
+                    label="button"
+                    size="md"
+                    shape="flat"
+                    duty="success"
+                  />
+                  <Button
+                    label="button"
+                    size="sm"
+                    shape="flat"
+                    duty="success"
+                  />
+                </div>
+              </div>
+              <div>
+                <p>Floating Action</p>
+                <div>
+                  <FloatingButton
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="inputs" className="section">
+            <h2 className="section--header">Inputs</h2>
+            <div className="section--content">
+            <Formsy>
+              <Input label="label" name="name" />
+              <Input label="label2" name="name1" />
+            </Formsy>
             </div>
           </section>
         </div>

@@ -1,0 +1,89 @@
+@import './import/importFile';
+
+@mixin inputColor($color: $color_main) {
+  .input {
+    border-bottom-color: $grey_dark;
+    color: $grey_dark;
+  }
+  .input__label {
+    color: $grey;
+  }
+
+  &.input_focused {
+    .input {
+      border-bottom-color: $color;
+    }
+    .input__label {
+      color: $color;
+    }
+  }
+}
+
+.input {
+  @extend %tp-p-s;
+  border-radius: 2px;
+  border-width: 1px;
+  border-style: solid;
+  outline: 0;
+  margin-bottom: 8px;
+  padding: 8px 0;
+  background: none;
+  border-color: transparent;
+  transition: background .2s, border .2s, color .2s, box-shadow .2s;
+  position: relative;
+  width: 100%;
+  &:disabled {
+    opacity: .4;
+    pointer-events: none;
+  }
+  
+  &_duty {
+    &_normal { @include inputColor($color_main); }
+    &_error { @include inputColor($color_danger); }
+    &_sucess { @include inputColor($color_success); }
+  }
+}
+
+.input__label {
+  @extend %tp-p-xs;
+  text-align: left;
+  transform: translateY(200%);
+  transition: transform .2s;
+  pointer-events: none;
+}
+
+.input-wrap {
+  position: relative;
+  &:before {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 0px;
+    position: absolute;
+    left: 1px;
+    bottom: 11px;
+    transition: width .2s;
+    background: $color_main;
+  }
+}
+
+.input_width {
+  &_full {
+    width: 100%;
+  }
+  &_min {
+    max-width: 250px;
+    width: 100%;
+  }
+}
+
+.input_focused,
+.input_filled {
+  .input__label {
+    transform: translateY(0);
+  }
+}
+
+.input_focused {
+  &:before { width: calc(100% - 2px); }
+}
