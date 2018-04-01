@@ -7,7 +7,9 @@ import './css/Input.css';
 class Input extends Component {
   constructor(props) {
     super(props);
-    this.changeValue = this.changeValue.bind(this);
+    this.state = {
+      focused : false
+    };
   }
 
   static propTypes = {
@@ -24,10 +26,14 @@ class Input extends Component {
     placeholder : '',
     disabled    : false,
     state       : 'normal'
-	};
+  };
+  
+  onFocus() {
+    this.setState({focused: true});
+  }
 
-  changeValue(event) {
-    this.props.setValue(event.currentTarget.value);
+  onBlur() {
+    this.setState({focused: false});
   }
 
   render() {
@@ -37,13 +43,21 @@ class Input extends Component {
       name,
       label,
       disabled,
-      state
+      state,
+      onChange,
+      validationError
     } = this.props;
+
+    const errorMessage = this.props.getErrorMessage();
 
     return (
       <div
         className={`input-wrap input_state_${
           state
+        } ${
+          this.state.focused ? 'input_focused' : ''
+        } ${
+          value.length ? 'input_filled' : ''
         }`}
       >
         <p className="input__label">{label}</p>
@@ -54,9 +68,13 @@ class Input extends Component {
           placeholder={placeholder}
           name={name}
           value={value}
-          onChange={this.changeValue}
+          onChange={onChange}
           disabled={disabled}
+
+          onFocus={() => this.onFocus()}
+          onBlur={() => this.onBlur()}
         />
+        <p className="input__validation">{errorMessage}</p>
       </div>
     );
   }

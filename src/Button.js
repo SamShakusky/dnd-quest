@@ -7,7 +7,7 @@ export default class Button extends Component {
   
   static propTypes = {
 		label    : PropTypes.string.isRequired,
-    size     : PropTypes.oneOf(['sm', 'md', 'lg']),
+    size     : PropTypes.oneOf(['sm', 'md']),
     shape    : PropTypes.oneOf(['solid','ghost','flat']),
     duty     : PropTypes.oneOf(['simple','danger','success']),
     onClick  : PropTypes.func.isRequired,

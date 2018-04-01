@@ -60,7 +60,6 @@ export default class App extends Component {
   }
 
   onSubmit = (event) => {
-    event.preventDefault();
     let {title, description, goal, editing, items} = this.state;
 
     if(title) {
