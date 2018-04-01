@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import Formsy from 'formsy-react';
 import Button from './Button';
 import FloatingButton from './FloatingButton';
+import Input from './Input';
 
 export default class Spec extends Component {
   render() {
@@ -202,6 +204,16 @@ export default class Spec extends Component {
                   />
                 </div>
               </div>
+            </div>
+          </section>
+
+          <section id="inputs" className="section">
+            <h2 className="section--header">Inputs</h2>
+            <div className="section--content">
+            <Formsy>
+              <Input label="label" name="name" />
+              <Input label="label2" name="name1" />
+            </Formsy>
             </div>
           </section>
         </div>

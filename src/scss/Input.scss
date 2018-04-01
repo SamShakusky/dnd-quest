@@ -1,0 +1,41 @@
+@import './import/importFile';
+
+@mixin inputColor($color: $color_main) {
+  .input {
+    border-bottom-color: $grey_dark;
+    color: $grey_dark;
+  }
+  .input__label {
+    color: $grey_dark;
+  }
+}
+
+.input {
+  @extend %tp-p-s;
+  border-radius: 2px;
+  border-width: 1px;
+  border-style: solid;
+  outline: 0;
+  margin-bottom: 8px;
+  padding: 8px 0;
+  background: none;
+  border-color: transparent;
+  transition: background .2s, border .2s, color .2s, box-shadow .2s;
+  cursor: pointer;
+  &:disabled {
+    opacity: .4;
+    pointer-events: none;
+  }
+  &_state {
+    &_normal { @include inputColor($color_main); }
+    &_error { @include inputColor($color_danger); }
+    &_sucess { @include inputColor($color_success); }
+  }
+}
+
+.input__label {
+  @extend %tp-p-xs;
+  text-align: left;
+  transform: translateY(200%);
+  transition: transform .2s;
+}
