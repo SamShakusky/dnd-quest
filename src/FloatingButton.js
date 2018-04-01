@@ -6,12 +6,13 @@ import './css/Button.css';
 export default class FloatingButton extends Component {
   
   static propTypes = {
-    onClick  : PropTypes.func.isRequired,
+    onClick  : PropTypes.func,
     disabled : PropTypes.bool,
     position : PropTypes.oneOf(['left','right','inline'])
   };
 
   static defaultProps = {
+    onClick  : null,
     disabled : false,
     position : 'right'
 	};

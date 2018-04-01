@@ -11,10 +11,11 @@ export const QuestForm = props => (
       <Input label="Title" name="title" value={props.title} onChange={props.onChange} required />
       <Input label="Description" name="description" value={props.description} onChange={props.onChange} />
       <Input label="Goal" name="goal" value={props.goal} onChange={props.onChange} />
-      <Button type="submit" label={props.editing? 'Edit' : 'Create'} shape="flat" size="sm" />
-      {(props.editing && <Button label="Delete" shape="flat" size="sm" duty="danger" onClick={props.onDelete} className="quest-delete" />)}
+      <div className="form_buttons">
+        <Button type="submit" label={props.editing? 'Edit' : 'Create'} shape="flat" size="sm" />
+        {(props.editing && <Button label="Delete" shape="flat" size="sm" duty="danger" onClick={props.onDelete} className="quest-delete" />)}
+      </div>
     </Formsy>
     <div onClick={props.onFormClose} className="overlay" />
   </div>
-  
 );

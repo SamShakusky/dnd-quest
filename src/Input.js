@@ -17,15 +17,17 @@ class Input extends Component {
     placeholder : PropTypes.string,
     name        : PropTypes.string.isRequired,
     label       : PropTypes.string.isRequired,
+    width       : PropTypes.oneOf(['full', 'min']),
     disabled    : PropTypes.bool,
-    state       : PropTypes.oneOf(['normal','error','sucess'])
+    duty        : PropTypes.oneOf(['normal','error','sucess'])
   };
 
   static defaultProps = {
     value       : '',
     placeholder : '',
+    width       : 'full',
     disabled    : false,
-    state       : 'normal'
+    duty        : 'normal'
   };
   
   onFocus() {
@@ -42,8 +44,9 @@ class Input extends Component {
       placeholder,
       name,
       label,
+      width,
       disabled,
-      state,
+      duty,
       onChange
     } = this.props;
 
@@ -51,8 +54,10 @@ class Input extends Component {
 
     return (
       <div
-        className={`input-wrap input_state_${
-          state
+        className={`input-wrap input_duty_${
+          duty
+        } input_width_${
+          width
         } ${
           this.state.focused ? 'input_focused' : ''
         } ${

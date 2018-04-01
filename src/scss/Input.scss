@@ -31,12 +31,13 @@
   border-color: transparent;
   transition: background .2s, border .2s, color .2s, box-shadow .2s;
   position: relative;
+  width: 100%;
   &:disabled {
     opacity: .4;
     pointer-events: none;
   }
   
-  &_state {
+  &_duty {
     &_normal { @include inputColor($color_main); }
     &_error { @include inputColor($color_danger); }
     &_sucess { @include inputColor($color_success); }
@@ -63,6 +64,16 @@
     bottom: 11px;
     transition: width .2s;
     background: $color_main;
+  }
+}
+
+.input_width {
+  &_full {
+    width: 100%;
+  }
+  &_min {
+    max-width: 250px;
+    width: 100%;
   }
 }
 
