@@ -13,7 +13,6 @@ export const QuestForm = props => (
       <Input label="Goal" name="goal" value={props.goal} onChange={props.onChange} />
       <Button type="submit" label={props.editing? 'Edit' : 'Create'} shape="flat" size="sm" />
       {(props.editing && <Button label="Delete" shape="flat" size="sm" duty="danger" onClick={props.onDelete} className="quest-delete" />)}
-      {/* {(props.editing && <button onClick={props.onDelete} className="quest-delete">Delete</button>)} */}
     </Formsy>
     <div onClick={props.onFormClose} className="overlay" />
   </div>

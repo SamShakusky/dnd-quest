@@ -10,7 +10,7 @@ export default class Button extends Component {
     size     : PropTypes.oneOf(['sm', 'md']),
     shape    : PropTypes.oneOf(['solid','ghost','flat']),
     duty     : PropTypes.oneOf(['simple','danger','success']),
-    onClick  : PropTypes.func.isRequired,
+    onClick  : PropTypes.func,
     disabled : PropTypes.bool
   };
 
@@ -18,7 +18,8 @@ export default class Button extends Component {
     size     : 'md',
     shape    : 'solid',
     duty     : 'simple',
-    disabled : false
+    disabled : false,
+    onClick  : null
 	};
   
   // onEdit = id => {

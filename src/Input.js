@@ -44,8 +44,7 @@ class Input extends Component {
       label,
       disabled,
       state,
-      onChange,
-      validationError
+      onChange
     } = this.props;
 
     const errorMessage = this.props.getErrorMessage();

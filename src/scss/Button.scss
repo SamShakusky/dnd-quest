@@ -69,19 +69,32 @@
 }
 
 .floating-button {
+  @extend %tp-h4;
+  @include shadow(3);
   height: 56px;
   width: 56px;
   border: 0;
   border-radius: 100%;
   outline: none;
   cursor: pointer;
-  @include shadow(3);
   font-size: 24px;
   line-height: 24px;
   background: $color_secondary;
   color: $white;
-  @extend %tp-h4;
   transition: background .2;
+  position: absolute;
+  bottom: 33px;
+  &_position {
+    &_left {
+      left: 30px;
+    }
+    &_right {
+      right: 30px;
+    }
+    &_inline {
+      position: static;
+    }
+  }
   span {
     display: inline-block;
     transition: transform .3s;
