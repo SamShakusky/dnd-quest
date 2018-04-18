@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { QuestList } from './QuestList'
 import { QuestForm } from './QuestForm';
 import FloatingButton from './FloatingButton';
+import SlidingPanel from './SlidingPanel';
 
 import './css/QuestManager.css';
 
@@ -116,17 +117,23 @@ export default class App extends Component {
   render() {
     return (
       <main className="page-manager">
-        <QuestForm
-          title={this.state.title}
-          description={this.state.description}
-          goal={this.state.goal}
-          onChange={this.onChange}
-          onSubmit={this.onSubmit}
-          onDelete={this.onDelete}
-          onFormClose={this.closeForm}
-          className={this.state.formVisibility ? 'active' : ''}
-          editing={this.state.editing}
-        />
+        <SlidingPanel
+          isShown={this.state.formVisibility}
+          onClose={this.closeForm}
+          side="right"
+        >
+          <QuestForm
+            title={this.state.title}
+            description={this.state.description}
+            goal={this.state.goal}
+            onChange={this.onChange}
+            onSubmit={this.onSubmit}
+            onDelete={this.onDelete}
+            onFormClose={this.closeForm}
+            // className={this.state.formVisibility ? 'active' : ''}
+            editing={this.state.editing}
+          />
+        </SlidingPanel>
         <QuestList
           items={this.state.items}
           onEdit={this.onEdit}
