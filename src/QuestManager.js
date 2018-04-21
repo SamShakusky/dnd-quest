@@ -18,13 +18,32 @@ export default class App extends Component {
         title: 'The title',
         description: '',
         goal: 'The goal',
-        id: '1312'
+        _id: '1312'
       }],
       formVisibility : false,
       editing : null
     };
   }
-
+  
+  componentWillMount() {
+    const requestOptions = {
+      method: 'GET',
+      // mode: 'no-cors',
+    }
+    
+    fetch('http://localhost:8000/quests', requestOptions)
+      .then((response) => {
+        response.json().then((data) => {
+         let quests = data;
+          this.setState({
+            items: quests
+          });
+        });
+        
+      }
+    );
+  }
+  
   clearInputs = () => {
     setTimeout(() => {
       this.setState({
@@ -65,12 +84,12 @@ export default class App extends Component {
 
     if(title) {
       if(editing) {
-        const index = items.findIndex(item => item.id === editing);
+        const index = items.findIndex(item => item._id === editing);
         items[index] = {
           title: title,
           description: description,
           goal: goal,
-          id: editing
+          _id: editing
         };
       }
       else {
@@ -79,7 +98,7 @@ export default class App extends Component {
             title: title,
             description: description,
             goal: goal,
-            id: +new Date()
+            _id: +new Date()
           }
         ];
       }
@@ -95,20 +114,20 @@ export default class App extends Component {
     event.preventDefault();
     let {items, editing} = this.state;
     
-    items = items.filter(item => item.id !== editing);
+    items = items.filter(item => item._id !== editing);
     
     this.setState({ items: items });
     this.closeForm();
     this.clearInputs();
   }
-  onEdit = (id) => {
-    const data = this.state.items.find(x => x.id === id);
+  onEdit = (_id) => {
+    const data = this.state.items.find(x => x._id === _id);
 
     this.setState({
       title: data.title,
       description: data.description,
       goal: data.goal,
-      editing: id,
+      editing: _id,
     });
     this.openForm();
   }

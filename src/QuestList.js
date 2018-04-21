@@ -10,8 +10,8 @@ export const QuestList = props => (
             title={item.title}
             description={item.description}
             goal={item.goal}
-            key={item.id}
-            id={item.id}
+            key={item._id}
+            id={item._id}
             onEdit={props.onEdit}
           />
         )
