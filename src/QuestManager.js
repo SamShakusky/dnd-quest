@@ -15,17 +15,102 @@ export default class App extends Component {
       title  : '',
       description: '',
       goal: '',
-      items : [{
-        title: 'The title',
-        description: '',
-        goal: 'The goal',
-        id: '1312'
-      }],
+      items : [],
       formVisibility : false,
       editing : null
     };
   }
-
+  
+  componentWillMount() {
+    this.getQuests();
+  }
+  
+  getQuests = () => {
+    const requestOptions = {
+      method: 'GET'
+    }
+    
+    fetch('http://localhost:8000/quests', requestOptions)
+      .then((response) => {
+        response.json().then((data) => {
+          this.setState({
+            items: data
+          });
+        });
+      }
+    );
+  }
+  
+  postQuest = (payload) => {
+    const data = JSON.stringify(payload);
+    const requestOptions = {
+      method  : 'POST',
+      body    : data,
+      headers : {
+        'Content-Type' : 'application/json'
+      }
+    }
+    
+    fetch('http://localhost:8000/quests', requestOptions)
+      .then((response) => {
+        response.json().then((data) => {
+          this.setState({
+            items: [
+              ...this.state.items,
+              { ...data }
+            ]
+          });
+          console.log(data);
+        });
+      }
+    );
+  }
+  
+  updateQuest = (payload, index) => {
+    const { editing, items } = this.state;
+    const data = JSON.stringify(payload);
+    const requestOptions = {
+      method  : 'PUT',
+      body    : data,
+      headers : {
+        'Content-Type' : 'application/json'
+      }
+    }
+    
+    fetch('http://localhost:8000/quests/' + editing, requestOptions)
+      .then((response) => {
+        response.json().then((data) => {
+          items[index] = {
+            ...data,
+            _id: editing
+          }
+          this.setState({
+            items
+          });
+        });
+      }
+    );
+  }
+  
+  deleteQuest = (event) => {
+    event.preventDefault();
+    let { editing, items } = this.state;
+    const requestOptions = {
+      method  : 'DELETE'
+    }
+    
+    fetch('http://localhost:8000/quests/' + editing, requestOptions)
+      .then((response) => {
+        response.json().then((data) => {
+          items = items.filter(item => item._id !== editing);
+          this.setState({ items });
+          this.closeForm();
+          this.clearInputs();
+        });
+      }
+    );
+  }
+  
   clearInputs = () => {
     setTimeout(() => {
       this.setState({
@@ -63,53 +148,31 @@ export default class App extends Component {
 
   onSubmit = (event) => {
     let {title, description, goal, editing, items} = this.state;
-
-    if(title) {
-      if(editing) {
-        const index = items.findIndex(item => item.id === editing);
-        items[index] = {
-          title: title,
-          description: description,
-          goal: goal,
-          id: editing
-        };
-      }
-      else {
-        items = [...items,
-          {
-            title: title,
-            description: description,
-            goal: goal,
-            id: +new Date()
-          }
-        ];
-      }
-      this.setState({ items: items });
-      this.closeForm();
-      this.clearInputs();
-    } else {
-      alert('Введите заголовок!');
+    const item = {
+      title       : title,
+      description : description,
+      goal        : goal
+    };
+    
+    if(editing) {
+      const index = items.findIndex(item => item._id === editing);
+      this.updateQuest(item, index);
     }
-  }
-  
-  onDelete = (event) => {
-    event.preventDefault();
-    let {items, editing} = this.state;
-    
-    items = items.filter(item => item.id !== editing);
-    
-    this.setState({ items: items });
+    else {
+      this.postQuest(item);
+    }
     this.closeForm();
     this.clearInputs();
   }
-  onEdit = (id) => {
-    const data = this.state.items.find(x => x.id === id);
-
+  
+  onEdit = (_id) => {
+    const data = this.state.items.find(x => x._id === _id);
+    
     this.setState({
       title: data.title,
       description: data.description,
       goal: data.goal,
-      editing: id,
+      editing: _id,
     });
     this.openForm();
   }
@@ -128,9 +191,8 @@ export default class App extends Component {
             goal={this.state.goal}
             onChange={this.onChange}
             onSubmit={this.onSubmit}
-            onDelete={this.onDelete}
+            onDelete={this.deleteQuest}
             onFormClose={this.closeForm}
-            // className={this.state.formVisibility ? 'active' : ''}
             editing={this.state.editing}
           />
         </SlidingPanel>
