@@ -26,20 +26,47 @@ export default class App extends Component {
   }
   
   componentWillMount() {
+    this.getQuests();
+  }
+  
+  getQuests = () => {
     const requestOptions = {
-      method: 'GET',
-      // mode: 'no-cors',
+      method: 'GET'
     }
     
     fetch('http://localhost:8000/quests', requestOptions)
       .then((response) => {
         response.json().then((data) => {
-         let quests = data;
           this.setState({
-            items: quests
+            items: data
           });
         });
-        
+      }
+    );
+  }
+  
+  postQuest = (payload) => {
+    const data = JSON.stringify(payload);
+    const requestOptions = {
+      method  : 'POST',
+      body    : data,
+      headers : {
+        // 'Accept': 'application/json',
+        'Content-Type' : 'application/json'
+      }
+    }
+    
+    fetch('http://localhost:8000/quests', requestOptions)
+      .then((response) => {
+        response.json().then((data) => {
+          this.setState({
+            items: [
+              ...this.state.items,
+              { ...data }
+            ]
+          });
+          console.log(data);
+        });
       }
     );
   }
@@ -93,16 +120,12 @@ export default class App extends Component {
         };
       }
       else {
-        items = [...items,
-          {
-            title: title,
-            description: description,
-            goal: goal,
-            _id: +new Date()
-          }
-        ];
+        this.postQuest({
+          title: title,
+          description: description,
+          goal: goal
+        })
       }
-      this.setState({ items: items });
       this.closeForm();
       this.clearInputs();
     } else {
