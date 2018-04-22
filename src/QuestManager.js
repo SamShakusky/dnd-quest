@@ -14,12 +14,7 @@ export default class App extends Component {
       title  : '',
       description: '',
       goal: '',
-      items : [{
-        title: 'The title',
-        description: '',
-        goal: 'The goal',
-        _id: '1312'
-      }],
+      items : [],
       formVisibility : false,
       editing : null
     };
@@ -51,7 +46,6 @@ export default class App extends Component {
       method  : 'POST',
       body    : data,
       headers : {
-        // 'Accept': 'application/json',
         'Content-Type' : 'application/json'
       }
     }
@@ -92,6 +86,25 @@ export default class App extends Component {
           this.setState({
             items
           });
+        });
+      }
+    );
+  }
+  
+  deleteQuest = (event) => {
+    event.preventDefault();
+    let { editing, items } = this.state;
+    const requestOptions = {
+      method  : 'DELETE'
+    }
+    
+    fetch('http://localhost:8000/quests/' + editing, requestOptions)
+      .then((response) => {
+        response.json().then((data) => {
+          items = items.filter(item => item._id !== editing);
+          this.setState({ items });
+          this.closeForm();
+          this.clearInputs();
         });
       }
     );
@@ -140,28 +153,13 @@ export default class App extends Component {
       goal        : goal
     };
     
-    if(title) {
-      if(editing) {
-        const index = items.findIndex(item => item._id === editing);
-        this.updateQuest(item, index);
-      }
-      else {
-        this.postQuest(item);
-      }
-      this.closeForm();
-      this.clearInputs();
-    } else {
-      alert('Введите заголовок!');
+    if(editing) {
+      const index = items.findIndex(item => item._id === editing);
+      this.updateQuest(item, index);
     }
-  }
-  
-  onDelete = (event) => {
-    event.preventDefault();
-    let {items, editing} = this.state;
-    
-    items = items.filter(item => item._id !== editing);
-    
-    this.setState({ items: items });
+    else {
+      this.postQuest(item);
+    }
     this.closeForm();
     this.clearInputs();
   }
@@ -187,7 +185,7 @@ export default class App extends Component {
           goal={this.state.goal}
           onChange={this.onChange}
           onSubmit={this.onSubmit}
-          onDelete={this.onDelete}
+          onDelete={this.deleteQuest}
           onFormClose={this.closeForm}
           className={this.state.formVisibility ? 'active' : ''}
           editing={this.state.editing}
