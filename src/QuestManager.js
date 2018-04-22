@@ -71,6 +71,32 @@ export default class App extends Component {
     );
   }
   
+  updateQuest = (payload, index) => {
+    const { editing, items } = this.state;
+    const data = JSON.stringify(payload);
+    const requestOptions = {
+      method  : 'PUT',
+      body    : data,
+      headers : {
+        'Content-Type' : 'application/json'
+      }
+    }
+    
+    fetch('http://localhost:8000/quests/' + editing, requestOptions)
+      .then((response) => {
+        response.json().then((data) => {
+          items[index] = {
+            ...data,
+            _id: editing
+          }
+          this.setState({
+            items
+          });
+        });
+      }
+    );
+  }
+  
   clearInputs = () => {
     setTimeout(() => {
       this.setState({
@@ -108,23 +134,19 @@ export default class App extends Component {
 
   onSubmit = (event) => {
     let {title, description, goal, editing, items} = this.state;
-
+    const item = {
+      title       : title,
+      description : description,
+      goal        : goal
+    };
+    
     if(title) {
       if(editing) {
         const index = items.findIndex(item => item._id === editing);
-        items[index] = {
-          title: title,
-          description: description,
-          goal: goal,
-          _id: editing
-        };
+        this.updateQuest(item, index);
       }
       else {
-        this.postQuest({
-          title: title,
-          description: description,
-          goal: goal
-        })
+        this.postQuest(item);
       }
       this.closeForm();
       this.clearInputs();
@@ -143,9 +165,10 @@ export default class App extends Component {
     this.closeForm();
     this.clearInputs();
   }
+  
   onEdit = (_id) => {
     const data = this.state.items.find(x => x._id === _id);
-
+    
     this.setState({
       title: data.title,
       description: data.description,
