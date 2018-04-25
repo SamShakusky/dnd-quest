@@ -21,7 +21,7 @@
 
 .sliding-panel_body {
   height: 100%;
-  width: 450px;
+  max-width: 450px;
   background: #fff;
   position: relative;
   z-index: 11;

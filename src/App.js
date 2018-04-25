@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, NavLink, BrowserRouter } from 'react-router-dom';
+import { Route, BrowserRouter } from 'react-router-dom';
 import QuestManager from './QuestManager';
 import Spec from './Spec';
 import Main from './Main';
