@@ -101,7 +101,7 @@ export default class App extends Component {
       method  : 'DELETE'
     }
     
-    fetch(`${localhost}/quests/${editing}` + editing, requestOptions)
+    fetch(`${localhost}/quests/${editing}`, requestOptions)
       .then((response) => {
         response.json().then((data) => {
           items = items.filter(item => item._id !== editing);
