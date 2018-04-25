@@ -184,6 +184,7 @@ export default class App extends Component {
           isShown={this.state.formVisibility}
           onClose={this.closeForm}
           side="right"
+          noOverlay
         >
           <QuestForm
             title={this.state.title}

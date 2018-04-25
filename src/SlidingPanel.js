@@ -13,14 +13,16 @@ export default class SlidingPanel extends Component {
   }
   
   static propTypes = {
-    isShown : PropTypes.bool,
-    side    : PropTypes.oneOf(['left', 'right']),
-    onClose : PropTypes.func
+    isShown   : PropTypes.bool,
+    side      : PropTypes.oneOf(['left', 'right']),
+    onClose   : PropTypes.func,
+    noOverlay : PropTypes.bool
   };
   
   static defaultProps = {
-    isShown : false,
-    side    : 'left'
+    isShown     : false,
+    side        : 'left',
+    noOverlay   : false
   };
   
   componentDidMount() {
@@ -35,7 +37,8 @@ export default class SlidingPanel extends Component {
     const {
       isShown,
       side,
-      onClose
+      onClose,
+      noOverlay
     } = this.props;
     
     const SlidingPanel = (
@@ -43,6 +46,8 @@ export default class SlidingPanel extends Component {
         side
       } ${
         isShown ? 'sliding-panel_active' : ''
+      } ${
+        noOverlay ? 'sliding-panel_no-overlay' : ''
       }`}>
         <div className="sliding-panel_body">
           {this.props.children}

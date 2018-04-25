@@ -1,12 +1,26 @@
+@import './import/shadows';
+
 .sliding-panel {
   position: fixed;
   top: 60px;
   overflow: hidden;
-  z-index: 10;
+  z-index: 11;
   transition: opacity .4s;
   height: calc(100vh - 60px);
   opacity: 0;
   pointer-events: none;
+  width: 100vw;
+  display: flex;
+  
+  &_no-overlay {
+    z-index: 10;
+    .sliding-panel_body {
+      @include shadow(2);
+    }
+    .sliding-panel_overlay {
+      display: none;
+    }
+  }
 }
 
 .sliding-panel_overlay {
@@ -30,13 +44,13 @@
 
 .sliding-panel_side {
   &_left {
-    left: 0;
+    justify-content: flex-start;
     .sliding-panel_body {
       transform: translateX(-100%);
     }
   }
   &_right {
-    right: 0;
+    justify-content: flex-end;
     .sliding-panel_body {
       transform: translateX(100%);
     }
