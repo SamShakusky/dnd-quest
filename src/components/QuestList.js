@@ -1,6 +1,7 @@
 import React from 'react';
-import './css/QuestList.css';
 import { Quest } from './Quest'
+
+import '../css/QuestList.css';
 
 export const QuestList = props => (
   <div className="quest-list">

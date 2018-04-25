@@ -7,8 +7,8 @@ import Menu from './Menu';
 import ButtonIcon from './ButtonIcon';
 import SlidingPanel from './SlidingPanel';
 
-import './css/App.css';
-import './css/Spec.css';
+import '../css/App.css';
+import '../css/Spec.css';
 
 export default class App extends Component {
   constructor(props) {

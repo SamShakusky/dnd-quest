@@ -2,7 +2,7 @@ import { withFormsy } from 'formsy-react';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import './css/Input.css';
+import '../css/Input.css';
 
 class Input extends Component {
   constructor(props) {

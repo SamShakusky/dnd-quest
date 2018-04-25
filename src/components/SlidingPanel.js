@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-import './css/SlidingPanel.css';
+import '../css/SlidingPanel.css';
 
 const modalRoot = document.getElementById('modal-root');
 

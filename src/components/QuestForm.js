@@ -3,7 +3,7 @@ import React from 'react';
 import Input from './Input';
 import Button from './Button';
 
-import './css/QuestForm.css';
+import '../css/QuestForm.css';
 
 export const QuestForm = props => (
   // <div className={`quest-form ${props.className}`}>

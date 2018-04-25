@@ -1,38 +1,38 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import './css/Button.css';
+import '../css/Button.css';
+import logo from '../icons/burger.svg';
 
-export default class FloatingButton extends Component {
+export default class ButtonIcon extends Component {
   
   static propTypes = {
     onClick  : PropTypes.func,
-    disabled : PropTypes.bool,
-    position : PropTypes.oneOf(['left','right','inline'])
+    disabled : PropTypes.bool
   };
 
   static defaultProps = {
     onClick  : null,
-    disabled : false,
-    position : 'right'
+    disabled : false
 	};
   
   render() {
     const {
       onClick,
-      disabled,
-      position
+      disabled
     } = this.props;
 
     return (
       <button
-        className={`floating-button floating-button_position_${
-          position
-        }`}
+        className='button-icon'
         onClick={onClick}
         disabled={disabled}
       >
-      <span>+</span>
+        <img
+          src={logo}
+          alt="menu"
+          className='button-icon__icon'
+        />
       </button>
     );
   }
