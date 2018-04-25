@@ -15,7 +15,7 @@
   &_no-overlay {
     z-index: 10;
     .sliding-panel_body {
-      @include shadow(2);
+      @include shadow(4);
     }
     .sliding-panel_overlay {
       display: none;
