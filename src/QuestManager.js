@@ -7,6 +7,8 @@ import SlidingPanel from './SlidingPanel';
 
 import './css/QuestManager.css';
 
+const localhost = 'http://192.168.0.90:8000';
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +32,7 @@ export default class App extends Component {
       method: 'GET'
     }
     
-    fetch('http://localhost:8000/quests', requestOptions)
+    fetch(`${localhost}/quests`, requestOptions)
       .then((response) => {
         response.json().then((data) => {
           this.setState({
@@ -51,7 +53,7 @@ export default class App extends Component {
       }
     }
     
-    fetch('http://localhost:8000/quests', requestOptions)
+    fetch(`${localhost}/quests`, requestOptions)
       .then((response) => {
         response.json().then((data) => {
           this.setState({
@@ -77,7 +79,7 @@ export default class App extends Component {
       }
     }
     
-    fetch('http://localhost:8000/quests/' + editing, requestOptions)
+    fetch(`${localhost}/quests/${editing}`, requestOptions)
       .then((response) => {
         response.json().then((data) => {
           items[index] = {
@@ -99,7 +101,7 @@ export default class App extends Component {
       method  : 'DELETE'
     }
     
-    fetch('http://localhost:8000/quests/' + editing, requestOptions)
+    fetch(`${localhost}/quests/${editing}` + editing, requestOptions)
       .then((response) => {
         response.json().then((data) => {
           items = items.filter(item => item._id !== editing);
