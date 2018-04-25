@@ -1,29 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import ButtonIcon from './ButtonIcon';
 
 export default class Menu extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      unfolded : false
-    };
-  }
+  static propTypes = {
+    onClick  : PropTypes.func
+  };
+
+  static defaultProps = {
+    onClick  : null
+	};
   
   render() {
+    const { onClick } = this.props;
+    
     return (
-        <div>
-          {/* <ButtonIcon /> */}
-          {
-            this.state.unfolded && 
-            <ul className="menu">
-              <li><NavLink className="link-light" exact to="/">Home</NavLink></li>
-              <li><NavLink className="link-light" to="/quest-manager">Quest Manager</NavLink></li>
-              <li><NavLink className="link-light" to="/spec">Spec</NavLink></li>
-            </ul>
-          }
-        </div>
+      <ul className="menu">
+        <li><NavLink onClick={onClick} className="link-dark" exact to="/">Home</NavLink></li>
+        <li><NavLink onClick={onClick} className="link-dark" to="/quest-manager">Quest Manager</NavLink></li>
+        <li><NavLink onClick={onClick} className="link-dark" to="/spec">Spec</NavLink></li>
+      </ul>
     );
   }
 }

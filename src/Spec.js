@@ -9,12 +9,12 @@ export default class Spec extends Component {
     return (
       <main className="page-spec">
         <h1>Spec</h1>
-        <nav>
+        {/* <nav>
           <a href="#colors">Colors</a>
           <a href="#typography">Typography</a>
           <a href="#shadows">Shadows</a>
           <a href="#buttons">Buttons</a>
-        </nav>
+        </nav> */}
         <div className="container">
           <section id="colors" className="section">
             <h2 className="section--header">Colors</h2>

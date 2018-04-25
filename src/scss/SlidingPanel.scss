@@ -1,10 +1,10 @@
 .sliding-panel {
-  position: absolute;
-  top: 42px;
+  position: fixed;
+  top: 60px;
   overflow: hidden;
   z-index: 10;
   transition: opacity .4s;
-  height: calc(100vh - 42px);
+  height: calc(100vh - 60px);
   opacity: 0;
   pointer-events: none;
 }
@@ -12,8 +12,8 @@
 .sliding-panel_overlay {
   position: fixed;
   left: 0;
-  top: 42px;
-  height: calc(100vh - 42px);
+  top: 60px;
+  height: calc(100vh - 60px);
   width: 100vw;
   background: rgba(0, 0, 0, .6);
   z-index: 10;
@@ -21,11 +21,10 @@
 
 .sliding-panel_body {
   height: 100%;
-  max-width: 450px;
+  width: 70vw;
   background: #fff;
   position: relative;
   z-index: 11;
-  padding: 24px;
   transition: transform .3s;
 }
 

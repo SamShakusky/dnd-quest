@@ -100,3 +100,15 @@
     transition: transform .3s;
   }
 }
+
+.button-icon {
+  background: none;
+  border: 0;
+  height: 36px;
+  width: 36px;
+  cursor: pointer;
+  
+  &__icon {
+    width: 100%;
+  }
+}

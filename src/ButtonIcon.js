@@ -24,11 +24,15 @@ export default class ButtonIcon extends Component {
 
     return (
       <button
-        className={'button-icon'}
+        className='button-icon'
         onClick={onClick}
         disabled={disabled}
       >
-        <img src={logo} alt="menu"/>
+        <img
+          src={logo}
+          alt="menu"
+          className='button-icon__icon'
+        />
       </button>
     );
   }
