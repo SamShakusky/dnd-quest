@@ -5,9 +5,8 @@ import { QuestForm } from './QuestForm';
 import FloatingButton from './FloatingButton';
 import SlidingPanel from './SlidingPanel';
 
+import localhost from '../config/localhost';
 import '../css/QuestManager.css';
-
-const localhost = 'http://192.168.0.90:8000';
 
 export default class App extends Component {
   constructor(props) {
