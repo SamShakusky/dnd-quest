@@ -13,12 +13,12 @@ export default class App extends Component {
     super(props);
     
     this.state = {
-      title: '',
-      description: '',
-      goal: '',
-      items: [],
-      formVisibility: false,
-      editing: null,
+      title          : '',
+      description    : '',
+      goal           : '',
+      items          : [],
+      formVisibility : false,
+      editing        : null,
     };
   }
   
@@ -31,7 +31,7 @@ export default class App extends Component {
     const { name } = target;
     
     this.setState({
-      [name]: target.value
+      [name] : target.value
     });
   }
   
@@ -64,24 +64,24 @@ export default class App extends Component {
     const data = this.state.items.find(x => x._id === _id);
     
     this.setState({
-      title: data.title,
-      description: data.description,
-      goal: data.goal,
-      editing: _id,
+      title       : data.title,
+      description : data.description,
+      goal        : data.goal,
+      editing     : _id,
     });
     this.openForm();
   }
   
   getQuests = () => {
     const requestOptions = {
-      method: 'GET'
+      method : 'GET'
     };
     
     fetch(`${localhost}/quests`, requestOptions)
       .then((response) => {
         response.json().then((data) => {
           this.setState({
-            items: data
+            items : data
           });
         });
       });
@@ -90,10 +90,10 @@ export default class App extends Component {
   postQuest = (payload) => {
     const data = JSON.stringify(payload);
     const requestOptions = {
-      method: 'POST',
-      body: data,
-      headers: {
-        'Content-Type': 'application/json'
+      method  : 'POST',
+      body    : data,
+      headers : {
+        'Content-Type' : 'application/json'
       }
     };
     
@@ -101,7 +101,7 @@ export default class App extends Component {
       .then((response) => {
         response.json().then((resp) => {
           this.setState({
-            items: [
+            items : [
               ...this.state.items,
               { ...resp }
             ]
@@ -114,10 +114,10 @@ export default class App extends Component {
     const { editing, items } = this.state;
     const data = JSON.stringify(payload);
     const requestOptions = {
-      method: 'PUT',
-      body: data,
-      headers: {
-        'Content-Type': 'application/json'
+      method  : 'PUT',
+      body    : data,
+      headers : {
+        'Content-Type' : 'application/json'
       }
     };
     
@@ -126,7 +126,7 @@ export default class App extends Component {
         response.json().then((resp) => {
           items[index] = {
             ...resp,
-            _id: editing
+            _id : editing
           };
           this.setState({
             items
@@ -140,7 +140,7 @@ export default class App extends Component {
     let { items } = this.state;
     const { editing } = this.state;
     const requestOptions = {
-      method: 'DELETE'
+      method : 'DELETE'
     };
     
     fetch(`${localhost}/quests/${editing}`, requestOptions)
@@ -157,17 +157,17 @@ export default class App extends Component {
   clearInputs = () => {
     setTimeout(() => {
       this.setState({
-        title: '',
-        description: '',
-        goal: '',
-        editing: ''
+        title       : '',
+        description : '',
+        goal        : '',
+        editing     : ''
       });
     }, 400);
   }
   
   openForm = () => {
     this.setState({
-      formVisibility: true
+      formVisibility : true
     });
   }
   
@@ -176,7 +176,7 @@ export default class App extends Component {
       this.clearInputs();
     }
     this.setState({
-      formVisibility: false
+      formVisibility : false
     });
   }
   

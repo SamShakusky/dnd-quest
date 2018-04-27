@@ -52,7 +52,7 @@ class Input extends Component {
       onChange
     } = this.props;
 
-    const errorMessage = this.props.getErrorMessage();
+    const errorMessage = this.props.getErrorMessage(); // eslint-disable-line react/prop-types
 
     return (
       <div

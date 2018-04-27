@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Quest from './Quest';
 
 import '../css/QuestList.css';
@@ -23,6 +24,6 @@ export default function QuestList(props) {
 }
 
 QuestList.propTypes = {
-  // items  : PropTypes.arrayOf(React.PropTypes.string).isRequired,
-  // onEdit : PropTypes.func.isRequired
+  items  : PropTypes.arrayOf(PropTypes.object).isRequired,
+  onEdit : PropTypes.func.isRequired
 };

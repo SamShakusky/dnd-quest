@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Formsy from 'formsy-react';
 import Button from './Button';
 import FloatingButton from './FloatingButton';
 import Input from './Input';
 
-export default class Spec extends Component {
+/* eslint-disable react/prefer-stateless-function */
+export default class Spec extends PureComponent {
   render() {
     return (
       <main className="page-spec">
@@ -61,11 +62,11 @@ export default class Spec extends Component {
           <section id="shadows" className="section">
             <h2 className="section--header">Shadows</h2>
             <div className="section--content">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
+              <div />
+              <div />
+              <div />
+              <div />
+              <div />
             </div>
           </section>
 
@@ -200,8 +201,7 @@ export default class Spec extends Component {
               <div>
                 <p>Floating Action</p>
                 <div>
-                  <FloatingButton
-                  />
+                  <FloatingButton />
                 </div>
               </div>
             </div>
@@ -210,10 +210,10 @@ export default class Spec extends Component {
           <section id="inputs" className="section">
             <h2 className="section--header">Inputs</h2>
             <div className="section--content">
-            <Formsy>
-              <Input label="label" name="name" />
-              <Input label="label2" name="name1" />
-            </Formsy>
+              <Formsy>
+                <Input label="label" name="name" />
+                <Input label="label2" name="name1" />
+              </Formsy>
             </div>
           </section>
         </div>
