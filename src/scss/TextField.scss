@@ -1,0 +1,128 @@
+@import './import/importFile';
+
+@mixin inputColor($color: $color_main) {
+  .field {
+    border-color: $grey_dark;
+    color: $grey_dark;
+  }
+  .field__label {
+    color: $grey_light;
+  }
+
+  &.field_focused {
+    .field {
+      border-color: $color;
+    }
+    .field__label {
+      color: $color;
+    }
+  }
+}
+
+.field {
+  @extend %tp-p-s;
+  border-style: solid;
+  outline: 0;
+  margin-bottom: 8px;
+  padding: 8px 0;
+  background: none;
+  border-color: transparent;
+  transition: background .2s, border .2s, color .2s, box-shadow .2s;
+  position: relative;
+  width: 100%;
+  &:disabled {
+    opacity: .4;
+    pointer-events: none;
+  }
+}
+
+.field_duty {
+  &_normal { @include inputColor($color_main); }
+  &_error { @include inputColor($color_danger); }
+  &_sucess { @include inputColor($color_success); }
+}
+
+.field__label {
+  @extend %tp-p-xxs;
+  text-align: left;
+  transition: transform .2s;
+  pointer-events: none;
+}
+
+.field__input {
+  position: relative;
+
+  &:before {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 0;
+    position: absolute;
+    left: 0;
+    bottom: 9px;
+    transition: width .2s;
+    background: $color_main;
+  }
+  
+  .field {
+    border-width: 0;
+    border-bottom-width: 1px;
+  }
+  
+  .field__label {
+    transform: translateY(200%);
+  }
+}
+
+.field__textarea {
+  display: flex;
+  flex-basis: 100%;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-bottom: 6px;
+  .field {
+    border-radius: 2px;
+    border-width: 1px;
+    resize: none;
+    padding: 28px 14px;
+    flex-grow: 1;
+  }
+  .field__label {
+    transform: translateY(100%);
+    padding-top: 8px;
+    margin-top: -8px;
+    margin-left: 14px;
+  }
+}
+
+.field_width {
+  &_full {
+    width: 100%;
+  }
+  &_min {
+    max-width: 250px;
+    width: 100%;
+  }
+}
+
+
+.field__input {
+  &.field_focused,
+  &.field_filled {
+    .field__label {
+      transform: translateY(0);
+    }
+  }
+}
+
+.field__textarea {
+  &.field_focused {
+    .field {
+      border-width: 2px;
+    }
+  }
+}
+
+.field_focused {
+  &:before { width: 100%; }
+}

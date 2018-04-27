@@ -64,6 +64,10 @@ $font_body_xl : 1.2rem;
   font-family: $font_body;
   font-size: .9rem;
 }
+%tp-p-xxs {
+  font-family: $font_body;
+  font-size: .8rem;
+}
 
 %link {
   text-decoration: none;
