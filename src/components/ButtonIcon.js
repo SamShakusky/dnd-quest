@@ -1,20 +1,19 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import '../css/Button.css';
 import logo from '../icons/burger.svg';
 
-export default class ButtonIcon extends Component {
-  
+export default class ButtonIcon extends PureComponent {
   static propTypes = {
-    onClick  : PropTypes.func,
-    disabled : PropTypes.bool
+    onClick: PropTypes.func,
+    disabled: PropTypes.bool
   };
 
   static defaultProps = {
-    onClick  : null,
-    disabled : false
-	};
+    onClick: null,
+    disabled: false
+  };
   
   render() {
     const {
@@ -24,14 +23,14 @@ export default class ButtonIcon extends Component {
 
     return (
       <button
-        className='button-icon'
+        className="button-icon"
         onClick={onClick}
         disabled={disabled}
       >
         <img
           src={logo}
           alt="menu"
-          className='button-icon__icon'
+          className="button-icon__icon"
         />
       </button>
     );

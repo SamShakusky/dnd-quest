@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
-export default class Menu extends Component {
+export default class Menu extends PureComponent {
   static propTypes = {
-    onClick  : PropTypes.func
+    onClick : PropTypes.func
   };
 
   static defaultProps = {
-    onClick  : null
-	};
+    onClick : null
+  };
   
   render() {
     const { onClick } = this.props;

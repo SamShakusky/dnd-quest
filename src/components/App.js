@@ -21,7 +21,7 @@ export default class App extends Component {
   
   toggleMenu = () => {
     this.setState({
-      menuVisibility: ! this.state.menuVisibility
+      menuVisibility : !this.state.menuVisibility
     });
   }
   
@@ -30,12 +30,12 @@ export default class App extends Component {
       <BrowserRouter>
         <div className="App">
           <header className="header">
-            <ButtonIcon onClick={this.toggleMenu}/>
+            <ButtonIcon onClick={this.toggleMenu} />
             <SlidingPanel
               isShown={this.state.menuVisibility}
               onClose={this.toggleMenu}
             >
-              <Menu onClick={this.toggleMenu}/>
+              <Menu onClick={this.toggleMenu} />
             </SlidingPanel>
           </header>
 

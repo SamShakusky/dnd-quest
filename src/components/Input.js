@@ -5,13 +5,6 @@ import PropTypes from 'prop-types';
 import '../css/Input.css';
 
 class Input extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      focused : false
-    };
-  }
-
   static propTypes = {
     value       : PropTypes.string,
     placeholder : PropTypes.string,
@@ -19,7 +12,8 @@ class Input extends Component {
     label       : PropTypes.string.isRequired,
     width       : PropTypes.oneOf(['full', 'min']),
     disabled    : PropTypes.bool,
-    duty        : PropTypes.oneOf(['normal','error','sucess'])
+    duty        : PropTypes.oneOf(['normal', 'error', 'sucess']),
+    onChange    : PropTypes.func
   };
 
   static defaultProps = {
@@ -27,15 +21,23 @@ class Input extends Component {
     placeholder : '',
     width       : 'full',
     disabled    : false,
-    duty        : 'normal'
+    duty        : 'normal',
+    onChange    : null
   };
   
+  constructor(props) {
+    super(props);
+    this.state = {
+      focused : false
+    };
+  }
+  
   onFocus() {
-    this.setState({focused: true});
+    this.setState({ focused : true });
   }
 
   onBlur() {
-    this.setState({focused: false});
+    this.setState({ focused : false });
   }
 
   render() {
@@ -66,9 +68,7 @@ class Input extends Component {
       >
         <p className="input__label">{label}</p>
         <input
-          className={
-            `input`
-          }
+          className="input"
           placeholder={placeholder}
           name={name}
           value={value}

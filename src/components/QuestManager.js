@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import { QuestList } from './QuestList'
-import { QuestForm } from './QuestForm';
+import QuestList from './QuestList';
+import QuestForm from './QuestForm';
 import FloatingButton from './FloatingButton';
 import SlidingPanel from './SlidingPanel';
 
@@ -11,14 +11,14 @@ import '../css/QuestManager.css';
 export default class App extends Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
-      title  : '',
+      title: '',
       description: '',
       goal: '',
-      items : [],
-      formVisibility : false,
-      editing : null
+      items: [],
+      formVisibility: false,
+      editing: null,
     };
   }
   
@@ -26,140 +26,34 @@ export default class App extends Component {
     this.getQuests();
   }
   
-  getQuests = () => {
-    const requestOptions = {
-      method: 'GET'
-    }
-    
-    fetch(`${localhost}/quests`, requestOptions)
-      .then((response) => {
-        response.json().then((data) => {
-          this.setState({
-            items: data
-          });
-        });
-      }
-    );
-  }
-  
-  postQuest = (payload) => {
-    const data = JSON.stringify(payload);
-    const requestOptions = {
-      method  : 'POST',
-      body    : data,
-      headers : {
-        'Content-Type' : 'application/json'
-      }
-    }
-    
-    fetch(`${localhost}/quests`, requestOptions)
-      .then((response) => {
-        response.json().then((data) => {
-          this.setState({
-            items: [
-              ...this.state.items,
-              { ...data }
-            ]
-          });
-          console.log(data);
-        });
-      }
-    );
-  }
-  
-  updateQuest = (payload, index) => {
-    const { editing, items } = this.state;
-    const data = JSON.stringify(payload);
-    const requestOptions = {
-      method  : 'PUT',
-      body    : data,
-      headers : {
-        'Content-Type' : 'application/json'
-      }
-    }
-    
-    fetch(`${localhost}/quests/${editing}`, requestOptions)
-      .then((response) => {
-        response.json().then((data) => {
-          items[index] = {
-            ...data,
-            _id: editing
-          }
-          this.setState({
-            items
-          });
-        });
-      }
-    );
-  }
-  
-  deleteQuest = (event) => {
-    event.preventDefault();
-    let { editing, items } = this.state;
-    const requestOptions = {
-      method  : 'DELETE'
-    }
-    
-    fetch(`${localhost}/quests/${editing}`, requestOptions)
-      .then((response) => {
-        response.json().then((data) => {
-          items = items.filter(item => item._id !== editing);
-          this.setState({ items });
-          this.closeForm();
-          this.clearInputs();
-        });
-      }
-    );
-  }
-  
-  clearInputs = () => {
-    setTimeout(() => {
-      this.setState({
-        title: '',
-        description: '',
-        goal: '',
-        editing: ''
-      });
-    }, 400);
-  }
-
-  openForm = () => {
-    this.setState({
-      formVisibility: true
-    });
-  }
-
-  closeForm = () => {
-    if(this.state.editing !== null) {
-      this.clearInputs();
-    }
-    this.setState({
-      formVisibility: false
-    });
-  }
-
   onChange = (event) => {
-    const target = event.target;
-    const name = target.name;
-
+    const { target } = event;
+    const { name } = target;
+    
     this.setState({
       [name]: target.value
     });
   }
-
-  onSubmit = (event) => {
-    let {title, description, goal, editing, items} = this.state;
+  
+  onSubmit = () => {
+    const {
+      title,
+      description,
+      goal,
+      editing,
+      items
+    } = this.state;
+    
     const item = {
-      title       : title,
-      description : description,
-      goal        : goal
+      title,
+      description,
+      goal
     };
     
-    if(editing) {
-      const index = items.findIndex(item => item._id === editing);
+    if (editing) {
+      const index = items.findIndex(i => i._id === editing);
       this.updateQuest(item, index);
-    }
-    else {
+    } else {
       this.postQuest(item);
     }
     this.closeForm();
@@ -176,6 +70,114 @@ export default class App extends Component {
       editing: _id,
     });
     this.openForm();
+  }
+  
+  getQuests = () => {
+    const requestOptions = {
+      method: 'GET'
+    };
+    
+    fetch(`${localhost}/quests`, requestOptions)
+      .then((response) => {
+        response.json().then((data) => {
+          this.setState({
+            items: data
+          });
+        });
+      });
+  }
+  
+  postQuest = (payload) => {
+    const data = JSON.stringify(payload);
+    const requestOptions = {
+      method: 'POST',
+      body: data,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    
+    fetch(`${localhost}/quests`, requestOptions)
+      .then((response) => {
+        response.json().then((resp) => {
+          this.setState({
+            items: [
+              ...this.state.items,
+              { ...resp }
+            ]
+          });
+        });
+      });
+  }
+  
+  updateQuest = (payload, index) => {
+    const { editing, items } = this.state;
+    const data = JSON.stringify(payload);
+    const requestOptions = {
+      method: 'PUT',
+      body: data,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    
+    fetch(`${localhost}/quests/${editing}`, requestOptions)
+      .then((response) => {
+        response.json().then((resp) => {
+          items[index] = {
+            ...resp,
+            _id: editing
+          };
+          this.setState({
+            items
+          });
+        });
+      });
+  }
+  
+  deleteQuest = (event) => {
+    event.preventDefault();
+    let { items } = this.state;
+    const { editing } = this.state;
+    const requestOptions = {
+      method: 'DELETE'
+    };
+    
+    fetch(`${localhost}/quests/${editing}`, requestOptions)
+      .then((response) => {
+        response.json().then(() => {
+          items = items.filter(item => item._id !== editing);
+          this.setState({ items });
+          this.closeForm();
+          this.clearInputs();
+        });
+      });
+  }
+  
+  clearInputs = () => {
+    setTimeout(() => {
+      this.setState({
+        title: '',
+        description: '',
+        goal: '',
+        editing: ''
+      });
+    }, 400);
+  }
+  
+  openForm = () => {
+    this.setState({
+      formVisibility: true
+    });
+  }
+  
+  closeForm = () => {
+    if (this.state.editing !== null) {
+      this.clearInputs();
+    }
+    this.setState({
+      formVisibility: false
+    });
   }
   
   render() {
@@ -202,7 +204,7 @@ export default class App extends Component {
           items={this.state.items}
           onEdit={this.onEdit}
         />
-        <FloatingButton onClick={this.openForm}/>
+        <FloatingButton onClick={this.openForm} />
       </main>
     );
   }

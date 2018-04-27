@@ -1,0 +1,18 @@
+{
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "extends": "airbnb",
+    "rules": {
+        "comma-dangle": 0,
+        "no-underscore-dangle": 0,
+        "no-trailing-spaces": [2, { "skipBlankLines": true }],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "key-spacing": ["error", {
+            "align": "colon",
+            "beforeColon": true
+        }]
+    }
+}

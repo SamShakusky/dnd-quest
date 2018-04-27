@@ -1,12 +1,13 @@
-import React from 'react';
-import { Quest } from './Quest'
+import React, { PropTypes } from 'react';
+import Quest from './Quest';
 
 import '../css/QuestList.css';
 
-export const QuestList = props => (
-  <div className="quest-list">
-    {
-      props.items.map((item,index) => (
+export default function QuestList(props) {
+  return (
+    <div className="quest-list">
+      {
+        props.items.map(item => (
           <Quest
             title={item.title}
             description={item.description}
@@ -15,8 +16,13 @@ export const QuestList = props => (
             id={item._id}
             onEdit={props.onEdit}
           />
-        )
-      )
-    }
-  </div>
-);
+          ))
+      }
+    </div>
+  );
+}
+
+QuestList.propTypes = {
+  // items  : PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  // onEdit : PropTypes.func.isRequired
+};

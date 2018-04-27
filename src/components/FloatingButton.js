@@ -1,21 +1,20 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import '../css/Button.css';
 
-export default class FloatingButton extends Component {
-  
+export default class FloatingButton extends PureComponent {
   static propTypes = {
     onClick  : PropTypes.func,
     disabled : PropTypes.bool,
-    position : PropTypes.oneOf(['left','right','inline'])
+    position : PropTypes.oneOf(['left', 'right', 'inline'])
   };
 
   static defaultProps = {
     onClick  : null,
     disabled : false,
     position : 'right'
-	};
+  };
   
   render() {
     const {
@@ -32,7 +31,7 @@ export default class FloatingButton extends Component {
         onClick={onClick}
         disabled={disabled}
       >
-      <span>+</span>
+        <span>+</span>
       </button>
     );
   }

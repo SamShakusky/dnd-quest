@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import '../css/Button.css';
 
-export default class Button extends Component {
-  
+export default class Button extends PureComponent {
   static propTypes = {
-		label    : PropTypes.string.isRequired,
+    label    : PropTypes.string.isRequired,
     size     : PropTypes.oneOf(['sm', 'md']),
-    shape    : PropTypes.oneOf(['solid','ghost','flat']),
-    duty     : PropTypes.oneOf(['simple','danger','success']),
+    shape    : PropTypes.oneOf(['solid', 'ghost', 'flat']),
+    duty     : PropTypes.oneOf(['simple', 'danger', 'success']),
     onClick  : PropTypes.func,
     disabled : PropTypes.bool
   };
@@ -20,14 +19,21 @@ export default class Button extends Component {
     duty     : 'simple',
     disabled : false,
     onClick  : null
-	};
+  };
   
   // onEdit = id => {
   //   this.props.onEdit(this.props.id);
   // }
 
   render() {
-    const { label, size, shape, duty, onClick, disabled } = this.props;
+    const {
+      label,
+      size,
+      shape,
+      duty,
+      onClick,
+      disabled
+    } = this.props;
 
     return (
       <button
@@ -41,7 +47,7 @@ export default class Button extends Component {
         onClick={onClick}
         disabled={disabled}
       >
-      {label}
+        {label}
       </button>
     );
   }

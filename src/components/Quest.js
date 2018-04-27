@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export class Quest extends Component {
-  
+export default class Quest extends Component {
   static propTypes = {
-		title         : PropTypes.string.isRequired,
-    description   : PropTypes.string,
-    goal          : PropTypes.string.isRequired,
-    onEdit        : PropTypes.func.isRequired
+    title       : PropTypes.string.isRequired,
+    description : PropTypes.string,
+    goal        : PropTypes.string.isRequired,
+    id          : PropTypes.string.isRequired,
+    onEdit      : PropTypes.func.isRequired
   };
 
   static defaultProps = {
     description : ''
-	};
+  };
   
-  onEdit = id => {
+  onEdit = () => {
     this.props.onEdit(this.props.id);
   }
 
