@@ -12,7 +12,7 @@ export default class SlidingPanel extends Component {
     side      : PropTypes.oneOf(['left', 'right']),
     onClose   : PropTypes.func,
     noOverlay : PropTypes.bool,
-    children  : PropTypes.oneOf([PropTypes.node, PropTypes.arrayOf(PropTypes.node)])
+    children  : PropTypes.node
   };
   
   static defaultProps = {
