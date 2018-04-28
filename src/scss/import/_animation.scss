@@ -1,0 +1,15 @@
+@mixin animation($property: all, $speed: fast) {
+  @if $speed == fast {
+      transition-property: $property;
+      transition-timing-function: cubic-bezier(.25, .46, .45, .94);
+      transition-duration: 0.25s;
+  } @else if $speed == medium {
+    transition-property: $property;
+    transition-timing-function: cubic-bezier(.25, .46, .45, .94);
+    transition-duration: 0.35s;
+  } @else if $speed == slow {
+    transition-property: $property;
+    transition-timing-function: cubic-bezier(.25, .46, .45, .94);
+    transition-duration: 0.45s;
+  }
+}

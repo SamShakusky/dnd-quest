@@ -82,7 +82,7 @@
   background: $color_secondary;
   color: $white;
   transition: background .2;
-  position: absolute;
+  position: fixed;
   bottom: 33px;
   &_position {
     &_left {

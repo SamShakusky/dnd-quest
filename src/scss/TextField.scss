@@ -16,6 +16,10 @@
     .field__label {
       color: $color;
     }
+    &.field__textarea:before,
+    &.field__textarea:after {
+      border-color: $color;
+    }
   }
 }
 
@@ -27,9 +31,9 @@
   padding: 8px 0;
   background: none;
   border-color: transparent;
-  transition: background .2s, border .2s, color .2s, box-shadow .2s;
   position: relative;
   width: 100%;
+  @include animation((background, border, box-shadow), fast);
   &:disabled {
     opacity: .4;
     pointer-events: none;
@@ -45,8 +49,8 @@
 .field__label {
   @extend %tp-p-xxs;
   text-align: left;
-  transition: transform .2s;
   pointer-events: none;
+  @include animation(transform, fast);
 }
 
 .field__input {
@@ -60,8 +64,8 @@
     position: absolute;
     left: 0;
     bottom: 9px;
-    transition: width .2s;
     background: $color_main;
+    @include animation(width, fast);
   }
   
   .field {
@@ -80,6 +84,32 @@
   flex-direction: column;
   flex-grow: 1;
   margin-bottom: 6px;
+  position: relative;
+  &:before,
+  &:after {
+    content: '';
+    height: calc(100% - 32px);
+    width: 100%;
+    position: absolute;
+    top: 25px;
+    left: 0;
+    border-width: 0;
+    border-style: solid;
+    border-radius: 3px;
+    transform: scale(0);
+    pointer-events: none;
+    @include animation(transform, fast);
+  }
+  &:before {
+    border-top-width: 2px;
+    border-left-width: 2px;
+    transform-origin: top left;
+  }
+  &:after {
+    border-bottom-width: 2px;
+    border-right-width: 2px;
+    transform-origin: bottom right;
+  }
   .field {
     border-radius: 2px;
     border-width: 1px;
@@ -88,10 +118,12 @@
     flex-grow: 1;
   }
   .field__label {
-    transform: translateY(100%);
+    transform: translate(2px, calc(100% + 1px));
+    width: calc(100% - 14px);
     padding-top: 8px;
-    margin-top: -8px;
-    margin-left: 14px;
+    padding: 8px 14px 6px;
+    background: $white;
+    z-index: 1;
   }
 }
 
@@ -117,8 +149,13 @@
 
 .field__textarea {
   &.field_focused {
+    &:before,
+    &:after {
+      transform: scale(1);
+    }
     .field {
-      border-width: 2px;
+      // border-width: 2px;
+      
     }
   }
 }

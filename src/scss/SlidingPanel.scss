@@ -1,16 +1,16 @@
-@import './import/shadows';
+@import './import/importFile';
 
 .sliding-panel {
   position: fixed;
   top: 60px;
   overflow: hidden;
   z-index: 11;
-  transition: opacity .4s;
   height: calc(100vh - 60px);
   opacity: 0;
   pointer-events: none;
   width: 100vw;
   display: flex;
+  @include animation(opacity, medium);
   
   &_no-overlay {
     z-index: 10;
@@ -39,7 +39,7 @@
   background: #fff;
   position: relative;
   z-index: 11;
-  transition: transform .3s;
+  @include animation(transform, medium);
 }
 
 .sliding-panel_side {
