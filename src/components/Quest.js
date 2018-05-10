@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-export default class Quest extends Component {
+export default class Quest extends PureComponent {
   static propTypes = {
     title       : PropTypes.string.isRequired,
     description : PropTypes.string,

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import QuestList from './QuestList';
 import QuestForm from './QuestForm';
@@ -8,7 +8,7 @@ import SlidingPanel from './SlidingPanel';
 import localhost from '../config/localhost';
 import '../css/QuestManager.css';
 
-export default class App extends Component {
+export default class App extends PureComponent {
   constructor(props) {
     super(props);
     

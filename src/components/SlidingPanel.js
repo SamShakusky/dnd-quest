@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
@@ -6,7 +6,7 @@ import '../css/SlidingPanel.css';
 
 const modalRoot = document.getElementById('modal-root');
 
-export default class SlidingPanel extends Component {
+export default class SlidingPanel extends PureComponent {
   static propTypes = {
     isShown   : PropTypes.bool,
     side      : PropTypes.oneOf(['left', 'right']),

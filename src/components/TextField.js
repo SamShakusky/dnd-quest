@@ -1,10 +1,10 @@
 import { withFormsy } from 'formsy-react';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import '../css/TextField.css';
 
-class TextField extends Component {
+class TextField extends PureComponent {
   static propTypes = {
     value       : PropTypes.string,
     placeholder : PropTypes.string,
@@ -80,6 +80,7 @@ class TextField extends Component {
           value={value}
           onChange={onChange}
           disabled={disabled}
+          autocomplete="off"
 
           onFocus={() => this.onFocus()}
           onBlur={() => this.onBlur()}

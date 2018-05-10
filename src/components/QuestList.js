@@ -1,26 +1,35 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Quest from './Quest';
 
 import '../css/QuestList.css';
 
-export default function QuestList(props) {
-  return (
-    <div className="quest-list">
-      {
-        props.items.map(item => (
-          <Quest
-            title={item.title}
-            description={item.description}
-            goal={item.goal}
-            key={item._id}
-            id={item._id}
-            onEdit={props.onEdit}
-          />
-          ))
-      }
-    </div>
-  );
+export default class QuestList extends PureComponent {
+  static propTypes = {
+    items  : PropTypes.arrayOf(PropTypes.object).isRequired,
+    onEdit : PropTypes.func.isRequired
+  };
+  
+  render() {
+    const { items, onEdit } = this.props;
+    
+    return (
+      <div className="quest-list">
+        {
+          items.map(item => (
+            <Quest
+              title={item.title}
+              description={item.description}
+              goal={item.goal}
+              key={item._id}
+              id={item._id}
+              onEdit={onEdit}
+            />
+            ))
+        }
+      </div>
+    );
+  }
 }
 
 QuestList.propTypes = {

@@ -1,10 +1,10 @@
 import { withFormsy } from 'formsy-react';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import '../css/Input.css';
 
-class Input extends Component {
+class Input extends PureComponent {
   static propTypes = {
     value       : PropTypes.string,
     placeholder : PropTypes.string,

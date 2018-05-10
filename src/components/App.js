@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Route, BrowserRouter } from 'react-router-dom';
 import QuestManager from './QuestManager';
 import Spec from './Spec';
@@ -10,7 +10,7 @@ import SlidingPanel from './SlidingPanel';
 import '../css/App.css';
 import '../css/Spec.css';
 
-export default class App extends Component {
+export default class App extends PureComponent {
   constructor(props) {
     super(props);
     
