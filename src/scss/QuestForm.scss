@@ -1,7 +1,7 @@
 @import './import/importFile';
 
 .quest-form {
-  height: 85vh;
+  height: 78vh;
   width: 65vw;
   display: flex;
   flex-direction: column;
@@ -12,6 +12,7 @@
   z-index: 10;
   border: 0;
   @media all and (min-width: 1025px) {
+    height: calc(100vh - 60px);
     width: 40vw;
   }
 }
