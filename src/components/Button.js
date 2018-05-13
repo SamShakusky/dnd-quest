@@ -5,25 +5,23 @@ import '../css/Button.css';
 
 export default class Button extends PureComponent {
   static propTypes = {
-    label    : PropTypes.string.isRequired,
-    size     : PropTypes.oneOf(['sm', 'md']),
-    shape    : PropTypes.oneOf(['solid', 'ghost', 'flat']),
-    duty     : PropTypes.oneOf(['simple', 'danger', 'success']),
-    onClick  : PropTypes.func,
-    disabled : PropTypes.bool
+    label     : PropTypes.string.isRequired,
+    size      : PropTypes.oneOf(['sm', 'md']),
+    shape     : PropTypes.oneOf(['solid', 'ghost', 'flat']),
+    duty      : PropTypes.oneOf(['simple', 'danger', 'success']),
+    onClick   : PropTypes.func,
+    disabled  : PropTypes.bool,
+    className : PropTypes.string
   };
 
   static defaultProps = {
-    size     : 'md',
-    shape    : 'solid',
-    duty     : 'simple',
-    disabled : false,
-    onClick  : null
+    size      : 'md',
+    shape     : 'solid',
+    duty      : 'simple',
+    disabled  : false,
+    onClick   : null,
+    className : null
   };
-  
-  // onEdit = id => {
-  //   this.props.onEdit(this.props.id);
-  // }
 
   render() {
     const {
@@ -32,7 +30,8 @@ export default class Button extends PureComponent {
       shape,
       duty,
       onClick,
-      disabled
+      disabled,
+      className
     } = this.props;
 
     return (
@@ -43,6 +42,8 @@ export default class Button extends PureComponent {
           shape
         } button_duty_${
           duty
+        } ${
+          className
         }`}
         onClick={onClick}
         disabled={disabled}

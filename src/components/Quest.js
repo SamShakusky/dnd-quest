@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import Button from './Button';
 
 export default class Quest extends PureComponent {
   static propTypes = {
@@ -23,7 +24,13 @@ export default class Quest extends PureComponent {
 
     return (
       <div className="quest">
-        <button className="quest-edit" onClick={this.onEdit}>edit</button>
+        <Button
+          className="quest-edit"
+          label="edit"
+          size="sm"
+          shape="flat"
+          onClick={this.onEdit}
+        />
         <h3 className="quest-title">{title}</h3>
         <p className="quest-description">{description}</p>
         <p className="quest-goal">{goal}</p>

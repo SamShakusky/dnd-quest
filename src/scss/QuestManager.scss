@@ -1,10 +1,14 @@
+@import './import/_colors';
+
 .page-manager {
+    min-height: calc(100vh - 60px);
     max-width: 1170px;
     margin: auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    padding: 64px 24px;
+    padding: 64px 0;
+    background: $grey_super-light;
 
   .activate-form {
     position: absolute;

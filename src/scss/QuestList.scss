@@ -1,38 +1,41 @@
+@import './import/importFile';
+
 .quest-list {
   display: flex;
   flex-wrap: wrap;
   flex-basis: 100%;
-  justify-content: space-evenly;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 12px;
 }
 
 .quest {
-  width: 350px;
-  padding: 24px;
-  margin-bottom: 18px;
-  border: 1px solid black;
+  width: 100%;
+  padding: 12px 24px;
+  margin-bottom: 2px;
   position: relative;
+  background: $white;
 }
 
 .quest-title {
-  font-size: 24px;
-  margin-bottom: 24px;
-  padding-right: 38px;
+  @extend %tp-p-l;
+  margin-bottom: 12px;
 }
 
 .quest-description {
-  font-size: 18px;
-  margin-bottom: 18px;
+  @extend %tp-p-s;
 }
 
 .quest-goal {
+  @extend %tp-p-xs;
   text-align: right;
   font-weight: 700;
 }
 
 .quest-edit {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 6px;
+  right: 6px;
 }
 
 .quest-delete {
