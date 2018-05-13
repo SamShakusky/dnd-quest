@@ -14,7 +14,8 @@ class TextField extends PureComponent {
     disabled    : PropTypes.bool,
     duty        : PropTypes.oneOf(['normal', 'error', 'sucess']),
     onChange    : PropTypes.func,
-    fieldType   : PropTypes.oneOf(['input', 'textarea'])
+    fieldType   : PropTypes.oneOf(['input', 'textarea']),
+    required    : PropTypes.bool
   };
 
   static defaultProps = {
@@ -24,7 +25,8 @@ class TextField extends PureComponent {
     disabled    : false,
     duty        : 'normal',
     onChange    : null,
-    fieldType   : 'input'
+    fieldType   : 'input',
+    required    : false
   };
   
   constructor(props) {
@@ -34,11 +36,11 @@ class TextField extends PureComponent {
     };
   }
   
-  onFocus() {
+  onFocus = () => {
     this.setState({ focused : true });
   }
 
-  onBlur() {
+  onBlur = () => {
     this.setState({ focused : false });
   }
 
@@ -52,7 +54,8 @@ class TextField extends PureComponent {
       disabled,
       duty,
       onChange,
-      fieldType
+      fieldType,
+      required
     } = this.props;
 
     const errorMessage = this.props.getErrorMessage(); // eslint-disable-line react/prop-types
@@ -68,6 +71,8 @@ class TextField extends PureComponent {
           this.state.focused ? 'field_focused' : ''
         } ${
           value.length ? 'field_filled' : ''
+        } ${
+          required ? 'field_required' : ''
         } field__${
           fieldType
         }`}
@@ -82,8 +87,8 @@ class TextField extends PureComponent {
           disabled={disabled}
           autoComplete="off"
 
-          onFocus={() => this.onFocus()}
-          onBlur={() => this.onBlur()}
+          onFocus={this.onFocus}
+          onBlur={this.onBlur}
         />
         <p className="field__validation">{errorMessage}</p>
       </div>

@@ -36,8 +36,8 @@ export default class QuestForm extends PureComponent {
     return (
       <Formsy onValidSubmit={onSubmit} className="quest-form">
         <TextField label="Title" name="title" value={title} onChange={onChange} required />
-        <TextField fieldType="textarea" label="Description" name="description" value={description} onChange={onChange} />
         <TextField label="Goal" name="goal" value={goal} onChange={onChange} />
+        <TextField fieldType="textarea" label="Description" name="description" value={description} onChange={onChange} />
         <div className="form_buttons">
           <Button type="submit" label={editing ? 'Edit' : 'Create'} shape="flat" size="sm" />
           {(editing && <Button label="Delete" shape="flat" size="sm" duty="danger" onClick={onDelete} className="quest-delete" />)}

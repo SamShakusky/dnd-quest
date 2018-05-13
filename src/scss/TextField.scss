@@ -23,11 +23,15 @@
   }
 }
 
+.field-wrap {
+  margin-bottom: 18px;
+  position: relative;
+}
+
 .field {
   @extend %tp-p-s;
   border-style: solid;
   outline: 0;
-  margin-bottom: 8px;
   padding: 8px 0;
   background: none;
   border-color: transparent;
@@ -50,7 +54,15 @@
   @extend %tp-p-xxs;
   text-align: left;
   pointer-events: none;
+  will-change: transform;
+  transform-origin: bottom left;
   @include animation(transform, fast);
+}
+
+.field_required {
+  .field__label:after {
+    content: '*'
+  }
 }
 
 .field__input {
@@ -63,8 +75,9 @@
     width: 0;
     position: absolute;
     left: 0;
-    bottom: 9px;
+    bottom: -1px;
     background: $color_main;
+    will-change: width;
     @include animation(width, fast);
   }
   
@@ -74,7 +87,9 @@
   }
   
   .field__label {
-    transform: translateY(200%);
+    position: absolute;
+    left: 0;
+    bottom: 8px;
   }
 }
 
@@ -83,21 +98,23 @@
   flex-basis: 100%;
   flex-direction: column;
   flex-grow: 1;
-  margin-bottom: 6px;
+  margin-top: 24px;
   position: relative;
+  min-height: 60px;
   &:before,
   &:after {
     content: '';
-    height: calc(100% - 32px);
+    height: 100%;
     width: 100%;
     position: absolute;
-    top: 25px;
+    top: 0;
     left: 0;
     border-width: 0;
     border-style: solid;
     border-radius: 3px;
     transform: scale(0);
     pointer-events: none;
+    will-change: transform;
     @include animation(transform, fast);
   }
   &:before {
@@ -114,14 +131,14 @@
     border-radius: 2px;
     border-width: 1px;
     resize: none;
-    padding: 28px 14px;
+    padding: 18px 14px;
     flex-grow: 1;
   }
   .field__label {
-    transform: translate(2px, calc(100% + 1px));
-    width: calc(100% - 14px);
-    padding-top: 8px;
-    padding: 8px 14px 6px;
+    padding: 0 4px;
+    position: absolute;
+    top: -6px;
+    left: 10px;
     background: $white;
     z-index: 1;
   }
@@ -142,7 +159,7 @@
   &.field_focused,
   &.field_filled {
     .field__label {
-      transform: translateY(0);
+      transform: translateY(-24px) scale(.80);
     }
   }
 }

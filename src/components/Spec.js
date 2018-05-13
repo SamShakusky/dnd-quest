@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import Formsy from 'formsy-react';
 import Button from './Button';
 import FloatingButton from './FloatingButton';
-import Input from './Input';
+import TextField from './TextField';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class Spec extends PureComponent {
@@ -211,8 +211,8 @@ export default class Spec extends PureComponent {
             <h2 className="section--header">Inputs</h2>
             <div className="section--content">
               <Formsy>
-                <Input label="label" name="name" />
-                <Input label="label2" name="name1" />
+                <TextField label="label" name="name" />
+                <TextField label="label2" name="name1" />
               </Formsy>
             </div>
           </section>
