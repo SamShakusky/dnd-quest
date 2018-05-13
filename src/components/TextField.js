@@ -80,7 +80,7 @@ class TextField extends PureComponent {
           value={value}
           onChange={onChange}
           disabled={disabled}
-          autocomplete="off"
+          autoComplete="off"
 
           onFocus={() => this.onFocus()}
           onBlur={() => this.onBlur()}
