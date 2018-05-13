@@ -57,7 +57,6 @@ export default class App extends PureComponent {
       this.postQuest(item);
     }
     this.closeForm();
-    this.clearInputs();
   }
   
   onEdit = (_id) => {
@@ -149,20 +148,8 @@ export default class App extends PureComponent {
           items = items.filter(item => item._id !== editing);
           this.setState({ items });
           this.closeForm();
-          this.clearInputs();
         });
       });
-  }
-  
-  clearInputs = () => {
-    setTimeout(() => {
-      this.setState({
-        title       : '',
-        description : '',
-        goal        : '',
-        editing     : ''
-      });
-    }, 400);
   }
   
   openForm = () => {
@@ -172,11 +159,19 @@ export default class App extends PureComponent {
   }
   
   closeForm = () => {
+    let inputs;
+    
     if (this.state.editing !== null) {
-      this.clearInputs();
+      inputs = {
+        title       : '',
+        description : '',
+        goal        : '',
+        editing     : ''
+      };
     }
     this.setState({
-      formVisibility : false
+      formVisibility : false,
+      ...inputs
     });
   }
   
