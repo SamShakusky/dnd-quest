@@ -7,8 +7,8 @@ import Menu from './Menu';
 import ButtonIcon from './ButtonIcon';
 import SlidingPanel from './SlidingPanel';
 
-import '../css/App.css';
-import '../css/Spec.css';
+import styles from '../css/App.css';
+// import '../css/Spec.css';
 
 export default class App extends PureComponent {
   constructor(props) {
@@ -26,10 +26,11 @@ export default class App extends PureComponent {
   }
   
   render() {
+    console.log(styles);
     return (
       <BrowserRouter>
-        <div className="App">
-          <header className="header">
+        <div className={styles.App}>
+          <header styleName="header">
             <ButtonIcon onClick={this.toggleMenu} />
             <SlidingPanel
               isShown={this.state.menuVisibility}
