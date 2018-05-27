@@ -21,6 +21,7 @@ export default class App extends PureComponent {
       title          : '',
       description    : '',
       goal           : '',
+      reward         : '',
       items          : [],
       formVisibility : false,
       editing        : null,
@@ -45,6 +46,7 @@ export default class App extends PureComponent {
       title,
       description,
       goal,
+      reward,
       editing,
       items
     } = this.state;
@@ -52,7 +54,8 @@ export default class App extends PureComponent {
     const item = {
       title,
       description,
-      goal
+      goal,
+      reward
     };
     
     if (editing) {
@@ -71,6 +74,7 @@ export default class App extends PureComponent {
       title       : data.title,
       description : data.description,
       goal        : data.goal,
+      reward      : data.reward,
       editing     : _id,
     });
     this.openForm();
@@ -176,6 +180,7 @@ export default class App extends PureComponent {
         title       : '',
         description : '',
         goal        : '',
+        reward      : '',
         editing     : ''
       };
     }
@@ -202,6 +207,7 @@ export default class App extends PureComponent {
             title={this.state.title}
             description={this.state.description}
             goal={this.state.goal}
+            reward={this.state.reward}
             onChange={this.onChange}
             onSubmit={this.onSubmit}
             onDelete={this.deleteQuest}

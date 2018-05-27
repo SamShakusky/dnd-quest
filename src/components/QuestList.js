@@ -21,6 +21,7 @@ export default class QuestList extends PureComponent {
               title={item.title}
               description={item.description}
               goal={item.goal}
+              reward={item.reward}
               key={item._id}
               id={item._id}
               onEdit={onEdit}

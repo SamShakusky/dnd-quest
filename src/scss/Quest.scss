@@ -21,12 +21,23 @@
   @extend %tp-p-s;
 }
 
-.quest-goal {
-  @extend %tp-p-xs;
-  text-align: right;
-  font-weight: 700;
+.bottom-panel {
+  display: flex;
   margin-top: auto;
   justify-self: flex-end;
+}
+
+.quest-goal {
+  @extend %tp-p-xs;
+  font-weight: 700;
+  flex: 1;
+}
+
+.quest-reward {
+  @extend %tp-p-xs;
+  text-align: right;
+  flex: 1;
+  color: $color_secondary;
 }
 
 .quest-edit {

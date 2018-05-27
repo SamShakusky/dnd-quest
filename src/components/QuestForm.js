@@ -10,7 +10,8 @@ export default class QuestForm extends PureComponent {
   static propTypes = {
     title       : PropTypes.string.isRequired,
     description : PropTypes.string,
-    goal        : PropTypes.string.isRequired,
+    goal        : PropTypes.string,
+    reward      : PropTypes.string,
     editing     : PropTypes.string,
     onSubmit    : PropTypes.func.isRequired,
     onChange    : PropTypes.func.isRequired,
@@ -20,6 +21,8 @@ export default class QuestForm extends PureComponent {
   
   static defaultProps = {
     description : '',
+    goal        : '',
+    reward      : '',
     editing     : ''
   };
   
@@ -28,6 +31,7 @@ export default class QuestForm extends PureComponent {
       title,
       description,
       goal,
+      reward,
       editing,
       onSubmit,
       onChange,
@@ -39,6 +43,7 @@ export default class QuestForm extends PureComponent {
       <Formsy onValidSubmit={onSubmit} styleName="quest-form">
         <TextField label="Title" name="title" value={title} onChange={onChange} required />
         <TextField label="Goal" name="goal" value={goal} onChange={onChange} />
+        <TextField label="Reward" name="reward" value={reward} onChange={onChange} />
         <TextField fieldType="textarea" label="Description" name="description" value={description} onChange={onChange} />
         <div className="form_buttons">
           <Button type="submit" label={editing ? 'Edit' : 'Create'} shape="flat" size="sm" />

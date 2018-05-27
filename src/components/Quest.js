@@ -8,13 +8,16 @@ export default class Quest extends PureComponent {
   static propTypes = {
     title       : PropTypes.string.isRequired,
     description : PropTypes.string,
-    goal        : PropTypes.string.isRequired,
+    goal        : PropTypes.string,
+    reward      : PropTypes.string,
     id          : PropTypes.string.isRequired,
     onEdit      : PropTypes.func.isRequired
   };
 
   static defaultProps = {
-    description : ''
+    description : '',
+    goal        : '',
+    reward      : ''
   };
   
   onEdit = () => {
@@ -22,7 +25,12 @@ export default class Quest extends PureComponent {
   }
 
   render() {
-    const { title, description, goal } = this.props;
+    const {
+      title,
+      description,
+      goal,
+      reward
+    } = this.props;
 
     return (
       <div styleName="quest">
@@ -36,7 +44,10 @@ export default class Quest extends PureComponent {
         </div>
         <h3 styleName="quest-title">{title}</h3>
         <p styleName="quest-description">{description}</p>
-        <p styleName="quest-goal">{goal}</p>
+        <div styleName="bottom-panel">
+          <p styleName="quest-goal">{goal}</p>
+          <p styleName="quest-reward">{reward}</p>
+        </div>
       </div>
     );
   }
