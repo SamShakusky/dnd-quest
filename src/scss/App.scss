@@ -15,31 +15,3 @@
   z-index: 10;
   @include shadow(1);
 }
-
-.menu {
-  display: flex;
-  flex-direction: column;
-  padding: 24px 18px;
-  a {
-    @extend %tp-p-m;
-  }
-  li {
-    margin-bottom: 18px;
-  }
-}
-
-.text {
-  margin: 0;
-}
-
-.text-sm {
-  font-size: 14px;
-}
-
-.text-md {
-  font-size: 18px;
-}
-
-.text-lg {
-  font-size: 24px;
-}

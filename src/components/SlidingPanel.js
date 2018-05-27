@@ -54,7 +54,7 @@ export default class SlidingPanel extends PureComponent {
     } = this.props;
     
     const Panel = (
-      <div className={`sliding-panel sliding-panel_side_${
+      <div styleName={`sliding-panel sliding-panel_side_${
         side
       } ${
         isShown ? 'sliding-panel_active' : ''
@@ -62,10 +62,10 @@ export default class SlidingPanel extends PureComponent {
         noOverlay ? 'sliding-panel_no-overlay' : ''
       }`}
       >
-        <div className="sliding-panel_body">
+        <div styleName="sliding-panel_body">
           {this.props.children}
         </div>
-        { <div onClick={onClose} className="sliding-panel_overlay" /> }
+        { <div onClick={onClose} styleName="sliding-panel_overlay" /> }
       </div>
     );
     

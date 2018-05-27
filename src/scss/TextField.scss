@@ -180,3 +180,7 @@
 .field_focused {
   &:before { width: 100%; }
 }
+
+.field__validation {
+  content: none;
+}

@@ -23,14 +23,14 @@ export default class ButtonIcon extends PureComponent {
 
     return (
       <button
-        className="button-icon"
+        styleName="button-icon"
         onClick={onClick}
         disabled={disabled}
       >
         <img
           src={logo}
           alt="menu"
-          className="button-icon__icon"
+          styleName="button-icon__icon"
         />
       </button>
     );

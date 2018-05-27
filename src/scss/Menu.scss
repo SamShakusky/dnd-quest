@@ -1,0 +1,13 @@
+@import './import/importFile';
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    padding: 24px 18px;
+    a {
+        @extend %tp-p-m;
+    }
+    li {
+        margin-bottom: 18px;
+    }
+}

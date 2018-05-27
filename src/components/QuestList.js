@@ -14,7 +14,7 @@ export default class QuestList extends PureComponent {
     const { items, onEdit } = this.props;
     
     return (
-      <div className="quest-list">
+      <div styleName="quest-list">
         {
           items.map(item => (
             <Quest

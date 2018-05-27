@@ -34,13 +34,13 @@ export default class QuestForm extends PureComponent {
     } = this.props;
     
     return (
-      <Formsy onValidSubmit={onSubmit} className="quest-form">
+      <Formsy onValidSubmit={onSubmit} styleName="quest-form">
         <TextField label="Title" name="title" value={title} onChange={onChange} required />
         <TextField label="Goal" name="goal" value={goal} onChange={onChange} />
         <TextField fieldType="textarea" label="Description" name="description" value={description} onChange={onChange} />
         <div className="form_buttons">
           <Button type="submit" label={editing ? 'Edit' : 'Create'} shape="flat" size="sm" />
-          {(editing && <Button label="Delete" shape="flat" size="sm" duty="danger" onClick={onDelete} className="quest-delete" />)}
+          {(editing && <Button label="Delete" shape="flat" size="sm" duty="danger" onClick={onDelete} />)}
         </div>
       </Formsy>
     );

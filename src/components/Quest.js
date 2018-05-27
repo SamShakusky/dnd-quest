@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button';
 
+import '../css/Quest.css';
+
 export default class Quest extends PureComponent {
   static propTypes = {
     title       : PropTypes.string.isRequired,
@@ -23,17 +25,18 @@ export default class Quest extends PureComponent {
     const { title, description, goal } = this.props;
 
     return (
-      <div className="quest">
-        <Button
-          className="quest-edit"
-          label="edit"
-          size="sm"
-          shape="flat"
-          onClick={this.onEdit}
-        />
-        <h3 className="quest-title">{title}</h3>
-        <p className="quest-description">{description}</p>
-        <p className="quest-goal">{goal}</p>
+      <div styleName="quest">
+        <div styleName="quest-edit">
+          <Button
+            label="edit"
+            size="sm"
+            shape="flat"
+            onClick={this.onEdit}
+          />
+        </div>
+        <h3 styleName="quest-title">{title}</h3>
+        <p styleName="quest-description">{description}</p>
+        <p styleName="quest-goal">{goal}</p>
       </div>
     );
   }

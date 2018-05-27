@@ -4,11 +4,13 @@ import Button from './Button';
 import FloatingButton from './FloatingButton';
 import TextField from './TextField';
 
+import '../css/Spec.css';
+
 /* eslint-disable react/prefer-stateless-function */
 export default class Spec extends PureComponent {
   render() {
     return (
-      <main className="page-spec">
+      <main styleName="page-spec">
         <h1>Spec</h1>
         {/* <nav>
           <a href="#colors">Colors</a>
@@ -16,52 +18,52 @@ export default class Spec extends PureComponent {
           <a href="#shadows">Shadows</a>
           <a href="#buttons">Buttons</a>
         </nav> */}
-        <div className="container">
-          <section id="colors" className="section">
-            <h2 className="section--header">Colors</h2>
-            <div className="section--content">
-              <span className=" color white">$white</span>
-              <span className=" color grey_light">$grey_light</span>
-              <span className=" color grey">$grey</span>
-              <span className=" color grey_dark">$grey_dark</span>
-              <span className=" color color_main_light">$color_main_light</span>
-              <span className=" color color_main">$color_main</span>
-              <span className=" color color_main_dark">$color_main_dark</span>
-              <span className=" color color_secondary_light">$color_secondary_light</span>
-              <span className=" color color_secondary">$color_secondary</span>
-              <span className=" color color_secondary_dark">$color_secondary_dark</span>
-              <span className=" color color_success">$color_success</span>
-              <span className=" color color_danger">$color_danger</span>
-              <span className=" color color_warning">$color_warning</span>
+        <div>
+          <section styleName="colors section">
+            <h2 styleName="section--header">Colors</h2>
+            <div styleName="section--content">
+              <span styleName=" color white">$white</span>
+              <span styleName=" color grey_light">$grey_light</span>
+              <span styleName=" color grey">$grey</span>
+              <span styleName=" color grey_dark">$grey_dark</span>
+              <span styleName=" color color_main_light">$color_main_light</span>
+              <span styleName=" color color_main">$color_main</span>
+              <span styleName=" color color_main_dark">$color_main_dark</span>
+              <span styleName=" color color_secondary_light">$color_secondary_light</span>
+              <span styleName=" color color_secondary">$color_secondary</span>
+              <span styleName=" color color_secondary_dark">$color_secondary_dark</span>
+              <span styleName=" color color_success">$color_success</span>
+              <span styleName=" color color_danger">$color_danger</span>
+              <span styleName=" color color_warning">$color_warning</span>
             </div>
           </section>
 
-          <section id="typography" className="section">
-            <h2 className="section--header">Typography</h2>
-            <div className="section--content">
-              <div className="head">
-                <h2 className="h1">Heading 1</h2>
-                <h2 className="h2">Heading 2</h2>
-                <h3 className="h3">Heading 3</h3>
-                <h3 className="h4">Heading 4</h3>
+          <section styleName="typography section">
+            <h2 styleName="section--header">Typography</h2>
+            <div styleName="section--content">
+              <div styleName="head">
+                <h2 styleName="h1">Heading 1</h2>
+                <h2 styleName="h2">Heading 2</h2>
+                <h3 styleName="h3">Heading 3</h3>
+                <h3 styleName="h4">Heading 4</h3>
               </div>
-              <div className="body">
-                <p className="xl">Paragraph xl</p>
-                <p className="l">Paragraph l</p>
-                <p className="m">Paragraph m</p>
-                <p className="s">Paragraph s</p>
-                <p className="xs">Paragraph xs</p>
+              <div styleName="body">
+                <p styleName="xl">Paragraph xl</p>
+                <p styleName="l">Paragraph l</p>
+                <p styleName="m">Paragraph m</p>
+                <p styleName="s">Paragraph s</p>
+                <p styleName="xs">Paragraph xs</p>
               </div>
-              <div className="link">
-                <p className="light">Here is some text with a <a href="google.com" >link</a> for you.</p>
-                <p className="dark">Here is some text with a <a href="google.com" >link</a> for you.</p>
+              <div styleName="link">
+                <p>Here is some text with a <a href="google.com" >link</a> for you.</p>
+                <p styleName="dark">Here is some text with a <a href="google.com" >link</a> for you.</p>
               </div>
             </div>
           </section>
 
-          <section id="shadows" className="section">
-            <h2 className="section--header">Shadows</h2>
-            <div className="section--content">
+          <section styleName="shadows section">
+            <h2 styleName="section--header">Shadows</h2>
+            <div styleName="section--content">
               <div />
               <div />
               <div />
@@ -70,9 +72,9 @@ export default class Spec extends PureComponent {
             </div>
           </section>
 
-          <section id="buttons" className="section">
-            <h2 className="section--header">Buttons</h2>
-            <div className="section--content">
+          <section styleName="buttons section">
+            <h2 styleName="section--header">Buttons</h2>
+            <div styleName="section--content">
               <div>
                 <p>Simple</p>
                 <div>
@@ -207,9 +209,9 @@ export default class Spec extends PureComponent {
             </div>
           </section>
 
-          <section id="inputs" className="section">
-            <h2 className="section--header">Inputs</h2>
-            <div className="section--content">
+          <section styleName="section">
+            <h2 styleName="section--header">Inputs</h2>
+            <div styleName="section--content">
               <Formsy>
                 <TextField label="label" name="name" />
                 <TextField label="label2" name="name1" />

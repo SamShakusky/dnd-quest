@@ -63,7 +63,7 @@ class TextField extends PureComponent {
 
     return (
       <div
-        className={`field-wrap field_duty_${
+        styleName={`field-wrap field_duty_${
           duty
         } field_width_${
           width
@@ -77,9 +77,9 @@ class TextField extends PureComponent {
           fieldType
         }`}
       >
-        <p className="field__label">{label}</p>
+        <p styleName="field__label">{label}</p>
         <Field
-          className="field"
+          styleName="field"
           placeholder={placeholder}
           name={name}
           value={value}
@@ -90,7 +90,7 @@ class TextField extends PureComponent {
           onFocus={this.onFocus}
           onBlur={this.onBlur}
         />
-        <p className="field__validation">{errorMessage}</p>
+        <p styleName="field__validation">{errorMessage}</p>
       </div>
     );
   }

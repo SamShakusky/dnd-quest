@@ -7,8 +7,7 @@ import Menu from './Menu';
 import ButtonIcon from './ButtonIcon';
 import SlidingPanel from './SlidingPanel';
 
-import styles from '../css/App.css';
-// import '../css/Spec.css';
+import '../css/App.css';
 
 export default class App extends PureComponent {
   constructor(props) {
@@ -26,10 +25,9 @@ export default class App extends PureComponent {
   }
   
   render() {
-    console.log(styles);
     return (
       <BrowserRouter>
-        <div className={styles.App}>
+        <div className="App">
           <header styleName="header">
             <ButtonIcon onClick={this.toggleMenu} />
             <SlidingPanel

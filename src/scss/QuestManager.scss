@@ -1,5 +1,9 @@
 @import './import/_colors';
 
+body {
+  background: $grey_super-light;
+}
+
 .page-manager {
     min-height: calc(100vh - 60px);
     max-width: 1170px;
@@ -8,7 +12,6 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     padding: 64px 0;
-    background: $grey_super-light;
 
   .activate-form {
     position: absolute;

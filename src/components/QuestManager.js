@@ -177,7 +177,7 @@ export default class App extends PureComponent {
   
   render() {
     return (
-      <main className="page-manager">
+      <main styleName="page-manager">
         <SlidingPanel
           isShown={this.state.formVisibility}
           onClose={this.closeForm}

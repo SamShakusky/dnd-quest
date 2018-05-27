@@ -25,7 +25,7 @@ export default class FloatingButton extends PureComponent {
 
     return (
       <button
-        className={`floating-button floating-button_position_${
+        styleName={`floating-button floating-button_position_${
           position
         }`}
         onClick={onClick}

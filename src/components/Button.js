@@ -20,7 +20,7 @@ export default class Button extends PureComponent {
     duty      : 'simple',
     disabled  : false,
     onClick   : null,
-    className : null
+    className : ''
   };
 
   render() {
@@ -36,7 +36,7 @@ export default class Button extends PureComponent {
 
     return (
       <button
-        className={`button button_size_${
+        styleName={`button button_size_${
           size
         } button_shape_${
           shape

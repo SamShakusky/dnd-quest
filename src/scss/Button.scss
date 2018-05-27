@@ -84,6 +84,7 @@
   transition: background .2;
   position: fixed;
   bottom: 33px;
+  z-index: 10;
   &_position {
     &_left {
       left: 30px;

@@ -8,36 +8,3 @@
   justify-content: flex-start;
   padding-top: 12px;
 }
-
-.quest {
-  width: 100%;
-  padding: 12px 24px;
-  margin-bottom: 2px;
-  position: relative;
-  background: $white;
-}
-
-.quest-title {
-  @extend %tp-p-l;
-  margin-bottom: 12px;
-}
-
-.quest-description {
-  @extend %tp-p-s;
-}
-
-.quest-goal {
-  @extend %tp-p-xs;
-  text-align: right;
-  font-weight: 700;
-}
-
-.quest-edit {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-}
-
-.quest-delete {
-  margin-top: 6px;
-}

@@ -1,7 +1,7 @@
 @import './import/importFile';
 
 .page-spec {
-  margin-top: 41px;
+  margin-top: 60px;
   h1 {
     @extend %tp-h2;
     color: $white;
@@ -47,7 +47,7 @@
     }
   }
   
-  #colors {
+  .colors {
     .section--content {
       max-width: 565px;
     }
@@ -88,7 +88,7 @@
     .color_warning:before { background-color: $color_warning }
   }
   
-  #typography {
+  .typography {
     .section--content {
       flex-direction: column;
       align-items: flex-start;
@@ -142,7 +142,7 @@
     }
   }
 
-  #shadows {
+  .shadows {
     .section--content {
       > div {
         height: 150px;
@@ -157,7 +157,7 @@
     }
   }
 
-  #buttons {
+  .buttons {
     .section--content {
       > div {
         margin-right: 36px;
@@ -173,7 +173,7 @@
         margin-bottom: 24px;
       }
     }
-    .button {
+    button {
       margin-right: 18px;
     }
   }
