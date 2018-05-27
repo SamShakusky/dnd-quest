@@ -12,6 +12,9 @@ body {
     flex-wrap: wrap;
     justify-content: space-evenly;
     padding: 64px 0;
+    body& {
+      display: none;
+    }
 
   .activate-form {
     position: absolute;

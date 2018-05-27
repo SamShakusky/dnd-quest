@@ -8,6 +8,11 @@ import SlidingPanel from './SlidingPanel';
 import localhost from '../config/localhost';
 import '../css/QuestManager.css';
 
+const scrollMap = {
+  true  : 'hidden',
+  false : 'auto'
+};
+
 export default class App extends PureComponent {
   constructor(props) {
     super(props);
@@ -155,7 +160,7 @@ export default class App extends PureComponent {
   openForm = () => {
     this.setState({
       formVisibility : true
-    });
+    }, this.toggleScroll(true));
   }
   
   closeForm = () => {
@@ -172,7 +177,11 @@ export default class App extends PureComponent {
     this.setState({
       formVisibility : false,
       ...inputs
-    });
+    }, this.toggleScroll(false));
+  }
+  
+  toggleScroll = (bool) => {
+    document.body.style.overflow = scrollMap[bool];
   }
   
   render() {
