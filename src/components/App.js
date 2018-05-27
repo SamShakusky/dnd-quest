@@ -4,10 +4,13 @@ import QuestManager from './QuestManager';
 import Spec from './Spec';
 import Main from './Main';
 import Menu from './Menu';
+import Button from './Button';
 import ButtonIcon from './ButtonIcon';
 import SlidingPanel from './SlidingPanel';
 
 import '../css/App.css';
+
+const html = document.getElementById('html');
 
 export default class App extends PureComponent {
   constructor(props) {
@@ -24,6 +27,12 @@ export default class App extends PureComponent {
     });
   }
   
+  toggleFullscreen = () => {
+    console.log(document.webkitFullscreenElement);
+    if (!document.webkitFullscreenElement) html.webkitRequestFullScreen();
+    else document.webkitCancelFullScreen();
+  }
+  
   render() {
     return (
       <BrowserRouter>
@@ -36,6 +45,9 @@ export default class App extends PureComponent {
             >
               <Menu onClick={this.toggleMenu} />
             </SlidingPanel>
+            <div styleName="fullscreen">
+              <Button size="sm" label="fullscreen" onClick={this.toggleFullscreen} />
+            </div>
           </header>
 
           <Route exact path="/" component={Main} />

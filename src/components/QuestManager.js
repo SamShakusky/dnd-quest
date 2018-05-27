@@ -200,7 +200,7 @@ export default class App extends PureComponent {
             onChange={this.onChange}
             onSubmit={this.onSubmit}
             onDelete={this.deleteQuest}
-            onFormClose={this.closeForm}
+            onClose={this.closeForm}
             editing={this.state.editing}
           />
         </SlidingPanel>

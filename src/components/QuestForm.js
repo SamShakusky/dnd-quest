@@ -14,7 +14,8 @@ export default class QuestForm extends PureComponent {
     editing     : PropTypes.string,
     onSubmit    : PropTypes.func.isRequired,
     onChange    : PropTypes.func.isRequired,
-    onDelete    : PropTypes.func.isRequired
+    onDelete    : PropTypes.func.isRequired,
+    onClose     : PropTypes.func.isRequired
   };
   
   static defaultProps = {
@@ -30,7 +31,8 @@ export default class QuestForm extends PureComponent {
       editing,
       onSubmit,
       onChange,
-      onDelete
+      onDelete,
+      onClose
     } = this.props;
     
     return (
@@ -40,7 +42,11 @@ export default class QuestForm extends PureComponent {
         <TextField fieldType="textarea" label="Description" name="description" value={description} onChange={onChange} />
         <div className="form_buttons">
           <Button type="submit" label={editing ? 'Edit' : 'Create'} shape="flat" size="sm" />
-          {(editing && <Button label="Delete" shape="flat" size="sm" duty="danger" onClick={onDelete} />)}
+          {(editing ?
+            <Button label="Delete" shape="flat" size="sm" duty="danger" onClick={onDelete} />
+            :
+            <Button label="Cancel" shape="flat" size="sm" duty="danger" onClick={onClose} />
+          )}
         </div>
       </Formsy>
     );

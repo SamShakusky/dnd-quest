@@ -2,7 +2,7 @@
 
 .header {
   background-color: $color_main_dark;
-  padding: 12px 24px;
+  padding: 12px 20px;
   color: #fff;
   display: flex;
   align-items: center;
@@ -14,4 +14,9 @@
   min-height: 42px;
   z-index: 10;
   @include shadow(1);
+}
+
+.fullscreen {
+  align-self: flex-end;
+  margin-left: auto;
 }
