@@ -128,12 +128,17 @@ export default class App extends PureComponent {
     fetch(`${localhost}/quests/${editing}`, requestOptions)
       .then((response) => {
         response.json().then((resp) => {
-          items[index] = {
+          const newItems = [...items];
+          
+          newItems[index] = {
             ...resp,
             _id : editing
           };
+          
           this.setState({
-            items
+            items : [
+              ...newItems
+            ]
           });
         });
       });

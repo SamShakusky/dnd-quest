@@ -28,7 +28,6 @@ export default class App extends PureComponent {
   }
   
   toggleFullscreen = () => {
-    console.log(document.webkitFullscreenElement);
     if (!document.webkitFullscreenElement) html.webkitRequestFullScreen();
     else document.webkitCancelFullScreen();
   }
