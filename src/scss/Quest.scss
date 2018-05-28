@@ -34,10 +34,62 @@
 }
 
 .quest-reward {
-  @extend %tp-p-xs;
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   flex: 1;
-  color: $color_secondary;
+  
+  p {
+    @extend %tp-p-xs;
+    margin-left: 6px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 15px;
+    color: $color_secondary_dark;
+  }
+}
+
+.coin {
+  &:before {
+    content: '';
+    display: block;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    border-width: 3px;
+    border-style: solid;
+    margin-right: 2px;
+    // margin-bottom: 1px;
+  }
+}
+
+.coin__gold {
+  &:before {
+    border-color: $color_gold;
+  }
+}
+
+.coin__silver {
+  &:before {
+    border-color: $color_silver;
+  }
+}
+
+.coin__bronze {
+  &:before {
+    border-color: $color_bronze;
+  }
+}
+
+.reward__item {
+  &:before {
+    content: '';
+    display: inline-block;
+    background: url(../icons/potion-ball.svg);
+    height: 16px;
+    width: 16px;
+    margin-bottom: 2px;
+  }
 }
 
 .quest-edit {
