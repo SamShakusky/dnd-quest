@@ -45,12 +45,12 @@ export default class Quest extends PureComponent {
         <h3 styleName="quest-title">{title}</h3>
         <p styleName="quest-description">{description}</p>
         <div styleName="bottom-panel">
-          <p styleName="quest-goal">{goal}</p>
+          <p styleName="quest-goal">Цель: {goal}</p>
           <div styleName="quest-reward">
-            <p styleName="coin coin__gold">0</p>
-            <p styleName="coin coin__silver">0</p>
-            <p styleName="coin coin__bronze">0</p>
-            <p styleName="reward__item">0</p>
+            <p styleName="coin coin__gold">4</p>
+            <p styleName="coin coin__silver">10</p>
+            <p styleName="coin coin__bronze">26</p>
+            <p styleName="reward__item">2</p>
           </div>
         </div>
       </div>

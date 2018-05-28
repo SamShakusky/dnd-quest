@@ -19,6 +19,7 @@
 
 .quest-description {
   @extend %tp-p-s;
+  margin-bottom: 12px;
 }
 
 .bottom-panel {
@@ -28,7 +29,7 @@
 }
 
 .quest-goal {
-  @extend %tp-p-xs;
+  @extend %tp-p-s;
   font-weight: 700;
   flex: 1;
 }
@@ -37,11 +38,9 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  flex: 1;
   
   p {
     @extend %tp-p-xs;
-    margin-left: 6px;
     display: inline-flex;
     align-items: center;
     font-size: 15px;
@@ -50,6 +49,7 @@
 }
 
 .coin {
+  margin-left: 10px;
   &:before {
     content: '';
     display: block;
@@ -58,7 +58,7 @@
     border-radius: 50%;
     border-width: 3px;
     border-style: solid;
-    margin-right: 2px;
+    margin-right: 3px;
     // margin-bottom: 1px;
   }
 }
@@ -82,13 +82,15 @@
 }
 
 .reward__item {
+  margin-left: 6px;
   &:before {
     content: '';
     display: inline-block;
-    background: url(../icons/potion-ball.svg);
-    height: 16px;
-    width: 16px;
+    background: url(../icons/sword.svg);
+    height: 14px;
+    width: 14px;
     margin-bottom: 2px;
+    margin-right: 2px;
   }
 }
 
