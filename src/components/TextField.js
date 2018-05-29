@@ -6,7 +6,7 @@ import '../css/TextField.css';
 
 class TextField extends PureComponent {
   static propTypes = {
-    value       : PropTypes.string,
+    value       : PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     placeholder : PropTypes.string,
     name        : PropTypes.string.isRequired,
     label       : PropTypes.string.isRequired,
@@ -15,7 +15,8 @@ class TextField extends PureComponent {
     duty        : PropTypes.oneOf(['normal', 'error', 'sucess']),
     onChange    : PropTypes.func,
     fieldType   : PropTypes.oneOf(['input', 'textarea']),
-    required    : PropTypes.bool
+    required    : PropTypes.bool,
+    type        : PropTypes.string
   };
 
   static defaultProps = {
@@ -26,7 +27,8 @@ class TextField extends PureComponent {
     duty        : 'normal',
     onChange    : null,
     fieldType   : 'input',
-    required    : false
+    required    : false,
+    type        : 'text'
   };
   
   constructor(props) {
@@ -55,7 +57,8 @@ class TextField extends PureComponent {
       duty,
       onChange,
       fieldType,
-      required
+      required,
+      type
     } = this.props;
 
     const errorMessage = this.props.getErrorMessage(); // eslint-disable-line react/prop-types
@@ -83,6 +86,7 @@ class TextField extends PureComponent {
           placeholder={placeholder}
           name={name}
           value={value}
+          type={type}
           onChange={onChange}
           disabled={disabled}
           autoComplete="off"

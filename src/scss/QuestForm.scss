@@ -20,6 +20,20 @@
   }
 }
 
+.rewards {
+  content: none;
+}
+
+.coins {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  
+  > div {
+    width: 30%;
+  }
+}
+
 .form_buttons {
   align-self: flex-end;
 }

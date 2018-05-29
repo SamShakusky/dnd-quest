@@ -37,13 +37,14 @@
 .quest-reward {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-end;
   
   p {
     @extend %tp-p-xs;
     display: inline-flex;
     align-items: center;
     font-size: 15px;
+    height: 100%;
     color: $color_secondary_dark;
   }
 }

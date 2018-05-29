@@ -9,7 +9,7 @@ export default class Quest extends PureComponent {
     title       : PropTypes.string.isRequired,
     description : PropTypes.string,
     goal        : PropTypes.string,
-    reward      : PropTypes.string,
+    reward      : PropTypes.shape({}),
     id          : PropTypes.string.isRequired,
     onEdit      : PropTypes.func.isRequired
   };
@@ -17,7 +17,12 @@ export default class Quest extends PureComponent {
   static defaultProps = {
     description : '',
     goal        : '',
-    reward      : ''
+    reward      : {
+      gold   : 0,
+      silver : 0,
+      copper : 0,
+      item   : ''
+    }
   };
   
   onEdit = () => {
@@ -31,7 +36,7 @@ export default class Quest extends PureComponent {
       goal,
       reward
     } = this.props;
-
+    
     return (
       <div styleName="quest">
         <div styleName="quest-edit">
@@ -47,10 +52,10 @@ export default class Quest extends PureComponent {
         <div styleName="bottom-panel">
           <p styleName="quest-goal">Цель: {goal}</p>
           <div styleName="quest-reward">
-            <p styleName="coin coin__gold">4</p>
-            <p styleName="coin coin__silver">10</p>
-            <p styleName="coin coin__bronze">26</p>
-            <p styleName="reward__item">2</p>
+            {reward.gold && <p styleName="coin coin__gold">{reward.gold}</p>}
+            {reward.silver && <p styleName="coin coin__silver">{reward.silver}</p>}
+            {reward.copper && <p styleName="coin coin__bronze">{reward.copper}</p>}
+            {reward.item && <p styleName="reward__item">{reward.item}</p>}
           </div>
         </div>
       </div>

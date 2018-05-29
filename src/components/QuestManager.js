@@ -21,10 +21,15 @@ export default class App extends PureComponent {
       title          : '',
       description    : '',
       goal           : '',
-      reward         : '',
       items          : [],
       formVisibility : false,
       editing        : null,
+      reward         : {
+        gold   : 0,
+        silver : 0,
+        copper : 0,
+        item   : ''
+      },
     };
   }
   
@@ -38,6 +43,19 @@ export default class App extends PureComponent {
     
     this.setState({
       [name] : target.value
+    });
+  }
+  
+  onChangeRewards = (event) => {
+    const { target } = event;
+    const { name } = target;
+    
+    this.setState({
+      ...this.state,
+      reward : {
+        ...this.state.reward,
+        [name] : target.value
+      }
     });
   }
   
@@ -209,6 +227,7 @@ export default class App extends PureComponent {
             goal={this.state.goal}
             reward={this.state.reward}
             onChange={this.onChange}
+            onChangeRewards={this.onChangeRewards}
             onSubmit={this.onSubmit}
             onDelete={this.deleteQuest}
             onClose={this.closeForm}
