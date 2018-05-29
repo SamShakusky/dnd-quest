@@ -24,12 +24,7 @@ export default class App extends PureComponent {
       items          : [],
       formVisibility : false,
       editing        : null,
-      reward         : {
-        gold   : 0,
-        silver : 0,
-        copper : 0,
-        item   : ''
-      },
+      reward         : {},
     };
   }
   
@@ -46,7 +41,7 @@ export default class App extends PureComponent {
     });
   }
   
-  onChangeRewards = (event) => {
+  onChangeCoins = (event) => {
     const { target } = event;
     const { name } = target;
     
@@ -55,6 +50,21 @@ export default class App extends PureComponent {
       reward : {
         ...this.state.reward,
         [name] : target.value
+      }
+    });
+  }
+  
+  onChangeItems = (event, index) => {
+    const { target } = event;
+    const { reward } = this.state;
+    
+    const items = [...this.state.reward.items];
+    items[index] = target.value;
+    
+    this.setState({
+      reward : {
+        ...reward,
+        items
       }
     });
   }
@@ -198,7 +208,7 @@ export default class App extends PureComponent {
         title       : '',
         description : '',
         goal        : '',
-        reward      : '',
+        reward      : { items : [] },
         editing     : ''
       };
     }
@@ -227,7 +237,8 @@ export default class App extends PureComponent {
             goal={this.state.goal}
             reward={this.state.reward}
             onChange={this.onChange}
-            onChangeRewards={this.onChangeRewards}
+            onChangeCoins={this.onChangeCoins}
+            onChangeItems={this.onChangeItems}
             onSubmit={this.onSubmit}
             onDelete={this.deleteQuest}
             onClose={this.closeForm}

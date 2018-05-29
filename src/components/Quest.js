@@ -17,12 +17,7 @@ export default class Quest extends PureComponent {
   static defaultProps = {
     description : '',
     goal        : '',
-    reward      : {
-      gold   : 0,
-      silver : 0,
-      copper : 0,
-      item   : ''
-    }
+    reward      : {}
   };
   
   onEdit = () => {
@@ -55,7 +50,7 @@ export default class Quest extends PureComponent {
             {reward.gold && <p styleName="coin coin__gold">{reward.gold}</p>}
             {reward.silver && <p styleName="coin coin__silver">{reward.silver}</p>}
             {reward.copper && <p styleName="coin coin__bronze">{reward.copper}</p>}
-            {reward.item && <p styleName="reward__item">{reward.item}</p>}
+            {reward.items && <p styleName="reward__item">{reward.items.length}</p>}
           </div>
         </div>
       </div>
