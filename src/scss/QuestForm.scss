@@ -5,19 +5,23 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 32px 18px;
   border: 1px solid $grey_light;
   background: $white;
   z-index: 10;
   border: 0;
+  height: calc(100vh - 60px);
   @media all and (min-width: 1025px) {
-    // height: calc(100vh - 60px);
     width: 40vw;
   }
   
   textarea {
     height: 25vh;
   }
+}
+
+.form-wrap {
+  padding: 32px 18px 64px;
+  overflow: auto;
 }
 
 .form-label {
@@ -46,6 +50,11 @@
 
 .form_buttons {
   align-self: flex-end;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  // background: $color_secondary;
 }
 
 .input-wrap {

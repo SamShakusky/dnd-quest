@@ -39,7 +39,9 @@ export default class App extends PureComponent {
           <header styleName="header">
             <Button
               onClick={this.toggleMenu}
-              icon={logo}
+              icon="menu"
+              iconSize="36px"
+              iconColor="#fff"
               shape="flat"
               noActive
             />

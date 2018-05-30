@@ -6,14 +6,18 @@ import '../css/Button.css';
 export default class Button extends PureComponent {
   static propTypes = {
     label     : PropTypes.string,
-    size      : PropTypes.oneOf(['sm', 'md']),
+    size      : PropTypes.oneOf(['sm', 'md', 'lg']),
     shape     : PropTypes.oneOf(['solid', 'ghost', 'flat']),
     duty      : PropTypes.oneOf(['simple', 'danger', 'success']),
     onClick   : PropTypes.func,
     disabled  : PropTypes.bool,
     className : PropTypes.string,
     icon      : PropTypes.string,
+    iconColor : PropTypes.string,
+    iconSize  : PropTypes.string,
     noActive  : PropTypes.bool,
+    fullWidth : PropTypes.bool,
+    sharp     : PropTypes.bool
   };
 
   static defaultProps = {
@@ -25,7 +29,11 @@ export default class Button extends PureComponent {
     onClick   : null,
     className : '',
     icon      : '',
+    iconColor : 'inherit',
+    iconSize  : '',
     noActive  : false,
+    fullWidth : false,
+    sharp     : false
   };
 
   render() {
@@ -38,7 +46,11 @@ export default class Button extends PureComponent {
       disabled,
       className,
       icon,
-      noActive
+      iconSize,
+      noActive,
+      iconColor,
+      fullWidth,
+      sharp
     } = this.props;
 
     return (
@@ -55,16 +67,27 @@ export default class Button extends PureComponent {
           label ? 'button_labeled' : ''
         } ${
           noActive ? 'button_no-active' : ''
+        } ${
+          fullWidth ? 'button_full' : ''
+        } ${
+          sharp ? 'button_sharp' : ''
         }`}
         onClick={onClick}
         disabled={disabled}
       >
         {label}
-        {icon && <img
-          src={icon}
-          alt="menu"
-          styleName="button__icon"
-        />}
+        {
+          icon &&
+          <i
+            className="material-icons"
+            style={{
+              color    : iconColor,
+              fontSize : iconSize
+            }}
+          >
+            {icon}
+          </i>
+        }
       </button>
     );
   }

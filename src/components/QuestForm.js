@@ -61,33 +61,34 @@ export default class QuestForm extends PureComponent {
     
     return (
       <Formsy onValidSubmit={onSubmit} styleName="quest-form">
-        <p styleName="form-label">Main</p>
-        <TextField label="Title" name="title" value={title} onChange={onChange} required />
-        <TextField label="Goal" name="goal" value={goal} onChange={onChange} />
-        <TextField fieldType="textarea" label="Description" name="description" value={description} onChange={onChange} />
-        <p styleName="form-label">Rewards</p>
-        <div styleName="rewards">
-          <div styleName="coins">
-            <TextField label="Gold" name="gold" type="number" value={reward.gold} onChange={onChangeCoins} />
-            <TextField label="Silver" name="silver" type="number" value={reward.silver} onChange={onChangeCoins} />
-            <TextField label="Copper" name="copper" type="number" value={reward.copper} onChange={onChangeCoins} />
+        <div styleName="form-wrap">
+          <p styleName="form-label">Main</p>
+          <TextField label="Title" name="title" value={title} onChange={onChange} required />
+          <TextField label="Goal" name="goal" value={goal} onChange={onChange} />
+          <TextField fieldType="textarea" label="Description" name="description" value={description} onChange={onChange} />
+          <p styleName="form-label">Rewards</p>
+          <div styleName="rewards">
+            <div styleName="coins">
+              <TextField label="Gold" name="gold" type="number" value={reward.gold} onChange={onChangeCoins} />
+              <TextField label="Silver" name="silver" type="number" value={reward.silver} onChange={onChangeCoins} />
+              <TextField label="Copper" name="copper" type="number" value={reward.copper} onChange={onChangeCoins} />
+            </div>
+            {reward.items && this.getItems()}
+            <Button
+              icon="add"
+              label="Add Item"
+              shape="ghost"
+              duty="success"
+              size="sm"
+            />
           </div>
-          {reward.items && this.getItems()}
-          <Button
-            icon={plus}
-            label="Add Item"
-            shape="ghost"
-            duty="success"
-            size="sm"
-          />
         </div>
-        
-        <div className="form_buttons">
-          <Button type="submit" label={editing ? 'Edit' : 'Create'} shape="flat" size="sm" />
+        <div styleName="form_buttons">
+          <Button type="submit" icon="check" duty="success" fullWidth sharp />
           {(editing ?
-            <Button label="Delete" shape="flat" size="sm" duty="danger" onClick={onDelete} />
+            <Button icon="delete_outline" duty="danger" onClick={onDelete} sharp />
             :
-            <Button label="Cancel" shape="flat" size="sm" duty="danger" onClick={onClose} />
+            <Button icon="close" duty="danger" onClick={onClose} sharp />
           )}
         </div>
       </Formsy>
