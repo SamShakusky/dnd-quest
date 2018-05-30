@@ -39,6 +39,7 @@
   background: #fff;
   position: relative;
   z-index: 11;
+  overflow: auto;
   @include animation(transform, medium);
 }
 

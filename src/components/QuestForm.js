@@ -60,8 +60,11 @@ export default class QuestForm extends PureComponent {
     
     return (
       <Formsy onValidSubmit={onSubmit} styleName="quest-form">
+        <p styleName="form-label">Main</p>
         <TextField label="Title" name="title" value={title} onChange={onChange} required />
         <TextField label="Goal" name="goal" value={goal} onChange={onChange} />
+        <TextField fieldType="textarea" label="Description" name="description" value={description} onChange={onChange} />
+        <p styleName="form-label">Rewards</p>
         <div styleName="rewards">
           <div styleName="coins">
             <TextField label="Gold" name="gold" type="number" value={reward.gold} onChange={onChangeCoins} />
@@ -70,7 +73,7 @@ export default class QuestForm extends PureComponent {
           </div>
           {reward.items && this.getItems()}
         </div>
-        <TextField fieldType="textarea" label="Description" name="description" value={description} onChange={onChange} />
+        
         <div className="form_buttons">
           <Button type="submit" label={editing ? 'Edit' : 'Create'} shape="flat" size="sm" />
           {(editing ?

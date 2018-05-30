@@ -20,6 +20,15 @@
   }
 }
 
+.form-label {
+  @extend %tp-p-xs;
+  margin-bottom: 18px;
+  color: $color_secondary;
+  &:not(:first-of-type) {
+    margin-top: 18px;
+  }
+}
+
 .rewards {
   content: none;
 }
@@ -27,7 +36,6 @@
 .coins {
   display: flex;
   justify-content: space-between;
-  margin-top: 24px;
   
   > div {
     width: 30%;
