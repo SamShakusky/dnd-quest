@@ -5,6 +5,7 @@ import TextField from './TextField';
 import Button from './Button';
 
 import '../css/QuestForm.css';
+import plus from '../icons/plus.svg';
 
 export default class QuestForm extends PureComponent {
   static propTypes = {
@@ -72,6 +73,13 @@ export default class QuestForm extends PureComponent {
             <TextField label="Copper" name="copper" type="number" value={reward.copper} onChange={onChangeCoins} />
           </div>
           {reward.items && this.getItems()}
+          <Button
+            icon={plus}
+            label="Add Item"
+            shape="ghost"
+            duty="success"
+            size="sm"
+          />
         </div>
         
         <div className="form_buttons">

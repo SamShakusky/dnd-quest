@@ -5,9 +5,9 @@ import Spec from './Spec';
 import Main from './Main';
 import Menu from './Menu';
 import Button from './Button';
-import ButtonIcon from './ButtonIcon';
 import SlidingPanel from './SlidingPanel';
 
+import logo from '../icons/burger.svg';
 import '../css/App.css';
 
 const html = document.getElementById('html');
@@ -37,7 +37,12 @@ export default class App extends PureComponent {
       <BrowserRouter>
         <div className="App">
           <header styleName="header">
-            <ButtonIcon onClick={this.toggleMenu} />
+            <Button
+              onClick={this.toggleMenu}
+              icon={logo}
+              shape="flat"
+              noActive
+            />
             <SlidingPanel
               isShown={this.state.menuVisibility}
               onClose={this.toggleMenu}
