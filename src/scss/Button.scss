@@ -99,19 +99,19 @@
   outline: none;
   cursor: pointer;
   font-size: 24px;
-  line-height: 24px;
+  line-height: 14px;
   background: $color_secondary;
   color: $white;
   transition: background .2;
   position: fixed;
-  bottom: 33px;
-  z-index: 10;
+  bottom: 16px;
+  z-index: 50;
   &_position {
     &_left {
-      left: 30px;
+      left: 16px;
     }
     &_right {
-      right: 30px;
+      right: 16px;
     }
     &_inline {
       position: static;

@@ -7,6 +7,11 @@ import Button from './Button';
 import '../css/QuestForm.css';
 import plus from '../icons/plus.svg';
 
+const hiddenSubmit = {
+  pointerEvents : 'none',
+  opacity       : 0
+};
+
 export default class QuestForm extends PureComponent {
   static propTypes = {
     title         : PropTypes.string.isRequired,
@@ -28,6 +33,11 @@ export default class QuestForm extends PureComponent {
     reward      : {},
     editing     : ''
   };
+  
+  constructor(props) {
+    super(props);
+    this.submitRef = React.createRef();
+  }
   
   getItems = () => {
     const { reward, onChangeItems } = this.props;
@@ -83,12 +93,12 @@ export default class QuestForm extends PureComponent {
             />
           </div>
         </div>
+        <button ref={this.submitRef} style={hiddenSubmit} />
         <div styleName="form_buttons">
-          <Button type="submit" icon="check" duty="success" fullWidth sharp />
           {(editing ?
-            <Button icon="delete_outline" duty="danger" onClick={onDelete} sharp />
+            <Button icon="delete_outline" shape="flat" duty="danger" onClick={onDelete} sharp noActive />
             :
-            <Button icon="close" duty="danger" onClick={onClose} sharp />
+            <Button icon="close" shape="flat" duty="danger" onClick={onClose} sharp noActive />
           )}
         </div>
       </Formsy>

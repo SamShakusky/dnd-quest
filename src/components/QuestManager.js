@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import ReactDOM from 'react-dom';
 
 import QuestList from './QuestList';
 import QuestForm from './QuestForm';
@@ -26,6 +27,8 @@ export default class App extends PureComponent {
       editing        : null,
       reward         : {},
     };
+    
+    this.formRef = React.createRef();
   }
   
   componentWillMount() {
@@ -222,7 +225,20 @@ export default class App extends PureComponent {
     document.body.style.overflow = scrollMap[bool];
   }
   
+  floatingClick = () => {
+    const { formVisibility } = this.state;
+    
+    if (formVisibility) {
+      const node = ReactDOM.findDOMNode(this.formRef.current.submitRef.current)
+      node.click();
+    } else {
+      this.openForm();
+    }
+  }
+  
   render() {
+    const { formVisibility } = this.state;
+    
     return (
       <main styleName="page-manager">
         <SlidingPanel
@@ -243,13 +259,17 @@ export default class App extends PureComponent {
             onDelete={this.deleteQuest}
             onClose={this.closeForm}
             editing={this.state.editing}
+            ref={this.formRef}
           />
         </SlidingPanel>
         <QuestList
           items={this.state.items}
           onEdit={this.onEdit}
         />
-        <FloatingButton onClick={this.openForm} />
+        <FloatingButton
+          onClick={this.floatingClick}
+          icon={formVisibility ? 'save' : 'add'}
+        />
       </main>
     );
   }

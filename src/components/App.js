@@ -6,7 +6,7 @@ import Main from './Main';
 import Menu from './Menu';
 import Button from './Button';
 import SlidingPanel from './SlidingPanel';
-
+console.log(React.version);
 import logo from '../icons/burger.svg';
 import '../css/App.css';
 

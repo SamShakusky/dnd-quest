@@ -5,22 +5,28 @@ import '../css/Button.css';
 
 export default class FloatingButton extends PureComponent {
   static propTypes = {
-    onClick  : PropTypes.func,
-    disabled : PropTypes.bool,
-    position : PropTypes.oneOf(['left', 'right', 'inline'])
+    onClick   : PropTypes.func,
+    disabled  : PropTypes.bool,
+    position  : PropTypes.oneOf(['left', 'right', 'inline']),
+    icon      : PropTypes.string,
+    iconColor : PropTypes.string,
   };
 
   static defaultProps = {
-    onClick  : null,
-    disabled : false,
-    position : 'right'
+    onClick   : null,
+    disabled  : false,
+    position  : 'right',
+    icon      : 'add',
+    iconColor : '#fff'
   };
   
   render() {
     const {
       onClick,
       disabled,
-      position
+      position,
+      icon,
+      iconColor,
     } = this.props;
 
     return (
@@ -31,7 +37,12 @@ export default class FloatingButton extends PureComponent {
         onClick={onClick}
         disabled={disabled}
       >
-        <span>+</span>
+        <i
+          className="material-icons"
+          style={{ color : iconColor }}
+        >
+          {icon}
+        </i>
       </button>
     );
   }
