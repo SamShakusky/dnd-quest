@@ -45,6 +45,7 @@
   border-color: transparent;
   transition: background .2s, border .2s, color .2s, box-shadow .2s;
   cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
   &:disabled {
     opacity: .4;
     pointer-events: none;
@@ -106,6 +107,11 @@
   position: fixed;
   bottom: 16px;
   z-index: 50;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  span {
+    display: inline-block;
+    transition: transform .3s;
+  }
   &_position {
     &_left {
       left: 16px;
@@ -117,8 +123,14 @@
       position: static;
     }
   }
-  span {
-    display: inline-block;
-    transition: transform .3s;
+  
+  
+  &_active {
+    animation: FAB .2s cubic-bezier(0.4, 0.0, 0.2, 1);
   }
+}
+
+@keyframes FAB {
+  from { transform: scale(.8) }
+  to { transform: scale(1) }
 }

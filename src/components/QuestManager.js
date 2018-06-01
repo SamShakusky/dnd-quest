@@ -269,6 +269,7 @@ export default class App extends PureComponent {
         <FloatingButton
           onClick={this.floatingClick}
           icon={formVisibility ? 'save' : 'add'}
+          active={formVisibility}
         />
       </main>
     );

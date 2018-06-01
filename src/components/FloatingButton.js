@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import '../css/Button.css';
+import styles from '../css/Button.css';
 
 export default class FloatingButton extends PureComponent {
   static propTypes = {
@@ -10,6 +10,7 @@ export default class FloatingButton extends PureComponent {
     position  : PropTypes.oneOf(['left', 'right', 'inline']),
     icon      : PropTypes.string,
     iconColor : PropTypes.string,
+    active    : PropTypes.bool,
   };
 
   static defaultProps = {
@@ -17,7 +18,8 @@ export default class FloatingButton extends PureComponent {
     disabled  : false,
     position  : 'right',
     icon      : 'add',
-    iconColor : '#fff'
+    iconColor : '#fff',
+    active    : false,
   };
   
   render() {
@@ -27,6 +29,7 @@ export default class FloatingButton extends PureComponent {
       position,
       icon,
       iconColor,
+      active,
     } = this.props;
 
     return (
@@ -36,6 +39,7 @@ export default class FloatingButton extends PureComponent {
         }`}
         onClick={onClick}
         disabled={disabled}
+        className={active ? styles['floating-button_active'] : ''}
       >
         <i
           className="material-icons"
