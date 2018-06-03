@@ -10,7 +10,8 @@ export default class FloatingButton extends PureComponent {
     position  : PropTypes.oneOf(['left', 'right', 'inline']),
     icon      : PropTypes.string,
     iconColor : PropTypes.string,
-    active    : PropTypes.bool,
+    expanded  : PropTypes.bool,
+    label     : PropTypes.string,
   };
 
   static defaultProps = {
@@ -19,7 +20,8 @@ export default class FloatingButton extends PureComponent {
     position  : 'right',
     icon      : 'add',
     iconColor : '#fff',
-    active    : false,
+    expanded  : false,
+    label     : '',
   };
   
   render() {
@@ -29,17 +31,20 @@ export default class FloatingButton extends PureComponent {
       position,
       icon,
       iconColor,
-      active,
+      expanded,
+      label,
     } = this.props;
 
     return (
       <button
-        styleName={`floating-button floating-button_position_${
+        styleName={`fab fab_position_${
           position
         }`}
         onClick={onClick}
         disabled={disabled}
-        className={active ? styles['floating-button_active'] : ''}
+        className={`
+          ${expanded ? styles.fab_expanded : ''}
+        `}
       >
         <i
           className="material-icons"
@@ -47,6 +52,7 @@ export default class FloatingButton extends PureComponent {
         >
           {icon}
         </i>
+        {label && <span styleName="fab__label">{label}</span>}
       </button>
     );
   }

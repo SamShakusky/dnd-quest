@@ -225,15 +225,10 @@ export default class App extends PureComponent {
     document.body.style.overflow = scrollMap[bool];
   }
   
-  floatingClick = () => {
-    const { formVisibility } = this.state;
-    
-    if (formVisibility) {
-      const node = ReactDOM.findDOMNode(this.formRef.current.submitRef.current)
-      node.click();
-    } else {
-      this.openForm();
-    }
+  fabSubmit = () => {
+    // eslint-disable-next-line react/no-find-dom-node
+    const node = ReactDOM.findDOMNode(this.formRef.current.submitRef.current);
+    node.click();
   }
   
   render() {
@@ -266,11 +261,21 @@ export default class App extends PureComponent {
           items={this.state.items}
           onEdit={this.onEdit}
         />
-        <FloatingButton
-          onClick={this.floatingClick}
-          icon={formVisibility ? 'save' : 'add'}
-          active={formVisibility}
-        />
+        {
+          formVisibility && <FloatingButton
+            onClick={this.fabSubmit}
+            icon="save"
+            active
+            expanded
+            label="Save"
+          />
+        }
+        {
+          !formVisibility && <FloatingButton
+            onClick={this.openForm}
+            icon="add"
+          />
+        }
       </main>
     );
   }

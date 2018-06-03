@@ -35,7 +35,7 @@ export default class Button extends PureComponent {
     fullWidth : false,
     sharp     : false
   };
-
+  
   render() {
     const {
       label,

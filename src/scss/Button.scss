@@ -90,13 +90,14 @@
   }
 }
 
-.floating-button {
-  @extend %tp-h4;
+.fab {
+  
   @include shadow(3);
   height: 56px;
-  width: 56px;
+  min-width: 56px;
+  max-width: 56px;
   border: 0;
-  border-radius: 100%;
+  border-radius: 60px;
   outline: none;
   cursor: pointer;
   font-size: 24px;
@@ -108,10 +109,11 @@
   bottom: 16px;
   z-index: 50;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
-  span {
-    display: inline-block;
-    transition: transform .3s;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: FAB .4s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+  transition: .4s max-width 3s;
   &_position {
     &_left {
       left: 16px;
@@ -123,14 +125,78 @@
       position: static;
     }
   }
+  &_expanded {
+    animation: FAB-expanded .8s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+    padding: 0 16px;
+    justify-content: space-between;
+    will-change: auto;
+    .fab__label {
+      @extend %tp-p-xs;
+      will-change: auto;
+      display: inline;
+      text-transform: uppercase;
+      letter-spacing: 0.05rem;
+      padding-left: 8px;
+      
+    }
+  }
   
-  
-  &_active {
-    animation: FAB .2s cubic-bezier(0.4, 0.0, 0.2, 1);
+  &__label {
+    display: none;
+    // transform: translateX(20px);
+    opacity: 0;
+    max-width: 0;
+    padding-left: 0;
+    animation: FAB-expanded-label .8s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
   }
 }
 
 @keyframes FAB {
-  from { transform: scale(.8) }
-  to { transform: scale(1) }
+  from {
+    transform: scale(.8);
+    opacity: .8;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes FAB-expanded {
+  0% {
+    transform: scale(.8);
+    opacity: .8;
+    max-width: 300px;
+  }
+  50% {
+    height: 56px;
+    max-width: 300px;
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    height: 48px;
+    max-width: 300px;
+  }
+}
+
+@keyframes FAB-expanded-label {
+  0% {
+    transform: translateX(20px);
+    opacity: 0;
+    width: 0;
+    padding-left: 0;
+  }
+  50% {
+    transform: translateX(20px);
+    opacity: 0;
+    width: 0;
+    padding-left: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+    max-width: 200px;
+    padding-left: 8px;
+  }
 }
