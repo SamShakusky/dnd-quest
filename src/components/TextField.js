@@ -1,8 +1,9 @@
 import { withFormsy } from 'formsy-react';
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import Button from './Button';
 
-import '../css/TextField.css';
+import styles from '../css/TextField.css';
 
 class TextField extends PureComponent {
   static propTypes = {
@@ -16,7 +17,10 @@ class TextField extends PureComponent {
     onChange    : PropTypes.func,
     fieldType   : PropTypes.oneOf(['input', 'textarea']),
     required    : PropTypes.bool,
-    type        : PropTypes.string
+    type        : PropTypes.string,
+    icon        : PropTypes.string,
+    iconColor   : PropTypes.string,
+    onButton    : PropTypes.func
   };
 
   static defaultProps = {
@@ -28,7 +32,10 @@ class TextField extends PureComponent {
     onChange    : null,
     fieldType   : 'input',
     required    : false,
-    type        : 'text'
+    type        : 'text',
+    icon        : null,
+    iconColor   : null,
+    onButton    : null
   };
   
   constructor(props) {
@@ -58,7 +65,10 @@ class TextField extends PureComponent {
       onChange,
       fieldType,
       required,
-      type
+      type,
+      icon,
+      iconColor,
+      onButton,
     } = this.props;
 
     const errorMessage = this.props.getErrorMessage(); // eslint-disable-line react/prop-types
@@ -95,6 +105,16 @@ class TextField extends PureComponent {
           onBlur={this.onBlur}
         />
         <p styleName="field__validation">{errorMessage}</p>
+        { icon &&
+          <Button
+            icon={icon}
+            iconColor={iconColor}
+            iconSize={18}
+            onClick={onButton}
+            shape="flat"
+            size="sm"
+          />
+        }
       </div>
     );
   }

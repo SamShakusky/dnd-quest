@@ -91,6 +91,13 @@
     left: 0;
     bottom: 8px;
   }
+  
+  button {
+    position: absolute;
+    right: 0;
+    bottom: 3px;
+    height: 24px;
+  }
 }
 
 .field__textarea {
@@ -153,7 +160,6 @@
     width: 100%;
   }
 }
-
 
 .field__input {
   &.field_focused,

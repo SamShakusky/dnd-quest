@@ -50,6 +50,8 @@ export default class QuestForm extends PureComponent {
           name={`item_${i + 1}`}
           value={reward.items[i]}
           onChange={e => onChangeItems(e, i)}
+          icon="clear"
+          iconColor="#f44336"
         />
       ))
     );
