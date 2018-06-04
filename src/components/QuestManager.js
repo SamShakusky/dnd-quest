@@ -25,7 +25,7 @@ export default class App extends PureComponent {
       items          : [],
       formVisibility : false,
       editing        : null,
-      reward         : {},
+      reward         : { items : [] },
     };
     
     this.formRef = React.createRef();
@@ -86,7 +86,10 @@ export default class App extends PureComponent {
       title,
       description,
       goal,
-      reward
+      reward : {
+        ...reward,
+        items : reward.items.filter(el => el.length)
+      }
     };
     
     if (editing) {
@@ -224,14 +227,27 @@ export default class App extends PureComponent {
   addItem = () => {
     const { reward } = this.state;
     
-    // const newItem = reward.items.push('');
-    
     this.setState({
       reward : {
         ...reward,
         items : [
           ...reward.items,
           ''
+        ]
+      }
+    });
+  }
+  
+  removeItem = (i) => {
+    const { reward } = this.state;
+    
+    const newItemsList = reward.items.filter(item => item !== reward.items[i]);
+    
+    this.setState({
+      reward : {
+        ...reward,
+        items : [
+          ...newItemsList
         ]
       }
     });
@@ -269,6 +285,7 @@ export default class App extends PureComponent {
             onDelete={this.deleteQuest}
             onClose={this.closeForm}
             addItem={this.addItem}
+            removeItem={this.removeItem}
             editing={this.state.editing}
             ref={this.formRef}
           />

@@ -25,6 +25,7 @@ export default class QuestForm extends PureComponent {
     onDelete      : PropTypes.func.isRequired,
     onClose       : PropTypes.func.isRequired,
     addItem       : PropTypes.func.isRequired,
+    removeItem    : PropTypes.func.isRequired,
   };
   
   static defaultProps = {
@@ -40,7 +41,7 @@ export default class QuestForm extends PureComponent {
   }
   
   getItems = () => {
-    const { reward, onChangeItems } = this.props;
+    const { reward, onChangeItems, removeItem } = this.props;
     
     return (
       reward.items.map((item, i) => (
@@ -52,6 +53,7 @@ export default class QuestForm extends PureComponent {
           onChange={e => onChangeItems(e, i)}
           icon="clear"
           iconColor="#f44336"
+          onButton={() => removeItem(i)}
         />
       ))
     );

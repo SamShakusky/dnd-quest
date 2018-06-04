@@ -95,8 +95,8 @@
   button {
     position: absolute;
     right: 0;
-    bottom: 3px;
-    height: 24px;
+    bottom: 4px;
+    height: 2;
   }
 }
 
@@ -175,10 +175,6 @@
     &:before,
     &:after {
       transform: scale(1);
-    }
-    .field {
-      // border-width: 2px;
-      
     }
   }
 }

@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button';
 
-import styles from '../css/TextField.css';
+import '../css/TextField.css';
 
 class TextField extends PureComponent {
   static propTypes = {
@@ -109,7 +109,7 @@ class TextField extends PureComponent {
           <Button
             icon={icon}
             iconColor={iconColor}
-            iconSize={18}
+            iconSize="18"
             onClick={onButton}
             shape="flat"
             size="sm"
