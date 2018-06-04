@@ -23,7 +23,8 @@ export default class QuestForm extends PureComponent {
     onChangeCoins : PropTypes.func.isRequired,
     onChangeItems : PropTypes.func.isRequired,
     onDelete      : PropTypes.func.isRequired,
-    onClose       : PropTypes.func.isRequired
+    onClose       : PropTypes.func.isRequired,
+    addItem       : PropTypes.func.isRequired,
   };
   
   static defaultProps = {
@@ -65,7 +66,8 @@ export default class QuestForm extends PureComponent {
       onChange,
       onChangeCoins,
       onDelete,
-      onClose
+      onClose,
+      addItem,
     } = this.props;
     
     return (
@@ -95,6 +97,7 @@ export default class QuestForm extends PureComponent {
               shape="flat"
               duty="success"
               size="sm"
+              onClick={addItem}
             />
           </div>
         </div>

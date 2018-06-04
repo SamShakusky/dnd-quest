@@ -76,6 +76,7 @@ export default class Button extends PureComponent {
         }`}
         onClick={onClick}
         disabled={disabled}
+        type="button"
       >
         {
           icon &&

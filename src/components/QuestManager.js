@@ -221,6 +221,22 @@ export default class App extends PureComponent {
     }, this.toggleScroll(false));
   }
   
+  addItem = () => {
+    const { reward } = this.state;
+    
+    // const newItem = reward.items.push('');
+    
+    this.setState({
+      reward : {
+        ...reward,
+        items : [
+          ...reward.items,
+          ''
+        ]
+      }
+    });
+  }
+  
   toggleScroll = (bool) => {
     document.body.style.overflow = scrollMap[bool];
   }
@@ -252,6 +268,7 @@ export default class App extends PureComponent {
             onSubmit={this.onSubmit}
             onDelete={this.deleteQuest}
             onClose={this.closeForm}
+            addItem={this.addItem}
             editing={this.state.editing}
             ref={this.formRef}
           />
