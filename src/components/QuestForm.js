@@ -5,7 +5,6 @@ import TextField from './TextField';
 import Button from './Button';
 
 import '../css/QuestForm.css';
-import plus from '../icons/plus.svg';
 
 const hiddenSubmit = {
   pointerEvents : 'none',
@@ -72,6 +71,13 @@ export default class QuestForm extends PureComponent {
     return (
       <Formsy onValidSubmit={onSubmit} styleName="quest-form">
         <div styleName="form-wrap">
+          <div styleName="form_buttons">
+            {(editing ?
+              <Button icon="delete_outline" shape="flat" duty="danger" onClick={onDelete} sharp noActive />
+              :
+              <Button icon="close" shape="flat" duty="danger" onClick={onClose} sharp noActive />
+            )}
+          </div>
           <p styleName="form-label">Main</p>
           <TextField label="Title" name="title" value={title} onChange={onChange} required />
           <TextField label="Goal" name="goal" value={goal} onChange={onChange} />
@@ -85,22 +91,14 @@ export default class QuestForm extends PureComponent {
             </div>
             {reward.items && this.getItems()}
             <Button
-              icon="add"
               label="Add Item"
-              shape="ghost"
+              shape="flat"
               duty="success"
               size="sm"
             />
           </div>
         </div>
         <button ref={this.submitRef} style={hiddenSubmit} />
-        <div styleName="form_buttons">
-          {(editing ?
-            <Button icon="delete_outline" shape="flat" duty="danger" onClick={onDelete} sharp noActive />
-            :
-            <Button icon="close" shape="flat" duty="danger" onClick={onClose} sharp noActive />
-          )}
-        </div>
       </Formsy>
     );
   }

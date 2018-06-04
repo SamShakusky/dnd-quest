@@ -21,7 +21,7 @@ export default class Button extends PureComponent {
   };
 
   static defaultProps = {
-    label     : '',
+    label     : null,
     size      : 'md',
     shape     : 'solid',
     duty      : 'simple',
@@ -64,18 +64,19 @@ export default class Button extends PureComponent {
         } ${
           className
         } ${
-          label ? 'button_labeled' : ''
-        } ${
           noActive ? 'button_no-active' : ''
         } ${
           fullWidth ? 'button_full' : ''
         } ${
           sharp ? 'button_sharp' : ''
+        } ${
+          icon ? 'button-icon' : ''
+        } ${
+          icon && !label ? 'button-icon_pure' : ''
         }`}
         onClick={onClick}
         disabled={disabled}
       >
-        {label}
         {
           icon &&
           <i
@@ -88,6 +89,7 @@ export default class Button extends PureComponent {
             {icon}
           </i>
         }
+        <span>{label}</span>
       </button>
     );
   }

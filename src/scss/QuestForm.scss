@@ -22,6 +22,7 @@
 .form-wrap {
   padding: 24px 16px 64px;
   overflow: auto;
+  position: relative;
 }
 
 .form-label {
@@ -36,7 +37,7 @@
 .rewards {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
 }
 
 .coins {
@@ -52,10 +53,7 @@
   align-self: flex-end;
   position: absolute;
   top: 16px;
-  right: -8px;
-  // width: 100%;
-  // display: flex;
-  // background: $color_secondary;
+  right: 10px;
 }
 
 .input-wrap {

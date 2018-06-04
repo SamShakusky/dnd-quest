@@ -50,7 +50,7 @@ export default class Quest extends PureComponent {
             {reward.gold && <p styleName="coin coin__gold">{reward.gold}</p>}
             {reward.silver && <p styleName="coin coin__silver">{reward.silver}</p>}
             {reward.copper && <p styleName="coin coin__bronze">{reward.copper}</p>}
-            {reward.items && <p styleName="reward__item">{reward.items.length}</p>}
+            {reward.items && reward.items[0] && <p styleName="reward__item">{reward.items.length}</p>}
           </div>
         </div>
       </div>

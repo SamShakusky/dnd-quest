@@ -240,7 +240,6 @@ export default class App extends PureComponent {
           isShown={this.state.formVisibility}
           onClose={this.closeForm}
           side="right"
-          noOverlay
         >
           <QuestForm
             title={this.state.title}
@@ -265,9 +264,6 @@ export default class App extends PureComponent {
           formVisibility && <FloatingButton
             onClick={this.fabSubmit}
             icon="save"
-            active
-            expanded
-            label="Save"
           />
         }
         {
