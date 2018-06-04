@@ -14,8 +14,7 @@ export default class Button extends PureComponent {
     className : PropTypes.string,
     icon      : PropTypes.string,
     iconColor : PropTypes.string,
-    iconSize  : PropTypes.string,
-    noActive  : PropTypes.bool,
+    iconSize  : PropTypes.number,
     fullWidth : PropTypes.bool,
     sharp     : PropTypes.bool
   };
@@ -30,8 +29,7 @@ export default class Button extends PureComponent {
     className : '',
     icon      : '',
     iconColor : 'inherit',
-    iconSize  : '',
-    noActive  : false,
+    iconSize  : 18,
     fullWidth : false,
     sharp     : false
   };
@@ -47,7 +45,6 @@ export default class Button extends PureComponent {
       className,
       icon,
       iconSize,
-      noActive,
       iconColor,
       fullWidth,
       sharp
@@ -63,8 +60,6 @@ export default class Button extends PureComponent {
           duty
         } ${
           className
-        } ${
-          noActive ? 'button_no-active' : ''
         } ${
           fullWidth ? 'button_full' : ''
         } ${

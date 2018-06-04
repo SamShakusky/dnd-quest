@@ -109,7 +109,6 @@ class TextField extends PureComponent {
           <Button
             icon={icon}
             iconColor={iconColor}
-            iconSize="18"
             onClick={onButton}
             shape="flat"
             size="sm"

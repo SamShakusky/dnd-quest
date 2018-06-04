@@ -32,7 +32,7 @@
   @extend %tp-p-s;
   border-style: solid;
   outline: 0;
-  padding: 8px 0;
+  padding: 6px 20px 6px 0;
   background: none;
   border-color: transparent;
   position: relative;
@@ -95,8 +95,8 @@
   button {
     position: absolute;
     right: 0;
-    bottom: 4px;
-    height: 2;
+    bottom: 3px;
+    height: 24px;
   }
 }
 

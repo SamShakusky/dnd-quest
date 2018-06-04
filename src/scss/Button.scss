@@ -24,7 +24,7 @@
     }
     &_flat {
       color: $color;
-      &:not(.button_no-active):active {
+      &:not(.button-icon_pure):active {
         color: darken($color, 10%);
         background: $grey_light;
       }

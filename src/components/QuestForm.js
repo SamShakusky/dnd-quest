@@ -79,9 +79,9 @@ export default class QuestForm extends PureComponent {
         <div styleName="form-wrap">
           <div styleName="form_buttons">
             {(editing ?
-              <Button icon="delete_outline" shape="flat" duty="danger" onClick={onDelete} sharp noActive />
+              <Button icon="delete_outline" iconSize={24} shape="flat" duty="danger" onClick={onDelete} sharp noActive />
               :
-              <Button icon="close" shape="flat" duty="danger" onClick={onClose} sharp noActive />
+              <Button icon="close" iconSize={24} shape="flat" duty="danger" onClick={onClose} sharp noActive />
             )}
           </div>
           <p styleName="form-label">Main</p>
