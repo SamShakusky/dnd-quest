@@ -235,14 +235,17 @@ export default class App extends PureComponent {
           ''
         ]
       }
-    });
+    }, () => console.log(reward.items));
   }
   
   removeItem = (i) => {
     const { reward } = this.state;
     
-    const newItemsList = reward.items.filter(item => item !== reward.items[i]);
-    
+    const newItemsList = [
+      ...reward.items.slice(0, i),
+      ...reward.items.slice(i + 1)
+    ]
+    console.log(newItemsList);
     this.setState({
       reward : {
         ...reward,
