@@ -244,8 +244,8 @@ export default class App extends PureComponent {
     const newItemsList = [
       ...reward.items.slice(0, i),
       ...reward.items.slice(i + 1)
-    ]
-    console.log(newItemsList);
+    ];
+    
     this.setState({
       reward : {
         ...reward,
