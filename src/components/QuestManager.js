@@ -171,12 +171,8 @@ export default class App extends PureComponent {
     event.preventDefault();
     let { items } = this.state;
     const { editing } = this.state;
-    const requestOptions = {
-      method : 'DELETE',
-      url    : `${localhost}/api/quests/${editing}`
-    };
     
-    axios.request(requestOptions).then(() => {
+    axios.delete(`${localhost}/api/quests/${editing}`).then(() => {
       items = items.filter(item => item.id !== editing);
       this.setState({ items });
       this.closeForm();

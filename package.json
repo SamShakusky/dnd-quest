@@ -55,7 +55,8 @@
     "start-js": "node scripts/start.js",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "node scripts/build.js",
-    "build": "npm-run-all build-css build-js",
+    "build-copy": "xcopy /s/y/q \"build\" \"../dnd-quest-server/client\"",
+    "build": "npm-run-all build-css build-js build-copy",
     "test": "node scripts/test.js --env=jsdom"
   },
   "devDependencies": {
