@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
-import { Route, BrowserRouter } from 'react-router-dom';
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import QuestManager from './QuestManager';
 import Spec from './Spec';
-import Main from './Main';
 import Menu from './Menu';
 import Button from './Button';
 import SlidingPanel from './SlidingPanel';
@@ -54,11 +53,10 @@ export default class App extends PureComponent {
               <Button size="sm" label="fullscreen" onClick={this.toggleFullscreen} />
             </div>
           </header>
-
-          <Route exact path="/" component={Main} />
-          <Route path="/quest-manager" component={QuestManager} />
-          <Route path="/spec" component={Spec} />
-          
+          <Switch>
+            <Route exact path="/" component={QuestManager} />
+            <Route path="/spec" component={Spec} />
+          </Switch>
         </div>
       </BrowserRouter>
     );

@@ -18,8 +18,7 @@ export default class Menu extends PureComponent {
     
     return (
       <ul styleName="menu">
-        <li><NavLink onClick={onClick} className="link-dark" exact to="/">Home</NavLink></li>
-        <li><NavLink onClick={onClick} className="link-dark" to="/quest-manager">Quest Manager</NavLink></li>
+        <li><NavLink onClick={onClick} className="link-dark" to="/">Quest Manager</NavLink></li>
         <li><NavLink onClick={onClick} className="link-dark" to="/spec">Spec</NavLink></li>
       </ul>
     );

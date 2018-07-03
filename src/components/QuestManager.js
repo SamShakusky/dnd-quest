@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 
 import QuestList from './QuestList';
 import QuestForm from './QuestForm';
@@ -93,7 +94,7 @@ export default class App extends PureComponent {
     };
     
     if (editing) {
-      const index = items.findIndex(i => i._id === editing);
+      const index = items.findIndex(i => i.id === editing);
       this.updateQuest(item, index);
     } else {
       this.postQuest(item);
@@ -101,85 +102,69 @@ export default class App extends PureComponent {
     this.closeForm();
   }
   
-  onEdit = (_id) => {
-    const data = this.state.items.find(x => x._id === _id);
+  onEdit = (id) => {
+    const data = this.state.items.find(x => x.id === id);
     
     this.setState({
       title       : data.title,
       description : data.description,
       goal        : data.goal,
       reward      : data.reward,
-      editing     : _id,
+      editing     : id,
     });
     this.openForm();
   }
   
   getQuests = () => {
-    const requestOptions = {
-      method : 'GET'
-    };
-    
-    fetch(`${localhost}/quests`, requestOptions)
+    axios.get(`${localhost}/api/quests`)
       .then((response) => {
-        response.json().then((data) => {
-          this.setState({
-            items : data
-          });
+        this.setState({
+          items : response.data
         });
       });
   }
   
-  postQuest = (payload) => {
-    const data = JSON.stringify(payload);
+  postQuest = (questData) => {
     const requestOptions = {
       method  : 'POST',
-      body    : data,
-      headers : {
-        'Content-Type' : 'application/json'
-      }
+      url     : `${localhost}/api/quests`,
+      data    : JSON.stringify(questData),
+      headers : { 'Content-Type' : 'application/json' }
     };
     
-    fetch(`${localhost}/quests`, requestOptions)
-      .then((response) => {
-        response.json().then((resp) => {
-          this.setState({
-            items : [
-              ...this.state.items,
-              { ...resp }
-            ]
-          });
-        });
+    axios.request(requestOptions).then((response) => {
+      this.setState({
+        items : [
+          ...this.state.items,
+          { ...response.data }
+        ]
       });
+    });
   }
   
-  updateQuest = (payload, index) => {
+  updateQuest = (questData, index) => {
     const { editing, items } = this.state;
-    const data = JSON.stringify(payload);
     const requestOptions = {
       method  : 'PUT',
-      body    : data,
-      headers : {
-        'Content-Type' : 'application/json'
-      }
+      url     : `${localhost}/api/quests/${editing}`,
+      data    : JSON.stringify(questData),
+      headers : { 'Content-Type' : 'application/json' }
     };
     
-    fetch(`${localhost}/quests/${editing}`, requestOptions)
-      .then((response) => {
-        response.json().then((resp) => {
-          const newItems = [...items];
-          
-          newItems[index] = {
-            ...resp,
-            _id : editing
-          };
-          
-          this.setState({
-            items : [
-              ...newItems
-            ]
-          });
-        });
+    axios.request(requestOptions).then((response) => {
+      const newItems = [...items];
+      
+      newItems[index] = {
+        ...response.data,
+        id : editing
+      };
+      
+      this.setState({
+        items : [
+          ...newItems
+        ]
       });
+    });
   }
   
   deleteQuest = (event) => {
@@ -187,17 +172,15 @@ export default class App extends PureComponent {
     let { items } = this.state;
     const { editing } = this.state;
     const requestOptions = {
-      method : 'DELETE'
+      method : 'DELETE',
+      url    : `${localhost}/api/quests/${editing}`
     };
     
-    fetch(`${localhost}/quests/${editing}`, requestOptions)
-      .then((response) => {
-        response.json().then(() => {
-          items = items.filter(item => item._id !== editing);
-          this.setState({ items });
-          this.closeForm();
-        });
-      });
+    axios.request(requestOptions).then(() => {
+      items = items.filter(item => item.id !== editing);
+      this.setState({ items });
+      this.closeForm();
+    });
   }
   
   openForm = () => {
@@ -235,7 +218,7 @@ export default class App extends PureComponent {
           ''
         ]
       }
-    }, () => console.log(reward.items));
+    });
   }
   
   removeItem = (i) => {
