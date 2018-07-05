@@ -1,11 +1,16 @@
 import React, { PureComponent } from 'react';
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
+import PrivateRoute from './helpers/private-route';
+import axios from 'axios';
+
 import QuestManager from './QuestManager';
 import Spec from './Spec';
 import Menu from './Menu';
+import Login from './login';
 import Button from './Button';
 import SlidingPanel from './SlidingPanel';
 
+import localhost from '../config/localhost';
 import '../css/App.css';
 
 const html = document.getElementById('html');
@@ -15,8 +20,36 @@ export default class App extends PureComponent {
     super(props);
     
     this.state = {
-      menuVisibility : false
+      menuVisibility : false,
+      isAuth         : false,
+      accessToken    : localStorage.getItem('access_token'),
+      userId         : localStorage.getItem('user_id')
     };
+    this.checkAuth();
+  }
+  
+  componentDidMount() {
+  
+  }
+  
+  checkAuth() {
+    const { accessToken, userId } = this.state;
+    
+    if (!accessToken || !userId) return false;
+    
+    return axios.get(`${localhost}/api/Users/${userId}?access_token=${accessToken}`)
+      .then(() => {
+        this.logIn();
+        return true;
+      }, () => false);
+  }
+  
+  logIn = () => {
+    this.setState({ isAuth : true });
+  }
+  
+  logOut = () => {
+    this.setState({ isAuth : false });
   }
   
   toggleMenu = () => {
@@ -31,6 +64,8 @@ export default class App extends PureComponent {
   }
   
   render() {
+    const { isAuth } = this.state;
+    
     return (
       <BrowserRouter>
         <div className="App">
@@ -54,7 +89,9 @@ export default class App extends PureComponent {
             </div>
           </header>
           <Switch>
-            <Route exact path="/" component={QuestManager} />
+            <Redirect exact from="/" to="/manager" />
+            <PrivateRoute isAuth={isAuth} path="/manager" component={QuestManager} />
+            <Route path="/login" render={() => <Login isAuth={isAuth} logIn={this.logIn} />} />
             <Route path="/spec" component={Spec} />
           </Switch>
         </div>

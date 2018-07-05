@@ -16,7 +16,8 @@ export default class Button extends PureComponent {
     iconColor : PropTypes.string,
     iconSize  : PropTypes.number,
     fullWidth : PropTypes.bool,
-    sharp     : PropTypes.bool
+    sharp     : PropTypes.bool,
+    type      : PropTypes.string,
   };
 
   static defaultProps = {
@@ -31,7 +32,8 @@ export default class Button extends PureComponent {
     iconColor : 'inherit',
     iconSize  : 18,
     fullWidth : false,
-    sharp     : false
+    sharp     : false,
+    type      : 'button',
   };
   
   render() {
@@ -47,7 +49,8 @@ export default class Button extends PureComponent {
       iconSize,
       iconColor,
       fullWidth,
-      sharp
+      sharp,
+      type,
     } = this.props;
 
     return (
@@ -71,7 +74,7 @@ export default class Button extends PureComponent {
         }`}
         onClick={onClick}
         disabled={disabled}
-        type="button"
+        type={type}
       >
         {
           icon &&

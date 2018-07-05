@@ -34,6 +34,7 @@ export default class App extends PureComponent {
   
   componentWillMount() {
     this.getQuests();
+    // console.log(localStorage.getItem('access_token'));
   }
   
   onChange = (event) => {
