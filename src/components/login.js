@@ -7,14 +7,14 @@ import '../css/Main.css';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class Login extends PureComponent {
-  onSubmit = () => {
-    this.props.logIn();
+  onSubmit = (accessToken, userId) => {
+    this.props.logIn(accessToken, userId);
   }
   
   render() {
     const { isAuth } = this.props;
-    
-    if (isAuth) return <Redirect to="/manager" />;
+    const { from } = this.props.location.state || { from : { pathname : '/manager' }};
+    if (isAuth) return <Redirect to={from} />;
     
     return (
       <main styleName="main">
@@ -23,5 +23,3 @@ export default class Login extends PureComponent {
     );
   }
 }
-
-// export default withRouter(Login);

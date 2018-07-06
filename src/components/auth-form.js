@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import Formsy from 'formsy-react';
 import axios from 'axios';
-import { withRouter } from 'react-router-dom';
 
 import Button from './Button';
 import TextField from './TextField';
@@ -44,9 +43,11 @@ export default class AuthForm extends PureComponent {
     };
     
     axios.request(requestOptions).then((response) => {
-      localStorage.setItem('access_token', response.data.id);
-      localStorage.setItem('user_id', response.data.userId);
-      this.props.onSubmit();
+      const { id, userId } = response.data;
+      localStorage.setItem('access_token', id);
+      localStorage.setItem('user_id', userId);
+      
+      this.props.onSubmit(id, userId);
     });
   }
   

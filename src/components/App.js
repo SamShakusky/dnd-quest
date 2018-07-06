@@ -39,17 +39,27 @@ export default class App extends PureComponent {
     
     return axios.get(`${localhost}/api/Users/${userId}?access_token=${accessToken}`)
       .then(() => {
-        this.logIn();
+        this.logIn(accessToken, userId);
         return true;
       }, () => false);
   }
   
-  logIn = () => {
-    this.setState({ isAuth : true });
+  logIn = (accessToken, userId) => {
+    this.setState({
+      isAuth : true,
+      accessToken,
+      userId
+    });
   }
   
   logOut = () => {
-    this.setState({ isAuth : false });
+    const { accessToken } = this.state;
+    
+    return axios.post(`${localhost}/api/Users/logout?access_token=${accessToken}`)
+      .then(() => {
+        this.setState({ isAuth : false });
+        return true;
+      }, () => false);
   }
   
   toggleMenu = () => {
@@ -64,35 +74,38 @@ export default class App extends PureComponent {
   }
   
   render() {
-    const { isAuth } = this.state;
+    const { isAuth, accessToken } = this.state;
     
     return (
       <BrowserRouter>
         <div className="App">
-          <header styleName="header">
-            <Button
-              onClick={this.toggleMenu}
-              icon="menu"
-              iconSize={36}
-              iconColor="#fff"
-              shape="flat"
-              noActive
-            />
-            <SlidingPanel
-              isShown={this.state.menuVisibility}
-              onClose={this.toggleMenu}
-            >
-              <Menu onClick={this.toggleMenu} />
-            </SlidingPanel>
-            <div styleName="fullscreen">
-              <Button size="sm" label="fullscreen" onClick={this.toggleFullscreen} />
-            </div>
-          </header>
+          {isAuth &&
+            <header styleName="header">
+              <Button
+                onClick={this.toggleMenu}
+                icon="menu"
+                iconSize={36}
+                iconColor="#fff"
+                shape="flat"
+                noActive
+              />
+              <SlidingPanel
+                isShown={this.state.menuVisibility}
+                onClose={this.toggleMenu}
+              >
+                <Menu closeMenu={this.toggleMenu} logOut={this.logOut} isAuth={isAuth} />
+              </SlidingPanel>
+              <div styleName="fullscreen">
+                <Button size="sm" label="fullscreen" onClick={this.toggleFullscreen} />
+              </div>
+            </header>
+          }
+          
           <Switch>
             <Redirect exact from="/" to="/manager" />
-            <PrivateRoute isAuth={isAuth} path="/manager" component={QuestManager} />
-            <Route path="/login" render={() => <Login isAuth={isAuth} logIn={this.logIn} />} />
-            <Route path="/spec" component={Spec} />
+            <Route path="/login" render={props => <Login {...props} isAuth={isAuth} logIn={this.logIn} />} />
+            <PrivateRoute isAuth={isAuth} accessToken={accessToken} path="/manager" component={QuestManager} />
+            <PrivateRoute isAuth={isAuth} path="/spec" component={Spec} />
           </Switch>
         </div>
       </BrowserRouter>
