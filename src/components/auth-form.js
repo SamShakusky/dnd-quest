@@ -61,12 +61,12 @@ export default class AuthForm extends PureComponent {
     
     return (
       <Formsy onValidSubmit={this.onSubmit} styleName="form">
-        <h1 styleName="form-title">LogIn</h1>
-        
-        <TextField label="Name" name="username" value={username} onChange={this.onChange} required />
-        <TextField label="Password" name="password" value={password} onChange={this.onChange} required />
-        <Button label="Send" type="submit" />
-        
+        <h1 styleName="form-title">Sign in</h1>
+        <div styleName="simple-auth">
+          <TextField label="Name" name="username" value={username} onChange={this.onChange} required />
+          <TextField label="Password" name="password" value={password} onChange={this.onChange} required />
+          <Button label="Submit" type="submit" />
+        </div>
         {/* <div styleName="buttons">
           <Button label="google" onClick={this.handleClick} />
           <Button label="facebook" />
