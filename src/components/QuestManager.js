@@ -19,10 +19,12 @@ const scrollMap = {
 export default class App extends PureComponent {
   static propTypes = {
     accessToken : PropTypes.string,
+    isAuth      : PropTypes.bool,
   };
   
   static defaultProps = {
     accessToken : '',
+    isAuth      : false,
   };
   
   constructor(props) {
@@ -42,8 +44,8 @@ export default class App extends PureComponent {
   }
   
   componentWillMount() {
-    this.getQuests();
-    // console.log(localStorage.getItem('access_token'));
+    const { isAuth } = this.props;
+    if (isAuth) this.getQuests();
   }
   
   onChange = (event) => {

@@ -59,6 +59,8 @@ export default class App extends PureComponent {
     return axios.post(`${localhost}/api/Users/logout?access_token=${accessToken}`)
       .then(() => {
         this.setState({ isAuth : false });
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('user_id');
         return true;
       }, () => false);
   }
