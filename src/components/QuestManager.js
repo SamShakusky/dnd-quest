@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import QuestList from './QuestList';
@@ -16,6 +17,14 @@ const scrollMap = {
 };
 
 export default class App extends PureComponent {
+  static propTypes = {
+    accessToken : PropTypes.string,
+  };
+  
+  static defaultProps = {
+    accessToken : '',
+  };
+  
   constructor(props) {
     super(props);
     

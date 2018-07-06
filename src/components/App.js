@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
-import PrivateRoute from './helpers/private-route';
 import axios from 'axios';
+
+import PrivateRoute from './helpers/private-route';
 
 import QuestManager from './QuestManager';
 import Spec from './Spec';

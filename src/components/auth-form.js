@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import Formsy from 'formsy-react';
 import axios from 'axios';
 
@@ -9,11 +10,15 @@ import localhost from '../config/localhost';
 import '../css/form.css';
 
 export default class AuthForm extends PureComponent {
+  static propTypes = {
+    onSubmit : PropTypes.func.isRequired
+  }
+  
   constructor(props) {
     super(props);
     
     this.state = {
-      username     : '',
+      username : '',
       password : '',
     };
   }
