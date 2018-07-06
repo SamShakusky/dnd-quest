@@ -117,7 +117,7 @@ export default class App extends PureComponent {
   }
   
   getQuests = () => {
-    axios.get(`${localhost}/api/quests`)
+    axios.get(`${localhost}/api/quests?access_token=${this.props.accessToken}`)
       .then((response) => {
         this.setState({
           items : response.data
@@ -128,7 +128,7 @@ export default class App extends PureComponent {
   postQuest = (questData) => {
     const requestOptions = {
       method  : 'POST',
-      url     : `${localhost}/api/quests`,
+      url     : `${localhost}/api/quests?access_token=${this.props.accessToken}`,
       data    : JSON.stringify(questData),
       headers : { 'Content-Type' : 'application/json' }
     };
@@ -147,7 +147,7 @@ export default class App extends PureComponent {
     const { editing, items } = this.state;
     const requestOptions = {
       method  : 'PUT',
-      url     : `${localhost}/api/quests/${editing}`,
+      url     : `${localhost}/api/quests/${editing}?access_token=${this.props.accessToken}`,
       data    : JSON.stringify(questData),
       headers : { 'Content-Type' : 'application/json' }
     };
@@ -173,7 +173,7 @@ export default class App extends PureComponent {
     let { items } = this.state;
     const { editing } = this.state;
     
-    axios.delete(`${localhost}/api/quests/${editing}`).then(() => {
+    axios.delete(`${localhost}/api/quests/${editing}?access_token=${this.props.accessToken}`).then(() => {
       items = items.filter(item => item.id !== editing);
       this.setState({ items });
       this.closeForm();
