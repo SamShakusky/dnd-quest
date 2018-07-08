@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
+import { Provider } from 'react-redux';
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
+
 import axios from 'axios';
 
 import PrivateRoute from './helpers/private-route';
@@ -11,6 +13,7 @@ import Login from './login';
 import Button from './Button';
 import SlidingPanel from './SlidingPanel';
 
+import store from '../store';
 import localhost from '../config/localhost';
 import '../css/App.css';
 
@@ -81,36 +84,38 @@ export default class App extends PureComponent {
     
     return (
       <BrowserRouter>
-        <div className="App">
-          {isAuth &&
-            <header styleName="header">
-              <Button
-                onClick={this.toggleMenu}
-                icon="menu"
-                iconSize={36}
-                iconColor="#fff"
-                shape="flat"
-                noActive
-              />
-              <SlidingPanel
-                isShown={this.state.menuVisibility}
-                onClose={this.toggleMenu}
-              >
-                <Menu closeMenu={this.toggleMenu} logOut={this.logOut} isAuth={isAuth} />
-              </SlidingPanel>
-              <div styleName="fullscreen">
-                <Button size="sm" label="fullscreen" onClick={this.toggleFullscreen} />
-              </div>
-            </header>
-          }
-          
-          <Switch>
-            <Redirect exact from="/" to="/manager" />
-            <Route path="/login" render={props => <Login {...props} isAuth={isAuth} logIn={this.logIn} />} />
-            <PrivateRoute isAuth={isAuth} accessToken={accessToken} path="/manager" component={QuestManager} />
-            <PrivateRoute isAuth={isAuth} path="/spec" component={Spec} />
-          </Switch>
-        </div>
+        <Provider store={store}>
+          <div className="App">
+            {isAuth &&
+              <header styleName="header">
+                <Button
+                  onClick={this.toggleMenu}
+                  icon="menu"
+                  iconSize={36}
+                  iconColor="#fff"
+                  shape="flat"
+                  noActive
+                />
+                <SlidingPanel
+                  isShown={this.state.menuVisibility}
+                  onClose={this.toggleMenu}
+                >
+                  <Menu closeMenu={this.toggleMenu} logOut={this.logOut} isAuth={isAuth} />
+                </SlidingPanel>
+                <div styleName="fullscreen">
+                  <Button size="sm" label="fullscreen" onClick={this.toggleFullscreen} />
+                </div>
+              </header>
+            }
+            
+            <Switch>
+              <Redirect exact from="/" to="/manager" />
+              <Route path="/login" render={props => <Login {...props} isAuth={isAuth} logIn={this.logIn} />} />
+              <PrivateRoute isAuth={isAuth} accessToken={accessToken} path="/manager" component={QuestManager} />
+              <PrivateRoute isAuth={isAuth} path="/spec" component={Spec} />
+            </Switch>
+          </div>
+        </Provider>
       </BrowserRouter>
     );
   }
