@@ -1,2 +1,4 @@
-export const FETCH_QUESTS = 'FETCH_QUESTS';
-export const NEW_QUEST = 'NEW_QUEST';
+export const CREATE_QUEST = 'CREATE_QUEST';
+export const READ_QUESTS = 'READ_QUESTS';
+export const UPDATE_QUEST = 'UPDATE_QUEST';
+export const DELETE_QUEST = 'DELETE_QUEST';

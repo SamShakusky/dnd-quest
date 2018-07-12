@@ -1,14 +1,14 @@
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 
 import QuestList from './QuestList';
 import QuestForm from './QuestForm';
 import FloatingButton from './FloatingButton';
 import SlidingPanel from './SlidingPanel';
 
-import localhost from '../config/localhost';
+import { readQuests, createQuest, updateQuest, deleteQuest } from '../actions/quest-actions';
 import '../css/QuestManager.css';
 
 const scrollMap = {
@@ -16,15 +16,19 @@ const scrollMap = {
   false : 'auto'
 };
 
-export default class App extends PureComponent {
+class App extends PureComponent {
   static propTypes = {
-    accessToken : PropTypes.string,
     isAuth      : PropTypes.bool,
+    quests      : PropTypes.arrayOf(PropTypes.string),
+    createQuest : PropTypes.func.isRequired,
+    readQuests  : PropTypes.func.isRequired,
+    updateQuest : PropTypes.func.isRequired,
+    deleteQuest : PropTypes.func.isRequired,
   };
   
   static defaultProps = {
-    accessToken : '',
-    isAuth      : false,
+    isAuth : false,
+    quests : [],
   };
   
   constructor(props) {
@@ -45,7 +49,8 @@ export default class App extends PureComponent {
   
   componentWillMount() {
     const { isAuth } = this.props;
-    if (isAuth) this.getQuests();
+    
+    if (isAuth) this.props.readQuests();
   }
   
   onChange = (event) => {
@@ -92,30 +97,31 @@ export default class App extends PureComponent {
       goal,
       reward,
       editing,
-      items
     } = this.state;
     
-    const item = {
+    const { quests } = this.props;
+    
+    const quest = {
       title,
       description,
       goal,
       reward : {
         ...reward,
         items : reward.items.filter(el => el.length)
-      }
+      },
+      id : editing || null,
     };
     
     if (editing) {
-      const index = items.findIndex(i => i.id === editing);
-      this.updateQuest(item, index);
+      this.props.updateQuest(quest, quests);
     } else {
-      this.postQuest(item);
+      this.props.createQuest(quest);
     }
     this.closeForm();
   }
   
   onEdit = (id) => {
-    const data = this.state.items.find(x => x.id === id);
+    const data = this.props.quests.find(x => x.id === id);
     
     this.setState({
       title       : data.title,
@@ -127,68 +133,13 @@ export default class App extends PureComponent {
     this.openForm();
   }
   
-  getQuests = () => {
-    axios.get(`${localhost}/api/quests?access_token=${this.props.accessToken}`)
-      .then((response) => {
-        this.setState({
-          items : response.data
-        });
-      });
-  }
-  
-  postQuest = (questData) => {
-    const requestOptions = {
-      method  : 'POST',
-      url     : `${localhost}/api/quests?access_token=${this.props.accessToken}`,
-      data    : JSON.stringify(questData),
-      headers : { 'Content-Type' : 'application/json' }
-    };
-    
-    axios.request(requestOptions).then((response) => {
-      this.setState({
-        items : [
-          ...this.state.items,
-          { ...response.data }
-        ]
-      });
-    });
-  }
-  
-  updateQuest = (questData, index) => {
-    const { editing, items } = this.state;
-    const requestOptions = {
-      method  : 'PUT',
-      url     : `${localhost}/api/quests/${editing}?access_token=${this.props.accessToken}`,
-      data    : JSON.stringify(questData),
-      headers : { 'Content-Type' : 'application/json' }
-    };
-    
-    axios.request(requestOptions).then((response) => {
-      const newItems = [...items];
-      
-      newItems[index] = {
-        ...response.data,
-        id : editing
-      };
-      
-      this.setState({
-        items : [
-          ...newItems
-        ]
-      });
-    });
-  }
-  
   deleteQuest = (event) => {
     event.preventDefault();
-    let { items } = this.state;
     const { editing } = this.state;
+    const { quests } = this.props;
     
-    axios.delete(`${localhost}/api/quests/${editing}?access_token=${this.props.accessToken}`).then(() => {
-      items = items.filter(item => item.id !== editing);
-      this.setState({ items });
-      this.closeForm();
-    });
+    this.props.deleteQuest(editing, quests);
+    this.closeForm();
   }
   
   openForm = () => {
@@ -285,7 +236,7 @@ export default class App extends PureComponent {
           />
         </SlidingPanel>
         <QuestList
-          items={this.state.items}
+          items={this.props.quests}
           onEdit={this.onEdit}
         />
         {
@@ -304,3 +255,14 @@ export default class App extends PureComponent {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  quests : state.quests.items
+});
+
+export default connect(mapStateToProps, {
+  readQuests,
+  createQuest,
+  updateQuest,
+  deleteQuest
+})(App);
