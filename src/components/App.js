@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import axios from 'axios';
 
@@ -20,45 +21,69 @@ import '../css/App.css';
 
 const html = document.getElementById('html');
 
-export default class App extends PureComponent {
+class App extends PureComponent {
+  static propTypes = {
+    isAuth      : PropTypes.bool,
+    credentials : PropTypes.shape({
+      accessToken  : PropTypes.string,
+      tokenCreated : PropTypes.number,
+      userId       : PropTypes.string,
+    }),
+  };
+  
+  static defaultProps = {
+    isAuth      : false,
+    credentials : {}
+  };
+  
   constructor(props) {
     super(props);
+    
+    const userCredentials = JSON.parse(localStorage.getItem('user_credentials'));
     
     this.state = {
       menuVisibility : false,
       isAuth         : false,
-      accessToken    : localStorage.getItem('access_token'),
-      userId         : localStorage.getItem('user_id')
+      credentials    : userCredentials ? {
+        accessToken : userCredentials.accessToken,
+        userId      : userCredentials.userId,
+      } : undefined,
     };
     this.checkAuth();
   }
   
-  componentDidMount() {
-  
+  componentDidUpdate(prevProps) {
+    const { credentials, isAuth } = this.props;
+    
+    if (credentials !== prevProps.credentials) {
+      this.setState({ // eslint-disable-line react/no-did-update-set-state
+        credentials,
+        isAuth
+      });
+    }
   }
   
   checkAuth() {
-    const { accessToken, userId } = this.state;
+    const { credentials } = this.state;
+    if (!credentials) return false;
     
-    if (!accessToken || !userId) return false;
+    const { accessToken, userId } = credentials;
     
     return axios.get(`${localhost}/api/Users/${userId}?access_token=${accessToken}`)
       .then(() => {
-        this.logIn(accessToken, userId);
+        this.logIn();
         return true;
       }, () => false);
   }
   
-  logIn = (accessToken, userId) => {
+  logIn = () => {
     this.setState({
       isAuth : true,
-      accessToken,
-      userId
     });
   }
   
   logOut = () => {
-    const { accessToken } = this.state;
+    const { accessToken } = this.state.credentials;
     
     return axios.post(`${localhost}/api/Users/logout?access_token=${accessToken}`)
       .then(() => {
@@ -81,7 +106,7 @@ export default class App extends PureComponent {
   }
   
   render() {
-    const { isAuth, accessToken } = this.state;
+    const { isAuth, credentials } = this.state;
     
     return (
       <BrowserRouter>
@@ -111,8 +136,8 @@ export default class App extends PureComponent {
             
             <Switch>
               <Redirect exact from="/" to="/manager" />
-              <Route path="/login" render={props => <Login {...props} isAuth={isAuth} logIn={this.logIn} />} />
-              <PrivateRoute isAuth={isAuth} accessToken={accessToken} path="/manager" component={QuestManager} />
+              <Route path="/login" render={props => <Login {...props} isAuth={isAuth} />} />
+              <PrivateRoute isAuth={isAuth} credentials={credentials} path="/manager" component={QuestManager} />
               <PrivateRoute isAuth={isAuth} path="/spec" component={Spec} />
             </Switch>
           </div>
@@ -121,3 +146,10 @@ export default class App extends PureComponent {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  credentials : state.user.credentials,
+  isAuth      : state.user.isAuth,
+});
+
+export default connect(mapStateToProps)(App);

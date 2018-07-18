@@ -1,17 +1,17 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Formsy from 'formsy-react';
-import axios from 'axios';
 
 import Button from './Button';
 import TextField from './TextField';
 
-import localhost from '../config/localhost';
+import { signIn } from '../actions/user-actions';
 import '../css/form.css';
 
-export default class AuthForm extends PureComponent {
+class AuthForm extends PureComponent {
   static propTypes = {
-    onSubmit : PropTypes.func.isRequired
+    signIn : PropTypes.func.isRequired
   }
   
   constructor(props) {
@@ -40,20 +40,7 @@ export default class AuthForm extends PureComponent {
       password
     };
     
-    const requestOptions = {
-      method  : 'POST',
-      url     : `${localhost}/api/Users/login`,
-      data    : JSON.stringify(userData),
-      headers : { 'Content-Type' : 'application/json' }
-    };
-    
-    axios.request(requestOptions).then((response) => {
-      const { id, userId } = response.data;
-      localStorage.setItem('access_token', id);
-      localStorage.setItem('user_id', userId);
-      
-      this.props.onSubmit(id, userId);
-    });
+    this.props.signIn(userData);
   }
   
   render() {
@@ -75,3 +62,11 @@ export default class AuthForm extends PureComponent {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  user : state.user.credentials
+});
+
+export default connect(mapStateToProps, {
+  signIn
+})(AuthForm);

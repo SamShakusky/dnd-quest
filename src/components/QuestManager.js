@@ -16,7 +16,7 @@ const scrollMap = {
   false : 'auto'
 };
 
-class App extends PureComponent {
+class QuestManager extends PureComponent {
   static propTypes = {
     isAuth      : PropTypes.bool,
     quests      : PropTypes.arrayOf(PropTypes.string),
@@ -265,4 +265,4 @@ export default connect(mapStateToProps, {
   createQuest,
   updateQuest,
   deleteQuest
-})(App);
+})(QuestManager);
