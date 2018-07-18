@@ -4,3 +4,4 @@ export const UPDATE_QUEST = 'UPDATE_QUEST';
 export const DELETE_QUEST = 'DELETE_QUEST';
 
 export const SIGNIN_USER = 'SIGNIN_USER';
+export const SIGNOUT_USER = 'SIGNOUT_USER';

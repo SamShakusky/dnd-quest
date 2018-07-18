@@ -83,7 +83,7 @@ class TextField extends PureComponent {
         } ${
           this.state.focused ? 'field_focused' : ''
         } ${
-          value.length ? 'field_filled' : ''
+          value ? 'field_filled' : ''
         } ${
           required ? 'field_required' : ''
         } field__${

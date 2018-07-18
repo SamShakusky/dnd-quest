@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SIGNIN_USER } from './types';
+import { SIGNIN_USER, SIGNOUT_USER } from './types';
 
 import localhost from '../config/localhost';
 
@@ -26,5 +26,21 @@ export const signIn = userData => (dispatch) => {
     });
     
     localStorage.setItem('user_credentials', JSON.stringify(userCredentials));
+  });
+};
+
+export const signOut = () => (dispatch, getState) => {
+  const { accessToken } = getState().user.credentials;
+  const requestOptions = {
+    method : 'POST',
+    url    : `${localhost}/api/Users/logout?access_token=${accessToken}`,
+  };
+  
+  axios.request(requestOptions).then(() => {
+    dispatch({
+      type : SIGNOUT_USER,
+    });
+    
+    localStorage.removeItem('user_credentials');
   });
 };

@@ -16,10 +16,25 @@ const scrollMap = {
   false : 'auto'
 };
 
+const rewardShape = {
+  items  : PropTypes.arrayOf(PropTypes.string),
+  gold   : PropTypes.number,
+  silver : PropTypes.number,
+  copper : PropTypes.number,
+};
+
+const questShape = {
+  title       : PropTypes.string.isRequired,
+  id          : PropTypes.string.isRequired,
+  description : PropTypes.string,
+  goal        : PropTypes.string,
+  reward      : PropTypes.shape(rewardShape),
+};
+
 class QuestManager extends PureComponent {
   static propTypes = {
     isAuth      : PropTypes.bool,
-    quests      : PropTypes.arrayOf(PropTypes.string),
+    quests      : PropTypes.arrayOf(PropTypes.shape(questShape)),
     createQuest : PropTypes.func.isRequired,
     readQuests  : PropTypes.func.isRequired,
     updateQuest : PropTypes.func.isRequired,
@@ -70,7 +85,7 @@ class QuestManager extends PureComponent {
       ...this.state,
       reward : {
         ...this.state.reward,
-        [name] : target.value
+        [name] : +target.value
       }
     });
   }

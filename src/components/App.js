@@ -82,18 +82,6 @@ class App extends PureComponent {
     });
   }
   
-  logOut = () => {
-    const { accessToken } = this.state.credentials;
-    
-    return axios.post(`${localhost}/api/Users/logout?access_token=${accessToken}`)
-      .then(() => {
-        this.setState({ isAuth : false });
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('user_id');
-        return true;
-      }, () => false);
-  }
-  
   toggleMenu = () => {
     this.setState({
       menuVisibility : !this.state.menuVisibility
@@ -126,7 +114,7 @@ class App extends PureComponent {
                   isShown={this.state.menuVisibility}
                   onClose={this.toggleMenu}
                 >
-                  <Menu closeMenu={this.toggleMenu} logOut={this.logOut} isAuth={isAuth} />
+                  <Menu closeMenu={this.toggleMenu} isAuth={isAuth} />
                 </SlidingPanel>
                 <div styleName="fullscreen">
                   <Button size="sm" label="fullscreen" onClick={this.toggleFullscreen} />

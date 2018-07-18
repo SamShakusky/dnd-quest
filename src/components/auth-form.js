@@ -63,10 +63,6 @@ class AuthForm extends PureComponent {
   }
 }
 
-const mapStateToProps = state => ({
-  user : state.user.credentials
-});
-
-export default connect(mapStateToProps, {
+export default connect(null, {
   signIn
 })(AuthForm);
