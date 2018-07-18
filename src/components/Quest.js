@@ -23,10 +23,6 @@ export default class Quest extends PureComponent {
   onEdit = () => {
     this.props.onEdit(this.props.id);
   }
-
-  componentDidMount() {
-    console.log(this.context);
-  }
   
   render() {
     const {
