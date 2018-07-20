@@ -1,0 +1,12 @@
+@import './import/importFile';
+
+.link {
+  color : $color_main_light;
+  text-decoration: none;
+  // font-size: inherit;
+  // font-family: inherit;
+  @include animation(color, fast);
+  &:hover {
+    color : $color_main;
+  }
+};

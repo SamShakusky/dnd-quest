@@ -26,6 +26,7 @@ export const signIn = userData => (dispatch) => {
     });
     
     localStorage.setItem('user_credentials', JSON.stringify(userCredentials));
+    localStorage.setItem('has_account', true);
   });
 };
 

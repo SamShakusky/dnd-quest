@@ -6,14 +6,29 @@
   background: $white;
   z-index: 10;
   @include shadow(1);
+  
+  button {
+    margin-top: 6px;
+    margin-bottom: 2px;
+  }
 }
 
 .form-title {
-  @extend %tp-h2;
-  padding: 12px 0 18px;
-  color: $white;
-  text-align: center;
-  background: $color_main;
+  @extend %tp-h4;
+  padding: 36px 24px 6px;
+  color: $color_main;
+}
+
+.form-subtitle {
+  @extend %tp-p-xl;
+  padding: 0 24px 6px;
+  color: $color_main;
+}
+
+.form-change {
+  @extend %tp-p-xxs;
+  color: $grey_dark;
+  padding-top: 12px;
 }
 
 .buttons {
@@ -30,5 +45,5 @@
   padding: 24px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
 }

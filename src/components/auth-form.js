@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Formsy from 'formsy-react';
 
 import Button from './Button';
+import Link from './link';
 import TextField from './TextField';
 
 import { signIn, signUp } from '../actions/user-actions';
@@ -18,11 +19,13 @@ class AuthForm extends PureComponent {
   constructor(props) {
     super(props);
     
+    const hasAccount = JSON.parse(localStorage.getItem('has_account'));
+    
     this.state = {
-      username   : '',
-      password   : '',
-      email      : '',
-      hasAccount : true,
+      username : '',
+      password : '',
+      email    : '',
+      hasAccount
     };
   }
   
@@ -63,17 +66,15 @@ class AuthForm extends PureComponent {
     
     return (
       <Formsy onValidSubmit={this.onSignIn} styleName="form">
-        <h1 styleName="form-title">Sign in</h1>
+        <h1 styleName="form-title">Long time no see!</h1>
+        <h2 styleName="form-subtitle">Feel yourself at home.</h2>
         <div styleName="simple-auth">
-          <TextField label="Name" name="username" value={username} onChange={this.onChange} required />
+          <TextField label="Username" name="username" value={username} onChange={this.onChange} required />
           <TextField label="Password" name="password" value={password} onChange={this.onChange} required />
-          <Button label="Create account" shape="flat" size="sm" onClick={this.toggleForm} />
           <Button label="Submit" type="submit" />
+          <p styleName="form-change">Forgot password? <Link onClick={this.toggleForm} text="Don't you worry"/></p>
+          <p styleName="form-change">New around here? <Link onClick={this.toggleForm} text="Let's introduce ourselves"/></p>
         </div>
-        {/* <div styleName="buttons">
-          <Button label="google" onClick={this.handleClick} />
-          <Button label="facebook" />
-        </div> */}
       </Formsy>
     );
   }
@@ -83,13 +84,14 @@ class AuthForm extends PureComponent {
     
     return (
       <Formsy onValidSubmit={this.onSignUp} styleName="form">
-        <h1 styleName="form-title">Sign up</h1>
+        <h1 styleName="form-title">Welcome, Traveler!</h1>
+        <h2 styleName="form-subtitle">Good to see new faces.</h2>
         <div styleName="simple-auth">
+          <TextField label="Username" name="username" value={username} onChange={this.onChange} required />
           <TextField label="Email" name="email" value={email} onChange={this.onChange} required />
           <TextField label="Password" name="password" value={password} onChange={this.onChange} required />
-          <TextField label="Name" name="username" value={username} onChange={this.onChange} required />
-          <Button label="Sign in" shape="flat" size="sm" onClick={this.toggleForm} />
           <Button label="Submit" type="submit" />
+          <p styleName="form-change">Been here before? <Link onClick={this.toggleForm} text="Remind me your name"/></p>
         </div>
       </Formsy>
     );
@@ -101,7 +103,9 @@ class AuthForm extends PureComponent {
     return hasAccount ? this.signInForm : this.signUpForm;
   }
   
-  toggleForm = () => {
+  toggleForm = (e) => {
+    e.preventDefault();
+    
     this.setState({ hasAccount : !this.state.hasAccount });
   }
   
