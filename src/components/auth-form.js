@@ -12,7 +12,7 @@ import '../css/form.css';
 class AuthForm extends PureComponent {
   static propTypes = {
     signIn : PropTypes.func.isRequired,
-    signUp : PropTypes.func,
+    signUp : PropTypes.func.isRequired,
   }
   
   constructor(props) {
@@ -113,5 +113,6 @@ class AuthForm extends PureComponent {
 }
 
 export default connect(null, {
-  signIn
+  signIn,
+  signUp,
 })(AuthForm);

@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { SIGNIN_USER, SIGNOUT_USER, CHECK_USER, SIGNUP_USER } from './types';
+import { SIGNIN_USER, SIGNOUT_USER, CHECK_USER } from './types';
 
 import localhost from '../config/localhost';
 
-export const signUp = userData => (dispatch) => {
+export const signIn = userData => (dispatch) => {
   const requestOptions = {
     method  : 'POST',
     url     : `${localhost}/api/Users/login`,
@@ -29,29 +29,16 @@ export const signUp = userData => (dispatch) => {
   });
 };
 
-export const signIn = userData => (dispatch) => {
+export const signUp = userData => (dispatch) => {
   const requestOptions = {
     method  : 'POST',
-    url     : `${localhost}/api/Users/login`,
+    url     : `${localhost}/api/Users`,
     data    : JSON.stringify(userData),
     headers : { 'Content-Type' : 'application/json' }
   };
   
-  axios.request(requestOptions).then((response) => {
-    const { id, userId } = response.data;
-    
-    const userCredentials = {
-      accessToken  : id,
-      tokenCreated : Date.now(),
-      userId
-    };
-    
-    dispatch({
-      type    : SIGNIN_USER,
-      payload : userCredentials,
-    });
-    
-    localStorage.setItem('user_credentials', JSON.stringify(userCredentials));
+  axios.request(requestOptions).then(() => {
+    dispatch(signIn(userData));
   });
 };
 
