@@ -1,4 +1,4 @@
-import { SIGNIN_USER, SIGNOUT_USER } from '../actions/types';
+import { SIGNIN_USER, SIGNOUT_USER, CHECK_USER } from '../actions/types';
 
 const userCredentials = JSON.parse(localStorage.getItem('user_credentials'));
 const initToken = userCredentials && userCredentials.accessToken;
@@ -24,6 +24,11 @@ export default (state = initialState, action) => {
         ...state,
         credentials : null,
         isAuth      : false,
+      };
+    case CHECK_USER:
+      return {
+        ...state,
+        isAuth : true
       };
     default:
       return state;

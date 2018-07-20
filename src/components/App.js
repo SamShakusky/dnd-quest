@@ -3,10 +3,7 @@ import { Provider, connect } from 'react-redux';
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import axios from 'axios';
-
 import PrivateRoute from './helpers/private-route';
-
 
 import QuestManager from './QuestManager';
 import Spec from './Spec';
@@ -16,7 +13,7 @@ import Button from './Button';
 import SlidingPanel from './SlidingPanel';
 
 import store from '../store';
-import localhost from '../config/localhost';
+import { checkUser } from '../actions/user-actions';
 import '../css/App.css';
 
 const html = document.getElementById('html');
@@ -29,6 +26,7 @@ class App extends PureComponent {
       tokenCreated : PropTypes.number,
       userId       : PropTypes.string,
     }),
+    checkUser : PropTypes.func.isRequired,
   };
   
   static defaultProps = {
@@ -58,7 +56,11 @@ class App extends PureComponent {
     if (credentials !== prevProps.credentials) {
       this.setState({ // eslint-disable-line react/no-did-update-set-state
         credentials,
-        isAuth
+        isAuth,
+      });
+    } else if (isAuth !== prevProps.isAuth) {
+      this.setState({ // eslint-disable-line react/no-did-update-set-state
+        isAuth,
       });
     }
   }
@@ -67,13 +69,7 @@ class App extends PureComponent {
     const { credentials } = this.state;
     if (!credentials) return false;
     
-    const { accessToken, userId } = credentials;
-    
-    return axios.get(`${localhost}/api/Users/${userId}?access_token=${accessToken}`)
-      .then(() => {
-        this.logIn();
-        return true;
-      }, () => false);
+    return this.props.checkUser();
   }
   
   logIn = () => {
@@ -140,4 +136,4 @@ const mapStateToProps = state => ({
   isAuth      : state.user.isAuth,
 });
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { checkUser })(App);

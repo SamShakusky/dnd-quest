@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SIGNIN_USER, SIGNOUT_USER } from './types';
+import { SIGNIN_USER, SIGNOUT_USER, CHECK_USER } from './types';
 
 import localhost from '../config/localhost';
 
@@ -43,4 +43,14 @@ export const signOut = () => (dispatch, getState) => {
     
     localStorage.removeItem('user_credentials');
   });
+};
+
+export const checkUser = () => (dispatch, getState) => {
+  const { accessToken, userId } = getState().user.credentials;
+  axios.get(`${localhost}/api/Users/${userId}?access_token=${accessToken}`)
+    .then(() => {
+      dispatch({
+        type : CHECK_USER,
+      });
+    });
 };
