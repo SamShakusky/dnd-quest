@@ -8,7 +8,12 @@ import QuestForm from './QuestForm';
 import FloatingButton from './FloatingButton';
 import SlidingPanel from './SlidingPanel';
 
-import { readQuests, createQuest, updateQuest, deleteQuest } from '../actions/quest-actions';
+import {
+  readQuests,
+  createQuest,
+  updateQuest,
+  deleteQuest
+} from '../actions/quest-actions';
 import '../css/QuestManager.css';
 
 const scrollMap = {

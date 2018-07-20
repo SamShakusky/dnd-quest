@@ -28,5 +28,7 @@
 
 .simple-auth {
   padding: 24px;
-  text-align: right;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
