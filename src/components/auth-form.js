@@ -1,3 +1,4 @@
+/*  eslint-disable */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -61,13 +62,17 @@ class AuthForm extends PureComponent {
     this.props.signUp(userData);
   }
   
+  invalid = (model, resetForm, invalidateForm) => {
+    
+  }
+  
   get signInForm() {
     const { username, password } = this.state;
     
     return (
-      <Formsy onValidSubmit={this.onSignIn} styleName="form">
+      <Formsy onValidSubmit={this.onSignIn} onInvalidSubmit={this.invalid} styleName="form">
         <h1 styleName="form-title">Long time no see!</h1>
-        <h2 styleName="form-subtitle">Feel yourself at home.</h2>
+        <h2 styleName="form-subtitle">Make yourself at home.</h2>
         <div styleName="simple-auth">
           <TextField label="Username" name="username" value={username} onChange={this.onChange} required />
           <TextField label="Password" name="password" value={password} onChange={this.onChange} required />
@@ -87,9 +92,27 @@ class AuthForm extends PureComponent {
         <h1 styleName="form-title">Welcome, Traveler!</h1>
         <h2 styleName="form-subtitle">Good to see new faces.</h2>
         <div styleName="simple-auth">
-          <TextField label="Username" name="username" value={username} onChange={this.onChange} required />
-          <TextField label="Email" name="email" value={email} onChange={this.onChange} required />
-          <TextField label="Password" name="password" value={password} onChange={this.onChange} required />
+          <TextField
+            label="Username"
+            name="username"
+            value={username}
+            onChange={this.onChange}
+          />
+          <TextField
+            label="Email"
+            name="email"
+            value={email}
+            onChange={this.onChange}
+            required
+            validations="isEmail"
+            validationError="This is not an email"
+          />
+          <TextField
+            label="Password"
+            name="password"
+            value={password}
+            onChange={this.onChange}
+          />
           <Button label="Submit" type="submit" />
           <p styleName="form-change">Been here before? <Link onClick={this.toggleForm} text="Remind me your name"/></p>
         </div>

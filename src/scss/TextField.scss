@@ -1,30 +1,39 @@
 @import './import/importFile';
 
-@mixin inputColor($color: $color_main) {
+@mixin inputColor($colorNormal: $color_secondary_light, $colorFocus: $color_main) {
   .field {
-    border-color: $grey_dark;
+    border-color: $colorNormal;
     color: $grey_dark;
-  }
-  .field__label {
-    color: $color_secondary_light;
+    &__label {
+      color: $colorNormal;
+    }
   }
 
   &.field_focused {
-    .field {
-      border-color: $color;
+    &:before {
+      background: $colorFocus;
     }
-    .field__label {
-      color: $color;
+    .field {
+      border-color: $colorFocus;
+      &__label {
+        color: $colorFocus;
+      }
     }
     &.field__textarea:before,
     &.field__textarea:after {
-      border-color: $color;
+      border-color: $colorFocus;
     }
   }
 }
 
+.field_duty {
+  &_normal { @include inputColor($color_secondary_light, $color_main); }
+  &_error { @include inputColor($color_danger, $color_danger); }
+  &_sucess { @include inputColor($color_success); }
+}
+
 .field-wrap {
-  margin-bottom: 18px;
+  margin-bottom: 24px;
   position: relative;
 }
 
@@ -42,12 +51,6 @@
     opacity: .4;
     pointer-events: none;
   }
-}
-
-.field_duty {
-  &_normal { @include inputColor($color_main); }
-  &_error { @include inputColor($color_danger); }
-  &_sucess { @include inputColor($color_success); }
 }
 
 .field__label {
@@ -76,7 +79,6 @@
     position: absolute;
     left: 0;
     bottom: -1px;
-    background: $color_main;
     will-change: width;
     @include animation(width, fast);
   }
@@ -184,5 +186,10 @@
 }
 
 .field__validation {
-  content: none;
+  @extend %tp-p-xxs;
+  position: absolute;
+  bottom: -1px;
+  right: 0;
+  transform: translateY(100%);
+  color: $color_danger;
 }

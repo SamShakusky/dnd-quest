@@ -1,47 +1,49 @@
 import { withFormsy } from 'formsy-react';
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+
 import Button from './Button';
 
 import '../css/TextField.css';
 
 class TextField extends PureComponent {
   static propTypes = {
-    value       : PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    placeholder : PropTypes.string,
-    name        : PropTypes.string.isRequired,
-    label       : PropTypes.string.isRequired,
-    width       : PropTypes.oneOf(['full', 'min']),
-    disabled    : PropTypes.bool,
-    duty        : PropTypes.oneOf(['normal', 'error', 'sucess']),
-    onChange    : PropTypes.func,
-    fieldType   : PropTypes.oneOf(['input', 'textarea']),
-    required    : PropTypes.bool,
-    type        : PropTypes.string,
-    icon        : PropTypes.string,
-    iconColor   : PropTypes.string,
-    onButton    : PropTypes.func
+    value           : PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    placeholder     : PropTypes.string,
+    name            : PropTypes.string.isRequired,
+    label           : PropTypes.string.isRequired,
+    width           : PropTypes.oneOf(['full', 'min']),
+    disabled        : PropTypes.bool,
+    onChange        : PropTypes.func,
+    fieldType       : PropTypes.oneOf(['input', 'textarea']),
+    required        : PropTypes.bool,
+    type            : PropTypes.string,
+    icon            : PropTypes.string,
+    iconColor       : PropTypes.string,
+    onButton        : PropTypes.func,
+    getErrorMessage : PropTypes.func,
   };
 
   static defaultProps = {
-    value       : '',
-    placeholder : '',
-    width       : 'full',
-    disabled    : false,
-    duty        : 'normal',
-    onChange    : null,
-    fieldType   : 'input',
-    required    : false,
-    type        : 'text',
-    icon        : null,
-    iconColor   : null,
-    onButton    : null
+    value           : '',
+    placeholder     : '',
+    width           : 'full',
+    disabled        : false,
+    onChange        : null,
+    fieldType       : 'input',
+    required        : false,
+    type            : 'text',
+    icon            : null,
+    iconColor       : null,
+    onButton        : null,
+    getErrorMessage : null,
   };
   
   constructor(props) {
     super(props);
     this.state = {
-      focused : false
+      focused      : false,
+      errorMessage : '',
     };
   }
   
@@ -50,9 +52,16 @@ class TextField extends PureComponent {
   }
 
   onBlur = () => {
-    this.setState({ focused : false });
+    this.setState({
+      focused      : false,
+      errorMessage : this.props.getErrorMessage(),
+    });
   }
 
+  // onChange = (e) => {
+  //   this.props.setValue(e.currentTarget.value);
+  // }
+  
   render() {
     const {
       value,
@@ -61,7 +70,6 @@ class TextField extends PureComponent {
       label,
       width,
       disabled,
-      duty,
       onChange,
       fieldType,
       required,
@@ -70,14 +78,14 @@ class TextField extends PureComponent {
       iconColor,
       onButton,
     } = this.props;
-
-    const errorMessage = this.props.getErrorMessage(); // eslint-disable-line react/prop-types
     const Field = fieldType;
+    
+    const { errorMessage } = this.state;
 
     return (
       <div
         styleName={`field-wrap field_duty_${
-          duty
+          errorMessage ? 'error' : 'normal'
         } field_width_${
           width
         } ${
