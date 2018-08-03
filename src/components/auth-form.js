@@ -96,6 +96,16 @@ class AuthForm extends PureComponent {
             label="Username"
             name="username"
             value={username}
+            validations={{
+              minLength : 4,
+              maxLength : 20,
+              isAlphanumeric : true
+            }}
+            validationErrors={{
+              minLength      : "Must must be between 4 and 20 characters",
+              maxLength      : "Must must be between 4 and 20 characters",
+              isAlphanumeric : "Must only contain letters or numbers"
+            }}
             onChange={this.onChange}
           />
           <TextField
@@ -112,6 +122,14 @@ class AuthForm extends PureComponent {
             name="password"
             value={password}
             onChange={this.onChange}
+            message="Must must be at least 8 characters"
+            validations={{
+              // matchRegexp : /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/
+              minLength : 8,
+            }}
+            validationErrors={{
+              minLength : "Must must be at least 8 characters",
+            }}
           />
           <Button label="Submit" type="submit" />
           <p styleName="form-change">Been here before? <Link onClick={this.toggleForm} text="Remind me your name"/></p>

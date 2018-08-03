@@ -27,8 +27,18 @@
 }
 
 .field_duty {
-  &_normal { @include inputColor($color_secondary_light, $color_main); }
-  &_error { @include inputColor($color_danger, $color_danger); }
+  &_normal {
+    @include inputColor($color_secondary_light, $color_main);
+    .field__message {
+      color: $color_secondary_light;
+    }
+  }
+  &_error {
+    @include inputColor($color_danger, $color_danger);
+    .field__message {
+      color: $color_danger;
+    }
+  }
   &_sucess { @include inputColor($color_success); }
 }
 
@@ -185,11 +195,10 @@
   &:before { width: 100%; }
 }
 
-.field__validation {
-  @extend %tp-p-xxs;
+.field__message {
+  @extend %tp-p-xxxs;
   position: absolute;
   bottom: -1px;
   right: 0;
   transform: translateY(100%);
-  color: $color_danger;
 }

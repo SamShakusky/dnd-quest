@@ -22,6 +22,7 @@ class TextField extends PureComponent {
     iconColor       : PropTypes.string,
     onButton        : PropTypes.func,
     getErrorMessage : PropTypes.func,
+    message         : PropTypes.string,
   };
 
   static defaultProps = {
@@ -37,6 +38,7 @@ class TextField extends PureComponent {
     iconColor       : null,
     onButton        : null,
     getErrorMessage : null,
+    message         : '',
   };
   
   constructor(props) {
@@ -48,7 +50,10 @@ class TextField extends PureComponent {
   }
   
   onFocus = () => {
-    this.setState({ focused : true });
+    this.setState({
+      focused      : true,
+      errorMessage : null,
+    });
   }
 
   onBlur = () => {
@@ -77,6 +82,7 @@ class TextField extends PureComponent {
       icon,
       iconColor,
       onButton,
+      message,
     } = this.props;
     const Field = fieldType;
     
@@ -108,11 +114,10 @@ class TextField extends PureComponent {
           onChange={onChange}
           disabled={disabled}
           autoComplete="off"
-
           onFocus={this.onFocus}
           onBlur={this.onBlur}
         />
-        <p styleName="field__validation">{errorMessage}</p>
+        <p styleName="field__message">{errorMessage || message}</p>
         { icon &&
           <Button
             icon={icon}

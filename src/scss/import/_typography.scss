@@ -75,6 +75,12 @@ $font_body_xl : 1.2rem;
   line-height: normal;
 }
 
+%tp-p-xxxs {
+  font-family: $font_body;
+  font-size: .7rem;
+  line-height: normal;
+}
+
 %link {
   text-decoration: none;
   transition: color .2s;
