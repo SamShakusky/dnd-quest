@@ -63,10 +63,6 @@ class TextField extends PureComponent {
     });
   }
 
-  // onChange = (e) => {
-  //   this.props.setValue(e.currentTarget.value);
-  // }
-  
   render() {
     const {
       value,

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SIGNIN_USER, SIGNOUT_USER, CHECK_USER } from './types';
+import { SIGNIN_USER, SIGNOUT_USER, CHECK_USER, SIGN_ERROR } from './types';
 
 import localhost from '../config/localhost';
 
@@ -11,23 +11,24 @@ export const signIn = userData => (dispatch) => {
     headers : { 'Content-Type' : 'application/json' }
   };
   
-  axios.request(requestOptions).then((response) => {
-    const { id, userId } = response.data;
-    
-    const userCredentials = {
-      accessToken  : id,
-      tokenCreated : Date.now(),
-      userId
-    };
-    
-    dispatch({
-      type    : SIGNIN_USER,
-      payload : userCredentials,
+  axios.request(requestOptions)
+    .then((response) => {
+      const { id, userId } = response.data;
+      
+      const userCredentials = {
+        accessToken  : id,
+        tokenCreated : Date.now(),
+        userId
+      };
+      
+      dispatch({
+        type    : SIGNIN_USER,
+        payload : userCredentials,
+      });
+      
+      localStorage.setItem('user_credentials', JSON.stringify(userCredentials));
+      localStorage.setItem('has_account', true);
     });
-    
-    localStorage.setItem('user_credentials', JSON.stringify(userCredentials));
-    localStorage.setItem('has_account', true);
-  });
 };
 
 export const signUp = userData => (dispatch) => {
@@ -38,9 +39,16 @@ export const signUp = userData => (dispatch) => {
     headers : { 'Content-Type' : 'application/json' }
   };
   
-  axios.request(requestOptions).then(() => {
-    dispatch(signIn(userData));
-  });
+  axios.request(requestOptions)
+    .then(() => {
+      dispatch(signIn(userData));
+    })
+    .catch((error) => {
+      dispatch({
+        type    : SIGN_ERROR,
+        payload : error.response
+      });
+    });
 };
 
 export const signOut = () => (dispatch, getState) => {
