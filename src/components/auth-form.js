@@ -7,6 +7,7 @@ import Formsy from 'formsy-react';
 import Button from './Button';
 import Link from './link';
 import TextField from './TextField';
+import Snackbar from './snackbar';
 
 import { signIn, signUp } from '../actions/user-actions';
 import '../css/form.css';
@@ -41,17 +42,23 @@ class AuthForm extends PureComponent {
       if (message.indexOf('username') !== -1) {
         this.setState({ // eslint-disable-line react/no-did-update-set-state
           error : 'This username is already taken'
-        });
+        }, this.removeError());
       } else if (message.indexOf('email') !== -1) {
         this.setState({ // eslint-disable-line react/no-did-update-set-state
           error : 'This email is already taken'
-        });
+        }, this.removeError());
       } else {
         this.setState({ // eslint-disable-line react/no-did-update-set-state
           error : ''
-        });
+        }, this.removeError());
       }
     }
+  }
+  
+  removeError = () => {
+    setTimeout(() => {
+      this.setState({  error : '' });
+    }, 4000);
   }
   
   onChange = (event) => {
@@ -117,7 +124,7 @@ class AuthForm extends PureComponent {
   }
   
   get signUpForm() {
-    const { username, password, email, isValid } = this.state;
+    const { username, password, email, isValid, error } = this.state;
     
     return (
       <Formsy
@@ -128,7 +135,7 @@ class AuthForm extends PureComponent {
       >
         <h1 styleName="form-title">Welcome, Traveler!</h1>
         <h2 styleName="form-subtitle">Good to see new faces.</h2>
-        <p>{this.state.error}</p>
+        { error && <Snackbar duty="danger" message={error} /> }
         <div styleName="simple-auth">
           <TextField
             label="Username"
