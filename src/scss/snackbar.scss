@@ -1,0 +1,46 @@
+@import './import/importFile';
+
+.snackbar {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 48px;
+  min-width: 344px;
+  background: $grey_dark;
+  padding: 18px 16px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  @include shadow(3);
+  animation: snackbar .4s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+  
+  &_normal {
+    background: $grey_dark;
+  }
+  &_danger {
+    background: $color_danger;
+  }
+  &_success {
+    background: $color_success;
+  }
+  &_warning {
+    background: $color_warning;
+  }
+}
+
+.snackbar__text {
+  @extend %tp-p-xs;
+  color: $white;
+}
+
+@keyframes snackbar {
+  from {
+    transform: translate(-50%, 0);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -6px);
+    opacity: 1;
+  }
+}

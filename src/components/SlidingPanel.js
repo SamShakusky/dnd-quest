@@ -45,7 +45,7 @@ export default class SlidingPanel extends PureComponent {
     modalRoot.removeChild(this.el);
   }
   
-  render() {
+  get panel() {
     const {
       isShown,
       side,
@@ -53,7 +53,7 @@ export default class SlidingPanel extends PureComponent {
       noOverlay
     } = this.props;
     
-    const Panel = (
+    return (
       <div styleName={`sliding-panel sliding-panel_side_${
         side
       } ${
@@ -68,9 +68,11 @@ export default class SlidingPanel extends PureComponent {
         { <div onClick={onClose} styleName="sliding-panel_overlay" /> }
       </div>
     );
-    
+  }
+  
+  render() {
     return ReactDOM.createPortal(
-      Panel,
+      this.panel,
       this.el
     );
   }
