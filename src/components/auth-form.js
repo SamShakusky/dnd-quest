@@ -114,7 +114,7 @@ class AuthForm extends PureComponent {
         <h2 styleName="form-subtitle">Make yourself at home.</h2>
         <div styleName="simple-auth">
           <TextField label="Username" name="username" value={username} onChange={this.onChange} required />
-          <TextField label="Password" name="password" value={password} onChange={this.onChange} required />
+          <TextField label="Password" name="password" type="password" value={password} onChange={this.onChange} required />
           <Button label="Submit" type="submit" />
           <p styleName="form-change">Forgot password? <Link onClick={this.toggleForm} text="Don't you worry"/></p>
           <p styleName="form-change">New around here? <Link onClick={this.toggleForm} text="Let's introduce ourselves"/></p>
@@ -169,8 +169,10 @@ class AuthForm extends PureComponent {
             label="Password"
             name="password"
             value={password}
+            type="password"
             onChange={this.onChange}
             required
+            noAutoComplete
             message="Must be at least 8 characters"
             validations={{
               minLength : 8,
@@ -195,7 +197,10 @@ class AuthForm extends PureComponent {
   toggleForm = (e) => {
     e.preventDefault();
     
-    this.setState({ hasAccount : !this.state.hasAccount });
+    this.setState({
+      hasAccount : !this.state.hasAccount,
+      password   : '',
+    });
   }
   
   render() {

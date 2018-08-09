@@ -23,6 +23,7 @@ class TextField extends PureComponent {
     onButton        : PropTypes.func,
     getErrorMessage : PropTypes.func,
     message         : PropTypes.string,
+    noAutoComplete  : PropTypes.bool,
   };
 
   static defaultProps = {
@@ -39,6 +40,7 @@ class TextField extends PureComponent {
     onButton        : null,
     getErrorMessage : null,
     message         : '',
+    noAutoComplete  : false,
   };
   
   constructor(props) {
@@ -79,6 +81,7 @@ class TextField extends PureComponent {
       iconColor,
       onButton,
       message,
+      noAutoComplete,
     } = this.props;
     const Field = fieldType;
     
@@ -109,7 +112,7 @@ class TextField extends PureComponent {
           type={type}
           onChange={onChange}
           disabled={disabled}
-          autoComplete="off"
+          autoComplete={noAutoComplete ? 'new-password' : 'on'}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
         />
