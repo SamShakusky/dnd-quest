@@ -1,19 +1,26 @@
 @import './import/importFile';
 
 .snackbar {
-  position: absolute;
+  animation: snackbar .4s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
   bottom: 18px;
   left: 50%;
+  pointer-events: none;
+  position: absolute;
   transform: translateX(-50%);
+}
+
+.snackbar__text {
+  @extend %tp-p-xs;
+  @include shadow(3);
+  align-items: center;
+  animation: disapear .4s cubic-bezier(0.4, 0.0, 0.2, 1) 3.5s forwards;
+  background: $grey_dark;
+  border-radius: 4px;
+  color: $white;
+  display: flex;
   height: 48px;
   min-width: 344px;
-  background: $grey_dark;
   padding: 18px 16px;
-  display: flex;
-  align-items: center;
-  border-radius: 4px;
-  @include shadow(3);
-  animation: snackbar .4s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
   
   &_normal {
     background: $grey_dark;
@@ -27,20 +34,44 @@
   &_warning {
     background: $color_warning;
   }
-}
-
-.snackbar__text {
-  @extend %tp-p-xs;
-  color: $white;
+  
+  &:after {
+    animation: line 3.5s linear forwards;
+    background: $grey_light;
+    bottom: 0;
+    content: '';
+    display: block;
+    height: 2px;
+    left: 0;
+    opacity: .5;
+    position: absolute;
+  }
 }
 
 @keyframes snackbar {
   from {
-    transform: translate(-50%, 0);
     opacity: 0;
+    transform: translate(-50%, 0);
   }
   to {
-    transform: translate(-50%, -6px);
     opacity: 1;
+    transform: translate(-50%, -6px);
   }
+}
+
+
+@keyframes disapear {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@keyframes line {
+  from { width: 0; }
+  to   { width: 100%; }
 }

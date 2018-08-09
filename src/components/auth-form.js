@@ -153,14 +153,14 @@ class AuthForm extends PureComponent {
             }}
             onChange={this.onChange}
             message="Only letters and numbers"
-            // required
+            required
           />
           <TextField
             label="Email"
             name="email"
             value={email}
             onChange={this.onChange}
-            // required
+            required
             validations="isEmail"
             validationError="This is not an email"
             innerRef={(c) => { this.emailInput = c; }}
@@ -170,7 +170,7 @@ class AuthForm extends PureComponent {
             name="password"
             value={password}
             onChange={this.onChange}
-            // required
+            required
             message="Must be at least 8 characters"
             validations={{
               minLength : 8,

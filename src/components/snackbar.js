@@ -33,8 +33,8 @@ export default class Snackbar extends PureComponent {
     const { message, duty } = this.props;
     
     return (
-      <div styleName={`snackbar snackbar_${duty}`}>
-        <p styleName="snackbar__text">{message}</p>
+      <div styleName="snackbar">
+        <p styleName={`snackbar__text snackbar__text_${duty}`}>{message}</p>
       </div>
     );
   }
