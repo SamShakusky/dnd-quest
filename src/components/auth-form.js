@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import Formsy from 'formsy-react';
 
 import Button from './Button';
-import Link from './link';
 import TextField from './TextField';
 import Snackbar from './snackbar';
 
@@ -117,8 +116,8 @@ class AuthForm extends PureComponent {
             required
           />
           <Button label="Submit" type="submit" disabled={!isValid} />
-          <p styleName="form-change">Forgot password? <Link onClick={this.toggleForm} text="Don't you worry" /></p>
-          <p styleName="form-change">New around here? <Link onClick={this.toggleForm} text="Let's introduce ourselves" /></p>
+          <p styleName="form-change">Forgot password? <Button inline label="Don't you worry" onClick={this.toggleForm} /></p>
+          <p styleName="form-change">New around here? <Button inline label="Let's introduce ourselves" onClick={this.toggleForm} /></p>
         </div>
       </Formsy>
     );
@@ -188,7 +187,7 @@ class AuthForm extends PureComponent {
             noAutoComplete
           />
           <Button label="Submit" type="submit" disabled={!isValid} />
-          <p styleName="form-change">Been here before? <Link onClick={this.toggleForm} text="Remind me your name" /></p>
+          <p styleName="form-change">Been here before? <Button inline label="Remind me your name" onClick={this.toggleForm} /></p>
         </div>
       </Formsy>
     );

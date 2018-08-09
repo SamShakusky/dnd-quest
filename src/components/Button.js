@@ -7,7 +7,7 @@ export default class Button extends PureComponent {
   static propTypes = {
     label     : PropTypes.string,
     size      : PropTypes.oneOf(['sm', 'md', 'lg']),
-    shape     : PropTypes.oneOf(['solid', 'ghost', 'flat']),
+    shape     : PropTypes.oneOf(['solid', 'ghost', 'flat', 'inline']),
     duty      : PropTypes.oneOf(['simple', 'danger', 'success']),
     onClick   : PropTypes.func,
     disabled  : PropTypes.bool,
@@ -18,6 +18,7 @@ export default class Button extends PureComponent {
     fullWidth : PropTypes.bool,
     sharp     : PropTypes.bool,
     type      : PropTypes.string,
+    inline    : PropTypes.bool,
   };
 
   static defaultProps = {
@@ -34,6 +35,7 @@ export default class Button extends PureComponent {
     fullWidth : false,
     sharp     : false,
     type      : 'button',
+    inline    : false,
   };
   
   render() {
@@ -51,6 +53,7 @@ export default class Button extends PureComponent {
       fullWidth,
       sharp,
       type,
+      inline,
     } = this.props;
 
     return (
@@ -69,6 +72,8 @@ export default class Button extends PureComponent {
           sharp ? 'button_sharp' : ''
         } ${
           icon ? 'button-icon' : ''
+        } ${
+          inline ? 'button_inline' : ''
         } ${
           icon && !label ? 'button-icon_pure' : ''
         }`}
