@@ -49,14 +49,14 @@
 
 .field {
   @extend %tp-p-s;
+  @include animation((background, border, box-shadow), fast);
+  background: none;
+  border-color: transparent;
   border-style: solid;
   outline: 0;
   padding: 6px 20px 6px 0;
-  background: none;
-  border-color: transparent;
   position: relative;
   width: 100%;
-  @include animation((background, border, box-shadow), fast);
   &:disabled {
     opacity: .4;
     pointer-events: none;
@@ -65,11 +65,12 @@
 
 .field__label {
   @extend %tp-p-xxs;
-  text-align: left;
-  pointer-events: none;
-  will-change: transform;
-  transform-origin: bottom left;
   @include animation(transform, fast);
+  pointer-events: none;
+  text-align: left;
+  transform-origin: bottom left;
+  will-change: transform;
+  z-index: 1;
 }
 
 .field_required {
@@ -82,15 +83,15 @@
   position: relative;
 
   &:before {
+    @include animation(width, fast);
+    bottom: -1px;
     content: '';
     display: block;
     height: 1px;
-    width: 0;
-    position: absolute;
     left: 0;
-    bottom: -1px;
+    position: absolute;
+    width: 0;
     will-change: width;
-    @include animation(width, fast);
   }
   
   .field {
@@ -99,16 +100,16 @@
   }
   
   .field__label {
-    position: absolute;
-    left: 0;
     bottom: 8px;
+    left: 0;
+    position: absolute;
   }
   
   button {
-    position: absolute;
-    right: 0;
     bottom: 3px;
     height: 24px;
+    position: absolute;
+    right: 0;
   }
 }
 
@@ -118,27 +119,27 @@
   flex-direction: column;
   flex-grow: 1;
   margin-top: 18px;
-  position: relative;
   min-height: 60px;
+  position: relative;
   &:before,
   &:after {
+    @include animation(transform, fast);
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 0;
     content: '';
     height: 100%;
-    width: 100%;
+    left: 0;
+    pointer-events: none;
     position: absolute;
     top: 0;
-    left: 0;
-    border-width: 0;
-    border-style: solid;
-    border-radius: 3px;
     transform: scale(0);
-    pointer-events: none;
+    width: 100%;
     will-change: transform;
-    @include animation(transform, fast);
   }
   &:before {
-    border-top-width: 2px;
     border-left-width: 2px;
+    border-top-width: 2px;
     transform-origin: top left;
   }
   &:after {
@@ -149,16 +150,16 @@
   .field {
     border-radius: 2px;
     border-width: 1px;
-    resize: none;
-    padding: 18px 14px;
     flex-grow: 1;
+    padding: 18px 14px;
+    resize: none;
   }
   .field__label {
+    background: $white;
+    left: 10px;
     padding: 0 4px;
     position: absolute;
     top: -6px;
-    left: 10px;
-    background: $white;
     z-index: 1;
   }
 }
@@ -197,8 +198,8 @@
 
 .field__message {
   @extend %tp-p-xxxs;
-  position: absolute;
   bottom: -1px;
+  position: absolute;
   right: 0;
   transform: translateY(100%);
 }

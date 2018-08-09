@@ -1,4 +1,3 @@
-/*  eslint-disable */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -12,10 +11,24 @@ import Snackbar from './snackbar';
 import { signIn, signUp } from '../actions/user-actions';
 import '../css/form.css';
 
+const errorShape = {
+  data : PropTypes.shape({
+    error : PropTypes.shape({
+      statusCode : PropTypes.number,
+      message    : PropTypes.string,
+    })
+  })
+};
+
 class AuthForm extends PureComponent {
   static propTypes = {
     signIn : PropTypes.func.isRequired,
     signUp : PropTypes.func.isRequired,
+    error  : PropTypes.shape(errorShape),
+  }
+  
+  static defaultProps = {
+    error : {},
   }
   
   constructor(props) {
@@ -37,28 +50,10 @@ class AuthForm extends PureComponent {
     const { error } = this.props;
     
     if (error !== prevProps.error) {
-      const message = error.data.error.message;
-      
-      if (message.indexOf('username') !== -1) {
-        this.setState({ // eslint-disable-line react/no-did-update-set-state
-          error : 'This username is already taken'
-        }, this.removeError());
-      } else if (message.indexOf('email') !== -1) {
-        this.setState({ // eslint-disable-line react/no-did-update-set-state
-          error : 'This email is already taken'
-        }, this.removeError());
-      } else {
-        this.setState({ // eslint-disable-line react/no-did-update-set-state
-          error : ''
-        }, this.removeError());
-      }
+      this.setState({ // eslint-disable-line react/no-did-update-set-state
+        error : this.errorMessage
+      }, this.removeError());
     }
-  }
-  
-  removeError = () => {
-    setTimeout(() => {
-      this.setState({  error : '' });
-    }, 4000);
   }
   
   onChange = (event) => {
@@ -93,38 +88,49 @@ class AuthForm extends PureComponent {
     this.props.signUp(userData);
   }
   
-  enableButton = () => {
-    this.setState({
-      isValid : true,
-    });
-  }
-  
-  disableButton = () => {
-    this.setState({
-      isValid : false,
-    });
-  }
-  
   get signInForm() {
-    const { username, password } = this.state;
+    const { username, password, isValid } = this.state;
     
     return (
-      <Formsy onValidSubmit={this.onSignIn} styleName="form">
+      <Formsy
+        onValid={this.enableButton}
+        onInvalid={this.disableButton}
+        onValidSubmit={this.onSignIn}
+        styleName="form"
+      >
         <h1 styleName="form-title">Long time no see!</h1>
         <h2 styleName="form-subtitle">Make yourself at home.</h2>
         <div styleName="simple-auth">
-          <TextField label="Username" name="username" value={username} onChange={this.onChange} required />
-          <TextField label="Password" name="password" type="password" value={password} onChange={this.onChange} required />
-          <Button label="Submit" type="submit" />
-          <p styleName="form-change">Forgot password? <Link onClick={this.toggleForm} text="Don't you worry"/></p>
-          <p styleName="form-change">New around here? <Link onClick={this.toggleForm} text="Let's introduce ourselves"/></p>
+          <TextField
+            label="Username"
+            name="username"
+            value={username}
+            onChange={this.onChange}
+            required
+          />
+          <TextField
+            label="Password"
+            name="password"
+            type="password"
+            value={password}
+            onChange={this.onChange}
+            required
+          />
+          <Button label="Submit" type="submit" disabled={!isValid} />
+          <p styleName="form-change">Forgot password? <Link onClick={this.toggleForm} text="Don't you worry" /></p>
+          <p styleName="form-change">New around here? <Link onClick={this.toggleForm} text="Let's introduce ourselves" /></p>
         </div>
       </Formsy>
     );
   }
   
   get signUpForm() {
-    const { username, password, email, isValid, error } = this.state;
+    const {
+      username,
+      password,
+      email,
+      isValid,
+    } = this.state;
     
     return (
       <Formsy
@@ -135,21 +141,20 @@ class AuthForm extends PureComponent {
       >
         <h1 styleName="form-title">Welcome, Traveler!</h1>
         <h2 styleName="form-subtitle">Good to see new faces.</h2>
-        { error && <Snackbar duty="danger" message={error} /> }
         <div styleName="simple-auth">
           <TextField
             label="Username"
             name="username"
             value={username}
             validations={{
-              minLength : 4,
-              maxLength : 20,
+              minLength      : 4,
+              maxLength      : 20,
               isAlphanumeric : true
             }}
             validationErrors={{
-              minLength      : "Must be between 4 and 20 characters",
-              maxLength      : "Must be between 4 and 20 characters",
-              isAlphanumeric : "Must only contain letters or numbers"
+              minLength      : 'Must be between 4 and 20 characters',
+              maxLength      : 'Must be between 4 and 20 characters',
+              isAlphanumeric : 'Must only contain letters or numbers'
             }}
             onChange={this.onChange}
             message="Only letters and numbers"
@@ -164,7 +169,7 @@ class AuthForm extends PureComponent {
             required
             validations="isEmail"
             validationError="This is not an email"
-            innerRef={(c) => { this.emailInput = c; }}
+            noAutoComplete
           />
           <TextField
             label="Password"
@@ -173,17 +178,17 @@ class AuthForm extends PureComponent {
             type="password"
             onChange={this.onChange}
             required
-            noAutoComplete
             message="Must be at least 8 characters"
             validations={{
               minLength : 8,
             }}
             validationErrors={{
-              minLength : "Must be at least 8 characters",
+              minLength : 'Must be at least 8 characters',
             }}
+            noAutoComplete
           />
           <Button label="Submit" type="submit" disabled={!isValid} />
-          <p styleName="form-change">Been here before? <Link onClick={this.toggleForm} text="Remind me your name"/></p>
+          <p styleName="form-change">Been here before? <Link onClick={this.toggleForm} text="Remind me your name" /></p>
         </div>
       </Formsy>
     );
@@ -193,6 +198,34 @@ class AuthForm extends PureComponent {
     const { hasAccount } = this.state;
     
     return hasAccount ? this.signInForm : this.signUpForm;
+  }
+  
+  get errorMessage() {
+    const { statusCode, message } = this.props.error.data.error;
+    
+    if (statusCode === 401) return 'Incorrect username or password';
+    if (message.indexOf('username') !== -1) return 'This username is already taken';
+    if (message.indexOf('email') !== -1) return 'This email is already taken';
+    
+    return '';
+  }
+  
+  removeError = () => {
+    setTimeout(() => {
+      this.setState({ error : '' });
+    }, 4000);
+  }
+  
+  enableButton = () => {
+    this.setState({
+      isValid : true,
+    });
+  }
+  
+  disableButton = () => {
+    this.setState({
+      isValid : false,
+    });
   }
   
   toggleForm = (e) => {
@@ -205,8 +238,13 @@ class AuthForm extends PureComponent {
   }
   
   render() {
+    const { error } = this.state;
+    
     return (
-      this.form
+      <div>
+        {this.form}
+        { error && <Snackbar duty="danger" message={error} /> }
+      </div>
     );
   }
 }
