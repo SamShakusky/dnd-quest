@@ -159,6 +159,7 @@ class AuthForm extends PureComponent {
             label="Email"
             name="email"
             value={email}
+            type="email"
             onChange={this.onChange}
             required
             validations="isEmail"
