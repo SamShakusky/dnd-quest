@@ -7,7 +7,7 @@ export const createQuest = questData => (dispatch, getState) => {
   const { accessToken } = getState().user.credentials;
   const requestOptions = {
     method  : 'POST',
-    url     : `${localhost}/api/quests?access_token=${accessToken}`,
+    url     : `${localhost}/api/Quests?access_token=${accessToken}`,
     data    : JSON.stringify(questData),
     headers : { 'Content-Type' : 'application/json' }
   };
@@ -22,7 +22,7 @@ export const createQuest = questData => (dispatch, getState) => {
 
 export const readQuests = () => (dispatch, getState) => {
   const { accessToken } = getState().user.credentials;
-  axios.get(`${localhost}/api/quests?access_token=${accessToken}`)
+  axios.get(`${localhost}/api/Quests?access_token=${accessToken}`)
     .then((response) => {
       dispatch({
         type    : READ_QUESTS,
@@ -38,7 +38,7 @@ export const updateQuest = (questData, quests) => (dispatch, getState) => {
   
   const requestOptions = {
     method  : 'PUT',
-    url     : `${localhost}/api/quests/${questData.id}?access_token=${accessToken}`,
+    url     : `${localhost}/api/Quests/${questData.id}?access_token=${accessToken}`,
     data    : JSON.stringify(questData),
     headers : { 'Content-Type' : 'application/json' }
   };
@@ -60,7 +60,7 @@ export const deleteQuest = (questId, quests) => (dispatch, getState) => {
   const { accessToken } = getState().user.credentials;
   let questList = [...quests];
   
-  axios.delete(`${localhost}/api/quests/${questId}?access_token=${accessToken}`)
+  axios.delete(`${localhost}/api/Quests/${questId}?access_token=${accessToken}`)
     .then(() => {
       questList = questList.filter(i => i.id !== questId);
       dispatch({
