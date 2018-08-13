@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import questReducer from './quest-reducers';
 import userReducer from './user-reducers';
+import campaignReducer from './campaign-reducers';
+import questReducer from './quest-reducers';
 
 export default combineReducers({
-  quests : questReducer,
-  user   : userReducer,
+  user      : userReducer,
+  campaigns : campaignReducer,
+  quests    : questReducer,
 });

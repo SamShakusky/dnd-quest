@@ -28,6 +28,7 @@ class Menu extends PureComponent {
     
     return (
       <ul styleName="menu">
+        <li><NavLink onClick={closeMenu} className="link-dark" to="/campaigns">Campaign Manager</NavLink></li>
         <li><NavLink onClick={closeMenu} className="link-dark" to="/manager">Quest Manager</NavLink></li>
         <li><NavLink onClick={closeMenu} className="link-dark" to="/spec">Spec</NavLink></li>
         {isAuth && <li><a onClick={this.signOut} href="/signout" className="link-dark">Signout</a></li>}

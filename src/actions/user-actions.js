@@ -6,7 +6,7 @@ import localhost from '../config/localhost';
 export const signIn = userData => (dispatch) => {
   const requestOptions = {
     method  : 'POST',
-    url     : `${localhost}/api/Users/login`,
+    url     : `${localhost}/api/Adventurers/login`,
     data    : JSON.stringify(userData),
     headers : { 'Content-Type' : 'application/json' }
   };
@@ -40,7 +40,7 @@ export const signIn = userData => (dispatch) => {
 export const signUp = userData => (dispatch) => {
   const requestOptions = {
     method  : 'POST',
-    url     : `${localhost}/api/Users`,
+    url     : `${localhost}/api/Adventurers`,
     data    : JSON.stringify(userData),
     headers : { 'Content-Type' : 'application/json' }
   };
@@ -61,7 +61,7 @@ export const signOut = () => (dispatch, getState) => {
   const { accessToken } = getState().user.credentials;
   const requestOptions = {
     method : 'POST',
-    url    : `${localhost}/api/Users/logout?access_token=${accessToken}`,
+    url    : `${localhost}/api/Adventurers/logout?access_token=${accessToken}`,
   };
   
   axios.request(requestOptions).then(() => {
@@ -75,7 +75,7 @@ export const signOut = () => (dispatch, getState) => {
 
 export const checkUser = () => (dispatch, getState) => {
   const { accessToken, userId } = getState().user.credentials;
-  axios.get(`${localhost}/api/Users/${userId}?access_token=${accessToken}`)
+  axios.get(`${localhost}/api/Adventurers/${userId}?access_token=${accessToken}`)
     .then(() => {
       dispatch({
         type : CHECK_USER,
