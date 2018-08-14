@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 // import Button from './Button';
 
-// import '../css/Campaign.css';
+import '../css/campaign.css';
 
 export default class Campaign extends PureComponent {
   static propTypes = {
@@ -39,9 +39,10 @@ export default class Campaign extends PureComponent {
       //   <h3 styleName="campaign-title">{title}</h3>
       //   <p styleName="campaign-description">{description}</p>
       // </div>
-      <div>
-        {title} and {description}
-      </div>
+      <a href="/" styleName="campaign__card">
+        <h3>{title}</h3>
+        <p>{description}</p>
+      </a>
     );
   }
 }

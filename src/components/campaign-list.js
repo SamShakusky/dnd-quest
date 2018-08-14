@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Campaign from './campaign';
 
-import '../css/QuestList.css';
+import '../css/campaign.css';
 
 export default class CampaignList extends PureComponent {
   static propTypes = {
@@ -14,7 +14,7 @@ export default class CampaignList extends PureComponent {
     const { items, onEdit } = this.props;
     
     return (
-      <div styleName="quest-list">
+      <div styleName="campaign__list">
         {
           items.map(item => (
             <Campaign

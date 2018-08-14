@@ -9,7 +9,7 @@ import FloatingButton from './FloatingButton';
 import CampaignList from './campaign-list';
 import CampaignForm from './campaign-form';
 
-// import '../css/campaign.css';
+import '../css/campaign.css';
 
 import {
   readCampaigns,
@@ -140,7 +140,7 @@ class CampaignManager extends PureComponent {
     const { formVisibility } = this.state;
     
     return (
-      <main >
+      <main styleName="campaign__page" >
         <SlidingPanel
           isShown={this.state.formVisibility}
           onClose={this.closeForm}
