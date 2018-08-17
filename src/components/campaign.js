@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
 import Button from './Button';
 
 import {
@@ -15,6 +17,9 @@ class Campaign extends PureComponent {
     id          : PropTypes.string.isRequired,
     onEdit      : PropTypes.func.isRequired,
     setCampaign : PropTypes.func.isRequired,
+    history     : PropTypes.shape({
+      push : PropTypes.func.isRequired,
+    }).isRequired,
   };
   
   onEdit = (e) => {
@@ -28,6 +33,7 @@ class Campaign extends PureComponent {
     const campaignId = e.currentTarget.pathname.substring(1);
     
     this.props.setCampaign(campaignId);
+    this.props.history.push('/manager');
   }
   
   render() {
@@ -50,4 +56,4 @@ class Campaign extends PureComponent {
   }
 }
 
-export default connect(null, { setCampaign })(Campaign);
+export default withRouter(connect(null, { setCampaign })(Campaign));
