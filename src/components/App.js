@@ -17,6 +17,10 @@ import store from '../store';
 import { checkUser } from '../actions/user-actions';
 import '../css/App.css';
 
+import {
+  setCampaign,
+} from '../actions/campaign-actions';
+
 const html = document.getElementById('html');
 
 class App extends PureComponent {
@@ -27,12 +31,14 @@ class App extends PureComponent {
       tokenCreated : PropTypes.number,
       userId       : PropTypes.string,
     }),
-    checkUser : PropTypes.func.isRequired,
+    checkUser       : PropTypes.func.isRequired,
+    currentCampaign : PropTypes.string,
   };
   
   static defaultProps = {
-    isAuth      : false,
-    credentials : {}
+    isAuth          : false,
+    credentials     : {},
+    currentCampaign : '',
   };
   
   constructor(props) {
@@ -92,6 +98,7 @@ class App extends PureComponent {
   
   render() {
     const { isAuth, credentials } = this.state;
+    const { currentCampaign } = this.props;
     
     return (
       <BrowserRouter>
@@ -113,6 +120,7 @@ class App extends PureComponent {
                 >
                   <Menu closeMenu={this.toggleMenu} isAuth={isAuth} />
                 </SlidingPanel>
+                <p>{currentCampaign}</p>
                 <div styleName="fullscreen">
                   <Button size="sm" label="fullscreen" onClick={this.toggleFullscreen} />
                 </div>
@@ -134,8 +142,9 @@ class App extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  credentials : state.user.credentials,
-  isAuth      : state.user.isAuth,
+  credentials     : state.user.credentials,
+  isAuth          : state.user.isAuth,
+  currentCampaign : state.campaigns.currentCampaign,
 });
 
-export default connect(mapStateToProps, { checkUser })(App);
+export default connect(mapStateToProps, { checkUser, setCampaign })(App);

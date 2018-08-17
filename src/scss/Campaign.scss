@@ -25,7 +25,7 @@
             @include shadow(2);
         }
         
-        h3 {
+        a {
             @extend %tp-p-m;
             background-color: $color_main;
             color: $white;

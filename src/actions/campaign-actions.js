@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CREATE_CAMPAIGN, READ_CAMPAIGNS, UPDATE_CAMPAIGN, DELETE_CAMPAIGN } from './types';
+import { CREATE_CAMPAIGN, READ_CAMPAIGNS, UPDATE_CAMPAIGN, DELETE_CAMPAIGN, SET_CAMPAIGN } from './types';
 
 import localhost from '../config/localhost';
 
@@ -32,7 +32,7 @@ export const readCampaigns = () => (dispatch, getState) => {
 };
 
 export const updateCampaign = (campaignData, campaigns) => (dispatch, getState) => {
-  const { accessToken, userId } = getState().user.credentials;
+  const { accessToken } = getState().user.credentials;
   const index = campaigns.findIndex(i => i.id === campaignData.id);
   const campaignList = [...campaigns];
   
@@ -67,4 +67,13 @@ export const deleteCampaign = (campaignId, campaigns) => (dispatch, getState) =>
         payload : campaignList,
       });
     });
+};
+
+export const setCampaign = campaignId => (dispatch) => {
+  dispatch({
+    type    : SET_CAMPAIGN,
+    payload : campaignId,
+  });
+  
+  localStorage.setItem('current_campaign', JSON.stringify(campaignId));
 };
