@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -38,17 +39,22 @@ const questShape = {
 
 class QuestManager extends PureComponent {
   static propTypes = {
-    isAuth      : PropTypes.bool,
-    quests      : PropTypes.arrayOf(PropTypes.shape(questShape)),
-    createQuest : PropTypes.func.isRequired,
-    readQuests  : PropTypes.func.isRequired,
-    updateQuest : PropTypes.func.isRequired,
-    deleteQuest : PropTypes.func.isRequired,
+    isAuth          : PropTypes.bool,
+    quests          : PropTypes.arrayOf(PropTypes.shape(questShape)),
+    createQuest     : PropTypes.func.isRequired,
+    readQuests      : PropTypes.func.isRequired,
+    updateQuest     : PropTypes.func.isRequired,
+    deleteQuest     : PropTypes.func.isRequired,
+    currentCampaign : PropTypes.string,
+    history         : PropTypes.shape({
+      push : PropTypes.func.isRequired,
+    }).isRequired,
   };
   
   static defaultProps = {
-    isAuth : false,
-    quests : [],
+    isAuth          : false,
+    quests          : [],
+    currentCampaign : '',
   };
   
   constructor(props) {
@@ -68,9 +74,9 @@ class QuestManager extends PureComponent {
   }
   
   componentWillMount() {
-    const { isAuth } = this.props;
+    if (!this.props.currentCampaign) this.props.history.push('/campaigns');
     
-    if (isAuth) this.props.readQuests();
+    this.props.readQuests();
   }
   
   onChange = (event) => {
@@ -277,12 +283,13 @@ class QuestManager extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  quests : state.quests.items
+  quests          : state.quests.items,
+  currentCampaign : state.campaigns.currentCampaign,
 });
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
   readQuests,
   createQuest,
   updateQuest,
   deleteQuest
-})(QuestManager);
+})(QuestManager));

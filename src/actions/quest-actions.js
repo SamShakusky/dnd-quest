@@ -22,7 +22,8 @@ export const createQuest = questData => (dispatch, getState) => {
 
 export const readQuests = () => (dispatch, getState) => {
   const { accessToken } = getState().user.credentials;
-  axios.get(`${localhost}/api/Quests?access_token=${accessToken}`)
+  const { currentCampaign } = getState().campaigns;
+  axios.get(`${localhost}/api/Campaigns/${currentCampaign}/quests?access_token=${accessToken}`)
     .then((response) => {
       dispatch({
         type    : READ_QUESTS,
