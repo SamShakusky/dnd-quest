@@ -22,31 +22,30 @@ export const createCampaign = campaignData => (dispatch, getState) => {
 
 export const readCampaigns = () => (dispatch, getState) => {
   const { accessToken, userId } = getState().user.credentials;
-  axios.get(`${localhost}/api/Adventurers/${userId}/campaigns?access_token=${accessToken}`)
+  axios.get(`${localhost}/api/Campaigns/membership?adventurerId=${userId}&access_token=${accessToken}`)
     .then((response) => {
       dispatch({
         type    : READ_CAMPAIGNS,
-        payload : response.data,
+        payload : response.data.items,
       });
     });
 };
 
 export const updateCampaign = (campaignData, campaigns) => (dispatch, getState) => {
-  const { accessToken } = getState().user.credentials;
+  const { accessToken, userId } = getState().user.credentials;
   const index = campaigns.findIndex(i => i.id === campaignData.id);
   const campaignList = [...campaigns];
   
   const requestOptions = {
     method  : 'PUT',
     url     : `${localhost}/api/Campaigns/${campaignData.id}?access_token=${accessToken}`,
-    data    : JSON.stringify(campaignData),
+    data    : JSON.stringify({ ...campaignList[index], ...campaignData }),
     headers : { 'Content-Type' : 'application/json' }
   };
   
   axios.request(requestOptions).then((response) => {
     campaignList[index] = {
       ...response.data,
-      id : campaignData.id,
     };
     
     dispatch({
