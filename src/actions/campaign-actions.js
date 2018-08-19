@@ -41,11 +41,13 @@ export const updateCampaign = (campaignData, campaigns) => (dispatch, getState) 
   const { accessToken } = getState().user.credentials;
   const index = campaigns.findIndex(i => i.id === campaignData.id);
   const campaignList = [...campaigns];
+  const { membersFull, ...newData } = campaignData;
+  const { membersFull: n, ...oldData } = campaignList[index];
   
   const requestOptions = {
     method  : 'PUT',
     url     : `${localhost}/api/Campaigns/${campaignData.id}?access_token=${accessToken}`,
-    data    : JSON.stringify({ ...campaignList[index], ...campaignData }),
+    data    : JSON.stringify({ ...oldData, ...newData }),
     headers : { 'Content-Type' : 'application/json' }
   };
   
