@@ -24,6 +24,7 @@ export default class CampaignList extends PureComponent {
               reward={item.reward}
               key={item.id}
               id={item.id}
+              ownerId={item.ownerId}
               onEdit={onEdit}
             />
             ))
