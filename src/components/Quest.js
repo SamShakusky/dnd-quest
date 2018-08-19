@@ -31,21 +31,21 @@ export default class Quest extends PureComponent {
       goal,
       reward
     } = this.props;
-    
+    console.log(reward.items.length, reward.length);
     return (
       <div styleName="quest">
         <div styleName="quest-edit">
-          <Button
-            label="edit"
+          {/* <Button
+            icon="edit"
             size="sm"
             shape="flat"
             onClick={this.onEdit}
-          />
+          /> */}
         </div>
         <h3 styleName="quest-title">{title}</h3>
-        <p styleName="quest-description">{description}</p>
+        { description && <p styleName="quest-description">{description}</p> }
         <div styleName="bottom-panel">
-          {goal && <p styleName="quest-goal">Goal: {goal}</p>}
+          {/* {goal && <p styleName="quest-goal">Goal: {goal}</p>} */}
           <div styleName="quest-reward">
             {reward.gold && <p styleName="coin coin__gold">{reward.gold}</p>}
             {reward.silver && <p styleName="coin coin__silver">{reward.silver}</p>}

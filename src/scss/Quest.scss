@@ -1,67 +1,72 @@
 @import './import/importFile';
 
 .quest {
-  width: 100%;
-  padding: 12px 24px;
-  margin-bottom: 6px;
-  position: relative;
+  @include shadow(1);
   background: $white;
-  min-height: 134px;
   display: flex;
   flex-direction: column;
-  @include shadow(1);
+  justify-content: center;
+  margin: 0 6px 6px;
+  max-height: 135px;
+  min-height: 54px;
+  padding: 12px 42px 12px 18px;
+  position: relative;
 }
 
 .quest-title {
-  @extend %tp-p-l;
-  margin-bottom: 12px;
+  @extend %tp-p-m;
 }
 
 .quest-description {
-  @extend %tp-p-s;
-  margin-bottom: 12px;
+  @extend %tp-p-xs;
+  color: $color_secondary;
+  margin-top: 6px;
+  max-height: 54px;
+  overflow: hidden;
 }
 
 .bottom-panel {
   display: flex;
-  margin-top: auto;
-  justify-content: flex-end;
+  justify-content: flex-start;
   justify-self: flex-end;
 }
 
 .quest-goal {
   @extend %tp-p-s;
-  font-weight: 700;
   flex: 1;
+  font-weight: 700;
 }
 
 .quest-reward {
+  align-items: flex-end;
   display: flex;
   justify-content: flex-end;
-  align-items: flex-end;
   
   p {
     @extend %tp-p-xs;
-    display: inline-flex;
     align-items: center;
+    color: $color_secondary_dark;
+    display: inline-flex;
     font-size: 15px;
     height: 100%;
-    color: $color_secondary_dark;
+    margin-top: 12px;
   }
 }
 
 .coin {
-  margin-left: 10px;
+  &:not(:first-of-type) {
+    margin-left: 10px;
+  }
   &:before {
+    // margin-bottom: 1px;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 3px;
     content: '';
     display: block;
     height: 12px;
-    width: 12px;
-    border-radius: 50%;
-    border-width: 3px;
-    border-style: solid;
     margin-right: 3px;
-    // margin-bottom: 1px;
+    width: 12px;
   }
 }
 
@@ -86,20 +91,20 @@
 .reward__item {
   margin-left: 6px;
   &:before {
+    background: url(../icons/sword.svg);
     content: '';
     display: inline-block;
-    background: url(../icons/sword.svg);
     height: 14px;
-    width: 14px;
     margin-bottom: 2px;
     margin-right: 2px;
+    width: 14px;
   }
 }
 
 .quest-edit {
   position: absolute;
-  top: 6px;
   right: 6px;
+  top: 6px;
 }
 
 .quest-delete {
