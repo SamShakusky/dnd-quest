@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { CREATE_CAMPAIGN, READ_CAMPAIGNS, UPDATE_CAMPAIGN, DELETE_CAMPAIGN, SET_CAMPAIGN } from './types';
+import {
+  CREATE_CAMPAIGN,
+  READ_CAMPAIGNS,
+  UPDATE_CAMPAIGN,
+  DELETE_CAMPAIGN,
+  SET_CAMPAIGN,
+} from './types';
 
 import localhost from '../config/localhost';
 

@@ -1,9 +1,16 @@
-import { CREATE_CAMPAIGN, READ_CAMPAIGNS, UPDATE_CAMPAIGN, DELETE_CAMPAIGN, SET_CAMPAIGN } from '../actions/types';
+import {
+  CREATE_CAMPAIGN,
+  READ_CAMPAIGNS,
+  UPDATE_CAMPAIGN,
+  DELETE_CAMPAIGN,
+  SET_CAMPAIGN,
+} from '../actions/types';
 
 const currentCampaign = JSON.parse(localStorage.getItem('current_campaign'));
 
 const initialState = {
-  items : [],
+  items   : [],
+  members : [],
   currentCampaign
 };
 

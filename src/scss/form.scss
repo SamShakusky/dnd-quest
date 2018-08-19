@@ -47,3 +47,81 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.quest-form {
+  width: 65vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid $grey_light;
+  background: $white;
+  z-index: 10;
+  border: 0;
+  height: calc(100vh - 60px);
+  @media all and (min-width: 1025px) {
+    width: 40vw;
+  }
+  
+  textarea {
+    height: 25vh;
+  }
+}
+
+.form-wrap {
+  padding: 24px 16px 64px;
+  overflow: auto;
+  position: relative;
+  width: 100%;
+}
+
+.form-label {
+  @extend %tp-p-xs;
+  margin-bottom: 18px;
+  color: $color_secondary;
+  &:not(:first-of-type) {
+    margin-top: 18px;
+  }
+}
+
+.rewards {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.coins {
+  display: flex;
+  justify-content: space-between;
+  
+  > div {
+    width: 30%;
+  }
+}
+
+.form_buttons {
+  align-self: flex-end;
+  position: absolute;
+  top: 16px;
+  right: 10px;
+}
+
+.input-wrap {
+  margin-bottom: 8px;
+}
+
+.members {
+  display: flex;
+  flex-direction: column;
+}
+
+.member {
+  flex-basis: 100%;
+  @extend %tp-p-s;
+  padding: 12px;
+  &:nth-child(even) {
+    background: $grey_super-light;
+  }
+  &:nth-child(odd) {
+    background: $grey_light;
+  }
+}

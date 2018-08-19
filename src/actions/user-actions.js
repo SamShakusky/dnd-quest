@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { SIGNIN_USER, SIGNOUT_USER, CHECK_USER, SIGN_ERROR } from './types';
+import { SIGNIN_USER, SIGNOUT_USER, CHECK_USER, SIGN_ERROR, GET_USER } from './types';
 
 import localhost from '../config/localhost';
 
@@ -79,6 +79,21 @@ export const checkUser = () => (dispatch, getState) => {
     .then(() => {
       dispatch({
         type : CHECK_USER,
+      });
+    });
+};
+
+export const getUser = userId => (dispatch, getState) => {
+  const { accessToken } = getState().user.credentials;
+  axios.get(`${localhost}/api/Adventurers/${userId}?access_token=${accessToken}`)
+    .then((response) => {
+      const { id, username } = response.data;
+      dispatch({
+        type    : GET_USER,
+        payload : {
+          userId : id,
+          username
+        }
       });
     });
 };

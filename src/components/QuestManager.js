@@ -39,7 +39,6 @@ const questShape = {
 
 class QuestManager extends PureComponent {
   static propTypes = {
-    isAuth          : PropTypes.bool,
     quests          : PropTypes.arrayOf(PropTypes.shape(questShape)),
     createQuest     : PropTypes.func.isRequired,
     readQuests      : PropTypes.func.isRequired,
@@ -52,7 +51,6 @@ class QuestManager extends PureComponent {
   };
   
   static defaultProps = {
-    isAuth          : false,
     quests          : [],
     currentCampaign : '',
   };

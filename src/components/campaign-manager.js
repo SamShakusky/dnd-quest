@@ -40,9 +40,9 @@ class CampaignManager extends PureComponent {
     super(props);
     
     this.state = {
-      title       : '',
-      description : '',
-      editing     : '',
+      title   : '',
+      members : [],
+      editing : '',
     };
     
     this.formRef = React.createRef();
@@ -64,7 +64,7 @@ class CampaignManager extends PureComponent {
   onSubmit = () => {
     const {
       title,
-      description,
+      members,
       editing,
     } = this.state;
     
@@ -72,7 +72,7 @@ class CampaignManager extends PureComponent {
     
     const campaign = {
       title,
-      description,
+      members,
       id : editing || null,
     };
     
@@ -88,9 +88,9 @@ class CampaignManager extends PureComponent {
     const data = this.props.campaigns.find(x => x.id === id);
     
     this.setState({
-      title       : data.title,
-      description : data.description,
-      editing     : id,
+      title   : data.title,
+      members : data.members,
+      editing : id,
     });
     this.openForm();
   }
@@ -148,7 +148,7 @@ class CampaignManager extends PureComponent {
         >
           <CampaignForm
             title={this.state.title}
-            description={this.state.description}
+            members={this.state.members}
             onChange={this.onChange}
             onSubmit={this.onSubmit}
             onDelete={this.deleteCampaign}
