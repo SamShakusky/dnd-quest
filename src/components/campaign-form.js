@@ -46,6 +46,13 @@ export default class CampaignForm extends PureComponent {
           key={members[i].id} // eslint-disable-line react/no-array-index-key
         >
           {members[i].username}
+          <Button
+            shape="flat"
+            duty="danger"
+            size="sm"
+            icon="close"
+            // onClick={addItem}
+          />
         </div>
       ))
     );
@@ -74,16 +81,18 @@ export default class CampaignForm extends PureComponent {
           </div>
           <p styleName="form-label">Main</p>
           <TextField label="Title" name="title" value={title} onChange={onChange} required />
-          <p styleName="form-label">Members</p>
-          <div styleName="members">
-            {members && this.items}
+          <div styleName="members_add">
             <Button
-              label="Add Item"
+              label="members"
               shape="flat"
               duty="success"
               size="sm"
+              icon="add"
               // onClick={addItem}
             />
+          </div>
+          <div styleName="members">
+            {members && this.items}
           </div>
         </div>
         <button ref={this.submitRef} style={hiddenSubmit} />

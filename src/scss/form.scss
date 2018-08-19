@@ -115,7 +115,10 @@
 }
 
 .member {
+  align-items: center;
+  display: flex;
   flex-basis: 100%;
+  justify-content: space-between;
   @extend %tp-p-s;
   padding: 12px;
   &:nth-child(even) {
@@ -124,4 +127,8 @@
   &:nth-child(odd) {
     background: $grey_light;
   }
+}
+
+.members_add {
+  margin-bottom: 12px;
 }
