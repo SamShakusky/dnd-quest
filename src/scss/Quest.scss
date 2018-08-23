@@ -1,16 +1,33 @@
 @import './import/importFile';
 
-.quest {
+.quest__wrapper {
   @include shadow(1);
-  background: $white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   margin: 0 6px 6px;
-  max-height: 135px;
   min-height: 54px;
-  padding: 12px 42px 12px 18px;
   position: relative;
+  border-radius: 2px;
+}
+
+.quest {
+  outline: none;
+  border: 0;
+  text-align: left;
+  background: none;
+  padding: 16px 16px 18px;
+  background-color: $white;
+  width: 100%;
+  @include animation(background-color, slow);
+  
+  &>span {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  &:active {
+    background-color: $color_secondary_light;
+  }
 }
 
 .quest-title {
@@ -21,14 +38,14 @@
   @extend %tp-p-xs;
   color: $color_secondary;
   margin-top: 6px;
-  max-height: 54px;
-  overflow: hidden;
 }
 
 .bottom-panel {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   justify-self: flex-end;
+  margin-top: 18px;
+  width: 100%;
 }
 
 .quest-goal {
@@ -49,7 +66,6 @@
     display: inline-flex;
     font-size: 15px;
     height: 100%;
-    margin-top: 12px;
   }
 }
 
@@ -109,4 +125,10 @@
 
 .quest-delete {
   margin-top: 6px;
+}
+
+.checkbox__wrapper {
+  position: absolute;
+  bottom: 15px;
+  right: 17px;
 }
