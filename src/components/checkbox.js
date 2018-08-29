@@ -8,9 +8,10 @@ export default class Checkbox extends PureComponent {
     label    : PropTypes.string,
     size     : PropTypes.oneOf(['sm', 'md', 'lg']),
     round    : PropTypes.bool,
-    onClick  : PropTypes.func,
+    onChange : PropTypes.func,
     disabled : PropTypes.bool,
     id       : PropTypes.string.isRequired,
+    checked  : PropTypes.bool,
   };
 
   static defaultProps = {
@@ -18,7 +19,8 @@ export default class Checkbox extends PureComponent {
     size     : 'md',
     round    : false,
     disabled : false,
-    onClick  : null,
+    onChange : null,
+    checked  : false,
   };
   
   render() {
@@ -26,9 +28,10 @@ export default class Checkbox extends PureComponent {
       label,
       size,
       round,
-      onClick,
+      onChange,
       disabled,
-      id
+      id,
+      checked,
     } = this.props;
 
     return (
@@ -41,7 +44,14 @@ export default class Checkbox extends PureComponent {
         }`
       }
       >
-        <input styleName="checkbox__input" id={id} type="checkbox" />
+        <input
+          styleName="checkbox__input"
+          id={id}
+          type="checkbox"
+          defaultChecked={checked}
+          disabled={disabled}
+          onChange={onChange}
+        />
         { label && <span styleName="checkbox__label">{label}</span> }
         <div styleName="box">
           <i className="material-icons">check</i>

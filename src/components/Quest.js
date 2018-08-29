@@ -1,17 +1,21 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Button from './Button';
+import { connect } from 'react-redux';
 import Checkbox from './checkbox';
+
+import { doneQuest } from '../actions/quest-actions';
 
 import '../css/Quest.css';
 
-export default class Quest extends PureComponent {
+class Quest extends PureComponent {
   static propTypes = {
     title       : PropTypes.string.isRequired,
     description : PropTypes.string,
     reward      : PropTypes.shape({}),
     id          : PropTypes.string.isRequired,
-    onEdit      : PropTypes.func.isRequired
+    onEdit      : PropTypes.func.isRequired,
+    done        : PropTypes.bool.isRequired,
+    doneQuest   : PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -26,10 +30,16 @@ export default class Quest extends PureComponent {
   }
   
   onEdit = (e) => {
-    console.log(e.target, this.checkbox.current);
     if (e.target === this.checkbox.current) return false;
     
     this.props.onEdit(this.props.id);
+  }
+  
+  doneQuest = (e) => {
+    const { id } = e.currentTarget;
+    const { done } = this.props;
+    
+    this.props.doneQuest(id, !done);
   }
   
   render() {
@@ -37,21 +47,14 @@ export default class Quest extends PureComponent {
       title,
       description,
       reward,
-      id
+      id,
+      done,
     } = this.props;
     
     return (
       <div styleName="quest__wrapper">
         <button onClick={this.onEdit} styleName="quest">
           <span>
-            <div styleName="quest-edit">
-              {/* <Button
-                icon="edit"
-                size="sm"
-                shape="flat"
-                onClick={this.onEdit}
-              /> */}
-            </div>
             <h3 styleName="quest-title">{title}</h3>
             { description && <p styleName="quest-description">{description}</p> }
             <div styleName="bottom-panel">
@@ -62,13 +65,22 @@ export default class Quest extends PureComponent {
                 {reward.copper && <p styleName="coin coin__bronze">{reward.copper}</p>}
                 {reward.items && reward.items[0] && <p styleName="reward__item">{reward.items.length}</p>}
               </div>
+              <p>{JSON.stringify(done)}</p>
             </div>
           </span>
         </button>
         <div styleName="checkbox__wrapper">
-          <Checkbox id={id} size="lg" round />
+          <Checkbox
+            onChange={this.doneQuest}
+            checked={done}
+            id={id}
+            size="lg"
+            round
+          />
         </div>
       </div>
     );
   }
 }
+
+export default connect(null, { doneQuest })(Quest);

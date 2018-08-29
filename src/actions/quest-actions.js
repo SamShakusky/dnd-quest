@@ -51,7 +51,7 @@ export const updateQuest = (questData, quests) => (dispatch, getState) => {
       ...response.data,
       id : questData.id,
     };
-    
+    console.log(questList)
     dispatch({
       type    : UPDATE_QUEST,
       payload : questList,
@@ -72,4 +72,30 @@ export const deleteQuest = (questId, quests) => (dispatch, getState) => {
         payload : questList,
       });
     });
+};
+
+export const doneQuest = (questId, newStatus) => (dispatch, getState) => {
+  const { accessToken } = getState().user.credentials;
+  const { currentCampaign } = getState().campaigns;
+  const questList = getState().quests.items;
+  const newList = [...questList];
+  const index = questList.findIndex(i => i.id === questId);
+  
+  const questData = { done : newStatus };
+  
+  const requestOptions = {
+    method  : 'PUT',
+    url     : `${localhost}/api/Campaigns/${currentCampaign}/quests/${questId}?access_token=${accessToken}`,
+    data    : JSON.stringify(questData),
+    headers : { 'Content-Type' : 'application/json' }
+  };
+  
+  axios.request(requestOptions).then((response) => {
+    newList[index].done = response.data.done;
+    
+    dispatch({
+      type    : UPDATE_QUEST,
+      payload : newList,
+    });
+  });
 };

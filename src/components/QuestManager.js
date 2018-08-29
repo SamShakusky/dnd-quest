@@ -13,7 +13,7 @@ import {
   readQuests,
   createQuest,
   updateQuest,
-  deleteQuest
+  deleteQuest,
 } from '../actions/quest-actions';
 import '../css/QuestManager.css';
 
@@ -263,6 +263,12 @@ class QuestManager extends PureComponent {
           items={this.props.quests}
           onEdit={this.onEdit}
         />
+        <p>-------------------------</p>
+        <QuestList
+          items={this.props.quests}
+          onEdit={this.onEdit}
+          isArchive
+        />
         {
           formVisibility && <FloatingButton
             onClick={this.fabSubmit}
@@ -289,5 +295,5 @@ export default withRouter(connect(mapStateToProps, {
   readQuests,
   createQuest,
   updateQuest,
-  deleteQuest
+  deleteQuest,
 })(QuestManager));
