@@ -36,7 +36,10 @@
   }
   
   &_round {
-    .box { border-radius: 50% };
+    .box {
+      border-radius: 50%;
+      i { opacity: 1; }
+    };
   }
 }
 

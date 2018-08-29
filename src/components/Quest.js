@@ -29,17 +29,31 @@ class Quest extends PureComponent {
     this.checkbox = React.createRef();
   }
   
+  state = {
+    collapsed : false,
+  }
+  
   onEdit = (e) => {
     if (e.target === this.checkbox.current) return false;
     
-    this.props.onEdit(this.props.id);
+    return this.props.onEdit(this.props.id);
   }
   
   doneQuest = (e) => {
-    const { id } = e.currentTarget;
     const { done } = this.props;
     
-    this.props.doneQuest(id, !done);
+    this.setState({
+      collapsed : true
+    }, this.doneRequest(e, done));
+  }
+  
+  doneRequest = (e, done) => {
+    const { id } = e.currentTarget;
+    
+    setTimeout(() => {
+      console.log('request sent', !done);
+      this.props.doneQuest(id, !done);
+    }, 500);
   }
   
   render() {
@@ -51,8 +65,10 @@ class Quest extends PureComponent {
       done,
     } = this.props;
     
+    const { collapsed } = this.state;
+    
     return (
-      <div styleName="quest__wrapper">
+      <div styleName={`quest__wrapper ${collapsed ? 'quest_collapsed' : ''}`}>
         <button onClick={this.onEdit} styleName="quest">
           <span>
             <h3 styleName="quest-title">{title}</h3>
@@ -65,7 +81,6 @@ class Quest extends PureComponent {
                 {reward.copper && <p styleName="coin coin__bronze">{reward.copper}</p>}
                 {reward.items && reward.items[0] && <p styleName="reward__item">{reward.items.length}</p>}
               </div>
-              <p>{JSON.stringify(done)}</p>
             </div>
           </span>
         </button>
