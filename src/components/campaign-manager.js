@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import SlidingPanel from './SlidingPanel';
 import FloatingButton from './FloatingButton';
-
+import AppBar from './app-bar';
 import CampaignList from './campaign-list';
 import CampaignForm from './campaign-form';
 
@@ -139,6 +139,7 @@ class CampaignManager extends PureComponent {
     
     return (
       <main styleName="campaign__page" >
+        <AppBar title="Campaigns" />
         <SlidingPanel
           isShown={this.state.formVisibility}
           onClose={this.closeForm}

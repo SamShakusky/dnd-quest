@@ -8,10 +8,7 @@ import PrivateRoute from './helpers/private-route';
 import CampaignManager from './campaign-manager';
 import QuestManager from './QuestManager';
 import Spec from './Spec';
-import Menu from './Menu';
 import Login from './login';
-import Button from './Button';
-import SlidingPanel from './SlidingPanel';
 
 import store from '../store';
 import { checkUser } from '../actions/user-actions';
@@ -98,13 +95,12 @@ class App extends PureComponent {
   
   render() {
     const { isAuth, credentials } = this.state;
-    const { currentCampaign } = this.props;
     
     return (
       <BrowserRouter>
         <Provider store={store}>
           <div className="App">
-            {isAuth &&
+            {/* {isAuth &&
               <header styleName="header">
                 <Button
                   onClick={this.toggleMenu}
@@ -125,7 +121,7 @@ class App extends PureComponent {
                   <Button size="sm" label="fullscreen" onClick={this.toggleFullscreen} />
                 </div>
               </header>
-            }
+            } */}
             
             <Switch>
               <Redirect exact from="/" to="/manager" />

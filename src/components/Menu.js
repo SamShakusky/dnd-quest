@@ -9,12 +9,7 @@ import '../css/Menu.css';
 class Menu extends PureComponent {
   static propTypes = {
     signOut   : PropTypes.func.isRequired,
-    closeMenu : PropTypes.func.isRequired,
-    isAuth    : PropTypes.bool,
-  };
-
-  static defaultProps = {
-    isAuth : false,
+    closeMenu : PropTypes.func.isRequired
   };
   
   signOut = (e) => {
@@ -24,14 +19,14 @@ class Menu extends PureComponent {
   }
   
   render() {
-    const { closeMenu, isAuth } = this.props;
+    const { closeMenu } = this.props;
     
     return (
       <ul styleName="menu">
         <li><NavLink onClick={closeMenu} className="link-dark" to="/campaigns">Campaign Manager</NavLink></li>
         <li><NavLink onClick={closeMenu} className="link-dark" to="/manager">Quest Manager</NavLink></li>
         <li><NavLink onClick={closeMenu} className="link-dark" to="/spec">Spec</NavLink></li>
-        {isAuth && <li><a onClick={this.signOut} href="/signout" className="link-dark">Signout</a></li>}
+        <li><a onClick={this.signOut} href="/signout" className="link-dark">Signout</a></li>
       </ul>
     );
   }

@@ -51,7 +51,6 @@ class Quest extends PureComponent {
     const { id } = e.currentTarget;
     
     setTimeout(() => {
-      console.log('request sent', !done);
       this.props.doneQuest(id, !done);
     }, 500);
   }

@@ -51,7 +51,7 @@ export const updateQuest = (questData, quests) => (dispatch, getState) => {
       ...response.data,
       id : questData.id,
     };
-    console.log(questList)
+    
     dispatch({
       type    : UPDATE_QUEST,
       payload : questList,

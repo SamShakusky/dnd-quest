@@ -1,0 +1,21 @@
+@import './import/importFile';
+
+.bar {
+  background-color: $color_main_dark;
+  padding: 12px 20px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  font-family: $font-head;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  min-height: 42px;
+  z-index: 10;
+  @include shadow(1);
+  justify-content: space-between;
+  &__actions {
+    content: none;
+  }
+}

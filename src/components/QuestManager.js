@@ -8,6 +8,7 @@ import QuestList from './QuestList';
 import QuestForm from './QuestForm';
 import FloatingButton from './FloatingButton';
 import SlidingPanel from './SlidingPanel';
+import AppBar from './app-bar';
 
 import {
   readQuests,
@@ -59,13 +60,14 @@ class QuestManager extends PureComponent {
     super(props);
     
     this.state = {
-      title          : '',
-      description    : '',
-      goal           : '',
-      items          : [],
-      formVisibility : false,
-      editing        : null,
-      reward         : { items : [] },
+      title             : '',
+      description       : '',
+      goal              : '',
+      items             : [],
+      formVisibility    : false,
+      archiveVisibility : false,
+      editing           : null,
+      reward            : { items : [] },
     };
     
     this.formRef = React.createRef();
@@ -226,6 +228,12 @@ class QuestManager extends PureComponent {
     document.body.style.overflow = scrollMap[bool];
   }
   
+  toggleArchive = () => {
+    const { archiveVisibility } = this.state;
+    
+    this.setState({ archiveVisibility : !archiveVisibility });
+  }
+  
   fabSubmit = () => {
     // eslint-disable-next-line react/no-find-dom-node
     const node = ReactDOM.findDOMNode(this.formRef.current.submitRef.current);
@@ -233,10 +241,15 @@ class QuestManager extends PureComponent {
   }
   
   render() {
-    const { formVisibility } = this.state;
+    const { formVisibility, archiveVisibility } = this.state;
     
     return (
       <main styleName="page-manager">
+        <AppBar
+          title={archiveVisibility ? 'Completed Quests' : 'Quests'}
+          modeChange={this.toggleArchive}
+          modeIcon={archiveVisibility ? 'assignment' : 'assignment_turned_in'}
+        />
         <SlidingPanel
           isShown={this.state.formVisibility}
           onClose={this.closeForm}
@@ -259,16 +272,18 @@ class QuestManager extends PureComponent {
             ref={this.formRef}
           />
         </SlidingPanel>
-        <QuestList
-          items={this.props.quests}
-          onEdit={this.onEdit}
-        />
-        <p>-------------------------</p>
-        <QuestList
-          items={this.props.quests}
-          onEdit={this.onEdit}
-          isArchive
-        />
+        { archiveVisibility ?
+          <QuestList
+            isArchive
+            items={this.props.quests}
+            onEdit={this.onEdit}
+          />
+          :
+          <QuestList
+            items={this.props.quests}
+            onEdit={this.onEdit}
+          />
+        }
         {
           formVisibility && <FloatingButton
             onClick={this.fabSubmit}
