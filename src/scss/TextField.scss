@@ -10,9 +10,6 @@
   }
 
   &.field_focused {
-    &:before {
-      background: $colorFocus;
-    }
     .field {
       border-color: $colorFocus;
       &__label {
