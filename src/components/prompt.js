@@ -37,7 +37,6 @@ export default class Prompt extends PureComponent {
     
     return (
       <Modal
-        onConfirm={onConfirm}
         onClose={onClose}
         isShown={isShown}
       >
@@ -53,7 +52,7 @@ export default class Prompt extends PureComponent {
             />
             <Button
               label={confirmText}
-              onClick={onClose}
+              onClick={onConfirm}
               shape="flat"
               size="sm"
             />
