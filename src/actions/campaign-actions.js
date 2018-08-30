@@ -11,10 +11,15 @@ import localhost from '../config/localhost';
 
 export const createCampaign = campaignData => (dispatch, getState) => {
   const { accessToken, userId } = getState().user.credentials;
+  const data = {
+    ownerId : userId,
+    members : [userId],
+    ...campaignData,
+  };
   const requestOptions = {
     method  : 'POST',
     url     : `${localhost}/api/Campaigns?access_token=${accessToken}`,
-    data    : JSON.stringify({ ...campaignData, adventurerId : userId }),
+    data    : JSON.stringify(data),
     headers : { 'Content-Type' : 'application/json' }
   };
   
