@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import styles from '../css/Button.css';
+import styles from '../css/button.css';
 
 export default class FloatingButton extends PureComponent {
   static propTypes = {

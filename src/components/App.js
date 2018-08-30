@@ -6,13 +6,12 @@ import PropTypes from 'prop-types';
 import PrivateRoute from './helpers/private-route';
 
 import CampaignManager from './campaign-manager';
-import QuestManager from './QuestManager';
-import Spec from './Spec';
+import QuestManager from './quest-manager';
+import Spec from './spec';
 import Login from './login';
 
 import store from '../store';
 import { checkUser } from '../actions/user-actions';
-import '../css/App.css';
 
 import {
   setCampaign,

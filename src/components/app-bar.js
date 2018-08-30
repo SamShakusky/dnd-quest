@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-import Menu from './Menu';
-import Button from './Button';
-import SlidingPanel from './SlidingPanel';
+import Menu from './menu';
+import Button from './button';
+import SlidingPanel from './sliding-panel';
 
 import '../css/app-bar.css';
 

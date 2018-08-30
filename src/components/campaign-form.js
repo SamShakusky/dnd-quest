@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Formsy from 'formsy-react';
-import TextField from './TextField';
-import Button from './Button';
+import TextField from './text-field';
+import Button from './button';
 
 import '../css/form.css';
 

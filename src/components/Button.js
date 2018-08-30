@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import '../css/Button.css';
+import '../css/button.css';
 
 export default class Button extends PureComponent {
   static propTypes = {

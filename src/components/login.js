@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 import AuthForm from './auth-form';
 
-import '../css/Main.css';
+import '../css/main.css';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class Login extends PureComponent {

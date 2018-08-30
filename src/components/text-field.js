@@ -2,9 +2,9 @@ import { withFormsy } from 'formsy-react';
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-import Button from './Button';
+import Button from './button';
 
-import '../css/TextField.css';
+import '../css/text-field.css';
 
 class TextField extends PureComponent {
   static propTypes = {

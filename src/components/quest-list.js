@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Quest from './Quest';
+import Quest from './quest';
 
-import '../css/QuestList.css';
+import '../css/quest-list.css';
 
 export default class QuestList extends PureComponent {
   static propTypes = {

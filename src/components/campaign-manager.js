@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import SlidingPanel from './SlidingPanel';
-import FloatingButton from './FloatingButton';
+import SlidingPanel from './sliding-panel';
+import FloatingButton from './floating-button';
 import AppBar from './app-bar';
 import CampaignList from './campaign-list';
 import CampaignForm from './campaign-form';

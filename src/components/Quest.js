@@ -5,7 +5,7 @@ import Checkbox from './checkbox';
 
 import { doneQuest } from '../actions/quest-actions';
 
-import '../css/Quest.css';
+import '../css/quest.css';
 
 class Quest extends PureComponent {
   static propTypes = {

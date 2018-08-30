@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Formsy from 'formsy-react';
 
-import Button from './Button';
-import TextField from './TextField';
+import Button from './button';
+import TextField from './text-field';
 import Snackbar from './snackbar';
 
 import { signIn, signUp } from '../actions/user-actions';

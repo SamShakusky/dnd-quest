@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { signOut } from '../actions/user-actions';
-import '../css/Menu.css';
+import '../css/menu.css';
 
 class Menu extends PureComponent {
   static propTypes = {

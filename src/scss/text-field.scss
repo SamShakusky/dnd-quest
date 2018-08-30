@@ -1,4 +1,4 @@
-@import './import/importFile';
+@import './import/import-file';
 
 @mixin inputColor($colorNormal: $color_secondary_light, $colorFocus: $color_main) {
   .field {

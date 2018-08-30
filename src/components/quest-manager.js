@@ -4,10 +4,10 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import QuestList from './QuestList';
-import QuestForm from './QuestForm';
-import FloatingButton from './FloatingButton';
-import SlidingPanel from './SlidingPanel';
+import QuestList from './quest-list';
+import QuestForm from './quest-form';
+import FloatingButton from './floating-button';
+import SlidingPanel from './sliding-panel';
 import AppBar from './app-bar';
 
 import {
@@ -16,7 +16,8 @@ import {
   updateQuest,
   deleteQuest,
 } from '../actions/quest-actions';
-import '../css/QuestManager.css';
+
+import '../css/quest-manager.css';
 
 const scrollMap = {
   true  : 'hidden',
