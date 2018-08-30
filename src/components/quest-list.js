@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Quest from './quest';
 
@@ -24,16 +24,19 @@ export default class QuestList extends PureComponent {
           items.map((item) => {
             if ((isArchive && item.done) || (!isArchive && !item.done)) {
               return (
-                <Quest
-                  title={item.title}
-                  description={item.description}
-                  goal={item.goal}
-                  reward={item.reward}
-                  done={item.done}
-                  key={item.id}
-                  id={item.id}
-                  onEdit={onEdit}
-                />
+                <Fragment>
+                  <Quest
+                    title={item.title}
+                    description={item.description}
+                    goal={item.goal}
+                    reward={item.reward}
+                    done={item.done}
+                    key={item.id}
+                    id={item.id}
+                    onEdit={onEdit}
+                  />
+                  <div />
+                </Fragment>
               );
             }
             return false;

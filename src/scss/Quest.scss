@@ -2,13 +2,18 @@
 
 .quest__wrapper {
   @include shadow(1);
-  margin: 0 6px 6px;
+  margin: 0 6px;
   min-height: 54px;
   max-height: 300px;
   overflow: hidden;
   position: relative;
   border-radius: 2px;
   @include animation(max-height, slow);
+  
+  & + div {
+    height: 6px;
+    @include animation(height, slow, .25s);
+  }
 }
 
 .quest {
@@ -19,7 +24,7 @@
   padding: 16px 16px 18px;
   background-color: $white;
   width: 100%;
-  @include animation(background-color, slow);
+  @include animation(background-color margin, slow);
   
   &>span {
     display: flex;
@@ -35,6 +40,10 @@
   &_collapsed {
     max-height: 0;
     min-height: 0;
+    
+    & + div {
+      height: 0;
+    }
   }
 }
 
@@ -82,7 +91,6 @@
     margin-left: 10px;
   }
   &:before {
-    // margin-bottom: 1px;
     border-radius: 50%;
     border-style: solid;
     border-width: 3px;
@@ -139,10 +147,4 @@
   position: absolute;
   bottom: 15px;
   right: 17px;
-}
-
-keyframes questDone {
-  from {
-    transform: translate
-  }
 }
