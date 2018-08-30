@@ -4,6 +4,7 @@ import App from './components/app';
 
 import store from './store';
 import './css/reset.css';
+import './css/fonts.css';
 
 ReactDOM.render(
   <App store={store} />,

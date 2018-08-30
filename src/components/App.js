@@ -99,29 +99,6 @@ class App extends PureComponent {
       <BrowserRouter>
         <Provider store={store}>
           <div className="App">
-            {/* {isAuth &&
-              <header styleName="header">
-                <Button
-                  onClick={this.toggleMenu}
-                  icon="menu"
-                  iconSize={36}
-                  iconColor="#fff"
-                  shape="flat"
-                  noActive
-                />
-                <SlidingPanel
-                  isShown={this.state.menuVisibility}
-                  onClose={this.toggleMenu}
-                >
-                  <Menu closeMenu={this.toggleMenu} isAuth={isAuth} />
-                </SlidingPanel>
-                <p>{currentCampaign}</p>
-                <div styleName="fullscreen">
-                  <Button size="sm" label="fullscreen" onClick={this.toggleFullscreen} />
-                </div>
-              </header>
-            } */}
-            
             <Switch>
               <Redirect exact from="/" to="/manager" />
               <Route path="/login" render={props => <Login {...props} isAuth={isAuth} />} />
