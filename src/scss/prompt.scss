@@ -1,0 +1,24 @@
+@import './import/import-file';
+
+.prompt {
+  display: flex;
+  flex-direction: column;
+  
+  &__title {
+    @extend %tp-p-l;
+    color: $grey_dark;
+    font-weight: bold;
+    margin-bottom: 18px;
+  }
+  
+  &__text {
+    @extend %tp-p-s;
+    color: $color_secondary;
+    margin-bottom: 24px;
+  }
+  
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

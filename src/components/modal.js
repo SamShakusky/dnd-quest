@@ -9,14 +9,12 @@ const modalRoot = document.getElementById('modal-root');
 export default class Modal extends PureComponent {
   static propTypes = {
     isShown  : PropTypes.bool,
-    onClose  : PropTypes.func,
-    children : PropTypes.node
+    onClose  : PropTypes.func.isRequired,
+    children : PropTypes.node.isRequired
   };
   
   static defaultProps = {
-    isShown  : false,
-    onClose  : null,
-    children : null
+    isShown : false,
   };
   
   constructor(props) {
@@ -63,7 +61,7 @@ export default class Modal extends PureComponent {
   render() {
     return ReactDOM.createPortal(
       this.modal,
-      this.el
+      modalRoot
     );
   }
 }

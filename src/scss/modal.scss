@@ -4,15 +4,15 @@
   @include animation(opacity, medium);
   align-items: center;
   display: flex;
-  height: calc(100vh - 60px);
+  height: 100vh;
   justify-content: center;
   opacity: 0;
   overflow: hidden;
   pointer-events: none;
   position: fixed;
-  top: 60px;
+  top: 0;
   width: 100vw;
-  z-index: 11;
+  z-index: 110;
   &_active {
     opacity: 1;
     pointer-events: auto;
@@ -20,16 +20,17 @@
   
   &__body {
     background: $white;
-    height: 200px;
-    width: 200px;
+    width: 300px;
     z-index: 11;
+    border-radius: 4px;
+    padding: 18px 8px 8px 24px;
   }
   
   &__overlay {
     position: fixed;
     left: 0;
-    top: 60px;
-    height: calc(100vh - 60px);
+    top: 0;
+    height: 100%;
     width: 100vw;
     background: rgba(0, 0, 0, .6);
     z-index: 10;
