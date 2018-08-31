@@ -74,7 +74,20 @@ export default class CampaignForm extends PureComponent {
         <div styleName="form-wrap">
           <div styleName="form_buttons">
             {(editing ?
-              <Button icon="delete_outline" iconSize={24} shape="flat" duty="danger" onClick={onDelete} sharp noActive />
+              <Button
+                icon="delete_outline"
+                iconSize={24}
+                shape="flat"
+                duty="danger"
+                onClick={onDelete}
+                sharp
+                noActive
+                confirmation={{
+                  title       : 'Delete campaign?',
+                  text        : `This will delete the campaign «${title}» and all quests in it. You can't undo this action.`,
+                  confirmText : 'Delete'
+                }}
+              />
               :
               <Button icon="close" iconSize={24} shape="flat" duty="danger" onClick={onClose} sharp noActive />
             )}

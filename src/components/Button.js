@@ -5,6 +5,13 @@ import Prompt from './prompt';
 
 import '../css/button.css';
 
+const confirmationShape = {
+  title       : PropTypes.string,
+  text        : PropTypes.string,
+  confirmText : PropTypes.string,
+  cancelText  : PropTypes.string,
+};
+
 export default class Button extends PureComponent {
   static propTypes = {
     label        : PropTypes.string,
@@ -21,7 +28,7 @@ export default class Button extends PureComponent {
     sharp        : PropTypes.bool,
     type         : PropTypes.string,
     inline       : PropTypes.bool,
-    confirmation : PropTypes.shape({}),
+    confirmation : PropTypes.shape(confirmationShape),
   };
 
   static defaultProps = {

@@ -35,7 +35,6 @@ const questShape = {
   title       : PropTypes.string.isRequired,
   id          : PropTypes.string.isRequired,
   description : PropTypes.string,
-  goal        : PropTypes.string,
   reward      : PropTypes.shape(rewardShape),
 };
 
@@ -63,7 +62,6 @@ class QuestManager extends PureComponent {
     this.state = {
       title             : '',
       description       : '',
-      goal              : '',
       items             : [],
       formVisibility    : false,
       archiveVisibility : false,
@@ -121,7 +119,6 @@ class QuestManager extends PureComponent {
     const {
       title,
       description,
-      goal,
       reward,
       editing,
     } = this.state;
@@ -131,7 +128,6 @@ class QuestManager extends PureComponent {
     const quest = {
       title,
       description,
-      goal,
       reward : {
         ...reward,
         items : reward.items.filter(el => el.length)
@@ -153,15 +149,13 @@ class QuestManager extends PureComponent {
     this.setState({
       title       : data.title,
       description : data.description,
-      goal        : data.goal,
       reward      : data.reward,
       editing     : id,
     });
     this.openForm();
   }
   
-  deleteQuest = (event) => {
-    event.preventDefault();
+  deleteQuest = () => {
     const { editing } = this.state;
     const { quests } = this.props;
     
@@ -182,7 +176,6 @@ class QuestManager extends PureComponent {
       inputs = {
         title       : '',
         description : '',
-        goal        : '',
         reward      : { items : [] },
         editing     : ''
       };
@@ -247,7 +240,7 @@ class QuestManager extends PureComponent {
     return (
       <main styleName="page-manager">
         <AppBar
-          title={archiveVisibility ? 'Completed Quests' : 'Quests'}
+          title={archiveVisibility ? 'Completed Quests' : 'Active Quests'}
           modeChange={this.toggleArchive}
           modeIcon={archiveVisibility ? 'assignment' : 'assignment_turned_in'}
         />
@@ -259,7 +252,6 @@ class QuestManager extends PureComponent {
           <QuestForm
             title={this.state.title}
             description={this.state.description}
-            goal={this.state.goal}
             reward={this.state.reward}
             onChange={this.onChange}
             onChangeCoins={this.onChangeCoins}

@@ -15,7 +15,6 @@ export default class QuestForm extends PureComponent {
   static propTypes = {
     title         : PropTypes.string.isRequired,
     description   : PropTypes.string,
-    goal          : PropTypes.string,
     reward        : PropTypes.shape({}),
     editing       : PropTypes.string,
     onSubmit      : PropTypes.func.isRequired,
@@ -30,7 +29,6 @@ export default class QuestForm extends PureComponent {
   
   static defaultProps = {
     description : '',
-    goal        : '',
     reward      : {},
     editing     : ''
   };
@@ -63,7 +61,6 @@ export default class QuestForm extends PureComponent {
     const {
       title,
       description,
-      goal,
       reward,
       editing,
       onSubmit,
@@ -79,14 +76,26 @@ export default class QuestForm extends PureComponent {
         <div styleName="form-wrap">
           <div styleName="form_buttons">
             {(editing ?
-              <Button icon="delete_outline" iconSize={24} shape="flat" duty="danger" onClick={onDelete} sharp noActive />
+              <Button
+                icon="delete_outline"
+                iconSize={24}
+                shape="flat"
+                duty="danger"
+                onClick={onDelete}
+                sharp
+                noActive
+                confirmation={{
+                  title       : 'Delete quest?',
+                  text        : `This will delete the quest «${title}». You can't undo this action.`,
+                  confirmText : 'Delete'
+                }}
+              />
               :
               <Button icon="close" iconSize={24} shape="flat" duty="danger" onClick={onClose} sharp noActive />
             )}
           </div>
           <p styleName="form-label">Main</p>
           <TextField label="Title" name="title" value={title} onChange={onChange} required />
-          <TextField label="Goal" name="goal" value={goal} onChange={onChange} />
           <TextField fieldType="textarea" label="Description" name="description" value={description} onChange={onChange} />
           <p styleName="form-label">Rewards</p>
           <div styleName="rewards">
