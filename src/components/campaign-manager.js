@@ -50,13 +50,6 @@ class CampaignManager extends PureComponent {
   
   componentDidMount() {
     this.props.readCampaigns();
-    
-    const url = 'http://192.168.0.90:3000/api/Campaigns/change-stream?_format=event-stream&access_token=1aqAxeIQmXDesmGt5xX5BmS1URsArthMMMF3qZqehNrCVxtY4ire8jZH0XaP3mO5';
-    const src = new EventSource(url);
-    
-    src.addEventListener('data', (msg) => {
-      console.log(JSON.parse(msg.data));
-    });
   }
   
   onChange = (event) => {
@@ -167,7 +160,6 @@ class CampaignManager extends PureComponent {
           items={this.props.campaigns}
           onEdit={this.onEdit}
         />
-        <p>Response: {this.state.resp}</p>
         {
           formVisibility && <FloatingButton
             onClick={this.fabSubmit}

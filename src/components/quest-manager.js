@@ -70,12 +70,24 @@ class QuestManager extends PureComponent {
     };
     
     this.formRef = React.createRef();
+    this.url = `/api/Quests/${this.props.currentCampaign}/changes?_format=event-stream&access_token=1aqAxeIQmXDesmGt5xX5BmS1URsArthMMMF3qZqehNrCVxtY4ire8jZH0XaP3mO5`;
+    this.source = new EventSource(this.url);
   }
   
-  componentWillMount() {
-    if (!this.props.currentCampaign) this.props.history.push('/campaigns');
+  componentDidMount() {
+    const { readQuests: showQuests, currentCampaign } = this.props;
+    if (!currentCampaign) this.props.history.push('/campaigns');
     
-    this.props.readQuests();
+    showQuests();
+    
+    this.source.addEventListener('data', (msg) => {
+      const data = JSON.parse(msg.data);
+      console.log(data.data.title);
+    });
+  }
+  
+  componentWillUnmount() {
+    this.source.close();
   }
   
   onChange = (event) => {

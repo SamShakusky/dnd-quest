@@ -31,6 +31,11 @@ export const readQuests = () => (dispatch, getState) => {
         payload : response.data,
       });
     });
+    // const ass = JSON.stringify({ "where": { "state": "CA" } });
+    // axios.get(`/api/Quests/change-stream?_format=event-stream&options=${ass}&access_token=${accessToken}`)
+    // .then((response) => {
+    //   console.log('bbb',response);
+    // });
 };
 
 export const updateQuest = (questData, quests) => (dispatch, getState) => {
