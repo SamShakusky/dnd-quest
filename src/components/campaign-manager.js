@@ -94,7 +94,7 @@ class CampaignManager extends PureComponent {
   }
   
   deleteCampaign = (event) => {
-    event && event.preventDefault();
+    if (event) event.preventDefault();
     const { editing } = this.state;
     const { campaigns } = this.props;
     

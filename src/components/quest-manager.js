@@ -46,6 +46,7 @@ class QuestManager extends PureComponent {
     updateQuest     : PropTypes.func.isRequired,
     deleteQuest     : PropTypes.func.isRequired,
     currentCampaign : PropTypes.string,
+    accessToken     : PropTypes.string.isRequired,
     history         : PropTypes.shape({
       push : PropTypes.func.isRequired,
     }).isRequired,
@@ -70,7 +71,7 @@ class QuestManager extends PureComponent {
     };
     
     this.formRef = React.createRef();
-    this.url = `/api/Quests/${this.props.currentCampaign}/changes?_format=event-stream&access_token=1aqAxeIQmXDesmGt5xX5BmS1URsArthMMMF3qZqehNrCVxtY4ire8jZH0XaP3mO5`;
+    this.url = `/api/Campaigns/${props.currentCampaign}/changes?_format=event-stream&access_token=${props.accessToken}`;
     this.source = new EventSource(this.url);
   }
   
@@ -309,6 +310,7 @@ class QuestManager extends PureComponent {
 const mapStateToProps = state => ({
   quests          : state.quests.items,
   currentCampaign : state.campaigns.currentCampaign,
+  accessToken     : state.user.credentials.accessToken,
 });
 
 export default withRouter(connect(mapStateToProps, {

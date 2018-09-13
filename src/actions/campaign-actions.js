@@ -33,10 +33,6 @@ export const createCampaign = campaignData => (dispatch, getState) => {
 
 export const readCampaigns = () => (dispatch, getState) => {
   const { accessToken, userId } = getState().user.credentials;
-  axios.get(`${localhost}/api/Campaigns/change-stream?access_token=${accessToken}`)
-    .then((response) => {
-      
-    });
   axios.get(`${localhost}/api/Campaigns/membership?adventurerId=${userId}&access_token=${accessToken}`)
     .then((response) => {
       dispatch({
