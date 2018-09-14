@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Checkbox from './checkbox';
 
-import { doneQuest } from '../actions/quest-actions';
+import { updateQuest } from '../actions/quest-actions';
 
 import '../css/quest.css';
 
@@ -15,7 +15,7 @@ class Quest extends PureComponent {
     id          : PropTypes.string.isRequired,
     onEdit      : PropTypes.func.isRequired,
     done        : PropTypes.bool.isRequired,
-    doneQuest   : PropTypes.func.isRequired,
+    updateQuest : PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -39,19 +39,28 @@ class Quest extends PureComponent {
     return this.props.onEdit(this.props.id);
   }
   
-  doneQuest = (e) => {
+  doneQuest = () => {
     const { done } = this.props;
     
     this.setState({
       collapsed : true
-    }, this.doneRequest(e, done));
+    }, this.doneRequest(done));
   }
   
-  doneRequest = (e, done) => {
-    const { id } = e.currentTarget;
+  doneRequest = (done) => {
+    const {
+      title, description, reward, id
+    } = this.props;
     
+    const data = {
+      done : !done,
+      title,
+      description,
+      reward,
+      id
+    };
     setTimeout(() => {
-      this.props.doneQuest(id, !done);
+      this.props.updateQuest(data);
     }, 500);
   }
   
@@ -97,4 +106,4 @@ class Quest extends PureComponent {
   }
 }
 
-export default connect(null, { doneQuest })(Quest);
+export default connect(null, { updateQuest })(Quest);

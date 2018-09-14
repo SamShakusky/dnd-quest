@@ -83,7 +83,8 @@ class QuestManager extends PureComponent {
     
     this.source.addEventListener('data', (msg) => {
       const data = JSON.parse(msg.data);
-      console.log(data.data.title);
+      console.log(data);
+      // showQuests();
     });
   }
   

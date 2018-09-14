@@ -10,7 +10,4 @@ export const UPDATE_CAMPAIGN = 'UPDATE_CAMPAIGN';
 export const DELETE_CAMPAIGN = 'DELETE_CAMPAIGN';
 export const SET_CAMPAIGN = 'SET_CAMPAIGN';
 
-export const CREATE_QUEST = 'CREATE_QUEST';
-export const READ_QUESTS = 'READ_QUESTS';
-export const UPDATE_QUEST = 'UPDATE_QUEST';
-export const DELETE_QUEST = 'DELETE_QUEST';
+export const UPDATE_LIST = 'UPDATE_LIST';

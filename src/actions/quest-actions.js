@@ -1,22 +1,31 @@
 import axios from 'axios';
-import { CREATE_QUEST, READ_QUESTS, UPDATE_QUEST, DELETE_QUEST } from './types';
+import randomId from '../utils/random-id';
+import { UPDATE_LIST } from './types';
 
 import localhost from '../config/localhost';
 
 export const createQuest = questData => (dispatch, getState) => {
+  const { items } = getState().quests;
+  const id = randomId('q');
+  const data = { ...questData, id };
+  dispatch({
+    type    : UPDATE_LIST,
+    payload : [...items, { ...data }],
+  });
+  
   const { accessToken } = getState().user.credentials;
   const { currentCampaign } = getState().campaigns;
   const requestOptions = {
     method  : 'POST',
     url     : `${localhost}/api/Campaigns/${currentCampaign}/quests?access_token=${accessToken}`,
-    data    : JSON.stringify(questData),
+    data    : JSON.stringify(data),
     headers : { 'Content-Type' : 'application/json' }
   };
   
-  axios.request(requestOptions).then((response) => {
+  axios.request(requestOptions).catch((error) => {
     dispatch({
-      type    : CREATE_QUEST,
-      payload : response.data,
+      type    : UPDATE_LIST,
+      payload : items,
     });
   });
 };
@@ -27,22 +36,28 @@ export const readQuests = () => (dispatch, getState) => {
   axios.get(`${localhost}/api/Campaigns/${currentCampaign}/quests?access_token=${accessToken}`)
     .then((response) => {
       dispatch({
-        type    : READ_QUESTS,
+        type    : UPDATE_LIST,
         payload : response.data,
       });
     });
-    // const ass = JSON.stringify({ "where": { "state": "CA" } });
-    // axios.get(`/api/Quests/change-stream?_format=event-stream&options=${ass}&access_token=${accessToken}`)
-    // .then((response) => {
-    //   console.log('bbb',response);
-    // });
 };
 
-export const updateQuest = (questData, quests) => (dispatch, getState) => {
+export const updateQuest = questData => (dispatch, getState) => {
+  const { items } = getState().quests;
+  const index = items.findIndex(i => i.id === questData.id);
+  const questList = [...items];
+  
+  questList[index] = {
+    ...questData,
+  };
+  
+  dispatch({
+    type    : UPDATE_LIST,
+    payload : questList,
+  });
+  
   const { accessToken } = getState().user.credentials;
   const { currentCampaign } = getState().campaigns;
-  const index = quests.findIndex(i => i.id === questData.id);
-  const questList = [...quests];
   
   const requestOptions = {
     method  : 'PUT',
@@ -51,56 +66,32 @@ export const updateQuest = (questData, quests) => (dispatch, getState) => {
     headers : { 'Content-Type' : 'application/json' }
   };
   
-  axios.request(requestOptions).then((response) => {
-    questList[index] = {
-      ...response.data,
-      id : questData.id,
-    };
-    
+  axios.request(requestOptions).catch((error) => {
     dispatch({
-      type    : UPDATE_QUEST,
-      payload : questList,
+      type    : UPDATE_LIST,
+      payload : items,
     });
   });
 };
 
-export const deleteQuest = (questId, quests) => (dispatch, getState) => {
+export const deleteQuest = questId => (dispatch, getState) => {
+  const { items } = getState().quests;
+  let questList = [...items];
+  
+  questList = questList.filter(i => i.id !== questId);
+  dispatch({
+    type    : UPDATE_LIST,
+    payload : questList,
+  });
+  
   const { accessToken } = getState().user.credentials;
   const { currentCampaign } = getState().campaigns;
-  let questList = [...quests];
   
   axios.delete(`${localhost}/api/Campaigns/${currentCampaign}/quests/${questId}?access_token=${accessToken}`)
-    .then(() => {
-      questList = questList.filter(i => i.id !== questId);
+    .catch(() => {
       dispatch({
-        type    : DELETE_QUEST,
-        payload : questList,
+        type    : UPDATE_LIST,
+        payload : items,
       });
     });
-};
-
-export const doneQuest = (questId, newStatus) => (dispatch, getState) => {
-  const { accessToken } = getState().user.credentials;
-  const { currentCampaign } = getState().campaigns;
-  const questList = getState().quests.items;
-  const newList = [...questList];
-  const index = questList.findIndex(i => i.id === questId);
-  
-  const questData = { done : newStatus };
-  
-  const requestOptions = {
-    method  : 'PUT',
-    url     : `${localhost}/api/Campaigns/${currentCampaign}/quests/${questId}?access_token=${accessToken}`,
-    data    : JSON.stringify(questData),
-    headers : { 'Content-Type' : 'application/json' }
-  };
-  
-  axios.request(requestOptions).then((response) => {
-    newList[index].done = response.data.done;
-    
-    dispatch({
-      type    : UPDATE_QUEST,
-      payload : newList,
-    });
-  });
 };
