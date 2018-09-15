@@ -1,15 +1,19 @@
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import '../css/snackbar.css';
 
+import { clearError } from '../actions/error-actions';
+
 const modalRoot = document.getElementById('modal-root');
 
-export default class Snackbar extends PureComponent {
+class Snackbar extends PureComponent {
   static propTypes = {
-    message : PropTypes.string.isRequired,
-    duty    : PropTypes.oneOf(['normal', 'danger', 'success', 'warning']),
+    message    : PropTypes.string.isRequired,
+    duty       : PropTypes.oneOf(['normal', 'danger', 'success', 'warning']),
+    clearError : PropTypes.func.isRequired,
   };
   
   static defaultProps = {
@@ -23,6 +27,7 @@ export default class Snackbar extends PureComponent {
   
   componentDidMount() {
     modalRoot.appendChild(this.el);
+    this.clear();
   }
   
   componentWillUnmount() {
@@ -39,6 +44,10 @@ export default class Snackbar extends PureComponent {
     );
   }
   
+  clear = () => {
+    setTimeout(this.props.clearError, 4000);
+  }
+  
   render() {
     return ReactDOM.createPortal(
       this.bar,
@@ -46,3 +55,5 @@ export default class Snackbar extends PureComponent {
     );
   }
 }
+
+export default connect(null, { clearError })(Snackbar);

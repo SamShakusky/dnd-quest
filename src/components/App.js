@@ -9,6 +9,7 @@ import CampaignManager from './campaign-manager';
 import QuestManager from './quest-manager';
 import Spec from './spec';
 import Login from './login';
+import Snackbar from './snackbar';
 
 import store from '../store';
 import { checkUser } from '../actions/user-actions';
@@ -29,6 +30,7 @@ class App extends PureComponent {
     }),
     checkUser       : PropTypes.func.isRequired,
     currentCampaign : PropTypes.string,
+    error           : PropTypes.string.isRequired,
   };
   
   static defaultProps = {
@@ -93,7 +95,8 @@ class App extends PureComponent {
   }
   
   render() {
-    const { isAuth, credentials } = this.state;
+    const { isAuth, credentials, } = this.state;
+    const { error } = this.props;
     
     return (
       <BrowserRouter>
@@ -106,6 +109,7 @@ class App extends PureComponent {
               <PrivateRoute isAuth={isAuth} credentials={credentials} path="/manager" component={QuestManager} />
               <PrivateRoute isAuth={isAuth} path="/spec" component={Spec} />
             </Switch>
+            { error && <Snackbar duty="danger" message={error} /> }
           </div>
         </Provider>
       </BrowserRouter>
@@ -117,6 +121,7 @@ const mapStateToProps = state => ({
   credentials     : state.user.credentials,
   isAuth          : state.user.isAuth,
   currentCampaign : state.campaigns.currentCampaign,
+  error           : state.error.error,
 });
 
 export default connect(mapStateToProps, { checkUser, setCampaign })(App);

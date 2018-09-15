@@ -1,6 +1,7 @@
 import axios from 'axios';
 import randomId from '../utils/random-id';
 import { UPDATE_LIST } from './types';
+import { emitError } from './error-actions';
 
 import localhost from '../config/localhost';
 
@@ -23,11 +24,12 @@ export const createQuest = (questData, withRequest = true) => (dispatch, getStat
       headers : { 'Content-Type' : 'application/json' }
     };
     
-    axios.request(requestOptions).catch((error) => {
+    axios.request(requestOptions).catch(() => {
       dispatch({
         type    : UPDATE_LIST,
         payload : items,
       });
+      dispatch(emitError('Hmm, that quest somehow wasn\'t created. Please, try again.'));
     });
   }
 };
@@ -69,11 +71,12 @@ export const updateQuest = (questData, withRequest = true) => (dispatch, getStat
       headers : { 'Content-Type' : 'application/json' }
     };
     
-    axios.request(requestOptions).catch((error) => {
+    axios.request(requestOptions).catch(() => {
       dispatch({
         type    : UPDATE_LIST,
         payload : items,
       });
+      dispatch(emitError('Hmm, that quest somehow wasn\'t edited. Please, try again.'));
     });
   }
 };
@@ -98,6 +101,7 @@ export const deleteQuest = (questId, withRequest = true) => (dispatch, getState)
           type    : UPDATE_LIST,
           payload : items,
         });
+        dispatch(emitError('Hmm, that quest somehow wasn\'t deleted. Please, try again.'));
       });
   }
 };

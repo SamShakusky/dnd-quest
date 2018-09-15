@@ -11,3 +11,5 @@ export const DELETE_CAMPAIGN = 'DELETE_CAMPAIGN';
 export const SET_CAMPAIGN = 'SET_CAMPAIGN';
 
 export const UPDATE_LIST = 'UPDATE_LIST';
+
+export const ERROR_HANDLER = 'ERROR_HANDLER';
