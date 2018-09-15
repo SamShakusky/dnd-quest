@@ -107,10 +107,11 @@ export const subscribe = source => (dispatch, getState) => {
   source.addEventListener('data', (msg) => {
     const data = JSON.parse(msg.data);
     if (userId === data.dispatcher) return false;
+    
     const action = {
       create : createQuest(data.data, false),
       update : updateQuest(data.data, false),
-      delete : deleteQuest(data.data.id, false),
+      remove : deleteQuest(data.data.id, false),
     };
     
     return dispatch(action[data.type]);
