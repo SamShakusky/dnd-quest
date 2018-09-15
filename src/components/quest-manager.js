@@ -72,6 +72,7 @@ class QuestManager extends PureComponent {
       archiveVisibility : false,
       editing           : null,
       reward            : { items : [] },
+      done              : false,
     };
     
     this.formRef = React.createRef();
@@ -134,13 +135,13 @@ class QuestManager extends PureComponent {
       description,
       reward,
       editing,
+      done,
     } = this.state;
-    
-    const { quests } = this.props;
     
     const quest = {
       title,
       description,
+      done,
       reward : {
         ...reward,
         items : reward.items.filter(el => el.length)
@@ -149,7 +150,7 @@ class QuestManager extends PureComponent {
     };
     
     if (editing) {
-      this.props.updateQuest(quest, quests);
+      this.props.updateQuest(quest);
     } else {
       this.props.createQuest(quest);
     }
@@ -164,6 +165,7 @@ class QuestManager extends PureComponent {
       description : data.description,
       reward      : data.reward,
       editing     : id,
+      done        : data.done,
     });
     this.openForm();
   }
@@ -190,7 +192,8 @@ class QuestManager extends PureComponent {
         title       : '',
         description : '',
         reward      : { items : [] },
-        editing     : ''
+        editing     : '',
+        done        : false,
       };
     }
     this.setState({

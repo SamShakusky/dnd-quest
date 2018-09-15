@@ -24,7 +24,7 @@ export default class QuestList extends PureComponent {
           items.map((item) => {
             if ((isArchive && item.done) || (!isArchive && !item.done)) {
               return (
-                <Fragment>
+                <Fragment key={item.id}>
                   <Quest
                     title={item.title}
                     description={item.description}
