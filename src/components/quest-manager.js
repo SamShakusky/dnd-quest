@@ -15,6 +15,8 @@ import {
   createQuest,
   updateQuest,
   deleteQuest,
+  subscribe,
+  unsubscribe,
 } from '../actions/quest-actions';
 
 import '../css/quest-manager.css';
@@ -45,6 +47,8 @@ class QuestManager extends PureComponent {
     readQuests      : PropTypes.func.isRequired,
     updateQuest     : PropTypes.func.isRequired,
     deleteQuest     : PropTypes.func.isRequired,
+    subscribe       : PropTypes.func.isRequired,
+    unsubscribe     : PropTypes.func.isRequired,
     currentCampaign : PropTypes.string,
     accessToken     : PropTypes.string.isRequired,
     history         : PropTypes.shape({
@@ -80,16 +84,11 @@ class QuestManager extends PureComponent {
     if (!currentCampaign) this.props.history.push('/campaigns');
     
     showQuests();
-    
-    this.source.addEventListener('data', (msg) => {
-      const data = JSON.parse(msg.data);
-      console.log(data);
-      // showQuests();
-    });
+    this.props.subscribe(this.source);
   }
   
   componentWillUnmount() {
-    this.source.close();
+    this.props.unsubscribe(this.source);
   }
   
   onChange = (event) => {
@@ -319,4 +318,6 @@ export default withRouter(connect(mapStateToProps, {
   createQuest,
   updateQuest,
   deleteQuest,
+  subscribe,
+  unsubscribe,
 })(QuestManager));
