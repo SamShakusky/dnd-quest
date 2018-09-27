@@ -24,12 +24,16 @@ export const createQuest = (questData, withRequest = true) => (dispatch, getStat
       headers : { 'Content-Type' : 'application/json' }
     };
     
-    axios.request(requestOptions).catch(() => {
+    axios.request(requestOptions).catch((err) => {
+      const { error } = err.response.data;
+      let errMessage = 'Hmm, that quest somehow wasn\'t created. Please, try again.';
+      if (error.statusCode === 507) errMessage = error.message;
+      
       dispatch({
         type    : UPDATE_LIST,
         payload : items,
       });
-      dispatch(emitError('Hmm, that quest somehow wasn\'t created. Please, try again.'));
+      dispatch(emitError(errMessage));
     });
   }
 };
