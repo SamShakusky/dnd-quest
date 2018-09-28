@@ -1,6 +1,6 @@
-@import './import/importFile';
+@import './import/import-file';
 
-.header {
+.bar {
   background-color: $color_main_dark;
   padding: 12px 20px;
   color: #fff;
@@ -14,9 +14,8 @@
   min-height: 42px;
   z-index: 10;
   @include shadow(1);
-}
-
-.fullscreen {
-  align-self: flex-end;
-  margin-left: auto;
+  justify-content: space-between;
+  &__actions {
+    content: none;
+  }
 }

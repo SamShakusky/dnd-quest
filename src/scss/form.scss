@@ -1,0 +1,134 @@
+@import './import/import-file';
+
+.form {
+  width: 100%;
+  max-width: 300px;
+  background: $white;
+  z-index: 10;
+  @include shadow(1);
+  
+  button {
+    margin-top: 6px;
+    margin-bottom: 2px;
+  }
+}
+
+.form-title {
+  @extend %tp-h4;
+  padding: 36px 24px 6px;
+  color: $color_main;
+}
+
+.form-subtitle {
+  @extend %tp-p-xl;
+  padding: 0 24px 6px;
+  color: $color_main;
+}
+
+.form-change {
+  @extend %tp-p-xxs;
+  color: $grey_dark;
+  padding-top: 12px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  padding: 36px 12px 24px;
+  
+  button:not(:last-of-type) {
+    margin-right: 12px;
+  }
+}
+
+.simple-auth {
+  padding: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.quest-form {
+  width: 65vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid $grey_light;
+  background: $white;
+  z-index: 10;
+  border: 0;
+  height: calc(100vh - 60px);
+  @media all and (min-width: 1025px) {
+    width: 40vw;
+  }
+  
+  textarea {
+    height: 25vh;
+  }
+}
+
+.form-wrap {
+  padding: 24px 16px 64px;
+  overflow: auto;
+  position: relative;
+  width: 100%;
+}
+
+.form-label {
+  @extend %tp-p-xs;
+  margin-bottom: 18px;
+  color: $color_secondary;
+  &:not(:first-of-type) {
+    margin-top: 18px;
+  }
+}
+
+.rewards {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.coins {
+  display: flex;
+  justify-content: space-between;
+  
+  > div {
+    width: 30%;
+  }
+}
+
+.form_buttons {
+  align-self: flex-end;
+  position: absolute;
+  top: 16px;
+  right: 10px;
+}
+
+.input-wrap {
+  margin-bottom: 8px;
+}
+
+.members {
+  display: flex;
+  flex-direction: column;
+}
+
+.member {
+  align-items: center;
+  display: flex;
+  flex-basis: 100%;
+  justify-content: space-between;
+  @extend %tp-p-s;
+  padding: 12px;
+  &:nth-child(even) {
+    background: $grey_super-light;
+  }
+  &:nth-child(odd) {
+    background: $grey_light;
+  }
+}
+
+.members_add {
+  margin-bottom: 12px;
+}

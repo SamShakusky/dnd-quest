@@ -1,4 +1,4 @@
-@import './import/importFile';
+@import './import/import-file';
 
 @mixin buttonColor($color: $color_main) {
   &.button_shape {
@@ -8,45 +8,46 @@
       border-color: $color;
       color: $white;
       &:active {
+        @include shadow(3);
         background: darken($color, 10%);
         border-color: darken($color, 10%);
-        @include shadow(3);
       }
     }
     &_ghost {
       border-color: $color;
-      color: $color;
       border-width: 1px;
+      color: $color;
       &:active {
-        color: darken($color, 10%);
         border-color: darken($color, 10%);
+        color: darken($color, 10%);
       }
     }
     &_flat {
       color: $color;
       &:not(.button-icon_pure):active {
-        color: darken($color, 10%);
         background: $grey_light;
+        color: darken($color, 10%);
       }
     }
   }
 }
 
 .button {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
   @extend %button;
-  display: inline-flex;
   align-items: center;
-  border-radius: 2px;
-  text-transform: uppercase;
-  border-width: 2px;
-  border-style: solid;
-  outline: 0;
-  font-weight: 500;
   background: none;
   border-color: transparent;
-  transition: background .2s, border .2s, color .2s, box-shadow .2s;
+  border-radius: 2px;
+  border-style: solid;
+  border-width: 2px;
   cursor: pointer;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  display: inline-flex;
+  font-weight: 500;
+  outline: 0;
+  text-transform: uppercase;
+  transition: background .2s, border .2s, color .2s, box-shadow .2s, opacity .2s;
+  user-select: none;
   &:disabled {
     opacity: .4;
     pointer-events: none;
@@ -54,27 +55,27 @@
   &_size {
     &_sm {
       font-size: .8rem;
-      padding: 0 16px;
       height: 34px;
       line-height: 32px;
+      padding: 0 16px;
     }
     &_md {
       font-size: .9rem;
-      padding: 0 16px;
       height: 36px;
       line-height: 32px;
+      padding: 0 16px;
     }
     &_lg {
       font-size: .9rem;
-      padding: 0 16px;
       height: 36px;
       line-height: 32px;
+      padding: 0 16px;
     }
   }
   &_duty {
-    &_simple { @include buttonColor($color_main); }
-    &_danger { @include buttonColor($color_danger); }
-    &_success { @include buttonColor($color_success); }
+    &_simple:not(.button_inline) { @include buttonColor($color_main); }
+    &_danger:not(.button_inline) { @include buttonColor($color_danger); }
+    &_success:not(.button_inline) { @include buttonColor($color_success); }
   }
   &_full {
     width: 100%;
@@ -83,13 +84,27 @@
   &_sharp {
     border-radius: 0;
   }
+  &.button_inline {
+    background: transparent;
+    color: $color_main_light;
+    font-size: inherit;
+    font-weight: inherit;
+    height: auto;
+    line-height: inherit;
+    margin: 0;
+    padding: 0;
+    text-transform: none;
+    &:hover {
+      color : $color_main;
+    }
+  }
 }
 
 .button-icon {
   padding-left: 10px;
   i {
-    padding-right: 6px;
     margin-top: -2px;
+    padding-right: 6px;
   }
   &_pure {
     padding: 0;
@@ -98,28 +113,28 @@
 }
 
 .fab {
-  @include shadow(3);
-  height: 56px;
-  min-width: 56px;
-  max-width: 56px;
-  border: 0;
-  border-radius: 60px;
-  outline: none;
-  cursor: pointer;
-  font-size: 24px;
-  line-height: 14px;
-  background: $color_secondary;
-  color: $white;
-  transition: background .2;
-  position: fixed;
-  bottom: 16px;
-  z-index: 50;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
-  display: flex;
+  @include shadow(3);
   align-items: center;
-  justify-content: center;
   animation: FAB .4s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+  background: $color_secondary;
+  border-radius: 60px;
+  border: 0;
+  bottom: 16px;
+  color: $white;
+  cursor: pointer;
+  display: flex;
+  font-size: 24px;
+  height: 56px;
+  justify-content: center;
+  line-height: 14px;
+  max-width: 56px;
+  min-width: 56px;
+  outline: none;
+  position: fixed;
   transition: .4s max-width 3s;
+  transition: background .2;
+  z-index: 50;
   &_position {
     &_left {
       left: 16px;
@@ -133,52 +148,51 @@
   }
   &_expanded {
     animation: FAB-expanded .8s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
-    padding: 0 16px;
     justify-content: space-between;
+    padding: 0 16px;
     will-change: auto;
     .fab__label {
       @extend %tp-p-xs;
-      will-change: auto;
       display: inline;
-      text-transform: uppercase;
       letter-spacing: 0.05rem;
       padding-left: 8px;
+      text-transform: uppercase;
+      will-change: auto;
       
     }
   }
   
   &__label {
-    display: none;
-    // transform: translateX(20px);
-    opacity: 0;
-    max-width: 0;
-    padding-left: 0;
     animation: FAB-expanded-label .8s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+    display: none;
+    max-width: 0;
+    opacity: 0;
+    padding-left: 0;
   }
 }
 
 @keyframes FAB {
   from {
-    transform: scale(.8);
     opacity: .8;
+    transform: scale(.8);
   }
   to {
-    transform: scale(1);
     opacity: 1;
+    transform: scale(1);
   }
 }
 
 @keyframes FAB-expanded {
   0% {
-    transform: scale(.8);
-    opacity: .8;
     max-width: 300px;
+    opacity: .8;
+    transform: scale(.8);
   }
   50% {
     height: 56px;
     max-width: 300px;
-    transform: scale(1);
     opacity: 1;
+    transform: scale(1);
   }
   100% {
     height: 48px;
@@ -188,21 +202,21 @@
 
 @keyframes FAB-expanded-label {
   0% {
-    transform: translateX(20px);
     opacity: 0;
-    width: 0;
     padding-left: 0;
+    transform: translateX(20px);
+    width: 0;
   }
   50% {
-    transform: translateX(20px);
     opacity: 0;
-    width: 0;
     padding-left: 0;
+    transform: translateX(20px);
+    width: 0;
   }
   100% {
-    transform: translateX(0);
-    opacity: 1;
     max-width: 200px;
+    opacity: 1;
     padding-left: 8px;
+    transform: translateX(0);
   }
 }

@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import Formsy from 'formsy-react';
-import Button from './Button';
-import FloatingButton from './FloatingButton';
-import TextField from './TextField';
+import Button from './button';
+import FloatingButton from './floating-button';
+import TextField from './text-field';
 
-import '../css/Spec.css';
+import '../css/spec.css';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class Spec extends PureComponent {

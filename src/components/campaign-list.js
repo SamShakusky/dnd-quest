@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Quest from './Quest';
+import Campaign from './campaign';
 
-import '../css/QuestList.css';
+import '../css/campaign.css';
 
-export default class QuestList extends PureComponent {
+export default class CampaignList extends PureComponent {
   static propTypes = {
     items  : PropTypes.arrayOf(PropTypes.object).isRequired,
     onEdit : PropTypes.func.isRequired
@@ -14,16 +14,17 @@ export default class QuestList extends PureComponent {
     const { items, onEdit } = this.props;
     
     return (
-      <div styleName="quest-list">
+      <div styleName="campaign__list">
         {
           items.map(item => (
-            <Quest
+            <Campaign
               title={item.title}
               description={item.description}
               goal={item.goal}
               reward={item.reward}
-              key={item._id}
-              id={item._id}
+              key={item.id}
+              id={item.id}
+              ownerId={item.ownerId}
               onEdit={onEdit}
             />
             ))
@@ -32,8 +33,3 @@ export default class QuestList extends PureComponent {
     );
   }
 }
-
-QuestList.propTypes = {
-  items  : PropTypes.arrayOf(PropTypes.object).isRequired,
-  onEdit : PropTypes.func.isRequired
-};

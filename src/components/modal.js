@@ -2,25 +2,19 @@ import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-import '../css/SlidingPanel.css';
+import '../css/modal.css';
 
 const modalRoot = document.getElementById('modal-root');
 
-export default class SlidingPanel extends PureComponent {
+export default class Modal extends PureComponent {
   static propTypes = {
-    isShown   : PropTypes.bool,
-    side      : PropTypes.oneOf(['left', 'right']),
-    onClose   : PropTypes.func,
-    noOverlay : PropTypes.bool,
-    children  : PropTypes.node
+    isShown  : PropTypes.bool,
+    onClose  : PropTypes.func.isRequired,
+    children : PropTypes.node.isRequired
   };
   
   static defaultProps = {
-    isShown   : false,
-    side      : 'left',
-    noOverlay : false,
-    onClose   : null,
-    children  : null
+    isShown : false,
   };
   
   constructor(props) {
@@ -45,33 +39,29 @@ export default class SlidingPanel extends PureComponent {
     modalRoot.removeChild(this.el);
   }
   
-  render() {
+  get modal() {
     const {
       isShown,
-      side,
       onClose,
-      noOverlay
     } = this.props;
     
-    const Panel = (
-      <div styleName={`sliding-panel sliding-panel_side_${
-        side
-      } ${
-        isShown ? 'sliding-panel_active' : ''
-      } ${
-        noOverlay ? 'sliding-panel_no-overlay' : ''
+    return (
+      <div styleName={`modal ${
+        isShown ? 'modal_active' : ''
       }`}
       >
-        <div styleName="sliding-panel_body">
+        <div styleName="modal__body">
           {this.props.children}
         </div>
-        { <div onClick={onClose} styleName="sliding-panel_overlay" /> }
+        { <div onClick={onClose} styleName="modal__overlay" /> }
       </div>
     );
-    
+  }
+  
+  render() {
     return ReactDOM.createPortal(
-      Panel,
-      this.el
+      this.modal,
+      modalRoot
     );
   }
 }

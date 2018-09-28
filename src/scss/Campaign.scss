@@ -1,0 +1,43 @@
+@import './import/import-file';
+
+.campaign {
+    &__page {
+        padding: 120px 24px;
+    }
+    &__list {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &__card {
+        width: 270px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+        margin: 0 12px 24px;
+        padding-bottom: 32px;
+        text-align: center;
+        @include shadow(1);
+        transition: .2s box-shadow;
+        &:hover {
+            @include shadow(2);
+        }
+        
+        a {
+            @extend %tp-p-m;
+            background-color: $color_main;
+            color: $white;
+            padding: 12px 18px;
+            width: 100%;
+            margin-bottom: 24px;
+        }
+        
+        p {
+            @extend %tp-p-xs;
+            padding: 0 18px;
+            color: $grey_dark;
+        }
+    }
+}
