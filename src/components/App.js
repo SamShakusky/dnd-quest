@@ -51,22 +51,8 @@ class App extends PureComponent {
         accessToken : userCredentials.accessToken,
         userId      : userCredentials.userId,
       } : undefined,
-      readyForInstall : false,
-      prompt          : null,
     };
     this.checkAuth();
-  }
-  
-  componentDidMount() {
-    window.addEventListener('beforeinstallprompt', (e) => {
-      // Prevent Chrome 67 and earlier from automatically showing the prompt
-      e.preventDefault();
-      // Stash the event so it can be triggered later.
-      this.setState({
-        prompt          : e,
-        readyForInstall : true
-      });
-    });
   }
   
   componentDidUpdate(prevProps) {
@@ -108,24 +94,8 @@ class App extends PureComponent {
     else document.webkitCancelFullScreen();
   }
   
-  install = () => {
-    const { prompt } = this.state;
-    prompt.prompt();
-    prompt.userChoice
-      .then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          // console.log('User accepted the A2HS prompt');
-        } else {
-          // console.log('User dismissed the A2HS prompt');
-        }
-        this.setState({
-          prompt : null,
-        });
-      });
-  }
-  
   render() {
-    const { isAuth, credentials, readyForInstall } = this.state;
+    const { isAuth, credentials } = this.state;
     const { error } = this.props;
     
     return (
