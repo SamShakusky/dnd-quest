@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { SIGNIN_USER, SIGNOUT_USER, CHECK_USER, SIGN_ERROR, GET_USER } from './types';
 
-import localhost from '../config/localhost';
+// import localhost from '../config/localhost';
 
 export const signIn = userData => (dispatch) => {
   const requestOptions = {
     method  : 'POST',
-    url     : `${localhost}/api/Adventurers/login`,
+    url     : '/api/Adventurers/login',
     data    : JSON.stringify(userData),
     headers : { 'Content-Type' : 'application/json' }
   };
@@ -40,7 +40,7 @@ export const signIn = userData => (dispatch) => {
 export const signUp = userData => (dispatch) => {
   const requestOptions = {
     method  : 'POST',
-    url     : `${localhost}/api/Adventurers`,
+    url     : '/api/Adventurers',
     data    : JSON.stringify(userData),
     headers : { 'Content-Type' : 'application/json' }
   };
@@ -61,7 +61,7 @@ export const signOut = () => (dispatch, getState) => {
   const { accessToken } = getState().user.credentials;
   const requestOptions = {
     method : 'POST',
-    url    : `${localhost}/api/Adventurers/logout?access_token=${accessToken}`,
+    url    : `/api/Adventurers/logout?access_token=${accessToken}`,
   };
   
   axios.request(requestOptions).then(() => {
@@ -75,7 +75,7 @@ export const signOut = () => (dispatch, getState) => {
 
 export const checkUser = () => (dispatch, getState) => {
   const { accessToken, userId } = getState().user.credentials;
-  axios.get(`${localhost}/api/Adventurers/${userId}?access_token=${accessToken}`)
+  axios.get(`/api/Adventurers/${userId}?access_token=${accessToken}`)
     .then(() => {
       dispatch({
         type : CHECK_USER,
@@ -85,7 +85,7 @@ export const checkUser = () => (dispatch, getState) => {
 
 export const getUser = userId => (dispatch, getState) => {
   const { accessToken } = getState().user.credentials;
-  axios.get(`${localhost}/api/Adventurers/${userId}?access_token=${accessToken}`)
+  axios.get(`/api/Adventurers/${userId}?access_token=${accessToken}`)
     .then((response) => {
       const { id, username } = response.data;
       dispatch({
