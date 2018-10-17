@@ -9,6 +9,7 @@ import CampaignManager from './campaign-manager';
 import QuestManager from './quest-manager';
 import Spec from './spec';
 import Login from './login';
+import Alpha from './alpha';
 import Snackbar from './snackbar';
 
 import store from '../store';
@@ -75,6 +76,7 @@ class App extends PureComponent {
             <Switch>
               <Redirect exact from="/" to={this.getBasicRedirect()} />
               <Route path="/login" render={props => <Login {...props} isAuth={isAuth} />} />
+              <Route path="/alpha" render={() => <Alpha />} />
               <PrivateRoute isAuth={isAuth} credentials={credentials} path="/campaigns" component={CampaignManager} />
               <PrivateRoute isAuth={isAuth} credentials={credentials} path="/manager" component={QuestManager} />
               <PrivateRoute isAuth={isAuth} path="/spec" component={Spec} />
