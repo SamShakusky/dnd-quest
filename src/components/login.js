@@ -9,15 +9,11 @@ import '../css/main.css';
 /* eslint-disable react/prefer-stateless-function */
 export default class Login extends PureComponent {
   static propTypes = {
-    isAuth   : PropTypes.bool,
+    isAuth   : PropTypes.bool.isRequired,
     location : PropTypes.shape({
       state : PropTypes.object
     }).isRequired
   };
-  
-  static defaultProps = {
-    isAuth : false
-  }
   
   render() {
     const { isAuth } = this.props;

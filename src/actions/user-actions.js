@@ -78,7 +78,13 @@ export const checkUser = () => (dispatch, getState) => {
   axios.get(`/api/Adventurers/${userId}?access_token=${accessToken}`)
     .then(() => {
       dispatch({
-        type : CHECK_USER,
+        type    : CHECK_USER,
+        payload : true,
+      });
+    }).catch(() => {
+      dispatch({
+        type    : CHECK_USER,
+        payload : false,
       });
     });
 };

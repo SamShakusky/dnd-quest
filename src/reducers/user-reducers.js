@@ -9,6 +9,7 @@ const initialState = {
     accessToken : initToken,
     userId      : initId,
   } : {},
+  isAuth : !!(initToken && initId),
 };
 
 export default (state = initialState, action) => {
@@ -28,7 +29,7 @@ export default (state = initialState, action) => {
     case CHECK_USER:
       return {
         ...state,
-        isAuth : true
+        isAuth : action.payload
       };
     case SIGN_ERROR:
       return {

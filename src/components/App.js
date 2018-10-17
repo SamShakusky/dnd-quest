@@ -18,11 +18,9 @@ import {
   setCampaign,
 } from '../actions/campaign-actions';
 
-const html = document.getElementById('html');
-
 class App extends PureComponent {
   static propTypes = {
-    isAuth      : PropTypes.bool,
+    isAuth      : PropTypes.bool.isRequired,
     credentials : PropTypes.shape({
       accessToken  : PropTypes.string,
       tokenCreated : PropTypes.number,
@@ -34,7 +32,6 @@ class App extends PureComponent {
   };
   
   static defaultProps = {
-    isAuth          : false,
     credentials     : {},
     currentCampaign : '',
   };
@@ -42,45 +39,24 @@ class App extends PureComponent {
   constructor(props) {
     super(props);
     
-    const userCredentials = JSON.parse(localStorage.getItem('user_credentials'));
-    
     this.state = {
       menuVisibility : false,
-      isAuth         : false,
-      credentials    : userCredentials ? {
-        accessToken : userCredentials.accessToken,
-        userId      : userCredentials.userId,
-      } : undefined,
     };
     this.checkAuth();
   }
   
-  componentDidUpdate(prevProps) {
-    const { credentials, isAuth } = this.props;
+  getBasicRedirect = () => {
+    const { currentCampaign } = this.props;
+    const redirectTo = currentCampaign ? '/manager' : '/campaigns';
     
-    if (credentials !== prevProps.credentials) {
-      this.setState({ // eslint-disable-line react/no-did-update-set-state
-        credentials,
-        isAuth,
-      });
-    } else if (isAuth !== prevProps.isAuth) {
-      this.setState({ // eslint-disable-line react/no-did-update-set-state
-        isAuth,
-      });
-    }
+    return redirectTo;
   }
   
   checkAuth() {
-    const { credentials } = this.state;
+    const { credentials } = this.props;
     if (!credentials) return false;
     
     return this.props.checkUser();
-  }
-  
-  logIn = () => {
-    this.setState({
-      isAuth : true,
-    });
   }
   
   toggleMenu = () => {
@@ -89,21 +65,15 @@ class App extends PureComponent {
     });
   }
   
-  toggleFullscreen = () => {
-    if (!document.webkitFullscreenElement) html.webkitRequestFullScreen();
-    else document.webkitCancelFullScreen();
-  }
-  
   render() {
-    const { isAuth, credentials } = this.state;
-    const { error } = this.props;
+    const { isAuth, credentials, error } = this.props;
     
     return (
       <BrowserRouter>
         <Provider store={store}>
           <div className="App">
             <Switch>
-              <Redirect exact from="/" to="/manager" />
+              <Redirect exact from="/" to={this.getBasicRedirect()} />
               <Route path="/login" render={props => <Login {...props} isAuth={isAuth} />} />
               <PrivateRoute isAuth={isAuth} credentials={credentials} path="/campaigns" component={CampaignManager} />
               <PrivateRoute isAuth={isAuth} credentials={credentials} path="/manager" component={QuestManager} />
