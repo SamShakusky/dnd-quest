@@ -5,18 +5,67 @@
     justify-content: center;
     min-height: 100vh;
     width: 100%;
+    background: $white;
+}
+
+.title__wrap {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
     padding: 32px 24px 60px;
 }
 
 .title {
     @extend %tp-h1;
     display: flex;
-    color: $color_secondary_dark;
+    align-self: baseline;
+    color: $white;
     font-weight: 600;
+    padding: 0 24px 2px 18px;
+    letter-spacing: 1px;
+    background: $color_main;
 }
 
 .sign {
     @extend %tp-h3;
-    color: $color_main_light;
+    color: $white;
     font-weight: 100;
+}
+
+.form__wrap {
+    width: 60%;
+    background: $color_main;
+    padding: 32px 32px 60px;
+    height: 100vh;
+    overflow: auto;
+    @include shadow(2);
+}
+
+.form__title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    p {
+        @extend %tp-h2;
+        color: $color_main;
+        background: $white;
+        padding: 0 24px 2px 18px;
+        font-weight: 600;
+    }
+}
+
+.party__title {
+    @extend %tp-h4;
+    color: $white;
+    margin-top: 90px;
+}
+
+.form {
+    margin-top: 32px;
+    width: 60%;
+    
+    > div {
+        padding: 18px 24px 2px;
+        background: $white;
+    }
 }
