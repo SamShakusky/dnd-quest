@@ -28,9 +28,9 @@ const scrollMap = {
 
 const rewardShape = {
   items  : PropTypes.arrayOf(PropTypes.string),
-  gold   : PropTypes.number,
-  silver : PropTypes.number,
-  copper : PropTypes.number,
+  gold   : PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  silver : PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  copper : PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 const questShape = {
@@ -105,11 +105,13 @@ class QuestManager extends PureComponent {
     const { target } = event;
     const { name } = target;
     
+    const amount = +target.value > 0 ? +target.value : '';
+    
     this.setState({
       ...this.state,
       reward : {
         ...this.state.reward,
-        [name] : +target.value
+        [name] : amount
       }
     });
   }
