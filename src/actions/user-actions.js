@@ -66,7 +66,7 @@ export const createParty = emails => (dispatch) => {
   };
   const requestOptions = {
     method  : 'POST',
-    url     : '/api/Party',
+    url     : '/api/Parties',
     data    : JSON.stringify(party),
     headers : { 'Content-Type' : 'application/json' }
   };
