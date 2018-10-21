@@ -7,9 +7,49 @@ import TextField from './text-field';
 
 import '../css/alpha.css';
 
+const rpClasses = [
+  'mightyfighter',
+  'agileranger',
+  'nerfedwizard',
+  'trickyrogue',
+  'lawfulpaladin',
+  'charismaticbard',
+  'kindcleric',
+  'ragingbarbarian',
+  'calmmonk',
+  'arcanesorcerer',
+  'homelessdruid',
+  'lovecraftianwarlock',
+];
+
 export default class Alpha extends PureComponent {
     state = {
-      ass : false,
+      members : 1,
+    }
+    
+    getTextFields = () => {
+      const { members } = this.state;
+      const fields = [];
+      
+      for (let i = 0; i < members; i += 1) {
+        const cls = i < 12 ? rpClasses[i] : 'wowsomanyfriends';
+        fields.push(<TextField
+          key={`email-${i}`}
+          name={`email-${i}`}
+          validations="isEmail"
+          placeholder={`${cls}@example.com`}
+        />);
+      }
+      
+      return fields;
+    }
+    
+    addMember = () => {
+      const { members } = this.state;
+      
+      this.setState({
+        members : members + 1
+      });
     }
     
     render() {
@@ -18,12 +58,26 @@ export default class Alpha extends PureComponent {
           styleName="container"
         >
           <div styleName="title__wrap">
-            <p styleName="title">Adventure</p>
-            <p styleName="title">
-              Companion
-              <span styleName="sign">α</span>
-            </p>
-            
+            <div>
+              <p styleName="title">Adventure</p>
+              <p styleName="title">
+                Companion
+                <span styleName="sign">α</span>
+              </p>
+            </div>
+            <div>
+              <p styleName="disclaimer">
+                These emails will never be shared with any 3rd parties,
+                such as evil cults of all sorts or advertisement-mongers.
+                Nor will it be used with any intention other than informing
+                on the Closed Alpha&apos;s status and ranting about the
+                meaninglessness of a pineapple pizza.
+              </p>
+              <p styleName="disclaimer">
+                All user-created data may probably be lost at the end of the Closed Alpha
+                in a bizzare accident of some kind or by the will of the God of Removal (aka Rm-Rf).
+              </p>
+            </div>
           </div>
           <div styleName="form__wrap">
             <div styleName="form__title">
@@ -34,25 +88,23 @@ export default class Alpha extends PureComponent {
             <Formsy
               styleName="form"
             >
-              <div>
-                <TextField
-                  label="Username"
-                  name="username"
-                  validations={{
-                    minLength      : 4,
-                    maxLength      : 20,
-                    isAlphanumeric : true
-                  }}
-                  validationErrors={{
-                    minLength      : 'Must be between 4 and 20 characters',
-                    maxLength      : 'Must be between 4 and 20 characters',
-                    isAlphanumeric : 'Must only contain letters or numbers'
-                  }}
-                  message="Only letters and numbers"
-                  required
+              <div styleName="fields-container">
+                {this.getTextFields()}
+                <Button
+                  label="Add member"
+                  shape="flat"
+                  duty="success"
+                  size="sm"
+                  icon="add"
+                  onClick={this.addMember}
                 />
               </div>
-              <Button label="Submit" type="submit" shape="ghost" />
+              <Button
+                duty="success"
+                label="Send"
+                type="submit"
+                shape="solid"
+              />
             </Formsy>
           </div>
         </main>

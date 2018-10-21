@@ -17,7 +17,7 @@ export default class Button extends PureComponent {
     label        : PropTypes.string,
     size         : PropTypes.oneOf(['sm', 'md', 'lg']),
     shape        : PropTypes.oneOf(['solid', 'ghost', 'flat', 'inline']),
-    duty         : PropTypes.oneOf(['simple', 'danger', 'success']),
+    duty         : PropTypes.oneOf(['simple', 'light', 'danger', 'success']),
     onClick      : PropTypes.func,
     disabled     : PropTypes.bool,
     className    : PropTypes.string,

@@ -11,7 +11,7 @@ class TextField extends PureComponent {
     value           : PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     placeholder     : PropTypes.string,
     name            : PropTypes.string.isRequired,
-    label           : PropTypes.string.isRequired,
+    label           : PropTypes.string,
     width           : PropTypes.oneOf(['full', 'min']),
     disabled        : PropTypes.bool,
     onChange        : PropTypes.func,
@@ -27,7 +27,8 @@ class TextField extends PureComponent {
   };
 
   static defaultProps = {
-    value           : '',
+    value           : undefined,
+    label           : '',
     placeholder     : '',
     width           : 'full',
     disabled        : false,

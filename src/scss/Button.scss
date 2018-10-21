@@ -69,11 +69,12 @@
       font-size: .9rem;
       height: 36px;
       line-height: 32px;
-      padding: 0 16px;
+      padding: 0 16px; 
     }
   }
   &_duty {
     &_simple:not(.button_inline) { @include buttonColor($color_main); }
+    &_light:not(.button_inline) { @include buttonColor($white); }
     &_danger:not(.button_inline) { @include buttonColor($color_danger); }
     &_success:not(.button_inline) { @include buttonColor($color_success); }
   }
@@ -99,7 +100,6 @@
     }
   }
 }
-
 .button-icon {
   padding-left: 10px;
   i {
