@@ -29,6 +29,8 @@ const rpClasses = [
   'lovecraftianwarlock',
 ];
 
+const submittedFlag = JSON.parse(localStorage.getItem('submitted'));
+
 class Alpha extends PureComponent {
     static propTypes = {
       emitError   : PropTypes.func.isRequired,
@@ -37,13 +39,18 @@ class Alpha extends PureComponent {
     };
   
     state = {
-      members : 1,
+      members   : 1,
+      submitted : submittedFlag,
     }
     
     onSubmit = (data) => {
       const emails = Object.values(data).filter(Boolean);
       
       if (!emails.length) return this.props.emitError('Please enter at least one email');
+      
+      this.setState({
+        submitted : true
+      });
       
       return this.props.createParty(emails);
     }
@@ -73,6 +80,42 @@ class Alpha extends PureComponent {
       return fields;
     }
     
+    getForm = () => (
+      <Formsy
+        styleName="form"
+        onValidSubmit={this.onSubmit}
+        onInvalidSubmit={this.onInvalidSubmit}
+      >
+        <p styleName="party__title">Create a party</p>
+        <div styleName="fields-container">
+          {this.getTextFields()}
+          <Button
+            label="Add member"
+            shape="flat"
+            duty="success"
+            size="sm"
+            icon="add"
+            onClick={this.addMember}
+          />
+        </div>
+        <Button
+          duty="success"
+          label="Send"
+          type="submit"
+          shape="solid"
+        />
+      </Formsy>
+    )
+    
+    getThanks = () => (
+      <div styleName="thanks-text">
+        <h3>Done!</h3>
+        <p>A confirmation will be sent to the specified email addresses in a few moments.</p>
+        <p>As soon as the Closed Alpha is available, you will receive another notice.</p>
+        <p>Thank you for your interest and may the Lembas guide you.</p>
+      </div>
+    );
+    
     textFieldChange = (event) => {
       const { target } = event;
       const { name } = target;
@@ -92,6 +135,7 @@ class Alpha extends PureComponent {
     
     render() {
       const { error } = this.props;
+      const { submitted } = this.state;
       
       return (
         <main
@@ -117,6 +161,9 @@ class Alpha extends PureComponent {
                 All user-created data may probably be lost at the end of the Closed Alpha
                 in a bizzare accident of some kind or by the will of the God of Removal (aka Rm-Rf).
               </p>
+              <p styleName="disclaimer">
+                By clicking &laquo;send&raquo; you are agreeing to these terms.
+              </p>
             </div>
           </div>
           <div styleName="form__wrap">
@@ -124,30 +171,7 @@ class Alpha extends PureComponent {
               <p>Join</p>
               <p>Closed Alpha</p>
             </div>
-            <p styleName="party__title">Create a party</p>
-            <Formsy
-              styleName="form"
-              onValidSubmit={this.onSubmit}
-              onInvalidSubmit={this.onInvalidSubmit}
-            >
-              <div styleName="fields-container">
-                {this.getTextFields()}
-                <Button
-                  label="Add member"
-                  shape="flat"
-                  duty="success"
-                  size="sm"
-                  icon="add"
-                  onClick={this.addMember}
-                />
-              </div>
-              <Button
-                duty="success"
-                label="Send"
-                type="submit"
-                shape="solid"
-              />
-            </Formsy>
+            { submitted ? this.getThanks() : this.getForm() }
           </div>
           { error && <Snackbar duty="danger" message={error} /> }
         </main>

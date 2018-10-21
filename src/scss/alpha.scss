@@ -41,7 +41,7 @@
 .disclaimer {
     @extend %tp-p-xs;
     color: $grey;
-    &:last-of-type {
+    &:not(:first-of-type) {
         margin-top: 12px;
     }
 }
@@ -59,6 +59,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    margin-bottom: 20vh;
     p {
         @extend %tp-h2;
         color: $color_main;
@@ -71,11 +72,11 @@
 .party__title {
     @extend %tp-h4;
     color: $white;
-    margin-top: 20vh;
+    margin-bottom: 24px;
+    align-self: flex-start;
 }
 
 .form {
-    margin-top: 24px;
     width: 60%;
     display: flex;
     flex-direction: column;
@@ -90,5 +91,19 @@
     
     > button {
         margin-top: -12px;
+    }
+}
+
+.thanks-text {
+    color: $white;
+    
+    h3 {
+        @extend %tp-h4;
+        margin-bottom: 12px;
+    }
+    
+    p {
+        @extend %tp-p-l;
+        margin-bottom: 6px;
     }
 }

@@ -72,6 +72,9 @@ export const createParty = emails => (dispatch) => {
   };
   
   axios.request(requestOptions)
+    .then(() => {
+      localStorage.setItem('submitted', true);
+    })
     .catch(() => {
       dispatch(emitError('Something went wrong. Please try again'));
     });
