@@ -27,7 +27,7 @@ class TextField extends PureComponent {
   };
 
   static defaultProps = {
-    value           : undefined,
+    value           : '',
     label           : '',
     placeholder     : '',
     width           : 'full',

@@ -1,5 +1,7 @@
 import axios from 'axios';
+import randomId from '../utils/random-id';
 import { SIGNIN_USER, SIGNOUT_USER, CHECK_USER, SIGN_ERROR, GET_USER } from './types';
+import { emitError } from './error-actions';
 
 // import localhost from '../config/localhost';
 
@@ -54,6 +56,24 @@ export const signUp = userData => (dispatch) => {
         type    : SIGN_ERROR,
         payload : error.response
       });
+    });
+};
+
+export const createParty = emails => (dispatch) => {
+  const party = {
+    id : randomId('p'),
+    emails
+  };
+  const requestOptions = {
+    method  : 'POST',
+    url     : '/api/Party',
+    data    : JSON.stringify(party),
+    headers : { 'Content-Type' : 'application/json' }
+  };
+  
+  axios.request(requestOptions)
+    .catch(() => {
+      dispatch(emitError('Something went wrong. Please try again'));
     });
 };
 

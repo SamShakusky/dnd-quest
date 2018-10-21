@@ -1,9 +1,16 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 
 import Formsy from 'formsy-react';
 
 import Button from './button';
 import TextField from './text-field';
+import Snackbar from './snackbar';
+
+import { emitError } from '../actions/error-actions';
+import { createParty } from '../actions/user-actions';
 
 import '../css/alpha.css';
 
@@ -22,9 +29,28 @@ const rpClasses = [
   'lovecraftianwarlock',
 ];
 
-export default class Alpha extends PureComponent {
+class Alpha extends PureComponent {
+    static propTypes = {
+      emitError   : PropTypes.func.isRequired,
+      createParty : PropTypes.func.isRequired,
+      error       : PropTypes.string.isRequired,
+    };
+  
     state = {
       members : 1,
+    }
+    
+    onSubmit = (data) => {
+      const emails = Object.values(data).filter(Boolean);
+      
+      if (!emails.length) return this.props.emitError('Please enter at least one email');
+      
+      return this.props.createParty(emails);
+    }
+    
+    onInvalidSubmit = () => {
+      const error = 'At least one of the emails is invalid';
+      this.props.emitError(error);
     }
     
     getTextFields = () => {
@@ -36,12 +62,24 @@ export default class Alpha extends PureComponent {
         fields.push(<TextField
           key={`email-${i}`}
           name={`email-${i}`}
+          value={this.state[`email-${i}`]}
           validations="isEmail"
           placeholder={`${cls}@example.com`}
+          type="email"
+          onChange={this.textFieldChange}
         />);
       }
       
       return fields;
+    }
+    
+    textFieldChange = (event) => {
+      const { target } = event;
+      const { name } = target;
+      
+      this.setState({
+        [name] : target.value
+      });
     }
     
     addMember = () => {
@@ -53,6 +91,8 @@ export default class Alpha extends PureComponent {
     }
     
     render() {
+      const { error } = this.props;
+      
       return (
         <main
           styleName="container"
@@ -87,6 +127,8 @@ export default class Alpha extends PureComponent {
             <p styleName="party__title">Create a party</p>
             <Formsy
               styleName="form"
+              onValidSubmit={this.onSubmit}
+              onInvalidSubmit={this.onInvalidSubmit}
             >
               <div styleName="fields-container">
                 {this.getTextFields()}
@@ -107,7 +149,14 @@ export default class Alpha extends PureComponent {
               />
             </Formsy>
           </div>
+          { error && <Snackbar duty="danger" message={error} /> }
         </main>
       );
     }
 }
+
+const mapStateToProps = state => ({
+  error : state.error.error,
+});
+
+export default connect(mapStateToProps, { emitError, createParty })(Alpha);
