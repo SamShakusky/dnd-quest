@@ -12,10 +12,10 @@ const initToken = userCredentials && userCredentials.accessToken;
 const initId = userCredentials && userCredentials.userId;
 
 const initialState = {
-  credentials : initToken && initId ? {
-    accessToken : initToken,
-    userId      : initId,
-  } : {},
+  credentials : {
+    accessToken : initToken || '',
+    userId      : initId || '',
+  },
   isAuth : !!(initToken && initId),
 };
 
@@ -30,8 +30,11 @@ export default (state = initialState, action) => {
     case SIGNOUT_USER:
       return {
         ...state,
-        credentials : null,
-        isAuth      : false,
+        credentials : {
+          accessToken : '',
+          userId      : '',
+        },
+        isAuth : false,
       };
     case CHECK_USER:
       return {

@@ -54,8 +54,8 @@ class App extends PureComponent {
   }
   
   checkAuth() {
-    const { credentials } = this.props;
-    if (!credentials) return false;
+    const { accessToken, userId } = this.props.credentials;
+    if (!accessToken || !userId) return false;
     
     return this.props.checkUser();
   }
