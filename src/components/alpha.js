@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-
+import ReCAPTCHA from 'react-google-recaptcha';
 import Formsy from 'formsy-react';
 
 import Button from './button';
@@ -41,6 +41,7 @@ class Alpha extends PureComponent {
     state = {
       members   : 1,
       submitted : submittedFlag,
+      captcha   : false,
     }
     
     onSubmit = (data) => {
@@ -98,11 +99,17 @@ class Alpha extends PureComponent {
             onClick={this.addMember}
           />
         </div>
+        <ReCAPTCHA
+          sitekey="6Lc0bXYUAAAAAEldqyVZdwbgB_-iSbqGzM4Cxzvo"
+          onChange={this.successfulCaptcha}
+          styleName="recaptcha"
+        />
         <Button
           duty="success"
           label="Send"
           type="submit"
           shape="solid"
+          disabled={!this.state.captcha}
         />
       </Formsy>
     )
@@ -130,6 +137,12 @@ class Alpha extends PureComponent {
       
       this.setState({
         members : members + 1
+      });
+    }
+    
+    successfulCaptcha = () => {
+      this.setState({
+        captcha : true,
       });
     }
     

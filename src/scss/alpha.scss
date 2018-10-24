@@ -130,7 +130,7 @@
     width: 60%;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
     
     @media all and (max-width: 1159px) {
         width: 100%;
@@ -164,4 +164,8 @@
         @extend %tp-p-l;
         margin-bottom: 6px;
     }
+}
+
+.recaptcha {
+    margin-bottom: 10px;
 }
