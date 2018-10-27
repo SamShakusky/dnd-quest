@@ -88,6 +88,8 @@ class AuthForm extends PureComponent {
   }
   
   get signInForm() {
+    document.title = 'Sign In – Adventure Companion';
+    
     const { username, password, isValid } = this.state;
     
     return (
@@ -124,6 +126,8 @@ class AuthForm extends PureComponent {
   }
   
   get signUpForm() {
+    document.title = 'Sign Up – Adventure Companion';
+    
     const {
       username,
       password,

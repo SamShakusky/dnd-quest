@@ -83,13 +83,15 @@ class QuestManager extends PureComponent {
   }
   
   componentDidMount() {
+    document.title = 'My Quests – Adventure Companion';
+    
     const { readQuests: showQuests, currentCampaign } = this.props;
     if (!currentCampaign) this.props.history.push('/campaigns');
     
     showQuests();
     this.props.subscribe(this.source);
   }
-  
+
   componentWillUnmount() {
     this.props.unsubscribe(this.source);
   }

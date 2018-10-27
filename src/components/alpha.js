@@ -44,6 +44,10 @@ class Alpha extends PureComponent {
       captcha   : false,
     }
     
+    componentDidMount() {
+      document.title = 'Join Alpha – Adventure Companion';
+    }
+    
     onSubmit = (data) => {
       const emails = Object.values(data).filter(Boolean);
       

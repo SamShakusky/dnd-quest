@@ -49,6 +49,7 @@ class CampaignManager extends PureComponent {
   }
   
   componentDidMount() {
+    document.title = 'My Campaigns – Adventure Companion';
     this.props.readCampaigns();
   }
   
