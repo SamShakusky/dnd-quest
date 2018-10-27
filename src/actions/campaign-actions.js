@@ -7,7 +7,7 @@ import {
   SET_CAMPAIGN,
 } from './types';
 
-// import localhost from '../config/localhost';
+import localhost from '../config/localhost';
 
 export const createCampaign = campaignData => (dispatch, getState) => {
   const { accessToken, userId } = getState().user.credentials;
@@ -18,7 +18,7 @@ export const createCampaign = campaignData => (dispatch, getState) => {
   };
   const requestOptions = {
     method  : 'POST',
-    url     : `/api/Campaigns?access_token=${accessToken}`,
+    url     : `${localhost}/api/Campaigns?access_token=${accessToken}`,
     data    : JSON.stringify(data),
     headers : { 'Content-Type' : 'application/json' }
   };
@@ -33,7 +33,7 @@ export const createCampaign = campaignData => (dispatch, getState) => {
 
 export const readCampaigns = () => (dispatch, getState) => {
   const { accessToken, userId } = getState().user.credentials;
-  axios.get(`/api/Campaigns/membership?adventurerId=${userId}&access_token=${accessToken}`)
+  axios.get(`${localhost}/api/Campaigns/membership?adventurerId=${userId}&access_token=${accessToken}`)
     .then((response) => {
       dispatch({
         type    : READ_CAMPAIGNS,
@@ -51,7 +51,7 @@ export const updateCampaign = (campaignData, campaigns) => (dispatch, getState) 
   
   const requestOptions = {
     method  : 'PUT',
-    url     : `/api/Campaigns/${campaignData.id}?access_token=${accessToken}`,
+    url     : `${localhost}/api/Campaigns/${campaignData.id}?access_token=${accessToken}`,
     data    : JSON.stringify({ ...oldData, ...newData }),
     headers : { 'Content-Type' : 'application/json' }
   };
@@ -72,7 +72,7 @@ export const deleteCampaign = (campaignId, campaigns) => (dispatch, getState) =>
   const { accessToken } = getState().user.credentials;
   let campaignList = [...campaigns];
   
-  axios.delete(`/api/Campaigns/${campaignId}?access_token=${accessToken}`)
+  axios.delete(`${localhost}/api/Campaigns/${campaignId}?access_token=${accessToken}`)
     .then(() => {
       campaignList = campaignList.filter(i => i.id !== campaignId);
       dispatch({

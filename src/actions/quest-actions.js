@@ -3,7 +3,7 @@ import randomId from '../utils/random-id';
 import { UPDATE_LIST } from './types';
 import { emitError } from './error-actions';
 
-// import localhost from '../config/localhost';
+import localhost from '../config/localhost';
 
 export const createQuest = (questData, withRequest = true) => (dispatch, getState) => {
   const { items } = getState().quests;
@@ -19,7 +19,7 @@ export const createQuest = (questData, withRequest = true) => (dispatch, getStat
     const { currentCampaign } = getState().campaigns;
     const requestOptions = {
       method  : 'POST',
-      url     : `/api/Campaigns/${currentCampaign}/quests?access_token=${accessToken}`,
+      url     : `${localhost}/api/Campaigns/${currentCampaign}/quests?access_token=${accessToken}`,
       data    : JSON.stringify(data),
       headers : { 'Content-Type' : 'application/json' }
     };
@@ -41,7 +41,7 @@ export const createQuest = (questData, withRequest = true) => (dispatch, getStat
 export const readQuests = () => (dispatch, getState) => {
   const { accessToken } = getState().user.credentials;
   const { currentCampaign } = getState().campaigns;
-  axios.get(`/api/Campaigns/${currentCampaign}/quests?access_token=${accessToken}`)
+  axios.get(`${localhost}/api/Campaigns/${currentCampaign}/quests?access_token=${accessToken}`)
     .then((response) => {
       dispatch({
         type    : UPDATE_LIST,
@@ -70,7 +70,7 @@ export const updateQuest = (questData, withRequest = true) => (dispatch, getStat
     
     const requestOptions = {
       method  : 'PUT',
-      url     : `/api/Campaigns/${currentCampaign}/quests/${questData.id}?access_token=${accessToken}`,
+      url     : `${localhost}/api/Campaigns/${currentCampaign}/quests/${questData.id}?access_token=${accessToken}`,
       data    : JSON.stringify(questData),
       headers : { 'Content-Type' : 'application/json' }
     };
@@ -99,7 +99,7 @@ export const deleteQuest = (questId, withRequest = true) => (dispatch, getState)
     const { accessToken } = getState().user.credentials;
     const { currentCampaign } = getState().campaigns;
     
-    axios.delete(`/api/Campaigns/${currentCampaign}/quests/${questId}?access_token=${accessToken}`)
+    axios.delete(`${localhost}/api/Campaigns/${currentCampaign}/quests/${questId}?access_token=${accessToken}`)
       .catch(() => {
         dispatch({
           type    : UPDATE_LIST,

@@ -10,6 +10,8 @@ import FloatingButton from './floating-button';
 import SlidingPanel from './sliding-panel';
 import AppBar from './app-bar';
 
+import localhost from '../config/localhost';
+
 import {
   readQuests,
   createQuest,
@@ -76,7 +78,7 @@ class QuestManager extends PureComponent {
     };
     
     this.formRef = React.createRef();
-    this.url = `/api/Campaigns/${props.currentCampaign}/changes?_format=event-stream&access_token=${props.accessToken}`;
+    this.url = `${localhost}/api/Campaigns/${props.currentCampaign}/changes?_format=event-stream&access_token=${props.accessToken}`;
     this.source = new EventSource(this.url);
   }
   
