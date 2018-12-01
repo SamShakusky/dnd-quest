@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import PrivateRoute from './helpers/private-route';
 
+import AdminPanel from './admin-panel';
 import CampaignManager from './campaign-manager';
 import QuestManager from './quest-manager';
 import Spec from './spec';
@@ -77,6 +78,7 @@ class App extends PureComponent {
               <Redirect exact from="/" to={this.getBasicRedirect()} />
               <Route path="/login" render={props => <Login {...props} isAuth={isAuth} />} />
               <Route path="/alpha" render={() => <Alpha />} />
+              <PrivateRoute isAuth={isAuth} credentials={credentials} path="/admin" component={AdminPanel} />
               <PrivateRoute isAuth={isAuth} credentials={credentials} path="/campaigns" component={CampaignManager} />
               <PrivateRoute isAuth={isAuth} credentials={credentials} path="/manager" component={QuestManager} />
               <PrivateRoute isAuth={isAuth} path="/spec" component={Spec} />

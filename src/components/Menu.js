@@ -60,6 +60,7 @@ class Menu extends PureComponent {
     
     return (
       <ul styleName="menu">
+        <li><NavLink onClick={closeMenu} className="link-dark" to="/admin">Admin Panel</NavLink></li>
         <li><NavLink onClick={closeMenu} className="link-dark" to="/campaigns">My Campaigns</NavLink></li>
         <li><NavLink onClick={closeMenu} className="link-dark" to="/manager">My Quests</NavLink></li>
         <li><NavLink onClick={closeMenu} className="link-dark" to="/spec">Spec</NavLink></li>
