@@ -26,6 +26,23 @@ export const getUsers = () => (dispatch, getState) => {
     });
 };
 
+export const getCampaigns = () => (dispatch, getState) => {
+  const { accessToken } = getState().user.credentials;
+
+  axios.get(`${localhost}/api/Campaigns?access_token=${accessToken}`)
+    .then((responce) => {
+      dispatch({
+        type    : GET_USERS,
+        payload : responce.data,
+      });
+    }).catch(() => {
+      dispatch({
+        type    : GET_USERS,
+        payload : false,
+      });
+    });
+};
+
 export const getParties = () => (dispatch, getState) => {
   const { accessToken } = getState().user.credentials;
 
@@ -43,19 +60,31 @@ export const getParties = () => (dispatch, getState) => {
     });
 };
 
-export const getCampaigns = () => (dispatch, getState) => {
+export const setTester = (partyId, flag) => (dispatch, getState) => {
   const { accessToken } = getState().user.credentials;
 
-  axios.get(`${localhost}/api/Campaigns?access_token=${accessToken}`)
-    .then((responce) => {
-      dispatch({
-        type    : GET_USERS,
-        payload : responce.data,
-      });
-    }).catch(() => {
-      dispatch({
-        type    : GET_USERS,
-        payload : false,
-      });
-    });
+  const requestOptions = {
+    method  : 'PUT',
+    url     : `${localhost}/api/Parties/${partyId}/tester?access_token=${accessToken}`,
+    data    : JSON.stringify({ flag }),
+    headers : { 'Content-Type' : 'application/json' }
+  };
+  
+  axios.request(requestOptions).then(() => {
+    dispatch(getParties());
+  });
+};
+
+export const removeTesters = () => (dispatch, getState) => {
+  const { accessToken } = getState().user.credentials;
+
+  const requestOptions = {
+    method  : 'PUT',
+    url     : `${localhost}/api/Parties/removeTesters?access_token=${accessToken}`,
+    headers : { 'Content-Type' : 'application/json' }
+  };
+  
+  axios.request(requestOptions).then(() => {
+    dispatch(getParties());
+  });
 };

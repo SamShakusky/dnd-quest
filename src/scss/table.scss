@@ -1,3 +1,15 @@
 .table {
     display: inline;
 }
+
+.table__pagination {
+    position: fixed;
+    bottom: 0;
+    left: 30px;
+    &>div {
+        padding-left: 0;
+        &> div:first-of-type {
+            flex: 0;
+        }
+    }
+}
