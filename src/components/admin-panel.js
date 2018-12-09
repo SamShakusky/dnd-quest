@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import AppBar from './app-bar';
 import Table from './table';
@@ -39,6 +42,7 @@ class Admin extends PureComponent {
       id     : null,
       tester : false,
     },
+    filterTesters : false,
   };
   
   componentDidMount() {
@@ -76,6 +80,13 @@ class Admin extends PureComponent {
     }
     this.setState({ value });
   };
+
+  handleFilter = () => {
+    const { filterTesters } = this.state;
+    
+    this.props.getParties(!filterTesters);
+    this.setState({ filterTesters : !filterTesters });
+  }
 
   render() {
     const { value, currentRow } = this.state;
@@ -115,6 +126,16 @@ class Admin extends PureComponent {
             <div>
               <p>ID: <span>{id}</span></p>
               <p>Status: <span>{status}</span></p>
+              <FormGroup row>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      onChange={this.handleFilter}
+                    />
+                  }
+                  label="Filter by Testers"
+                />
+              </FormGroup>
               <Button
                 label="Change Status"
                 onClick={this.setTester}

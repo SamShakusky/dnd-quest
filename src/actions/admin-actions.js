@@ -43,10 +43,18 @@ export const getCampaigns = () => (dispatch, getState) => {
     });
 };
 
-export const getParties = () => (dispatch, getState) => {
+export const getParties = filterTesters => (dispatch, getState) => {
   const { accessToken } = getState().user.credentials;
-
-  axios.get(`${localhost}/api/Parties?access_token=${accessToken}`)
+  
+  const filter = filterTesters ?
+    JSON.stringify({
+      where : {
+        tester : true,
+      }
+    })
+    : null;
+  
+  axios.get(`${localhost}/api/Parties?filter=${filter}&access_token=${accessToken}`)
     .then((responce) => {
       dispatch({
         type    : GET_USERS,
