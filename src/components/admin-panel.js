@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Formsy from 'formsy-react';
 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -11,6 +12,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import AppBar from './app-bar';
 import Table from './table';
 import Button from './button';
+import TextField from './text-field';
 
 import styles from '../css/admin-panel.css';
 
@@ -19,17 +21,19 @@ import {
   getCampaigns,
   getParties,
   setTester,
+  setManyTesters,
   removeTesters,
 } from '../actions/admin-actions';
 
 class Admin extends PureComponent {
   static propTypes = {
-    tableData     : PropTypes.arrayOf(PropTypes.shape({})),
-    getUsers      : PropTypes.func.isRequired,
-    getCampaigns  : PropTypes.func.isRequired,
-    getParties    : PropTypes.func.isRequired,
-    setTester     : PropTypes.func.isRequired,
-    removeTesters : PropTypes.func.isRequired,
+    tableData      : PropTypes.arrayOf(PropTypes.shape({})),
+    getUsers       : PropTypes.func.isRequired,
+    getCampaigns   : PropTypes.func.isRequired,
+    getParties     : PropTypes.func.isRequired,
+    setTester      : PropTypes.func.isRequired,
+    setManyTesters : PropTypes.func.isRequired,
+    removeTesters  : PropTypes.func.isRequired,
   };
   
   static defaultProps = {
@@ -38,6 +42,7 @@ class Admin extends PureComponent {
   
   state = {
     value      : 'users',
+    amount     : 10,
     currentRow : {
       id     : null,
       tester : false,
@@ -88,8 +93,21 @@ class Admin extends PureComponent {
     this.setState({ filterTesters : !filterTesters });
   }
 
+  handleAmount = (event) => {
+    const { target } = event;
+    const { name } = target;
+    
+    this.setState({
+      [name] : target.value
+    });
+  }
+  
+  handleTesters = (data) => {
+    this.props.setManyTesters(+data.amount);
+  }
+
   render() {
-    const { value, currentRow } = this.state;
+    const { value, currentRow, amount } = this.state;
     const { tableData } = this.props;
     
     const id = currentRow.id || null;
@@ -145,6 +163,13 @@ class Admin extends PureComponent {
                 onClick={this.props.removeTesters}
                 duty="danger"
               />
+              <Formsy styleName="random" onSubmit={this.handleTesters}>
+                <TextField type="number" name="amount" value={amount} onChange={this.handleAmount} />
+                <Button
+                  label="Random"
+                  type="submit"
+                />
+              </Formsy>
             </div>
            }
         </section>
@@ -162,5 +187,6 @@ export default connect(mapStateToProps, {
   getCampaigns,
   getParties,
   setTester,
+  setManyTesters,
   removeTesters,
 })(Admin);

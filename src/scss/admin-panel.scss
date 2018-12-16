@@ -41,4 +41,18 @@
             color: $grey_dark;
         }
     }
+    
+    button {
+        margin-right: 12px;
+        margin-bottom: 24px;
+    }
+}
+
+.random {
+    display: flex;
+    
+    div {
+        margin-right: 12px;
+        width: 149px;
+    }
 }

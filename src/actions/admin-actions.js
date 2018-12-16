@@ -56,9 +56,14 @@ export const getParties = filterTesters => (dispatch, getState) => {
   
   axios.get(`${localhost}/api/Parties?filter=${filter}&access_token=${accessToken}`)
     .then((responce) => {
+      const result = responce.data.length === 0 ?
+        null
+        :
+        responce.data;
+      
       dispatch({
         type    : GET_USERS,
-        payload : responce.data,
+        payload : result,
       });
     }).catch(() => {
       dispatch({
@@ -75,6 +80,21 @@ export const setTester = (partyId, flag) => (dispatch, getState) => {
     method  : 'PUT',
     url     : `${localhost}/api/Parties/${partyId}/tester?access_token=${accessToken}`,
     data    : JSON.stringify({ flag }),
+    headers : { 'Content-Type' : 'application/json' }
+  };
+  
+  axios.request(requestOptions).then(() => {
+    dispatch(getParties());
+  });
+};
+
+export const setManyTesters = amount => (dispatch, getState) => {
+  const { accessToken } = getState().user.credentials;
+
+  const requestOptions = {
+    method  : 'PUT',
+    url     : `${localhost}/api/Parties/addTesters?access_token=${accessToken}`,
+    data    : JSON.stringify({ amount }),
     headers : { 'Content-Type' : 'application/json' }
   };
   
