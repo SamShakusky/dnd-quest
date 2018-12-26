@@ -11,6 +11,7 @@ import QuestManager from './quest-manager';
 import Spec from './spec';
 import Login from './login';
 import Alpha from './alpha';
+import SetPass from './set-password';
 import Snackbar from './snackbar';
 
 import store from '../store';
@@ -78,6 +79,7 @@ class App extends PureComponent {
               <Redirect exact from="/" to={this.getBasicRedirect()} />
               <Route path="/login" render={props => <Login {...props} isAuth={isAuth} />} />
               <Route path="/alpha" render={() => <Alpha />} />
+              <Route path="/password" component={SetPass} />
               <PrivateRoute isAuth={isAuth} credentials={credentials} path="/admin" component={AdminPanel} />
               <PrivateRoute isAuth={isAuth} credentials={credentials} path="/campaigns" component={CampaignManager} />
               <PrivateRoute isAuth={isAuth} credentials={credentials} path="/manager" component={QuestManager} />
