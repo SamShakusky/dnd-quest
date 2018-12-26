@@ -23,21 +23,25 @@ import {
   setTester,
   setManyTesters,
   removeTesters,
+  createAdventures,
 } from '../actions/admin-actions';
 
 class Admin extends PureComponent {
   static propTypes = {
-    tableData      : PropTypes.arrayOf(PropTypes.shape({})),
-    getUsers       : PropTypes.func.isRequired,
-    getCampaigns   : PropTypes.func.isRequired,
-    getParties     : PropTypes.func.isRequired,
-    setTester      : PropTypes.func.isRequired,
-    setManyTesters : PropTypes.func.isRequired,
-    removeTesters  : PropTypes.func.isRequired,
+    tableData        : PropTypes.arrayOf(PropTypes.shape({})),
+    log              : PropTypes.arrayOf(PropTypes.string),
+    getUsers         : PropTypes.func.isRequired,
+    getCampaigns     : PropTypes.func.isRequired,
+    getParties       : PropTypes.func.isRequired,
+    setTester        : PropTypes.func.isRequired,
+    setManyTesters   : PropTypes.func.isRequired,
+    removeTesters    : PropTypes.func.isRequired,
+    createAdventures : PropTypes.func.isRequired,
   };
   
   static defaultProps = {
     tableData : null,
+    log       : [],
   }
   
   state = {
@@ -108,7 +112,7 @@ class Admin extends PureComponent {
 
   render() {
     const { value, currentRow, amount } = this.state;
-    const { tableData } = this.props;
+    const { tableData, log } = this.props;
     
     const id = currentRow.id || null;
     const status = (typeof currentRow.tester === 'boolean') ?
@@ -170,6 +174,13 @@ class Admin extends PureComponent {
                   type="submit"
                 />
               </Formsy>
+              <Button
+                label="Create Adventures"
+                onClick={this.props.createAdventures}
+              />
+              <p>New Adventurers: <span>{log[0]}</span></p>
+              <p>New Campaigns: <span>{log[1]}</span></p>
+              <p>New Errors: <span>{log[2]}</span></p>
             </div>
            }
         </section>
@@ -179,7 +190,8 @@ class Admin extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  tableData : state.admin.tableData
+  tableData : state.admin.tableData,
+  log       : state.admin.log,
 });
 
 export default connect(mapStateToProps, {
@@ -189,4 +201,5 @@ export default connect(mapStateToProps, {
   setTester,
   setManyTesters,
   removeTesters,
+  createAdventures,
 })(Admin);

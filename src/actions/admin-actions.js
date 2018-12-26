@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { GET_USERS } from './types';
+import { GET_USERS, GET_LOG } from './types';
 
 import localhost from '../config/localhost';
 
@@ -13,10 +13,10 @@ export const getUsers = () => (dispatch, getState) => {
     id       : true
   });
   axios.get(`${localhost}/api/Adventurers?filter=${filter}&access_token=${accessToken}`)
-    .then((responce) => {
+    .then((response) => {
       dispatch({
         type    : GET_USERS,
-        payload : responce.data,
+        payload : response.data,
       });
     }).catch(() => {
       dispatch({
@@ -30,10 +30,10 @@ export const getCampaigns = () => (dispatch, getState) => {
   const { accessToken } = getState().user.credentials;
 
   axios.get(`${localhost}/api/Campaigns?access_token=${accessToken}`)
-    .then((responce) => {
+    .then((response) => {
       dispatch({
         type    : GET_USERS,
-        payload : responce.data,
+        payload : response.data,
       });
     }).catch(() => {
       dispatch({
@@ -55,11 +55,11 @@ export const getParties = filterTesters => (dispatch, getState) => {
     : null;
   
   axios.get(`${localhost}/api/Parties?filter=${filter}&access_token=${accessToken}`)
-    .then((responce) => {
-      const result = responce.data.length === 0 ?
+    .then((response) => {
+      const result = response.data.length === 0 ?
         null
         :
-        responce.data;
+        response.data;
       
       dispatch({
         type    : GET_USERS,
@@ -114,5 +114,36 @@ export const removeTesters = () => (dispatch, getState) => {
   
   axios.request(requestOptions).then(() => {
     dispatch(getParties());
+  });
+};
+
+export const createAdventures = () => (dispatch, getState) => {
+  const { accessToken } = getState().user.credentials;
+
+  const requestOptions = {
+    method  : 'POST',
+    url     : `${localhost}/api/Parties/createAdventures?access_token=${accessToken}`,
+    headers : { 'Content-Type' : 'application/json' }
+  };
+  
+  axios.request(requestOptions).then((response) => {
+    const {
+      data: {
+        adventurers,
+        campaigns,
+        errors,
+      }
+    } = response;
+    
+    const log = [
+      adventurers.length,
+      campaigns.length,
+      errors.length,
+    ];
+    
+    dispatch({
+      type    : GET_LOG,
+      payload : log,
+    });
   });
 };
