@@ -5,6 +5,7 @@ import {
   SIGN_ERROR,
   GET_USER,
   CREATE_PARTY,
+  PASS_CHANGED,
 } from '../actions/types';
 
 const userCredentials = JSON.parse(localStorage.getItem('user_credentials'));
@@ -16,7 +17,8 @@ const initialState = {
     accessToken : initToken || '',
     userId      : initId || '',
   },
-  isAuth : !!(initToken && initId),
+  isAuth      : !!(initToken && initId),
+  passChanged : false,
 };
 
 export default (state = initialState, action) => {
@@ -56,6 +58,11 @@ export default (state = initialState, action) => {
         ...state,
         credentials : action.payload,
         isAuth      : true,
+      };
+    case PASS_CHANGED:
+      return {
+        ...state,
+        passChanged : true,
       };
     default:
       return state;

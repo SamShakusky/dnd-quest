@@ -1,6 +1,13 @@
 import axios from 'axios';
 import randomId from '../utils/random-id';
-import { SIGNIN_USER, SIGNOUT_USER, CHECK_USER, SIGN_ERROR, GET_USER } from './types';
+import {
+  SIGNIN_USER,
+  SIGNOUT_USER,
+  CHECK_USER,
+  SIGN_ERROR,
+  GET_USER,
+  PASS_CHANGED,
+} from './types';
 import { emitError } from './error-actions';
 
 import localhost from '../config/localhost';
@@ -125,4 +132,24 @@ export const getUser = userId => (dispatch, getState) => {
         }
       });
     });
+};
+
+export const setPassword = data => (dispatch) => {
+  const requestOptions = {
+    method  : 'POST',
+    url     : `${localhost}/api/Adventurers/reset-password?access_token=${data.token}`,
+    data    : JSON.stringify({ newPassword : data.pass }),
+    headers : { 'Content-Type' : 'application/json' }
+  };
+  
+  axios.request(requestOptions).then(() => {
+    dispatch({
+      type : PASS_CHANGED,
+    });
+  }).catch((error) => {
+    dispatch({
+      type    : SIGN_ERROR,
+      payload : error.response
+    });
+  });
 };

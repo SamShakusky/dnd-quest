@@ -4,6 +4,8 @@ export const CHECK_USER = 'CHECK_USER';
 export const SIGN_ERROR = 'SIGN_ERROR';
 export const GET_USER = 'GET_USER';
 export const GET_USERS = 'GET_USERS';
+export const PASS_CHANGED = 'PASS_CHANGED';
+
 export const GET_LOG = 'GET_LOG';
 
 export const CREATE_PARTY = 'CREATE_PARTY';

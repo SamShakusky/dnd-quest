@@ -1,55 +1,85 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Formsy from 'formsy-react';
 import TextField from './text-field';
 import Button from './button';
+import Snackbar from './snackbar';
 
-// import {
-//   readQuests,
-//   createQuest,
-//   updateQuest,
-//   deleteQuest,
-//   subscribe,
-//   unsubscribe,
-// } from '../actions/quest-actions';
+import {
+  setPassword
+} from '../actions/user-actions';
 
 import '../css/set-password.css';
 
 class SetPass extends React.PureComponent {
   static propTypes = {
-    
+    setPassword : PropTypes.func.isRequired,
+    error       : PropTypes.string,
+    location    : PropTypes.shape({}).isRequired,
+    passChanged : PropTypes.bool,
   };
   
   static defaultProps = {
-    
+    error       : '',
+    passChanged : false,
   };
   
   state = {
     newPass  : '',
     confPass : '',
+    error    : '',
   }
   
   componentDidMount() {
-    document.title = 'Set New Password – Adventure Companion';
+    document.title = 'Set Password – Adventure Companion';
+  }
+  
+  componentDidUpdate(prevProps) {
+    const { error } = this.props;
+    
+    if (error !== prevProps.error) {
+      this.setState({ // eslint-disable-line react/no-did-update-set-state
+        error : 'Your link has expired. Please contact us to get a new one.'
+      }, this.removeError());
+    }
+  }
+  
+  removeError = () => {
+    setTimeout(() => {
+      this.setState({ error : '' });
+    }, 4000);
   }
   
   handleChange = (event) => {
     const { target: { name, value } } = event;
-    console.log()
+    
     this.setState({
       [name] : value
     });
   }
   
   handleSubmit = (data) => {
-    console.log(data);
+    const { location: { search } } = this.props;
+    const token = search.split('=')[1];
+    
+    this.props.setPassword({
+      pass : data.newPass,
+      token
+    });
   }
   
   render() {
-    const { newPass, confPass } = this.state;
+    const { newPass, confPass, error } = this.state;
+    const { passChanged } = this.props;
+    
+    if (passChanged) {
+      return (
+        <Redirect to="/" />
+      );
+    }
     
     return (
       <main styleName="page-pass">
@@ -67,12 +97,12 @@ class SetPass extends React.PureComponent {
             onChange={this.handleChange}
             noAutoComplete
             message="Must be at least 8 characters"
-            validations={{
-              minLength : 8,
-            }}
-            validationErrors={{
-              minLength : 'Must be at least 8 characters',
-            }}
+            // validations={{
+            //   minLength : 8,
+            // }}
+            // validationErrors={{
+            //   minLength : 'Must be at least 8 characters',
+            // }}
             required
           />
           <TextField
@@ -93,15 +123,17 @@ class SetPass extends React.PureComponent {
             type="submit"
           />
         </Formsy>
+        { error && <Snackbar duty="danger" message={error} /> }
       </main>
     );
   }
 }
 
 const mapStateToProps = state => ({
-
+  error       : state.user.error,
+  passChanged : state.user.passChanged,
 });
 
 export default withRouter(connect(mapStateToProps, {
-
+  setPassword,
 })(SetPass));
