@@ -153,3 +153,17 @@ export const setPassword = data => (dispatch) => {
     });
   });
 };
+
+export const sendTokens = () => (dispatch, getState) => {
+  const { accessToken } = getState().user.credentials;
+  
+  const requestOptions = {
+    method  : 'POST',
+    url     : `${localhost}/api/Adventurers/setTempTokens?access_token=${accessToken}`,
+    headers : { 'Content-Type' : 'application/json' }
+  };
+  
+  axios.request(requestOptions).catch((error) => {
+    console.warn(error); // eslint-disable-line no-console
+  });
+};

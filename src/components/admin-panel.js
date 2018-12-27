@@ -26,6 +26,10 @@ import {
   createAdventures,
 } from '../actions/admin-actions';
 
+import {
+  sendTokens
+} from '../actions/user-actions';
+
 class Admin extends PureComponent {
   static propTypes = {
     tableData        : PropTypes.arrayOf(PropTypes.shape({})),
@@ -37,6 +41,7 @@ class Admin extends PureComponent {
     setManyTesters   : PropTypes.func.isRequired,
     removeTesters    : PropTypes.func.isRequired,
     createAdventures : PropTypes.func.isRequired,
+    sendTokens       : PropTypes.func.isRequired,
   };
   
   static defaultProps = {
@@ -182,7 +187,15 @@ class Admin extends PureComponent {
               <p>New Campaigns: <span>{log[1]}</span></p>
               <p>New Errors: <span>{log[2]}</span></p>
             </div>
-           }
+          }
+          { value === 'users' &&
+            <div>
+              <Button
+                label="Send Temp Tokens"
+                onClick={this.props.sendTokens}
+              />
+            </div>
+          }
         </section>
       </main>
     );
@@ -202,4 +215,5 @@ export default connect(mapStateToProps, {
   setManyTesters,
   removeTesters,
   createAdventures,
+  sendTokens,
 })(Admin);
