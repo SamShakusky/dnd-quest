@@ -175,7 +175,7 @@ class Alpha extends PureComponent {
                 meaninglessness of a pineapple pizza.
               </p>
               <p styleName="disclaimer">
-                All user-created data may probably be lost at the end of the Closed Alpha
+                All user-created data may probably be lost at the end of (during) the Closed Alpha
                 in a bizzare accident of some kind or by the will of the God of Removal (aka Rm-Rf).
               </p>
               <p styleName="disclaimer">

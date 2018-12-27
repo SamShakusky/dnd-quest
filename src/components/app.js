@@ -50,7 +50,7 @@ class App extends PureComponent {
   
   getBasicRedirect = () => {
     const { currentCampaign } = this.props;
-    const redirectTo = currentCampaign ? '/manager' : '/campaigns';
+    const redirectTo = currentCampaign ? '/quests' : '/campaigns';
     
     return redirectTo;
   }
@@ -78,11 +78,11 @@ class App extends PureComponent {
             <Switch>
               <Redirect exact from="/" to={this.getBasicRedirect()} />
               <Route path="/login" render={props => <Login {...props} isAuth={isAuth} />} />
-              <Route path="/alpha" render={() => <Alpha />} />
+              <Route path="/alpha" component={Alpha} />
               <Route path="/password" component={SetPass} />
               <PrivateRoute isAuth={isAuth} credentials={credentials} path="/admin" component={AdminPanel} />
               <PrivateRoute isAuth={isAuth} credentials={credentials} path="/campaigns" component={CampaignManager} />
-              <PrivateRoute isAuth={isAuth} credentials={credentials} path="/manager" component={QuestManager} />
+              <PrivateRoute isAuth={isAuth} credentials={credentials} path="/quests" component={QuestManager} />
               <PrivateRoute isAuth={isAuth} path="/spec" component={Spec} />
             </Switch>
             { error && <Snackbar duty="danger" message={error} /> }

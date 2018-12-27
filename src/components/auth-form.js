@@ -99,7 +99,9 @@ class AuthForm extends PureComponent {
         onValidSubmit={this.onSignIn}
         styleName="form"
       >
-        <h1 styleName="form-title">Long time no see!</h1>
+        {/* Alpha */}
+        {/* <h1 styleName="form-title">Long time no see!</h1> */ }
+        <h1 styleName="form-title">Welcome to the Alpha!</h1>
         <h2 styleName="form-subtitle">Make yourself at home.</h2>
         <div styleName="simple-auth">
           <TextField
@@ -118,8 +120,11 @@ class AuthForm extends PureComponent {
             required
           />
           <Button label="Submit" type="submit" disabled={!isValid} />
-          <p styleName="form-change">Forgot password? <Button inline label="Don't you worry" onClick={this.toggleForm} /></p>
-          <p styleName="form-change">New around here? <Button inline label="Let's introduce ourselves" onClick={this.toggleForm} /></p>
+          {/* Alpha */}
+          {/* eslint-disable max-len */}
+          {/* <p styleName="form-change">Forgot password? <Button inline label="Don't you worry" onClick={this.toggleForm} /></p>
+          <p styleName="form-change">New around here? <Button inline label="Let's introduce ourselves" onClick={this.toggleForm} /></p> */}
+          {/* eslint-enable max-len */}
         </div>
       </Formsy>
     );
@@ -198,9 +203,12 @@ class AuthForm extends PureComponent {
   }
   
   get form() {
-    const { hasAccount } = this.state;
+    // Alpha
+    // const { hasAccount } = this.state;
     
-    return hasAccount ? this.signInForm : this.signUpForm;
+    return this.signInForm;
+    // Alpha
+    // return hasAccount ? this.signInForm : this.signUpForm;
   }
   
   get errorMessage() {

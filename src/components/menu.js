@@ -60,10 +60,8 @@ class Menu extends PureComponent {
     
     return (
       <ul styleName="menu">
-        <li><NavLink onClick={closeMenu} className="link-dark" to="/admin">Admin Panel</NavLink></li>
         <li><NavLink onClick={closeMenu} className="link-dark" to="/campaigns">My Campaigns</NavLink></li>
-        <li><NavLink onClick={closeMenu} className="link-dark" to="/manager">My Quests</NavLink></li>
-        <li><NavLink onClick={closeMenu} className="link-dark" to="/spec">Spec</NavLink></li>
+        <li><NavLink onClick={closeMenu} className="link-dark" to="/quests">My Quests</NavLink></li>
         { readyForInstall && <li><a onClick={this.install} href="/install" className="link-dark">Install on Device</a></li> }
         <li><a onClick={this.signOut} href="/signout" className="link-dark">Sign Out</a></li>
       </ul>
