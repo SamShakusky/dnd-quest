@@ -3,17 +3,17 @@
   "name": "Adventure Companion",
   "icons": [
     {
-      "src": "/images/icon.png",
+      "src": "/images/sword.png",
       "type": "image/png",
       "sizes": "144x144"
     },
     {
-      "src": "/images/icon.png",
+      "src": "/images/sword.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/images/icon.png",
+      "src": "/images/sword.png",
       "type": "image/png",
       "sizes": "512x512"
     }
