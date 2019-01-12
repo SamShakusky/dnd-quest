@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import { Provider, connect } from 'react-redux';
-import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
+import { Route, Router, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import createHistory from 'history/createBrowserHistory';
 
 import PrivateRoute from './helpers/private-route';
 
@@ -20,6 +21,8 @@ import { checkUser } from '../actions/user-actions';
 import {
   setCampaign,
 } from '../actions/campaign-actions';
+
+const history = createHistory();
 
 class App extends PureComponent {
   static propTypes = {
@@ -48,6 +51,13 @@ class App extends PureComponent {
     this.checkAuth();
   }
   
+  componentDidMount() {
+    history.listen((location) => {
+      window.ga('set', 'page', location.pathname + location.search);
+      window.ga('send', 'pageview');
+    });
+  }
+  
   getBasicRedirect = () => {
     const { currentCampaign } = this.props;
     const redirectTo = currentCampaign ? '/quests' : '/campaigns';
@@ -72,7 +82,7 @@ class App extends PureComponent {
     const { isAuth, credentials, error } = this.props;
     
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <Provider store={store}>
           <div className="App">
             <Switch>
@@ -88,7 +98,7 @@ class App extends PureComponent {
             { error && <Snackbar duty="danger" message={error} /> }
           </div>
         </Provider>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
