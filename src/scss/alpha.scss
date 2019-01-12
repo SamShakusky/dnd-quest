@@ -41,9 +41,8 @@
     letter-spacing: 1px;
     background: $color_main;
     
-    @media all and (max-width: 599px) {
-        font-size: 2rem;
-        padding: 0 12px 2px 8px;
+    @media all and (max-width: 1159px) {
+        display: none;
     }
 }
 
@@ -67,7 +66,7 @@
     @media all and (max-width: 1159px) {
         width: 70%;
         &:first-of-type {
-            margin-top: 48px;
+            margin-top: 0;
         }
     }
     
@@ -88,6 +87,7 @@
         width: 100%;
         height: auto;
         box-shadow: none;
+        order: -1;
     }
 }
 
