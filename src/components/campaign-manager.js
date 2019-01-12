@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import SlidingPanel from './sliding-panel';
-import FloatingButton from './floating-button';
+// import FloatingButton from './floating-button';
 import AppBar from './app-bar';
 import CampaignList from './campaign-list';
 import CampaignForm from './campaign-form';
@@ -136,7 +136,7 @@ class CampaignManager extends PureComponent {
   }
   
   render() {
-    const { formVisibility } = this.state;
+    // const { formVisibility } = this.state;
     
     return (
       <main styleName="campaign__page" >
@@ -161,7 +161,7 @@ class CampaignManager extends PureComponent {
           items={this.props.campaigns}
           onEdit={this.onEdit}
         />
-        {
+        {/* {
           formVisibility && <FloatingButton
             onClick={this.fabSubmit}
             icon="save"
@@ -172,7 +172,7 @@ class CampaignManager extends PureComponent {
             onClick={this.openForm}
             icon="add"
           />
-        }
+        } */}
       </main>
     );
   }

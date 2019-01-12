@@ -35,7 +35,7 @@ class Campaign extends PureComponent {
     const campaignId = e.currentTarget.pathname.substring(1);
     
     this.props.setCampaign(campaignId);
-    this.props.history.push('/manager');
+    this.props.history.push('/quests');
   }
   
   render() {

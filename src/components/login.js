@@ -17,7 +17,7 @@ export default class Login extends PureComponent {
   
   render() {
     const { isAuth } = this.props;
-    const { from } = this.props.location.state || { from : { pathname : '/manager' } };
+    const { from } = this.props.location.state || { from : { pathname : '/quests' } };
     if (isAuth) return <Redirect to={from} />;
     
     return (

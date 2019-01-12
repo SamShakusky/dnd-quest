@@ -20,15 +20,15 @@ export default class CampaignForm extends PureComponent {
   static propTypes = {
     title    : PropTypes.string.isRequired,
     members  : PropTypes.arrayOf(PropTypes.shape(memberShape)),
-    editing  : PropTypes.string,
+    // editing  : PropTypes.string,
     onSubmit : PropTypes.func.isRequired,
     onChange : PropTypes.func.isRequired,
-    onDelete : PropTypes.func.isRequired,
-    onClose  : PropTypes.func.isRequired,
+    // onDelete : PropTypes.func.isRequired,
+    // onClose  : PropTypes.func.isRequired,
   };
   
   static defaultProps = {
-    editing : '',
+    // editing : '',
     members : []
   };
   
@@ -62,18 +62,19 @@ export default class CampaignForm extends PureComponent {
     const {
       title,
       members,
-      editing,
+      // editing,
       onSubmit,
       onChange,
-      onDelete,
-      onClose,
+      // onDelete,
+      // onClose,
     } = this.props;
     
     return (
       <Formsy onValidSubmit={onSubmit} styleName="quest-form">
         <div styleName="form-wrap">
           <div styleName="form_buttons">
-            {(editing ?
+            {/* eslint-disable max-len */}
+            {/* {(editing ?
               <Button
                 icon="delete_outline"
                 iconSize={24}
@@ -90,10 +91,17 @@ export default class CampaignForm extends PureComponent {
               />
               :
               <Button icon="close" iconSize={24} shape="flat" duty="danger" onClick={onClose} sharp noActive />
-            )}
+            )} */}
           </div>
           <p styleName="form-label">Main</p>
-          <TextField label="Title" name="title" value={title} onChange={onChange} required />
+          <TextField
+            label="Title"
+            name="title"
+            value={title}
+            onChange={onChange}
+            required
+            disabled
+          />
           <div styleName="members_add">
             <Button
               label="members"
