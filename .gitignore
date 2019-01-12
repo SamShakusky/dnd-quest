@@ -7,7 +7,6 @@
 # production
 /build
 /src/css/*.css
-/src/config/localhost.js
 
 # misc
 .DS_Store
