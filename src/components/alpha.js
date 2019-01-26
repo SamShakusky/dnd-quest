@@ -123,7 +123,7 @@ class Alpha extends PureComponent {
         <h3>Done!</h3>
         <p>A confirmation will be sent to the specified email addresses in a few moments.</p>
         <p>As soon as the Closed Alpha is available, you will receive another notice.</p>
-        <p>Thank you for your interest and may the Lembas guide you.</p>
+        <p>Thank you for your interest!</p>
       </div>
     );
     
